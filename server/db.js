@@ -1,12 +1,20 @@
 const { Client } = require('pg');
 const dotenv = require('dotenv');
+require('dotenv').config();
+
+const dbUser = process.env.USER;
+const dbHost = process.env.HOST;
+const dbPassword = process.env.PASSWORD;
+const db = process.env.DATABASE;
+const dbPORT = process.env.DBPORT;
+
 
 const client = new Client({
-  user: 'moviedb_yx6x_user',
-  host: 'dpg-cl1l6nrmgg9c73e0v3hg-a.frankfurt-postgres.render.com',
-  database: 'moviedb_yx6x',
-  password: 'NVH9CDO5pHozZzRic1xovtOOePcqqB6V',
-  port: 5432, // Default PostgreSQL port
+  user: dbUser,
+  host: dbHost,
+  database: db,
+  password: dbPassword,
+  port: dbPORT, // Default PostgreSQL port
   ssl: {
     rejectUnauthorized: false
   }
