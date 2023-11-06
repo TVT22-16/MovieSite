@@ -10,16 +10,25 @@ const {addUser, getUsers,getUserbyname} = require('../models/altUsers_model');
 
 //get users
 router.get('/', async (req, res) => {
-
-     res.json(await getUsers());
-    
+    try {
+        const users = await getUsers();
+        res.json(users);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).json({ error: "Error fetching users" });
+    }
 });
 
 //get user by name 
-router.get('/:username',async (req, res)=>{
+router.get('/:username', async (req, res) => {
+    let username = req.params.username; // Access the 'username' route parameter
+    const user = await getUserbyname(username);
 
-    let byusr = res.json(await getUserbyname(req.params));
-
+    if (user.length > 0) {
+        res.json(user);
+    } else {
+        res.status(404).json({ error: 'User not found' });
+    }
 });
 
 //add user

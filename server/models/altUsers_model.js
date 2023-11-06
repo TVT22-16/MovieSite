@@ -22,10 +22,7 @@ async function getUsers(){
 
 async function getUserbyname(username){
     const result = await pgPool.query(sql.GET_USERBYNAME,[username]);
-    console.log(sql.GET_USERBYNAME,[username]);
-    console.log(username);
     const rows = result.rows;
-    console.log(rows);
     return rows;
 }
 
