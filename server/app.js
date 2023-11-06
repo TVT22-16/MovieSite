@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var altUserRouter = require('./routes/altUsers.js')
 
 var app = express();
 dotenv.config();
@@ -14,7 +15,8 @@ app.use(express.static('public'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/u', usersRouter);
+// app.use('/u', usersRouter);
+// app.use('/u/:username', usersRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
