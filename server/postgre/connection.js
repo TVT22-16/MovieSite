@@ -1,6 +1,8 @@
 require('dotenv').config({path:('../.env')});
 const {Pool} = require('pg');
 
+//this is alternative for db.js
+
 const pgPool = new Pool({
     host: process.env.HOST,
     port: process.env.DBPORT,
