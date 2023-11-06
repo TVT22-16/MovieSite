@@ -8,8 +8,6 @@ const sql = {
 };
 
 
-
-
 async function addUser(username,password){
     await pgPool.query(sql.INSERT_USER, [username,password]);
 }
