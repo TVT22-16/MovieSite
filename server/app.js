@@ -14,6 +14,7 @@ app.use(express.static('public'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/u', usersRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
