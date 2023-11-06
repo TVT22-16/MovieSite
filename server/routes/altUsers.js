@@ -1,36 +1,32 @@
+const router = require('express').Router();
+const multer = require('multer');
+const upload = multer({dest: 'upload/'});
 
-const {addUser, getUsers, getByusername} = require('../postgre/user');
+const {addUser, getUsers} = require('../models/altUsers_model');
 
-router.get('/u', async (req, res) => {
+/**
+ * User root get mapping
+ */
+router.get('/', async (req, res) => {
 
-    res.json(await getUsers());
-   
+     res.json(await getUsers());
+    
 });
 
-router.get('/u/:username', async (req, res) => {
-    let username = req.params.username;
-    console.log('Received request for username:', username);
 
-    try {
-        const user = await getByusername(username);
-        if (user) {
-            res.json(user);
-        } else {
-            res.status(404).json({ error: 'User not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
+//User root post mapping. Supports urlencoded and multer
+router.post('/', upload.none() , async (req,res) => {
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const uname = req.body.uname;
+    let pw = req.body.pw;
 
-router.post('/u', upload.none() , async (req,res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    pw = await bcrypt.hash(pw, 10);
 
     console.log(pw);
 
     try {
-        await addUser(username,password);
+        await addUser(fname,lname,uname,pw);
         res.end();
     } catch (error) {
         console.log(error);
@@ -39,3 +35,5 @@ router.post('/u', upload.none() , async (req,res) => {
     
 
 });
+
+module.exports = router;
