@@ -2,42 +2,42 @@ const router = require('express').Router();
 const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 
-const {addUser, getUsers, getUserbyname, updateUser, deleteUser} = require('../models/users_model');
+const {addGroup, getGroups, getGroupbyname, updateGroup, deleteGroup} = require('../models/groups_model');
 
 /**
  * User root get mapping
  */
 
-//get users
+//get groups
 router.get('/', async (req, res) => {
     try {
-        const users = await getUsers();
-        res.json(users);
+        const groups = await getGroups();
+        res.json(groups);
     } catch (error) {
         console.error("Error fetching users:", error);
         res.status(500).json({ error: "Error fetching users" });
     }
 });
 
-//get user by name 
-router.get('/:username', async (req, res) => {
-    let username = req.params.username; // Access the 'username' route parameter
-    const user = await getUserbyname(username);
+//get group by name 
+router.get('/:group_name', async (req, res) => {
+    let group_name = req.params.username; // Access the 'group_name' route parameter
+    const groups = await getGroupbyname(group_name);
 
     if (user.length > 0) {
-        res.json(user);
+        res.json(groups);
     } else {
         res.status(404).json({ error: 'User not found' });
     }
 });
 
-//add user
+//add group
 router.post('/', upload.none() , async (req,res) => {
-    const username = req.body.username;
-    const password = req.body.password;
+    const group_name = req.body.group_name;
+    const group_description = req.body.group_description;
 
     try {
-        await addUser(username,password);
+        await addGroup(group_name,group_description);
         res.end();
     } catch (error) {
         console.log(error);
@@ -46,12 +46,12 @@ router.post('/', upload.none() , async (req,res) => {
 
 });
 
-// update user
-router.put('/:username', upload.none(), async (req, res) => {
-    let username = req.params.username;
-    let password = req.body.password;
+// update group
+router.put('/:group_name', upload.none(), async (req, res) => {
+    let group_name = req.params.group_name;
+    let group_description = req.body.group_description;
     try {
-        await updateUser(username,password);
+        await updateGroup(group_name,group_description);
         res.end();
     } catch (error) {
         console.log(error);
@@ -60,10 +60,10 @@ router.put('/:username', upload.none(), async (req, res) => {
 });
 
 //delete user
-router.delete('/:username', async (req, res) => {
-    let username = req.params.username;
+router.delete('/:group_name', async (req, res) => {
+    let group_name = req.params.group_name;
     try {
-        await deleteUser(username);
+        await deleteGroup(group_name);
         res.end();
     } catch (error) {
         console.log(error); 
