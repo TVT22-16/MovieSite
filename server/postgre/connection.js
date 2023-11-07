@@ -9,7 +9,9 @@ const pgPool = new Pool({
     database: process.env.DATABASE,
     user: process.env.USER,
     password: process.env.PASSWORD,
-    ssl: true
+    ssl: {
+        rejectUnauthorized: false
+      }
 });
 
 pgPool.connect((err) => {

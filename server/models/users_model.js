@@ -1,23 +1,40 @@
-const db = require('../db');
 
-const users = {
-    getAll: function(callback){
-        return db.query('select username, password from users', callback);
-    },
-    getById: function(id, callback){
-        return db.query('select username, password from users where idusers = $1', [id], callback);
-    },
-    add: function(users, callback){
-        return db.query('insert into users (username, password) values ($1, $2)', [users.username, users.password], callback);
-    },    
-    delete: function(username, callback) {
-        return db.query('DELETE FROM users WHERE username = $1', [username], callback);
-    },    
-    update: function(username, userData, callback) {
-        return db.query('UPDATE users SET username = $1, password = $2 WHERE username = $3', [userData.username, userData.password, username], callback);
-    },
-    
-    
+
+const pgPool = require('../postgre/connection');
+
+const sql = {
+    INSERT_USER: 'INSERT INTO users VALUES ($1, $2)',
+    GET_USERS: 'SELECT username,password FROM users',
+    GET_USERBYNAME: 'SELECT * FROM users WHERE username = $1',
+    UPDATE_USER: 'UPDATE users SET username = $1, password = $2 WHERE username = $1',
+    DELETE_USER: 'DELETE FROM users WHERE username = $1'
 };
 
-module.exports = users;
+
+async function addUser(username,password){
+    await pgPool.query(sql.INSERT_USER, [username,password]);
+    console.log(sql.INSERT_USER, [username,password]);
+}
+
+async function getUsers(){
+    const result = await pgPool.query(sql.GET_USERS);
+    const rows = result.rows;
+    return rows;
+}
+
+async function getUserbyname(username){
+    const result = await pgPool.query(sql.GET_USERBYNAME,[username]);
+    const rows = result.rows;
+    return rows;
+}
+async function updateUser(username,password){
+    await pgPool.query(sql.UPDATE_USER, [username,password]);
+    console.log(sql.UPDATE_USER, [username,password]);
+}
+
+async function deleteUser(username){
+    await pgPool.query(sql.DELETE_USER, [username]);
+    console.log(sql.DELETE_USER, [username]);
+}
+
+module.exports = {addUser, getUsers,getUserbyname ,updateUser, deleteUser};
