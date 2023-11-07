@@ -12,7 +12,7 @@ async function getReviews(){
     return rows;
 }
 
-async function addReview(username,rating,review,moviedbid) {
+async function addReview(username,rating,review,moviedb_movieid) {
     try {
         const result = await pgPool.query(sql.INSERT_REVIEW, [username, review, rating, moviedb_movieid]);
         console.log(result); // Log the result of the query if needed

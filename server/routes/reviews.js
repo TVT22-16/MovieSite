@@ -22,10 +22,12 @@ router.post('/add', upload.none() , async (req,res) => {
     const username = req.body.username;
     const review = req.body.review;
     const rating = req.body.rating;
-    const moviedbid = req.body.moviedb_movieid;
+    const moviedb_movieid = req.body.moviedb_movieid;
+
+    console.log(username,review,rating,moviedb_movieid);
 
     try {
-        await addReview(username,review,rating,moviedbid);
+        await addReview(username,review,rating,moviedb_movieid);
         res.end();
     } catch (error) {
         console.log(error);
