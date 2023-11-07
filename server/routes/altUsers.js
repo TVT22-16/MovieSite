@@ -1,33 +1,40 @@
+const router = require('express').Router();
+const multer = require('multer');
+const upload = multer({dest: 'upload/'});
 
-const {addUser, getUsers, getByusername} = require('../postgre/user');
+const {addUser, getUsers,getUserbyname} = require('../models/altUsers_model');
 
-router.get('/u', async (req, res) => {
+/**
+ * User root get mapping
+ */
 
-    res.json(await getUsers());
-   
-});
-
-router.get('/u/:username', async (req, res) => {
-    let username = req.params.username;
-    console.log('Received request for username:', username);
-
+//get users
+router.get('/', async (req, res) => {
     try {
-        const user = await getByusername(username);
-        if (user) {
-            res.json(user);
-        } else {
-            res.status(404).json({ error: 'User not found' });
-        }
+        const users = await getUsers();
+        res.json(users);
     } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
+        console.error("Error fetching users:", error);
+        res.status(500).json({ error: "Error fetching users" });
     }
 });
 
-router.post('/u', upload.none() , async (req,res) => {
+//get user by name 
+router.get('/:username', async (req, res) => {
+    let username = req.params.username; // Access the 'username' route parameter
+    const user = await getUserbyname(username);
+
+    if (user.length > 0) {
+        res.json(user);
+    } else {
+        res.status(404).json({ error: 'User not found' });
+    }
+});
+
+//add user
+router.post('/', upload.none() , async (req,res) => {
     const username = req.body.username;
     const password = req.body.password;
-
-    console.log(pw);
 
     try {
         await addUser(username,password);
@@ -35,7 +42,8 @@ router.post('/u', upload.none() , async (req,res) => {
     } catch (error) {
         console.log(error);
         res.json({error: error.message}).status(500);
-    }
-    
+    }   
 
 });
+
+module.exports = router;
