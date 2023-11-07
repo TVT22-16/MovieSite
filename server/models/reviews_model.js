@@ -2,7 +2,7 @@ const pgPool = require('../postgre/connection');
 
 const sql = {
     GET_REVIEWS: 'SELECT * FROM reviews',
-    INSERT_REVIEW: 'INSERT INTO reviews VALUES ($1, $2, $3, $4, NOW())',
+    INSERT_REVIEW: 'INSERT INTO reviews (username, review, rating, moviedb_movieid,created_at) VALUES ($1,$2,$3,$4, NOW())'
 
 };
 
@@ -12,14 +12,15 @@ async function getReviews(){
     return rows;
 }
 
-async function addReview(username,rating,review,moviedb_movieid) {
+async function addReview(username, review, rating, moviedb_movieid) {
     try {
-        const result = await pgPool.query(sql.INSERT_REVIEW, [username, review, rating, moviedb_movieid]);
-        console.log(result); // Log the result of the query if needed
+      const result = await pgPool.query(sql.INSERT_REVIEW, [username, review, rating, moviedb_movieid]);
+      console.log(result); // Log the result of the query if needed
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
 }
+
 
 
 module.exports = {addReview,getReviews};
