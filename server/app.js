@@ -5,7 +5,7 @@ const connection = require('./postgre/connection.js')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users.js');
 var groupsRouter = require('./routes/groups.js');
-var reviewsRouter = require('/routes/reviews.js');
+var reviewsRouter = require('./routes/reviews.js');
 
 var app = express();
 dotenv.config();
