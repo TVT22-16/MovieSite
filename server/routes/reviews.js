@@ -2,20 +2,28 @@ const router = require('express').Router();
 const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 
-const {addReview,getReviews,deleteReview} = require('../models/reviews_model.js');
+const {addReview,getReviews,deleteReview,getReviewsUser} = require('../models/reviews_model.js');
 
 
-
+//get all reviews or reviews?username=
 router.get('/', async (req, res) => {
+    let username = req.query.username || '';
+
     try {
-        const reviews = await getReviews();
+        let reviews;
+
+        if (username.length > 0) {
+            reviews = await getReviewsUser(username);
+        } else {
+            reviews = await getReviews();
+        }
+        console.log(username);
         res.json(reviews);
     } catch (error) {
-        console.error("Error fetching users:", error);
-        res.status(500).json({ error: "Error fetching users" });
+        console.error("Error fetching reviews:", error);
+        res.status(500).json({ error: "Error fetching reviews" });
     }
 });
-
 
 //add user
 router.post('/add', upload.none() , async (req,res) => {
@@ -39,6 +47,7 @@ router.post('/add', upload.none() , async (req,res) => {
     }
 });
 
+//delete review by id
 router.delete('/delete', async(req,res) => {
     const review_id = req.body.review_id;
 
