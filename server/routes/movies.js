@@ -9,7 +9,7 @@ router.get('/', async(req,res) =>{
         const movies = await getPopularMovies();
         res.json(movies);
     } catch (error){
-        res.json('Movies get fail '+ error);
+        res.json('Movies get fail -> '+ error);
     }
 });
 
