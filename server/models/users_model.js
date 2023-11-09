@@ -1,5 +1,3 @@
-
-
 const pgPool = require('../postgre/connection');
 
 const sql = {
@@ -7,15 +5,14 @@ const sql = {
     GET_USERS: 'SELECT username,password FROM users',
     GET_USERBYNAME: 'SELECT * FROM users WHERE username = $1',
     UPDATE_USER: 'UPDATE users SET username = $1, password = $2 WHERE username = $1',
-    DELETE_USER: 'DELETE FROM users WHERE username = $1'
+    DELETE_USER: 'DELETE FROM users WHERE username = $1',
+    GET_PW: 'SELECT password FROM users WHERE username = $1'
 };
 
 
 async function addUser(username,password){
     await pgPool.query(sql.INSERT_USER, [username,password]);
-    console.log(sql.INSERT_USER, [username,password]);
 }
-
 async function getUsers(){
     const result = await pgPool.query(sql.GET_USERS);
     const rows = result.rows;
@@ -37,4 +34,13 @@ async function deleteUser(username){
     console.log(sql.DELETE_USER, [username]);
 }
 
-module.exports = {addUser, getUsers,getUserbyname ,updateUser, deleteUser};
+async function checkUser(username){
+        const result = await pgPool.query(sql.GET_PW, [username]);
+
+        if(result.rows.length > 0){
+            return result.rows[0].password;
+        }else{
+            return null;
+        }
+}
+module.exports = {addUser, getUsers,getUserbyname ,updateUser, deleteUser, checkUser};
