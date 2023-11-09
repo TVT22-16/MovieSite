@@ -2,7 +2,8 @@ const pgPool = require('../postgre/connection');
 
 const sql = {
     GET_REVIEWS: 'SELECT * FROM reviews',
-    INSERT_REVIEW: 'INSERT INTO reviews (username, review, rating, moviedb_movieid,created_at) VALUES ($1,$2,$3,$4, NOW())'
+    INSERT_REVIEW: 'INSERT INTO reviews (username, review, rating, moviedb_movieid,created_at) VALUES ($1,$2,$3,$4, NOW())',
+    DELETE_REVIEW: 'DELETE FROM reviews WHERE review_id=$1;'
 
 };
 
@@ -21,6 +22,15 @@ async function addReview(username, review, rating, moviedb_movieid) {
     }
 }
 
+async function deleteReview(review_id){
+  try{
+    const result = await pgPool.query(sql.DELETE_REVIEW,[review_id]);
+    console.log(`Review with id=${review_id} was deleted`);
+  } catch (error){
+    console.error(error);
+  }
+}
 
 
-module.exports = {addReview,getReviews};
+
+module.exports = {addReview,getReviews,deleteReview};

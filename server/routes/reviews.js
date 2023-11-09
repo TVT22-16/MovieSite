@@ -2,7 +2,7 @@ const router = require('express').Router();
 const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 
-const {addReview,getReviews} = require('../models/reviews_model.js');
+const {addReview,getReviews,deleteReview} = require('../models/reviews_model.js');
 
 
 
@@ -26,14 +26,29 @@ router.post('/add', upload.none() , async (req,res) => {
 
     console.log(username,review,rating,moviedb_movieid);
 
-    try {
-        await addReview(username,review,rating,moviedb_movieid);
+    if (rating>10){
+        res.json("Rating can't be over 10")
+    } else{
+        try {
+            await addReview(username,review,rating,moviedb_movieid);
+            res.end();
+        } catch (error) {
+            console.log(error);
+            res.json({error: error.message}).status(500);
+        }  
+    }
+});
+
+router.delete('/delete', async(req,res) => {
+    const review_id = req.body.review_id;
+
+    try{
+        await deleteReview(review_id);
         res.end();
-    } catch (error) {
+    } catch (error){
         console.log(error);
         res.json({error: error.message}).status(500);
-    }   
-
+    }
 });
 
 module.exports = router;
