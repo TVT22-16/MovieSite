@@ -1,10 +1,10 @@
 import React from 'react'
+import Movies from '../components/Movies.js';
 
 function Home() {
   return (
     <div>
-        <h1>This is the homepage!
-        </h1>
+        <Movies/>
 
     </div>
   )
