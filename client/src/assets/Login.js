@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import './Login.css'
+import { jwtToken } from './Signals';
+import axios from "axios";
+import { Link } from 'react-router-dom';
+
+
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -13,22 +18,34 @@ function Login() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here, you can add your authentication logic and check the username and password.
-    // For this example, we'll just log them to the console.
-    console.log("Username:", username);
-    console.log("Password:", password);
-  };
+    console.log('Username: ' + username);
+    console.log('Password ' + password);
+    try {
+      const response = await axios.post('http://localhost:3001/users/login', {
+        username,
+        password,
+      });
+
+      console.log('Login successful:', response.data);
+      // Handle success, e.g., update state or redirect the user
+    } catch (error) {
+      console.error('Error during login:', error.response ? error.response.data : error.message);
+      // Handle the error, e.g., display an error message to the user
+    }
+
+
+  }
 
   return (
-    
+
     <div className="container">
       <div className='centeringContainer'>
         <h1>Enter your credentials</h1>
       </div>
-      
-      
+
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <form onSubmit={handleSubmit}>
@@ -57,13 +74,18 @@ function Login() {
               />
             </div>
             <button type="submit" className="btn btn-primary">
-              Sign In
+              Login
             </button>
+
           </form>
+
+          <Link to="/register" variant="body2">Don't have an account? Register here</Link>
         </div>
       </div>
     </div>
+
   );
 }
+
 
 export default Login;

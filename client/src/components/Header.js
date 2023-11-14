@@ -26,8 +26,8 @@ const Header = () => {
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="custom-nav">
         <Nav.Link href="/home">Home</Nav.Link>
-        <Nav.Link href="/signin">Sign In</Nav.Link>
-        <Nav.Link href="/signup">Sign Up</Nav.Link>
+        <Nav.Link href="/login">Log in</Nav.Link>
+        <Nav.Link href="/register">Register</Nav.Link>
         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
           <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
           <NavDropdown.Item href="/mygroups">Groups</NavDropdown.Item>  
@@ -41,8 +41,8 @@ const Header = () => {
 <Routes>
       <Route path="/"  />
       <Route path="/home" element={<Home/>}/>
-      <Route path="/signin" element={<Login/>}/>
-      <Route path="/signup" element={<Signup/>}/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/register" element={<Signup/>}/>
       </Routes>
 
   </header>
