@@ -30,12 +30,13 @@ async function searchMovies(search){
     const options = {
       method: 'GET',
       //todo remove "+"
-      url: 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&query='+search,
+      url: `https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&query=${search}`,
       headers: {
         accept: 'application/json',
         Authorization: process.env.MOVIEDB_API_KEY
       }
     };
+
 
     const response = await axios.request(options);
     return response.data.results;
