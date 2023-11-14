@@ -1,35 +1,37 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import './Signup.css'
 
 function Signup() {
   const [username, setUsername] = useState('');
- // const [email,setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
-/*
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-*/
+
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Here, you can add your authentication logic and check the username and password.
     // For this example, we'll just log them to the console.
     console.log("Username:", username);
-   // console.log("Email", email);
     console.log("Password:", password);
   };
 
   return (
+
     <div className="container">
+      <div className='centeringContainer'>
+        <h1>Create an account</h1>
+      </div>
+      
       <div className="row">
         <div className="col-md-6 offset-md-3">
           <form onSubmit={handleSubmit}>
@@ -45,21 +47,7 @@ function Signup() {
                 onChange={handleUsernameChange}
               />
             </div>
-{/*           
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">
-                Email:
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="form-control"
-                value={email}
-                onChange={handleEmailChange}
-              />
-            </div> */}
-            
-            
+
 
             <div className="mb-3">
               <label htmlFor="password" className="form-label">
@@ -74,10 +62,12 @@ function Signup() {
               />
             </div>
             <button type="submit" className="btn btn-primary">
-              Sign Up
+              Register
             </button>
           </form>
+          <Link to="/login" variant="body2">Already have an account? Login here</Link>
         </div>
+
       </div>
     </div>
   );
