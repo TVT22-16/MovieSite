@@ -1,6 +1,13 @@
 
 
 .listCont{
-    display: flex;
-    flex-direction:row;
+    /* display: flex;
+    flex-direction:row; */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    overflow-x:hidden;
+    overflow-y: scroll;
+
 }
+
