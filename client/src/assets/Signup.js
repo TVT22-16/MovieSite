@@ -6,6 +6,7 @@ import './Signup.css'
 function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -18,12 +19,26 @@ function Signup() {
     setPassword(e.target.value);
   };
 
+  const handleConfirmPasswordChange = (e) =>{
+    setConfirmPassword(e.target.value);
+  }
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Username: ' + username);
     console.log('Password ' + password);
+    
+
+    if (!username.trim() || !password.trim() || !confirmPassword.trim()) {
+      setErrorMessage('All fields are required.');
+      return;
+    }
+    if( password !== confirmPassword){
+      setErrorMessage("Passwords don't match")
+      return;
+    }
+   
     try {
       const response = await axios.post('http://localhost:3001/users/register', {
         username,
@@ -89,6 +104,20 @@ function Signup() {
                 onChange={handlePasswordChange}
               />
             </div>
+
+            <div className="mb-3">
+            <label htmlFor="confirmPassword" className="form-label">
+              Confirm Password:
+            </label>
+            <input
+              type="password"
+              id="confirmPassword"
+              className="form-control"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
+            />
+          </div>
+
             <button type="submit" className="btn btn-primary">
               Register
             </button>
