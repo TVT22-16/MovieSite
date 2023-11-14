@@ -1,10 +1,10 @@
 import React from 'react'
+import MovieApp from './MovieApp'
 
 function Home() {
   return (
     <div>
-        <h1>This is the homepage!
-        </h1>
+        <MovieApp/>
 
     </div>
   )
