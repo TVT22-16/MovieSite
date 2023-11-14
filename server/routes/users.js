@@ -31,11 +31,15 @@ router.post('/register', upload.none() , async (req,res) => {
         await addUser(username,password);
         res.end();
     } catch (error) {
-        console.log(error);
-        res.json({error: error.message}).status(500);
-    }
-
-});
+        if (error.message.includes('duplicate key value violates unique constraint')) {
+            // Check the error message for a specific string indicating a unique constraint violation
+            res.status(409).json({ error: 'Username already exists' });
+          } else {
+            // Send a generic error message for other cases
+            res.status(500).json({ error: 'Internal Server Error' });
+          }
+        }
+      });
 
 router.post('/login', upload.none(), async (req,res) => {
     const username = req.body.username;
