@@ -1,5 +1,28 @@
 
 
+.searchCont{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+    float: right;
+}
+
+.searchBar,textarea{
+    border-radius: 10px;
+}
+
+#searchBtn{
+    border-radius: 10px;
+}
+
+/* input[type="text"], textarea {
+
+    background-color : black; 
+  
+  } */
+
+
 .listCont{
     /* display: flex;
     flex-direction:row; */
@@ -14,6 +37,7 @@
 
     padding-top: 2%;
 }
+
 
 .movieCard{
     background-color: lightgrey;
