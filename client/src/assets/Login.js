@@ -1,15 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css'
-import { jwtToken } from './Signals';
-import axios from "axios";
+import { jwtToken, userData, usernameSignal } from './Signals';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-
-
 function Login() {
+
+  return (
+    <div>
+      <UserInfo/>
+      { jwtToken.value.length === 0 ? <LoginForm/> : 
+        <button onClick={() => jwtToken.value = ''}>Logout</button>}
+    </div>
+  );
+}
+function UserInfo(){
+  
+  return(
+    <div>
+      {jwtToken.value ? <h1>{userData.value?.private}</h1> : <h1>You are guest</h1>}
+    </div>
+  )
+}
+
+function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  const [loggedIn, setLoggedIn] = useState(false);
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
@@ -17,7 +34,6 @@ function Login() {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,17 +43,27 @@ function Login() {
       const response = await axios.post('http://localhost:3001/users/login', {
         username,
         password,
-      });
+      })
+    .then(resp => { jwtToken.value = resp.data.jwtToken; usernameSignal.value = username;  })
+    .catch(error => console.log(error.response.data))
 
       console.log('Login successful:', response.data);
+      setLoggedIn(true);
       // Handle success, e.g., update state or redirect the user
     } catch (error) {
       console.error('Error during login:', error.response ? error.response.data : error.message);
       // Handle the error, e.g., display an error message to the user
     }
+  };
 
 
-  }
+  /* useEffect(() => {
+    // Redirect to the homepage if logged in
+    if (loggedIn) {
+      // You can replace '/home' with the actual path of your homepage
+      window.location.href = '/home';
+    }
+  }, [loggedIn]); */
 
   return (
 
@@ -86,6 +112,5 @@ function Login() {
 
   );
 }
-
 
 export default Login;
