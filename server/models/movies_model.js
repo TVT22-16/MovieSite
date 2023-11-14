@@ -25,5 +25,25 @@ async function getPopularMovies() {
     }
   }
 
+async function searchMovies(search){
+  try {
+    const options = {
+      method: 'GET',
+      //todo remove "+"
+      url: 'https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&query='+search,
+      headers: {
+        accept: 'application/json',
+        Authorization: process.env.MOVIEDB_API_KEY
+      }
+    };
 
-module.exports = {getPopularMovies};
+    const response = await axios.request(options);
+    return response.data.results;
+    
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+module.exports = {getPopularMovies,searchMovies};
