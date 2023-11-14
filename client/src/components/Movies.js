@@ -29,7 +29,7 @@ const Movies = () => {
       <h1>Movies</h1>
             
       <div className='searchCont'>
-        <input
+        <input id='searchBar'
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -37,6 +37,8 @@ const Movies = () => {
         />
         <button id='searchBtn' onClick={handleSearch}>Search</button>
       </div>
+
+
 
       <ul className='listCont'>
         {searchResults.length > 0 ? (
@@ -47,8 +49,9 @@ const Movies = () => {
               <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" />
             </li>
           ))
+
+          //else Render popular movies if no search results
         ) : (
-          // Render popular movies if no search results
           popularMovies.map(movie => (
             <li className='movieCard' key={movie.id}>
               <h3 className='movieTitle'>{movie.title}</h3>
