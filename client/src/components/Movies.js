@@ -19,7 +19,8 @@ const Movies = () => {
 
 
   return (
-    <div>
+
+    <div class='outerCont'>
       <h1>Popular Movies</h1>
       <ul class='listCont'>
         {popularMovies.map(movie => (

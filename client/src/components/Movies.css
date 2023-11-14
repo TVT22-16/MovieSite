@@ -4,14 +4,15 @@
     /* display: flex;
     flex-direction:row; */
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
 
     overflow-x:hidden;
     /* overflow-y: scroll; */
-
-    gap: 100px;
+    gap: 15px;
 
     list-style: none;
+
+    padding-top: 2%;
 }
 
 .movieCard{
@@ -25,7 +26,8 @@
 }
 
 .movieTitle{
-    font-size: 150%;
+    font-size: 120%;
+    font-weight: 700;
 }
 
 .posterImg{
@@ -36,6 +38,21 @@
 
 h1{
     margin-bottom: 2%;
+}
+
+.outerCont{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto auto;
+
+    overflow: hidden;
+}
+
+.movieCard:hover{
+    scale: 1.05;
+    opacity: 0.80;
 }
 
 @media (max-width: 400px) {
