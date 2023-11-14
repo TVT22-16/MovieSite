@@ -18,36 +18,29 @@ const MovieApp = () => {
       .catch(error => console.error('Error fetching popular movies:', error));
   }, []);
 
-  const handleSearch = () => {
-    if (searchTerm) {
-      axios.get(`${baseUrl}/${searchTerm}`)
-        .then(response => setSearchResults(response.data))
-        .catch(error => console.error('Error searching movies:', error));
-    }
-  };
+//   const handleSearch = () => {
+//     if (searchTerm) {
+//       axios.get(`${baseUrl}/${searchTerm}`)
+//         .then(response => setSearchResults(response.data))
+//         .catch(error => console.error('Error searching movies:', error));
+//     }
+//   };
 
-  const handleMovieClick = (id) => {
-    axios.get(`${baseUrl}/id/${id}`)
-      .then(response => setSelectedMovie(response.data))
-      .catch(error => console.error('Error fetching movie details:', error));
-  };
+//   const handleMovieClick = (id) => {
+//     axios.get(`${baseUrl}/id/${id}`)
+//       .then(response => setSelectedMovie(response.data))
+//       .catch(error => console.error('Error fetching movie details:', error));
+//   };
 
   return (
     <div>
-      <h1>Movie App</h1>
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search for movies..."
-      />
-      <button onClick={handleSearch}>Search</button>
-
+      <h1>Movies</h1>
       <h2>Popular Movies</h2>
       <ul>
         {popularMovies.map(movie => (
-          <li key={movie.id} onClick={() => handleMovieClick(movie.id)}>
+          <li key={movie.id}>
             {movie.title}
+            <img class='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Logo" />
           </li>
         ))}
       </ul>
@@ -57,7 +50,7 @@ const MovieApp = () => {
           <h2>Search Results</h2>
           <ul>
             {searchResults.map(movie => (
-              <li key={movie.id} onClick={() => handleMovieClick(movie.id)}>
+              <li key={movie.id}>
                 {movie.title}
               </li>
             ))}
