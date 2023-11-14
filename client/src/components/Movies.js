@@ -20,11 +20,11 @@ const Movies = () => {
 
   return (
     <div>
-      <h1>Movies</h1>
+      <h1>Popular Movies</h1>
       <ul class='listCont'>
         {popularMovies.map(movie => (
-          <li key={movie.id}>
-            {movie.title}
+          <li class='movieCard' key={movie.id}>
+            <h3 class='movieTitle'>{movie.title}</h3>
             <img class='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Logo" />
           </li>
         ))}
