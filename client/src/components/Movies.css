@@ -1,0 +1,6 @@
+
+
+.listCont{
+    display: flex;
+    flex-direction:row;
+}
