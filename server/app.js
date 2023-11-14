@@ -1,6 +1,7 @@
 var express = require('express');
 const dotenv = require('dotenv');
 const connection = require('./postgre/connection.js')
+const cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users.js');
@@ -11,6 +12,7 @@ var moviesRouter = require('./routes/movies.js');
 var app = express();
 dotenv.config();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
