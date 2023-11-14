@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import './Login.css'
 import { jwtToken } from './Signals';
 import axios from "axios";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); 
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -31,6 +32,7 @@ function Login() {
 
       console.log('Login successful:', response.data);
       // Handle success, e.g., update state or redirect the user
+      navigate('/home');
     } catch (error) {
       console.error('Error during login:', error.response ? error.response.data : error.message);
       // Handle the error, e.g., display an error message to the user
