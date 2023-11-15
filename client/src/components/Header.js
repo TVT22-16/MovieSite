@@ -6,7 +6,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import './Header.css';
 import { Routes, Route } from 'react-router-dom';
 
-import { jwtToken, usernameSignal } from '../assets/Signals';
 import Login from '../assets/Login';
 import Signup from '../assets/Signup';
 import Home from '../assets/Home';
@@ -16,7 +15,7 @@ import { jwtToken, usernameSignal, handleLogout } from '../assets/Signals';
 
 
 const Header = ({loggedIn}) => {
-  
+
   const username = usernameSignal.value;
 
   const handleLogout = () => {
@@ -27,7 +26,7 @@ const Header = ({loggedIn}) => {
   };
   if (jwtToken.value.length > 0) {
   return <header>
-   
+
     <Navbar expand="lg" className="bg-body-tertiary">
   <Container>
     <Navbar.Brand href="/">MovieSite</Navbar.Brand>
@@ -39,7 +38,7 @@ const Header = ({loggedIn}) => {
         <Nav.Link href="/mygroups">Groups</Nav.Link>
         <NavDropdown title={username} id="basic-nav-dropdown">
           <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-          <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>  
+          <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
           <NavDropdown.Divider />
           <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
         </NavDropdown>
@@ -47,21 +46,11 @@ const Header = ({loggedIn}) => {
     </Navbar.Collapse>
   </Container>
 </Navbar>
-
-  </header>
-
-<Routes>
-      <Route path="/"  />
-      <Route path="/home" element={<Home/>}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/register" element={<Signup/>}/>
-      </Routes>
 </header>
 
-  
-} else {  
+} else {
 return <header>
-   
+
   <Navbar expand="lg" className="bg-body-tertiary">
 <Container>
   <Navbar.Brand href="/">MovieSite</Navbar.Brand>
@@ -75,12 +64,6 @@ return <header>
   </Navbar.Collapse>
 </Container>
 </Navbar>
-<Routes>
-    <Route path="/"  />
-    <Route path="/home" element={<Home/>}/>
-    <Route path="/login" element={<Login/>}/>
-    <Route path="/register" element={<Signup/>}/>
-    </Routes>
 </header>
 }
 }
