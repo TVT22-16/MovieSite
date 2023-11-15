@@ -41,7 +41,9 @@ function LoginForm() {
 
       console.log('Login successful:', response.data);
       setLoggedIn(true);
+
       // Handle success, e.g., update state or redirect the user
+
     } catch (error) {
       console.error('Error during login:', error.response ? error.response.data : error.message);
       // Handle the error, e.g., display an error message to the user

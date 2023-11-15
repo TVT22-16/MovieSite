@@ -5,11 +5,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import './Header.css';
 import { Routes, Route } from 'react-router-dom';
+
+import { jwtToken, usernameSignal } from '../assets/Signals';
 import Login from '../assets/Login';
 import Signup from '../assets/Signup';
 import Home from '../assets/Home';
 import { jwtToken, usernameSignal, handleLogout } from '../assets/Signals';
-//import Signup from '../assets/Signup';
+
 
 
 
@@ -45,6 +47,9 @@ const Header = ({loggedIn}) => {
     </Navbar.Collapse>
   </Container>
 </Navbar>
+
+  </header>
+
 <Routes>
       <Route path="/"  />
       <Route path="/home" element={<Home/>}/>
@@ -52,6 +57,7 @@ const Header = ({loggedIn}) => {
       <Route path="/register" element={<Signup/>}/>
       </Routes>
 </header>
+
   
 } else {  
 return <header>

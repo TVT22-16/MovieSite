@@ -1,24 +1,36 @@
-import React, { useEffect } from 'react'
-import { Container } from 'react-bootstrap'
+import React from 'react';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Home from './assets/Home';
+import Login from './assets/Login';
+import Signup from './assets/Signup';
+
+
+
 
 
 function App() {
   return (
-    <>
-      
-      <Header />
-      <main>
-        <Container>
-        
-        
-      
-        </Container>
-      </main>
-      <Footer />
-      
-    </>
+    <BrowserRouter>
+      <>
+        <Header />
+        <main>
+          <Routes>
+            
+            {/* Routing */}
+
+            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Signup />} />
+
+
+
+          </Routes>
+        </main>
+        <Footer />
+      </>
+    </BrowserRouter>
   );
 }
 
