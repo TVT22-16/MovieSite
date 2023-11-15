@@ -9,14 +9,15 @@ import { Routes, Route } from 'react-router-dom';
 import Login from '../assets/Login';
 import Signup from '../assets/Signup';
 import Home from '../assets/Home';
-import { jwtToken, usernameSignal, handleLogout } from '../assets/Signals';
+import { jwtToken, usernameSignal} from '../assets/Signals';
 
 
 
 
 const Header = ({loggedIn}) => {
 
-  const username = usernameSignal.value;
+  const username = sessionStorage.getItem('username');
+  console.log(username);
 
   const handleLogout = () => {
     // Clear authentication-related information
