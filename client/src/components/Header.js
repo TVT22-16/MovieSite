@@ -5,9 +5,6 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import './Header.css';
 import { Routes, Route } from 'react-router-dom';
-import Login from '../assets/Login';
-import Signup from '../assets/Signup';
-import Home from '../assets/Home';
 import { jwtToken, usernameSignal } from '../assets/Signals';
 //import Signup from '../assets/Signup';
 
@@ -43,12 +40,6 @@ const Header = ({loggedIn}) => {
     </Navbar.Collapse>
   </Container>
 </Navbar>
-<Routes>
-      <Route path="/"  />
-      <Route path="/home" element={<Home/>}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/register" element={<Signup/>}/>
-      </Routes>
 
   </header>
   
