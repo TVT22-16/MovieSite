@@ -60,7 +60,7 @@ export function Reviews() {
   }, []);
 
 
-//   This useEffect is set up to run fetchMoviesForReviews whenever the review state changes.
+//   This useEffect is set up to run fetchMoviesForReviews whenever review state changes.
   useEffect(() => {
     fetchMoviesForReviews();
   }, [review]); 
