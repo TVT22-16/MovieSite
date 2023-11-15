@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Reviews.css';
 
 const baseURL = 'http://localhost:3001/reviews';
 const moviebyidURL = 'http://localhost:3001/movies/id/';
@@ -72,9 +73,9 @@ export function Reviews() {
       <ul className='listCont'>
         {review.map((rew, index) => (
           <li key={index} className='listInReview'>
-            <p>{rew.username}</p>
+            <p>Reviewer: {rew.username}</p>
             <p>{rew.review}</p>
-            <p>{rew.rating}</p>
+            <p>Rating: {rew.rating}</p>
 
 
             {/* Movietitle */}
