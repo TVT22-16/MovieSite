@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './assets/Home';
 import Login from './assets/Login';
 import Signup from './assets/Signup';
+import Reviews from './assets/Reviews';
 
 
 
@@ -17,12 +18,13 @@ function App() {
         <Header />
         <main>
           <Routes>
-            
+
             {/* Routing */}
 
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
+            <Route path="/reviews" element={<Reviews />} />
 
 
 
