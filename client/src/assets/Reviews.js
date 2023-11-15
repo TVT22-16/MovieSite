@@ -4,42 +4,68 @@ import axios from 'axios';
 const baseURL = 'http://localhost:3001/reviews';
 const moviebyidURL = 'http://localhost:3001/movies/id/';
 
+// Custom function for making a GET request
+async function get(apiRoute) {
+  try {
+    const response = await axios.get(apiRoute);
+    return response.data;
+  } catch (err) {
+    return err;
+  }
+}
+
 export function Reviews() {
   const [review, setReview] = React.useState(null);
-  const [movie, setMovie] = React.useState(null);
+  const [movies, setMovies] = React.useState([]);
+  const [movieposters, setMoviePosters] = React.useState([]);
 
-  React.useEffect(() => {
-    const fetchReviewData = async () => {
-      try {
-        const response = await axios.get(baseURL);
-        setReview(response.data);
-      } catch (error) {
-        console.error('Error fetching review data:', error);
+  // Fetch review data
+  const fetchReviewData = async () => {
+    try {
+      const reviewData = await get(baseURL);
+      setReview(reviewData);
+    } catch (error) {
+      console.error('Error fetching review data:', error);
+    }
+  };
+
+  // Fetch movie data for each review
+  const fetchMoviesForReviews = async () => {
+    try {
+      if (review) {
+        // Get movieid from revewis
+        const movieIds = review.map((rew) => rew.moviedb_movieid);
+
+        // Fetch moviedatas
+        const responses = await Promise.all(
+          movieIds.map((movieId) => get(`${moviebyidURL}${movieId}`))
+        );
+
+        
+        const movieTitles = responses.map((response) => response.title);
+        const posters = responses.map((response) => response.poster_path);
+
+        // Set information arrays
+        setMovies(movieTitles);
+        setMoviePosters(posters);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching movie data:', error);
+    }
+  };
 
+  useEffect(() => {
+    // Fetch review data when the component mounts
     fetchReviewData();
   }, []);
 
-  React.useEffect(() => {
-    const fetchMovieData = async () => {
-      try {
-        // Assuming movieid is available in the review data
-        const movieId = review?.[0]?.moviedb_movieid; // Adjust this based on your data structure
 
-        if (movieId) {
-          const response = await axios.get(`${moviebyidURL}${movieId}`);
-          setMovie(response.data.title);
-        }
-      } catch (error) {
-        console.error('Error fetching movie data:', error);
-      }
-    };
+//   This useEffect is set up to run fetchMoviesForReviews whenever the review state changes.
+  useEffect(() => {
+    fetchMoviesForReviews();
+  }, [review]); 
 
-    fetchMovieData();
-  }, [review]); //runs if moviedata changes
-
-  if (!review || !movie) return null;
+  if (!review || !movies) return null;
 
   return (
     <div id='body'>
@@ -50,8 +76,13 @@ export function Reviews() {
             <p>{rew.review}</p>
             <p>{rew.rating}</p>
 
-            {/* Display movie title */}
-            <p>{movie}</p>
+
+            {/* Movietitle */}
+            <p>{movies[index]}</p>
+
+            {/* Movie poster */}
+            <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movieposters[index]}`} alt="Movie Poster" />
+
           </li>
         ))}
       </ul>
