@@ -8,20 +8,12 @@ function Login() {
 
   return (
     <div>
-      <UserInfo/>
       { jwtToken.value.length === 0 ? <LoginForm/> : 
-        <button onClick={() => jwtToken.value = ''}>Logout</button>}
+        <button onClick={() => jwtToken.value = null}>Logout</button>}
     </div>
   );
 }
-function UserInfo(){
-  
-  return(
-    <div>
-      {jwtToken.value ? <h1>{userData.value?.private}</h1> : <h1>You are guest</h1>}
-    </div>
-  )
-}
+
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -50,7 +42,6 @@ function LoginForm() {
       console.log('Login successful:', response.data);
       setLoggedIn(true);
       // Handle success, e.g., update state or redirect the user
-      navigate('/home');
     } catch (error) {
       console.error('Error during login:', error.response ? error.response.data : error.message);
       // Handle the error, e.g., display an error message to the user
