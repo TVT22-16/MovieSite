@@ -6,6 +6,7 @@ import Home from './assets/Home';
 import Login from './assets/Login';
 import Signup from './assets/Signup';
 import Reviews from './assets/Reviews';
+import Settings from './assets/Settings';
 
 
 
@@ -25,7 +26,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
             <Route path="/reviews" element={<Reviews />} />
-
+            <Route path="/settings" element={<Settings />} />
 
 
           </Routes>

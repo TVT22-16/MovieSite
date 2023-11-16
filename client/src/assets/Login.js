@@ -9,7 +9,7 @@ function Login() {
   return (
     <div>
       { jwtToken.value.length === 0 ? <LoginForm/> : 
-        <button onClick={() => jwtToken.value = null}>Logout</button>}
+        <button onClick={() => jwtToken.value = ''}>Logout</button>}
     </div>
   );
 }
@@ -38,6 +38,8 @@ function LoginForm() {
       })
     .then(resp => { jwtToken.value = resp.data.jwtToken; usernameSignal.value = username;  })
     .catch(error => console.log(error.response.data))
+
+    sessionStorage.setItem('username', username);
 
       console.log('Login successful:', response.data);
       setLoggedIn(true);
