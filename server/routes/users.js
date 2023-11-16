@@ -53,10 +53,11 @@ router.post('/login', upload.none(), async (req,res) => {
             const token = jwt.sign({username: username}, process.env.JWT_SECRET);
             res.status(200).json({jwtToken:token});
         }else{
+            
             res.status(401).json({error: 'Invalid password'});
         }
     }else{
-        res.status(401).json({error: 'Customer not found'});
+        res.status(401).json({error: 'User not found'});
     }
 });
 
