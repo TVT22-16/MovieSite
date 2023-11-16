@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Reviews.css';
 
 const baseURL = 'http://localhost:3001/reviews';
 const moviebyidURL = 'http://localhost:3001/movies/id/';
@@ -15,9 +16,8 @@ async function get(apiRoute) {
 }
 
 export function Reviews() {
-  const [review, setReview] = React.useState(null);
+  const [review, setReview] = React.useState([]);
   const [movies, setMovies] = React.useState([]);
-  const [movieposters, setMoviePosters] = React.useState([]);
 
   // Fetch review data
   const fetchReviewData = async () => {
@@ -32,8 +32,8 @@ export function Reviews() {
   // Fetch movie data for each review
   const fetchMoviesForReviews = async () => {
     try {
-      if (review) {
-        // Get movieid from revewis
+      if (review.length > 0) {
+        // Get movieid from reviews
         const movieIds = review.map((rew) => rew.moviedb_movieid);
 
         // Fetch moviedatas
@@ -41,13 +41,16 @@ export function Reviews() {
           movieIds.map((movieId) => get(`${moviebyidURL}${movieId}`))
         );
 
-        
-        const movieTitles = responses.map((response) => response.title);
-        const posters = responses.map((response) => response.poster_path);
+        // Create an array of movie objects
+        const movieDatas = responses.map((response) => ({
+          id: response.id,
+          title: response.title,
+          poster_path: response.poster_path,
+          release_date: response.release_date,
+        }));
 
-        // Set information arrays
-        setMovies(movieTitles);
-        setMoviePosters(posters);
+        // Set the movies state
+        setMovies(movieDatas);
       }
     } catch (error) {
       console.error('Error fetching movie data:', error);
@@ -59,29 +62,30 @@ export function Reviews() {
     fetchReviewData();
   }, []);
 
-
-//   This useEffect is set up to run fetchMoviesForReviews whenever the review state changes.
+  // This useEffect is set up to run fetchMoviesForReviews whenever review state changes.
   useEffect(() => {
     fetchMoviesForReviews();
   }, [review]); 
 
-  if (!review || !movies) return null;
+  if (!review.length || !movies.length) return null;
 
   return (
     <div id='body'>
-      <ul className='listCont'>
+      <ul className='listContRew'>
         {review.map((rew, index) => (
           <li key={index} className='listInReview'>
-            <p>{rew.username}</p>
-            <p>{rew.review}</p>
-            <p>{rew.rating}</p>
 
+            <p>Reviewer: {rew.username}</p>
+            <p>{rew.review}</p>
+            <p>Rating: {rew.rating}</p>
+
+            {/* <p>{movies[index].id}</p> */}
 
             {/* Movietitle */}
-            <p>{movies[index]}</p>
+            <p>{movies[index].title} ({movies[index].release_date})</p>
 
             {/* Movie poster */}
-            <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movieposters[index]}`} alt="Movie Poster" />
+            <img className='posterImgRew' src={`https://image.tmdb.org/t/p/w500${movies[index].poster_path}`} alt="Movie Poster" />
 
           </li>
         ))}
