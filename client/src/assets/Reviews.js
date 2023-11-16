@@ -69,8 +69,8 @@ export function Reviews() {
   if (!review || !movies) return null;
 
   return (
-    <div id='body'>
-      <ul className='listCont'>
+    <div id='bodyRew'>
+      <ul className='listContRew'>
         {review.map((rew, index) => (
           <li key={index} className='listInReview'>
             <p>Reviewer: {rew.username}</p>
@@ -82,7 +82,7 @@ export function Reviews() {
             <p>{movies[index]}</p>
 
             {/* Movie poster */}
-            <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movieposters[index]}`} alt="Movie Poster" />
+            <img className='posterImgRew' src={`https://image.tmdb.org/t/p/w500${movieposters[index]}`} alt="Movie Poster" />
 
           </li>
         ))}

@@ -1,6 +1,6 @@
 
 
-.listCont{
+.listContRew{
     /* display: flex;
     flex-direction:row; */
     display: grid;
@@ -27,6 +27,6 @@
     border-radius: 10px;
 }
 
-.posterImg{
+.posterImgRew{
     width: 25%;
 }
