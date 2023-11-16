@@ -43,6 +43,7 @@ export function Reviews() {
 
         // Create an array of movie objects
         const movieDatas = responses.map((response) => ({
+          id: response.id,
           title: response.title,
           poster_path: response.poster_path,
           release_date: response.release_date,
@@ -73,10 +74,12 @@ export function Reviews() {
       <ul className='listContRew'>
         {review.map((rew, index) => (
           <li key={index} className='listInReview'>
-            
+
             <p>Reviewer: {rew.username}</p>
             <p>{rew.review}</p>
             <p>Rating: {rew.rating}</p>
+
+            {/* <p>{movies[index].id}</p> */}
 
             {/* Movietitle */}
             <p>{movies[index].title} ({movies[index].release_date})</p>
