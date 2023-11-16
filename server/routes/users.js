@@ -4,7 +4,7 @@ const upload = multer({dest: 'upload/'});
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const {addUser, getUsers, getUserbyname, updateUser, deleteUser, checkUser} = require('../models/users_model');
+const {addUser, getUsers, getUserbyname, updateUser, deleteUser, checkUser, updateUsername} = require('../models/users_model');
 
 /**
  * User root get mapping
@@ -74,10 +74,12 @@ router.get('/private', async (req,res) => {
     }
 });
 
-// update user
-router.put('/:username', upload.none(), async (req, res) => {
+// update password
+router.put('/password/:username', upload.none(), async (req, res) => {
     let username = req.params.username;
     let password = req.body.password;
+
+    password = await bcrypt.hash(password, 10);
     try {
         await updateUser(username,password);
         res.end();
@@ -86,6 +88,22 @@ router.put('/:username', upload.none(), async (req, res) => {
         res.json({error: error.message}).status(500);
     }
 });
+//update username
+router.put('/name/:username', upload.none(), async (req, res) => {
+    let username = req.params.username;
+    let password = req.body.password;
+    let newUsername = req.body.newUsername;
+
+    password = await bcrypt.hash(password, 10);
+    try {
+        await updateUsername(username,password, newUsername);
+        res.end();
+    } catch (error) {
+        console.log(error);
+        res.json({error: error.message}).status(500);
+    }
+});
+
 
 //delete user
 router.delete('/:username', async (req, res) => {

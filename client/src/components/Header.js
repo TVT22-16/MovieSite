@@ -23,9 +23,9 @@ const Header = ({loggedIn}) => {
     // Clear authentication-related information
     jwtToken.value = ''; // Assuming jwtToken is a ref or a mutable object
     usernameSignal.value = '';
-    // Add other logout-related logic if needed
+    window.location.href = '/login'; 
   };
-  if (jwtToken.value.length > 0) {
+  if (jwtToken.value !== '') {
   return <header>
 
     <Navbar expand="lg" className="bg-body-tertiary">

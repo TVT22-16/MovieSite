@@ -36,10 +36,13 @@ function LoginForm() {
         username,
         password,
       })
-    .then(resp => { jwtToken.value = resp.data.jwtToken; usernameSignal.value = username;  })
-    .catch(error => console.log(error.response.data))
+  
+    jwtToken.value = response.data.jwtToken;
+    usernameSignal.value = response.data.username;
 
+    //These may be needed later
     sessionStorage.setItem('username', username);
+    sessionStorage.setItem('token', jwtToken.value);
 
       console.log('Login successful:', response.data);
       setLoggedIn(true);
