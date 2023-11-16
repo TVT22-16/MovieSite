@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const MoviesInfo = () => {
+const MovieInfo = () => {
   return (
     <div>
         movieinfopage
@@ -9,4 +9,4 @@ const MoviesInfo = () => {
   );
 };
 
-export default MoviesInfo;
+export default MovieInfo;

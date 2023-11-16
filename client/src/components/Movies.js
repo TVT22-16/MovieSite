@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Movies.css';
-import './MovieInfo.js'
+import MovieInfo from './MovieInfo.js'
+
 
 const Movies = () => {
 
-  const openInfo = (id) => {
+  const openInfo = (id,endpoint) => {
 
     // console.log(event.target);
     console.log(`Movie with id ${id}`);
+    window.location.href = endpoint;
   };
 
 
@@ -48,7 +50,6 @@ const Movies = () => {
       </div>
 
 
-
       <ul className='listCont'>
         {searchResults.length > 0 ? (
           // Render search results if available
@@ -65,7 +66,7 @@ const Movies = () => {
             <li className='movieCard' key={movie.id}>
               <h3 className='movieTitle'>{movie.title}</h3>
               {/* To delay the execution of openInfo(movie.id) until the image is clicked, you need to wrap it in an arrow function: */}
-              <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)}/>
+              <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id,'/reviews')}/>
             </li>
           ))
         )}
