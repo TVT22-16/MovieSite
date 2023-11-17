@@ -7,6 +7,7 @@ import Login from './assets/Login';
 import Signup from './assets/Signup';
 import Reviews from './assets/Reviews';
 import Settings from './assets/Settings';
+import MovieInfo from './components/MovieInfo';
 
 
 
@@ -27,6 +28,8 @@ function App() {
             <Route path="/register" element={<Signup />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/settings" element={<Settings />} />
+
+            <Route path="/movieinfo/" element={<MovieInfo/>}/>
 
 
           </Routes>

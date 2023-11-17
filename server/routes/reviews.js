@@ -2,28 +2,54 @@ const router = require('express').Router();
 const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 
-const {addReview,getReviews,deleteReview,getReviewsUser} = require('../models/reviews_model.js');
+const {addReview,getReviews,deleteReview,getReviewsUser,getReviewsMovieId} = require('../models/reviews_model.js');
 
 
 //get all reviews or reviews?username=
 router.get('/', async (req, res) => {
-    let username = req.query.username || '';
 
     try {
         let reviews;
-
-        if (username.length > 0) {
-            reviews = await getReviewsUser(username);
-        } else {
             reviews = await getReviews();
-        }
-        console.log(username);
         res.json(reviews);
+
     } catch (error) {
         console.error("Error fetching reviews:", error);
         res.status(500).json({ error: "Error fetching reviews" });
     }
 });
+
+router.get('/byMovieId/:movieid', async (req, res) => {
+
+    try {
+        let id = req.params.movieid;
+        let reviews;
+        reviews = await getReviewsMovieId(id);
+
+        res.json(reviews);
+
+    } catch (error) {
+        console.error("Error fetching reviews:", error);
+        res.status(500).json({ error: "Error fetching reviews" });
+    }
+});
+
+router.get('/user/:username', async (req, res) => {
+
+    try {
+        let username = req.params.username;
+        let reviews;
+        reviews = await getReviewsUser(username);
+
+        res.json(reviews);
+
+    } catch (error) {
+        console.error("Error fetching reviews:", error);
+        res.status(500).json({ error: "Error fetching reviews" });
+    }
+});
+
+
 
 //add user
 router.post('/add', upload.none() , async (req,res) => {
