@@ -50,6 +50,7 @@ const MovieInfo = () => {
         <h1>{movieData.title} ({movieData.vote_average})</h1>
         <img className='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
         <ul>
+          {/* foreach */}
           {reviews.map((review, index) => (
             <li key={index}>
               <strong> {review.username} </strong>
