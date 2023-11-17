@@ -10,7 +10,9 @@ const Movies = () => {
 
     // console.log(event.target);
     console.log(`Movie with id ${id}`);
-    window.location.href = endpoint;
+
+    // window.location.href = endpoint;
+    window.location.href = `/movieinfo/${id}`;
   };
 
 
