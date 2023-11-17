@@ -7,6 +7,7 @@ import Login from './assets/Login';
 import Signup from './assets/Signup';
 import Reviews from './assets/Reviews';
 import Settings from './assets/Settings';
+import Groups from './assets/Groups';
 
 
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/register" element={<Signup />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/groups" element={<Groups/>} />
 
 
           </Routes>

@@ -24,7 +24,7 @@ router.get('/:group_name', async (req, res) => {
     let group_name = req.params.username; // Access the 'group_name' route parameter
     const groups = await getGroupbyname(group_name);
 
-    if (user.length > 0) {
+    if (groups.length > 0) {
         res.json(groups);
     } else {
         res.status(404).json({ error: 'User not found' });

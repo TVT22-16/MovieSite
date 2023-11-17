@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import './Header.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, } from 'react-router-dom';
 
 import Login from '../assets/Login';
 import Signup from '../assets/Signup';
@@ -36,7 +36,7 @@ const Header = ({loggedIn}) => {
       <Nav className="custom-nav">
         <Nav.Link href="/home">Home</Nav.Link>
         <Nav.Link href="/reviews">Reviews</Nav.Link>
-        <Nav.Link href="/mygroups">Groups</Nav.Link>
+        <Nav.Link href="/groups">Groups</Nav.Link>
         <NavDropdown title={username} id="basic-nav-dropdown">
           <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
           <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
