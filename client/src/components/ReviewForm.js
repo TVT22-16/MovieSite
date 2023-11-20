@@ -17,6 +17,10 @@ const ReviewForm = ({moviedb_movieid}) => {
     const [showForm, setShowForm] = useState(false);
 
     const submitReviewForm = (event) =>{
+
+      // Hide form when submitting
+      setShowForm(false);
+
       event.preventDefault(); 
 
       const reviewData = {
@@ -59,7 +63,7 @@ const ReviewForm = ({moviedb_movieid}) => {
 
 
                 <label htmlFor="rating">Rating</label>
-                    <input type="number" name="rating" className='ratingBox' placeholder="0-10.0"/>
+                    <input type="number" name="rating" className='ratingBox' placeholder="0-10.0" step="any" max="10.0" maxlength="4"/>
 
 
                 <input className='submitBtn' type="submit" value="SUBMIT REVIEW"/>
