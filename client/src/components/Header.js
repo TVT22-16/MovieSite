@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from '../assets/Login';
 import Signup from '../assets/Signup';
 import Home from '../assets/Home';
+import Userlist from '../assets/Userlist';
 import { jwtToken, usernameSignal} from '../assets/Signals';
 
 
@@ -37,6 +38,7 @@ const Header = ({loggedIn}) => {
         <Nav.Link href="/home">Home</Nav.Link>
         <Nav.Link href="/reviews">Reviews</Nav.Link>
         <Nav.Link href="/mygroups">Groups</Nav.Link>
+        <Nav.Link href="/userlist">Users</Nav.Link>
         <NavDropdown title={username} id="basic-nav-dropdown">
           <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
           <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
