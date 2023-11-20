@@ -53,7 +53,7 @@ const MovieInfo = () => {
           <div class='imgTitleContainer'>
             <h1 class='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
             <img className='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
-            <ul id='themoviedbInfo'>
+            <ul class='themoviedbInfo'>
               <li>Moviedb votes: {movieData.vote_average}</li>
              <br></br> <li>{movieData.overview}</li>
             </ul>
@@ -66,9 +66,9 @@ const MovieInfo = () => {
           {/* foreach */}
           {reviews.map((review, index) => (
             <li key={index} class='reviewItem'>
-              <p id='pUsername'> {review.username}  </p> 
-              <p id='pRating'>Rating: {review.rating}  </p> 
-              <p id='pReview'>{review.review}  </p> 
+              <p class='pUsername'> {review.username}  </p> 
+              <p class='pRating'>Rating: {review.rating}  </p> 
+              <p class='pReview'>{review.review}  </p> 
 
             </li>
           ))}

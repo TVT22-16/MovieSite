@@ -10,7 +10,7 @@
 
 }
 
-#movieInfoBody{
+.movieInfoBody{
     overflow-x: hidden;
 }
 
@@ -18,7 +18,7 @@
     max-width: 80%;
 }
 
-#reviewForm{ 
+.reviewForm{ 
 
     margin-top: 2%;
     margin-bottom: 2%;
@@ -64,10 +64,13 @@
     flex-direction: column;
 
     align-items: center;
+
+    float: left;
 }
 
-#themoviedbInfo{
+.themoviedbInfo{
     list-style: none;
+    width: 90%;
     
 }
 
@@ -77,6 +80,7 @@
 
 .reviewContainer{
     margin-top: 2%;
+    min-width: 60%;
 
 }
 

@@ -21,12 +21,12 @@ const ReviewForm = () => {
   
     return (
       
-        <div id='reviewFormBody'>
+        <div class='reviewFormBody'>
 
         <button onClick={handleShowForm}>Add Review</button>
   
         {showForm && (
-            <form id='reviewForm'>
+            <form class='reviewForm'>
                 <label for="review">Review</label>
                     {/* <input type="text" class='reviewBox' name="review" placeholder="Write your review here"/> */}
                     <textarea name="review" rows="4" cols="50" placeholder="Write your review here"></textarea>
