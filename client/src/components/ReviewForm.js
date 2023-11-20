@@ -11,6 +11,10 @@ const ReviewForm = () => {
 
     const [showForm, setShowForm] = useState(false);
 
+    const [review, setReview] = useState('');
+    const [rating, setRating] = useState('');
+
+
     const handleShowForm = () => {
       setShowForm(true);
     };
@@ -24,16 +28,15 @@ const ReviewForm = () => {
         {showForm && (
             <form id='reviewForm'>
                 <label for="review">Review</label>
-                    <input type="text" name="review" size='20' rows="4"/>
+                    {/* <input type="text" class='reviewBox' name="review" placeholder="Write your review here"/> */}
+                    <textarea name="review" rows="4" cols="50" placeholder="Write your review here"></textarea>
 
 
-                <label>
-                    Rating (0-10.0)
-                    <input type='number' name='rating'/>
-                </label>
+                <label for="rating">Rating</label>
+                    <input type="number" name="rating" class='ratingBox' placeholder="0-10.0"/>
 
 
-                <input type="submit" value="Submit" />
+                <input class='submitBtn' type="submit" value="SUBMIT REVIEW" />
             </form>
 
         )}
