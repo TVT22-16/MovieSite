@@ -18,8 +18,18 @@
     max-width: 80%;
 }
 
-#addReview{
-    /* float:right; */
+#reviewForm{ 
+
+margin-top: 2%;
+margin-bottom: 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+#reviewFormBody{
+    display: flex;
+    flex-direction: column;
 }
 
 .movieTitle{

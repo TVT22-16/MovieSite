@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MovieInfo.css';
 import { useSearchParams } from 'react-router-dom'
+import ReviewForm from './ReviewForm';
 
 
 //https://webtips.dev/solutions/get-query-params-in-react
@@ -60,7 +61,8 @@ const MovieInfo = () => {
 
           
         <ul class='reviewContainer'>
-        <button id='addReview'>Add review</button>
+        <ReviewForm/>
+
           {/* foreach */}
           {reviews.map((review, index) => (
             <li key={index} class='reviewItem'>
