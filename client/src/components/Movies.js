@@ -7,12 +7,11 @@ import ReviewForm from './ReviewForm.js';
 
 const Movies = () => {
 
-  const openInfo = (id,endpoint) => {
+  const openInfo = (id) => {
 
     // console.log(event.target);
     console.log(`Movie with id ${id}`);
 
-    // window.location.href = endpoint;
     window.location.href = `/movieinfo/?id=${id}`;
   };
 

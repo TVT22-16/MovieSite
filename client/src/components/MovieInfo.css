@@ -4,6 +4,7 @@
 .infoContainer{
     display: flex;
     flex-direction: row;
+    float: left;
     margin-left: 2%;
     margin-top: 2%;
 
@@ -12,6 +13,7 @@
 
 #movieInfoBody{
     overflow-x: hidden;
+    float: left;
 }
 
 .infoPoster{
@@ -77,6 +79,7 @@
 
 .reviewContainer{
     margin-top: 2%;
+    width: 80%;
 
 }
 
