@@ -4,7 +4,7 @@ const upload = multer({dest: 'upload/'});
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const {addUser, getUsers, getUserbyname, updateUser, deleteUser, checkUser, updateUsername} = require('../models/users_model');
+const {addUser, getUsers, getUsernames, getUserbyname, updateUser, deleteUser, checkUser, updateUsername} = require('../models/users_model');
 
 /**
  * User root get mapping
@@ -20,7 +20,15 @@ router.get('/', async (req, res) => {
         res.status(500).json({ error: "Error fetching users" });
     }
 });
-
+router.get('/userinfo', async (req, res) => {
+    try {
+        const users = await getUsernames();
+        res.json(users);
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).json({ error: "Error fetching users" });
+    }
+});
 //add user
 router.post('/register', upload.none() , async (req,res) => {
     const username = req.body.username;
