@@ -16,16 +16,16 @@ const ReviewForm = () => {
     };
   
     return (
-      <div id='reviewFormBody'>
       
+        <div id='reviewFormBody'>
+
         <button onClick={handleShowForm}>Add Review</button>
   
         {showForm && (
             <form id='reviewForm'>
-                <label>
-                    Review
-                    <input type="text" name="review" size='20' rows="4" cols="50"/>
-                </label>
+                <label for="review">Review</label>
+                    <input type="text" name="review" size='20' rows="4"/>
+
 
                 <label>
                     Rating (0-10.0)

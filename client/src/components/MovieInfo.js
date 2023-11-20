@@ -55,7 +55,7 @@ const MovieInfo = () => {
             <img className='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
             <ul id='themoviedbInfo'>
               <li>Moviedb votes: {movieData.vote_average}</li>
-              <li>Overview: {movieData.overview}</li>
+             <br></br> <li>{movieData.overview}</li>
             </ul>
           </div>
 

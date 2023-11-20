@@ -20,16 +20,19 @@
 
 #reviewForm{ 
 
-margin-top: 2%;
-margin-bottom: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 10px;
+    width: 75%;
 }
 
 #reviewFormBody{
+    align-items: center;
     display: flex;
     flex-direction: column;
+    margin-left: 1%;
 }
 
 .movieTitle{
