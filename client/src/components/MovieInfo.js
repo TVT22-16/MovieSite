@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './MovieInfo.css';
 import { useSearchParams } from 'react-router-dom'
 
 
@@ -46,19 +47,31 @@ const MovieInfo = () => {
 
 
   return (
-      <div>
-        <h1>{movieData.title} ({movieData.vote_average})</h1>
-        <img className='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
-        <ul>
+      <div id='movieInfoBody'>
+        <div class='infoContainer'>
+          <div class='imgTitleContainer'>
+            <h1 class='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
+            <img className='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
+            <ul id='themoviedbInfo'>
+              <li>Moviedb votes: {movieData.vote_average}</li>
+              <li>Overview: {movieData.overview}</li>
+            </ul>
+          </div>
+
+          
+        <ul class='reviewContainer'>
+        <button id='addReview'>Add review</button>
           {/* foreach */}
           {reviews.map((review, index) => (
-            <li key={index}>
-              <strong> {review.username} </strong>
-              <strong> {review.review} </strong>
-              <strong> {review.rating} </strong>
+            <li key={index} class='reviewItem'>
+              <p id='pUsername'> {review.username}  </p> 
+              <p id='pRating'>Rating: {review.rating}  </p> 
+              <p id='pReview'>{review.review}  </p> 
+
             </li>
           ))}
         </ul>
+        </div>
       </div>
 
   )

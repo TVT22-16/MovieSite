@@ -1,0 +1,63 @@
+
+
+
+.infoContainer{
+    display: flex;
+    flex-direction: row;
+    margin-left: 2%;
+    margin-top: 2%;
+
+
+}
+
+#movieInfoBody{
+    overflow-x: hidden;
+}
+
+.infoPoster{
+    max-width: 80%;
+}
+
+#addReview{
+    /* float:right; */
+}
+
+.movieTitle{
+    font-size: 120%
+}
+
+.imgTitleContainer{
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+#themoviedbInfo{
+    list-style: none;
+    
+}
+
+.infoPoster{
+    border-radius: 5px;
+}
+
+.reviewContainer{
+    margin-top: 2%;
+
+}
+
+.reviewItem{
+    background-color: lightblue;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+
+    min-width: 70%;
+
+}
