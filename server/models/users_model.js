@@ -3,6 +3,7 @@ const pgPool = require('../postgre/connection');
 const sql = {
     INSERT_USER: 'INSERT INTO users VALUES ($1, $2)',
     GET_USERS: 'SELECT username,password FROM users',
+    GET_USERNAMES: 'SELECT username FROM users',
     GET_USERBYNAME: 'SELECT * FROM users WHERE username = $1',
     UPDATE_USER: 'UPDATE users SET username = $1, password = $2 WHERE username = $1',
     UPDATE_USERNAME: 'UPDATE users SET username = $1, password = $2 WHERE username = $3',
@@ -19,7 +20,11 @@ async function getUsers(){
     const rows = result.rows;
     return rows;
 }
-
+async function getUsernames(){
+    const result = await pgPool.query(sql.GET_USERNAMES);
+    const rows = result.rows;
+    return rows;
+}
 async function getUserbyname(username){
     const result = await pgPool.query(sql.GET_USERBYNAME,[username]);
     const rows = result.rows;
@@ -47,4 +52,4 @@ async function checkUser(username){
             return null;
         }
 }
-module.exports = {addUser, getUsers,getUserbyname ,updateUser, updateUsername, deleteUser, checkUser};
+module.exports = {addUser, getUsers,getUsernames,getUserbyname ,updateUser, updateUsername, deleteUser, checkUser};
