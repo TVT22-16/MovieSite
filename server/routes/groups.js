@@ -2,7 +2,7 @@ const router = require('express').Router();
 const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 
-const {addGroup, getGroups, getGroupbyname, updateGroup, deleteGroup} = require('../models/groups_model');
+const {addGroup, getGroups, getGroupbyname, updateGroup, deleteGroup, getGroupsByUser} = require('../models/groups_model');
 
 /**
  * User root get mapping
@@ -30,6 +30,23 @@ router.get('/:group_name', async (req, res) => {
         res.status(404).json({ error: 'User not found' });
     }
 });
+
+router.get('/user/:username', async (req, res) => {
+    const username = req.params.username;
+  
+    try {
+      const groups = await getGroupsByUser(username);
+  
+      if (groups.length === 0) {
+        return res.status(404).json({ error: 'User is not part of any groups' });
+      }
+  
+      res.json(groups);
+    } catch (error) {
+      console.error('Error fetching groups by user:', error);
+      res.status(500).json({ error: 'Error fetching groups by user' });
+    }
+  });
 
 //add group
 router.post('/', upload.none() , async (req,res) => {
