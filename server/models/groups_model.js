@@ -7,7 +7,13 @@ const sql = {
     GET_GROUPS: 'SELECT group_name,group_description FROM groups',
     GET_GROUPBYNAME: 'SELECT * FROM groups WHERE group_name = $1',
     UPDATE_GROUP: 'UPDATE groups SET group_name = $1, group_description = $2 WHERE group_name = $1',
-    DELETE_GROUP: 'DELETE FROM groups WHERE group_name = $1'
+    DELETE_GROUP: 'DELETE FROM groups WHERE group_name = $1',
+    GET_GROUPS_BY_USER: `
+    SELECT groups.*
+    FROM groups
+    INNER JOIN users_groups ON groups.group_name = users_groups.group_name
+    WHERE users_groups.username = $1;
+  `,
 };
 
 
@@ -38,4 +44,21 @@ async function deleteGroup(group_name){
     console.log(sql.DELETE_GROUP, [group_name]);
 }
 
-module.exports = {addGroup, getGroups, getGroupbyname, updateGroup, deleteGroup};
+async function getGroupsByUser(username) {
+    const query = {
+        text: `
+          SELECT groups.*
+          FROM groups
+          INNER JOIN users_groups ON groups.group_name = users_groups.group_name
+          WHERE users_groups.username = $1;
+        `,
+        values: [username],
+      };
+    
+      const result = await pgPool.query(query);
+      console.log(result);
+      const rows = result.rows;
+      return rows;
+    }
+
+module.exports = {addGroup, getGroups, getGroupbyname, updateGroup, deleteGroup, getGroupsByUser};
