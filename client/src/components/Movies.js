@@ -3,6 +3,9 @@ import axios from 'axios';
 import './Movies.css';
 import MovieInfo from './MovieInfo.js'
 import ReviewForm from './ReviewForm.js';
+import SearchBar from './Search.js';
+import DropdownComponent from './Dropdown.js';
+
 
 
 const Movies = () => {
@@ -17,21 +20,70 @@ const Movies = () => {
 
 
   const [popularMovies, setPopularMovies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+
   const [searchResults, setSearchResults] = useState([]);
 
   const baseUrl = 'http://localhost:3001/movies';
 
+
+  //popular, upcoming, top_rated
+  const [filter, setFilter] = useState('popular');
+
+  const updateFilter = (newFilter) => {
+    console.log(newFilter);
+    setFilter(newFilter);
+  };
+
+
+
+  //result page number
+  const [page, setPage] = useState(1);
+
+  const pageHandler = (p) =>{
+    setPage(p);
+  }
+
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const updateSearchTerm = (searchInput) =>{
+    setSearchTerm(searchInput);
+    // handleSearch(searchTerm);
+    console.log(searchInput);
+  }
+
+
   useEffect(() => {
     // Fetch popular movies when the component mounts
-    axios.get(baseUrl)
+    axios.get(`${baseUrl}/filters/${page}/${filter}`)
       .then(response => setPopularMovies(response.data))
       .catch(error => console.error('Error fetching popular movies:', error));
-  }, [baseUrl]); // Add baseUrl as a dependency to useEffect
+  }, [baseUrl, page, filter]); // Add baseUrl as a dependency to useEffect
+
+
+  useEffect(()=>{
+
+    if (searchTerm.length>2) {
+      axios.get(`${baseUrl}/search/${searchTerm}`) 
+        .then(response => setSearchResults(response.data))
+        .catch(error => console.error('Error searching movies:', error));
+    } else {
+      setSearchResults([]);
+      
+    }
+
+  },[searchTerm])
+
 
   const handleSearch = () => {
+    console.log(`Search term is: ${searchTerm}`);
+    // if (searchTerm === 'shrek'){
+    //   axios.get(`${baseUrl}/filters/${page}/${filter}`)
+    //   .then(response => setPopularMovies(response.data))
+    //   .catch(error => console.error('Error fetching popular movies:', error));
+    // }
     if (searchTerm) {
-      axios.get(`${baseUrl}/${searchTerm}`) // Correct the search endpoint
+      axios.get(`${baseUrl}/search/${searchTerm}`) 
         .then(response => setSearchResults(response.data))
         .catch(error => console.error('Error searching movies:', error));
     }
@@ -40,15 +92,19 @@ const Movies = () => {
   return (
     <div className='outerCont'>
       <h1>Movies</h1>
-            
+
       <div className='searchCont'>
-        <input id='searchBar'
+        {/* <input id='searchBar'
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search for movies..."
-        />
-        <button id='searchBtn' onClick={handleSearch}>Search</button>
+        /> */}
+        {/* <button id='searchBtn' onClick={handleSearch}>Search</button> */}
+        
+        <SearchBar updateSearchTerm={updateSearchTerm}/>
+        <DropdownComponent childFilter={filter} updateFilter={updateFilter}/>
+        
       </div>
 
 
