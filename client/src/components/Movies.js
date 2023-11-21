@@ -23,12 +23,11 @@ const Movies = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  const baseUrl = 'http://localhost:3001/movies/filters';
+  const baseUrl = 'http://localhost:3001/movies';
 
 
   //popular, upcoming, top_rated
   const [filter, setFilter] = useState('popular');
-
 
   const updateFilter = (newFilter) => {
     console.log(newFilter);
@@ -40,19 +39,19 @@ const Movies = () => {
 
   const pageHandler = (p) =>{
     setPage(p);
-}
+  }
 
 
   useEffect(() => {
     // Fetch popular movies when the component mounts
-    axios.get(`${baseUrl}/${page}/${filter}`)
+    axios.get(`${baseUrl}/filters/${page}/${filter}`)
       .then(response => setPopularMovies(response.data))
       .catch(error => console.error('Error fetching popular movies:', error));
   }, [baseUrl, page, filter]); // Add baseUrl as a dependency to useEffect
 
   const handleSearch = () => {
     if (searchTerm) {
-      axios.get(`${baseUrl}/${searchTerm}`) // Correct the search endpoint
+      axios.get(`${baseUrl}/search/${searchTerm}`) 
         .then(response => setSearchResults(response.data))
         .catch(error => console.error('Error searching movies:', error));
     }
@@ -63,14 +62,14 @@ const Movies = () => {
       <h1>Movies</h1>
             
       <div className='searchCont'>
-        <input id='searchBar'
+        {/* <input id='searchBar'
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search for movies..."
-        />
-        {/* <SearchBar/> */}
-        <button id='searchBtn' onClick={handleSearch}>Search</button>
+        /> */}
+        <SearchBar/>
+        {/* <button id='searchBtn' onClick={handleSearch}>Search</button> */}
 
         <DropdownComponent childFilter={filter} updateFilter={updateFilter}/>
         
