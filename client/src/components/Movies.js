@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Movies.css';
 import MovieInfo from './MovieInfo.js'
+import ReviewForm from './ReviewForm.js';
 
 
 const Movies = () => {
