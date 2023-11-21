@@ -63,10 +63,13 @@ const Movies = () => {
 
   useEffect(()=>{
 
-    if (searchTerm) {
+    if (searchTerm.length>2) {
       axios.get(`${baseUrl}/search/${searchTerm}`) 
         .then(response => setSearchResults(response.data))
         .catch(error => console.error('Error searching movies:', error));
+    } else {
+      setSearchResults([]);
+      
     }
 
   },[searchTerm])
