@@ -3,20 +3,25 @@
 .searchCont{
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 10px;
 
-    float: right;
-
+    flex-wrap: nowrap;
     margin-bottom: 5%;
 }
 
-.searchBar,textarea{
+.searchForm{
+    gap: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+/* .searchBar,textarea{
     border-radius: 10px;
 }
 
 #searchBtn{
     border-radius: 10px;
-}
+} */
 
 /* input[type="text"], textarea {
 

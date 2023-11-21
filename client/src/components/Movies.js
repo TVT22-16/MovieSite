@@ -20,7 +20,7 @@ const Movies = () => {
 
 
   const [popularMovies, setPopularMovies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+
   const [searchResults, setSearchResults] = useState([]);
 
   const baseUrl = 'http://localhost:3001/movies';
@@ -34,11 +34,22 @@ const Movies = () => {
     setFilter(newFilter);
   };
 
+
+
   //result page number
   const [page, setPage] = useState(1);
 
   const pageHandler = (p) =>{
     setPage(p);
+  }
+
+
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const updateSearchTerm = (searchInput) =>{
+    setSearchTerm(searchInput);
+    // handleSearch(searchTerm);
+    console.log(searchInput);
   }
 
 
@@ -49,7 +60,25 @@ const Movies = () => {
       .catch(error => console.error('Error fetching popular movies:', error));
   }, [baseUrl, page, filter]); // Add baseUrl as a dependency to useEffect
 
+
+  useEffect(()=>{
+
+    if (searchTerm) {
+      axios.get(`${baseUrl}/search/${searchTerm}`) 
+        .then(response => setSearchResults(response.data))
+        .catch(error => console.error('Error searching movies:', error));
+    }
+
+  },[searchTerm])
+
+
   const handleSearch = () => {
+    console.log(`Search term is: ${searchTerm}`);
+    // if (searchTerm === 'shrek'){
+    //   axios.get(`${baseUrl}/filters/${page}/${filter}`)
+    //   .then(response => setPopularMovies(response.data))
+    //   .catch(error => console.error('Error fetching popular movies:', error));
+    // }
     if (searchTerm) {
       axios.get(`${baseUrl}/search/${searchTerm}`) 
         .then(response => setSearchResults(response.data))
@@ -60,7 +89,7 @@ const Movies = () => {
   return (
     <div className='outerCont'>
       <h1>Movies</h1>
-            
+
       <div className='searchCont'>
         {/* <input id='searchBar'
           type="text"
@@ -68,9 +97,9 @@ const Movies = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search for movies..."
         /> */}
-        <SearchBar/>
         {/* <button id='searchBtn' onClick={handleSearch}>Search</button> */}
-
+        
+        <SearchBar updateSearchTerm={updateSearchTerm}/>
         <DropdownComponent childFilter={filter} updateFilter={updateFilter}/>
         
       </div>
