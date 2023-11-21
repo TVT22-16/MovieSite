@@ -23,21 +23,32 @@ const Movies = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
+  const baseUrl = 'http://localhost:3001/movies';
+
 
   //popular, upcoming, top_rated
   const [filter, setFilter] = useState('popular');
 
+
+  const updateFilter = (newFilter) => {
+    console.log(newFilter);
+    setFilter(newFilter);
+  };
+
   //result page number
   const [page, setPage] = useState(1);
 
-  const baseUrl = 'http://localhost:3001/movies';
+  const pageHandler = (p) =>{
+    setPage(p);
+}
+
 
   useEffect(() => {
     // Fetch popular movies when the component mounts
     axios.get(`${baseUrl}/${page}/${filter}`)
       .then(response => setPopularMovies(response.data))
       .catch(error => console.error('Error fetching popular movies:', error));
-  }, [baseUrl]); // Add baseUrl as a dependency to useEffect
+  }, [baseUrl, page, filter]); // Add baseUrl as a dependency to useEffect
 
   const handleSearch = () => {
     if (searchTerm) {
@@ -61,7 +72,7 @@ const Movies = () => {
         {/* <SearchBar/> */}
         <button id='searchBtn' onClick={handleSearch}>Search</button>
 
-        <DropdownComponent/>
+        <DropdownComponent childFilter={filter} updateFilter={updateFilter}/>
         
       </div>
 
