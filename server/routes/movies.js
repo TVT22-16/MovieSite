@@ -4,11 +4,12 @@ const {getPopularMovies,searchMovies,getMovieByID} = require('../models/movies_m
 
 
 
-router.get('/:filter', async(req,res) =>{
+router.get('/:page/:filter', async(req,res) =>{
     try{
         let filter = req.params.filter;
+        let page = req.params.page;
 
-        const movies = await getPopularMovies(filter,1);
+        const movies = await getPopularMovies(filter,page);
 
         res.json(movies);
     } catch (error){
