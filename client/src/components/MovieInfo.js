@@ -49,9 +49,9 @@ const MovieInfo = () => {
 
   return (
       <div id='movieInfoBody'>
-        <div class='infoContainer'>
-          <div class='imgTitleContainer'>
-            <h1 class='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
+        <div className='infoContainer'>
+          <div className='imgTitleContainer'>
+            <h1 className='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
             <img className='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
             <ul id='themoviedbInfo'>
               <li>Moviedb votes: {movieData.vote_average}</li>
@@ -60,12 +60,14 @@ const MovieInfo = () => {
           </div>
 
           
-        <ul class='reviewContainer'>
-        <ReviewForm/>
+        <ul className='reviewContainer'>
+
+          {/* pass the movieid to the review form */}
+        <ReviewForm moviedb_movieid={params}/>
 
           {/* foreach */}
           {reviews.map((review, index) => (
-            <li key={index} class='reviewItem'>
+            <li key={index} className='reviewItem'>
               <p id='pUsername'> {review.username}  </p> 
               <p id='pRating'>Rating: {review.rating}  </p> 
               <p id='pReview'>{review.review}  </p> 
