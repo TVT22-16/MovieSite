@@ -23,7 +23,7 @@ const Movies = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  const baseUrl = 'http://localhost:3001/movies';
+  const baseUrl = 'http://localhost:3001/movies/filters';
 
 
   //popular, upcoming, top_rated
