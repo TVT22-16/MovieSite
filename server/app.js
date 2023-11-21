@@ -8,6 +8,7 @@ var usersRouter = require('./routes/users.js');
 var groupsRouter = require('./routes/groups.js');
 var reviewsRouter = require('./routes/reviews.js');
 var moviesRouter = require('./routes/movies.js');
+var users_groupsRouter = require('./routes/users_groups.js');
 
 var app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ app.use('/users', usersRouter);
 app.use('/groups',groupsRouter);
 app.use('/reviews',reviewsRouter);
 app.use('/movies',moviesRouter);
+app.use('/users_groups',users_groupsRouter);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

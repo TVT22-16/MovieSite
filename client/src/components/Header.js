@@ -37,8 +37,7 @@ const Header = ({loggedIn}) => {
       <Nav className="custom-nav">
         <Nav.Link href="/home">Home</Nav.Link>
         <Nav.Link href="/reviews">Reviews</Nav.Link>
-        <Nav.Link href="/mygroups">Groups</Nav.Link>
-        <Nav.Link href="/userlist">Users</Nav.Link>
+        <Nav.Link href="/groups">Groups</Nav.Link>
         <NavDropdown title={username} id="basic-nav-dropdown">
           <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
           <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
