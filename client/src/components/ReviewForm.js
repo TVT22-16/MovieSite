@@ -62,7 +62,7 @@ const ReviewForm = ({moviedb_movieid}) => {
 
 
                 <label htmlFor="rating">Rating</label>
-                    <input type="number" name="rating" className='ratingBox' placeholder="0-10.0" step="any" max="10.0" maxlength="4"/>
+                    <input type="number" name="rating" className='ratingBox' placeholder="0-10.0" step="any" max="10.0" maxLength="4"/>
 
 
                 <input className='submitBtn' type="submit" value="SUBMIT REVIEW"/>

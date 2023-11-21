@@ -6,6 +6,8 @@
     gap: 5px;
 
     float: right;
+
+    margin-bottom: 5%;
 }
 
 .searchBar,textarea{

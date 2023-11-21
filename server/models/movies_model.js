@@ -3,14 +3,15 @@ const apiurl = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1
 require('dotenv').config({path:('../.env')});
 const axios = require('axios');
 
+//popular
+//top_rated
+//upcoming
 
-
-
-async function getPopularMovies() {
+async function getPopularMovies(filter,page) {
     try {
       const options = {
         method: 'GET',
-        url: 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1',
+        url: `https://api.themoviedb.org/3/movie/${filter}?language=en-US&page=${page}`,
         headers: {
           accept: 'application/json',
           Authorization: process.env.MOVIEDB_API_KEY

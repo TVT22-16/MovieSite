@@ -3,6 +3,9 @@ import axios from 'axios';
 import './Movies.css';
 import MovieInfo from './MovieInfo.js'
 import ReviewForm from './ReviewForm.js';
+import SearchBar from './Search.js';
+import DropdownComponent from './Dropdown.js';
+
 
 
 const Movies = () => {
@@ -20,11 +23,13 @@ const Movies = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
+  const [filter, setFilter] = useState('popular');
+
   const baseUrl = 'http://localhost:3001/movies';
 
   useEffect(() => {
     // Fetch popular movies when the component mounts
-    axios.get(baseUrl)
+    axios.get(`${baseUrl}/${filter}`)
       .then(response => setPopularMovies(response.data))
       .catch(error => console.error('Error fetching popular movies:', error));
   }, [baseUrl]); // Add baseUrl as a dependency to useEffect
@@ -48,7 +53,11 @@ const Movies = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search for movies..."
         />
+        {/* <SearchBar/> */}
         <button id='searchBtn' onClick={handleSearch}>Search</button>
+
+        <DropdownComponent/>
+        
       </div>
 
 
