@@ -12,7 +12,6 @@ const ReviewForm = ({moviedb_movieid}) => {
 
     const addReviewUrl = 'http://localhost:3001/reviews/add'
 
-    const username = sessionStorage.getItem('username');
 
     const [showForm, setShowForm] = useState(false);
 
@@ -24,7 +23,7 @@ const ReviewForm = ({moviedb_movieid}) => {
       event.preventDefault(); 
 
       const reviewData = {
-        username: username,
+        username: sessionStorage.getItem('username'),
         moviedb_movieid: moviedb_movieid,
         review: event.target.review.value,
         rating: event.target.rating.value,

@@ -25,6 +25,7 @@ const Header = ({loggedIn}) => {
     jwtToken.value = ''; // Assuming jwtToken is a ref or a mutable object
     usernameSignal.value = '';
     window.location.href = '/login'; 
+    sessionStorage.clear();
   };
   if (jwtToken.value !== '') {
   return <header>
