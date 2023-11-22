@@ -22,6 +22,8 @@ const Movies = () => {
 
   const [popularMovies, setPopularMovies] = useState([]);
 
+  const [responsePageAmount, setResponsePageAmount] = useState({});
+
   const [searchResults, setSearchResults] = useState([]);
 
   const baseUrl = 'http://localhost:3001/movies';
@@ -57,7 +59,13 @@ const Movies = () => {
   useEffect(() => {
     // Fetch movies when component mounts
     axios.get(`${baseUrl}/filters/${page}/${filter}`)
-      .then(response => setPopularMovies(response.data.results))
+      .then(response =>{
+
+        //set movies results and total page count
+         setPopularMovies(response.data.results);
+         setResponsePageAmount(response.data.total_pages);}
+      
+      )
       .catch(error => console.error('Error fetching popular movies:', error));
   }, [baseUrl, page, filter]); // Add baseUrl, page, filter as a dependency to useEffect
 
