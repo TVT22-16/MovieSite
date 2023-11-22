@@ -15,6 +15,8 @@ const MovieInfo = () => {
 
   const params = searchParams.get('id');
 
+
+  //Fetch moviedata by if from moviedatabase
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,6 +32,7 @@ const MovieInfo = () => {
   }, [params]); //prevent endless loop caused by useEffect and useState (only do this if params changes)
   
 
+  //Fetch user reviews
   useEffect(() => {
     const fetchData = async () => {
       try {
