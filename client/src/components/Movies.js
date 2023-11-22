@@ -43,21 +43,12 @@ const Movies = () => {
   const [page, setPage] = useState(1);
 
   const updatePage = (p) =>{
-    console.log('update page function');
     console.log(`${page} and ${responsePageAmount}`);
     setPage(p);
   }
 
 
   const [searchTerm, setSearchTerm] = useState('');
-
-
-  //reset page to one when filter or search changes
-  // useEffect(() =>{
-  //   setPage(1);
-
-  //   },[searchTerm,filter]);
-
 
 
   const updateSearchTerm = (searchInput) =>{
@@ -69,7 +60,8 @@ const Movies = () => {
 
   useEffect(() => {
     // Fetch movies when component mounts
-    axios.get(`${baseUrl}/filters/${page}/${filter}`)
+    if (searchTerm.length < 2){
+      axios.get(`${baseUrl}/filters/${page}/${filter}`)
       .then(response =>{
 
         //set movies results and total page count
@@ -78,6 +70,7 @@ const Movies = () => {
       
       )
       .catch(error => console.error('Error fetching popular movies:', error));
+    }
   }, [baseUrl, page, filter]); // Add baseUrl, page, filter as a dependency to useEffect
 
 
@@ -95,18 +88,8 @@ const Movies = () => {
       setSearchResults([]);
       
     }
-  },[searchTerm]);
+  },[searchTerm,page]);
 
-
-  const handleSearch = () => {
-    console.log(`Search term is: ${searchTerm}`);
-
-    if (searchTerm) {
-      axios.get(`${baseUrl}/search/${searchTerm}`) 
-        .then(response => setSearchResults(response.data))
-        .catch(error => console.error('Error searching movies:', error));
-    }
-  };
 
   return (
     <div className='outerCont'>
