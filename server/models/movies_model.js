@@ -7,6 +7,10 @@ const axios = require('axios');
 //top_rated
 //upcoming
 
+
+
+//
+
 async function getPopularMovies(filter,page) {
     try {
       const options = {
@@ -19,12 +23,32 @@ async function getPopularMovies(filter,page) {
       };
   
       const response = await axios.request(options);
-      return response.data.results;
+      // return response.data.results;
+      return response.data;
       
     } catch (error) {
       throw error;
     }
   }
+
+async function discorverMovies(){
+  try {
+    const options = {
+      method: 'GET',
+      url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}`,
+      headers: {
+        accept: 'application/json',
+        Authorization: process.env.MOVIEDB_API_KEY
+      }
+    };
+
+    const response = await axios.request(options);
+    return response.data.results;
+    
+  } catch (error) {
+    throw error;
+  }
+}
 
 async function searchMovies(search){
   try {
