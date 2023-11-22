@@ -18,7 +18,6 @@ const SearchBar = (props) => {
         className="mr-sm-2"
         onChange={handleSearch}
       />
-      {/* <Button variant="outline-success" onClick={()=>handleSearch}>Search</Button> */}
     </Form>
   );
 };

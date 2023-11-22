@@ -5,7 +5,7 @@ import MovieInfo from './MovieInfo.js'
 import ReviewForm from './ReviewForm.js';
 import SearchBar from './Search.js';
 import DropdownComponent from './Dropdown.js';
-import CustomPagination from './Pagination.js';
+import PaginationComponent from './Pagination.js';
 
 
 
@@ -51,7 +51,7 @@ const Movies = () => {
 
   const updateSearchTerm = (searchInput) =>{
     setSearchTerm(searchInput);
-    // handleSearch(searchTerm);
+
     console.log(searchInput);
   }
 
@@ -102,11 +102,14 @@ const Movies = () => {
         
         <SearchBar updateSearchTerm={updateSearchTerm}/>
         <DropdownComponent childFilter={filter} updateFilter={updateFilter}/>
-        
+
       </div>
+
+      <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
 
 
       <ul className='listCont'>
+        
         {searchResults.length > 0 ? (
           // Render search results if available
           searchResults.map(movie => (
@@ -127,6 +130,8 @@ const Movies = () => {
           ))
         )}
       </ul>
+
+      <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
     </div>
   );
 };

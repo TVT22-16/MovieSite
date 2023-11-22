@@ -4,30 +4,34 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+/* 
+    flex-wrap: nowrap; */
+    margin-bottom: 1%;
+    /* background-color: lightblue; */
 
-    flex-wrap: nowrap;
-    margin-bottom: 5%;
+}
+
+/* searchbar */
+.mr-sm-2{
+
+}
+
+.pageComponent{
+    margin-left: 80%;
+    overflow-wrap: break-word;
+    scale: 85%;
 }
 
 .searchForm{
-    gap: 10px;
+    /* gap: 10px; */
     display: flex;
     flex-direction: row;
+
+    margin: auto auto;
+
 }
 
-/* .searchBar,textarea{
-    border-radius: 10px;
-}
 
-#searchBtn{
-    border-radius: 10px;
-} */
-
-/* input[type="text"], textarea {
-
-    background-color : black; 
-  
-  } */
 
 
 .listCont{
@@ -78,7 +82,7 @@ h1{
     align-items: center;
     margin: auto auto;
 
-    overflow: hidden;
+    overflow-wrap: break-word;
 }
 
 .movieCard:hover{
