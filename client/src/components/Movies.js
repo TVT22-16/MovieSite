@@ -43,7 +43,6 @@ const Movies = () => {
   const [page, setPage] = useState(1);
 
   const updatePage = (p) =>{
-    console.log(`${page} and ${responsePageAmount}`);
     setPage(p);
   }
 
@@ -54,7 +53,6 @@ const Movies = () => {
   const updateSearchTerm = (searchInput) =>{
     setSearchTerm(searchInput);
 
-    console.log(searchInput);
   }
 
 
