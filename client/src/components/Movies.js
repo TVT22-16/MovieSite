@@ -111,6 +111,7 @@ const Movies = () => {
             <li className='movieCard' key={movie.id}>
               <h3 className='movieTitle'>{movie.title}</h3>
               <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)} />
+              <h3 className='voteAverage'>{movie.vote_average}</h3>
             </li>
           ))
 
