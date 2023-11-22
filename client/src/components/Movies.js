@@ -33,7 +33,7 @@ const Movies = () => {
   const [filter, setFilter] = useState('popular');
 
   const updateFilter = (newFilter) => {
-    console.log(newFilter);
+    setPage(1);
     setFilter(newFilter);
   };
 
@@ -43,11 +43,22 @@ const Movies = () => {
   const [page, setPage] = useState(1);
 
   const updatePage = (p) =>{
+    console.log('update page function');
+    console.log(`${page} and ${responsePageAmount}`);
     setPage(p);
   }
 
 
   const [searchTerm, setSearchTerm] = useState('');
+
+
+  //reset page to one when filter or search changes
+  // useEffect(() =>{
+  //   setPage(1);
+
+  //   },[searchTerm,filter]);
+
+
 
   const updateSearchTerm = (searchInput) =>{
     setSearchTerm(searchInput);
@@ -73,15 +84,18 @@ const Movies = () => {
   useEffect(()=>{
 
     if (searchTerm.length>2) {
-      axios.get(`${baseUrl}/search/${searchTerm}`) 
-        .then(response => setSearchResults(response.data))
+      axios.get(`${baseUrl}/search/${page}/${searchTerm}`) 
+        .then(response =>{ 
+          setSearchResults(response.data.results);
+          setResponsePageAmount(response.data.total_pages);
+
+        })
         .catch(error => console.error('Error searching movies:', error));
     } else {
       setSearchResults([]);
       
     }
-
-  },[searchTerm])
+  },[searchTerm]);
 
 
   const handleSearch = () => {

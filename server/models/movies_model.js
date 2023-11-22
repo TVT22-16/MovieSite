@@ -31,30 +31,30 @@ async function getPopularMovies(filter,page) {
     }
   }
 
-async function discorverMovies(){
-  try {
-    const options = {
-      method: 'GET',
-      url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}`,
-      headers: {
-        accept: 'application/json',
-        Authorization: process.env.MOVIEDB_API_KEY
-      }
-    };
+// async function discorverMovies(){
+//   try {
+//     const options = {
+//       method: 'GET',
+//       url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}`,
+//       headers: {
+//         accept: 'application/json',
+//         Authorization: process.env.MOVIEDB_API_KEY
+//       }
+//     };
 
-    const response = await axios.request(options);
-    return response.data.results;
+//     const response = await axios.request(options);
+//     return response.data.results;
     
-  } catch (error) {
-    throw error;
-  }
-}
+//   } catch (error) {
+//     throw error;
+//   }
+// }
 
-async function searchMovies(search){
+async function searchMovies(search,page){
   try {
     const options = {
       method: 'GET',
-      url: `https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=1&query=${search}`,
+      url: `https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&page=${page}&query=${search}`,
       headers: {
         accept: 'application/json',
         Authorization: process.env.MOVIEDB_API_KEY
@@ -63,7 +63,7 @@ async function searchMovies(search){
 
 
     const response = await axios.request(options);
-    return response.data.results;
+    return response.data;
     
   } catch (error) {
     throw error;

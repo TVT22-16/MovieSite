@@ -17,10 +17,11 @@ router.get('/filters/:page/:filter', async(req,res) =>{
     }
 });
 
-router.get('/search/:search', async(req,res) =>{
+router.get('/search/:page/:search', async(req,res) =>{
     try{
         let search = req.params.search;
-        const movies = await searchMovies(search);
+        let page = req.params.page;
+        const movies = await searchMovies(search,page);
         res.json(movies);
     } catch (error){
         res.json('Movies get fail -> '+ error);
