@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {getPopularMovies,searchMovies,getMovieByID} = require('../models/movies_model.js');
+const {getPopularMovies,searchMovies,getMovieByID, getMovieTrailer} = require('../models/movies_model.js');
 
 
 
@@ -32,6 +32,17 @@ router.get('/id/:id', async(req,res) =>{
     try{
         let id = req.params.id;
         const movies = await getMovieByID(id);
+        res.json(movies);
+    } catch (error){
+        res.json('Movies get fail -> '+ error);
+        console.error(error);
+    }
+});
+
+router.get('/trailer/:id', async(req,res) =>{
+    try{
+        let id = req.params.id;
+        const movies = await getMovieTrailer(id);
         res.json(movies);
     } catch (error){
         res.json('Movies get fail -> '+ error);

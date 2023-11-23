@@ -5,6 +5,8 @@ import { useSearchParams } from 'react-router-dom'
 import ReviewForm from './ReviewForm';
 
 
+
+
 //https://webtips.dev/solutions/get-query-params-in-react
 
 const MovieInfo = () => {
@@ -55,6 +57,8 @@ const MovieInfo = () => {
 
         <h1 id='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
         <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
+
+        <div id='movieVideos'>  </div>
 
 
         <div id='infoReviewContainer'>
