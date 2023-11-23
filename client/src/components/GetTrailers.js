@@ -27,15 +27,37 @@ const GetTrailers = () => {
 
     return (
         <div>
-            Trailers:
-
-            {trailers.map((trailer) => (
+            {/* {trailers.map((trailer) => (
                 <div>{trailer.key}</div>
-            ))}
+            ))} */}
+            
+
+            {/* Pass the last video from the array */}
+            {trailers.length > 0 && (
+                 <YouTubeEmbed videoId={trailers[trailers.length - 1].key} />
+            )}
 
       </div>
     );
 }
+
+
+const YouTubeEmbed = ({ videoId }) => {
+    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+  
+    return (
+      <div className="video-responsive">
+        <iframe
+          width="720"
+          height="406"
+          src={embedUrl}
+          title="YouTube video player"
+          allowFullScreen
+        ></iframe>
+      </div>
+    );
+  };
+  
  
 export default GetTrailers;
 

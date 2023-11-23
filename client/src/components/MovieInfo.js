@@ -57,7 +57,7 @@ const MovieInfo = () => {
       <div id='pageContainer'>
 
         <h1 id='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
-        <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
+        {/* <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" /> */}
 
         <div id='movieVideos'><GetTrailers></GetTrailers></div>
 
