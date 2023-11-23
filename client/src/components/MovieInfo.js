@@ -59,7 +59,7 @@ const MovieInfo = () => {
         <h1 id='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
         {/* <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" /> */}
 
-        <div id='movieVideos'><GetTrailers></GetTrailers></div>
+        <GetTrailers id={movieData.id} />
 
 
         <div id='infoReviewContainer'>
@@ -85,7 +85,8 @@ const MovieInfo = () => {
         </div>
 
       <div id='similarContainer'>
-                poopoo piipii
+                Similar Movies
+
       </div>
 
 

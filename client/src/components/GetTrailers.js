@@ -4,15 +4,17 @@ import axios from 'axios';
 
 
 
-const GetTrailers = () => {
+const GetTrailers = ({id}) => {
 
     const [trailers,setTrailers] = useState([]);
+
+    console.log({id});
 
     useEffect(()=>{
 
         const fetchTrailers = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/movies/trailer/670292');
+                const response = await axios.get(`http://localhost:3001/movies/trailer/${id}`);
                 setTrailers(response.data);
             } catch (error) {
                 console.error('Error fetching trailers:', error);
@@ -21,18 +23,18 @@ const GetTrailers = () => {
     
 
         fetchTrailers();
-    },[]); //Do when component mounts '[]'
+    },[id]); //Do when component mounts '[]'
 
 
 
     return (
-        <div>
+        <div className="videoResponsive">
             {/* {trailers.map((trailer) => (
                 <div>{trailer.key}</div>
             ))} */}
             
 
-            {/* Pass the last video from the array */}
+            {/* Pass the last video from the array because it seems to be usually the main trailer */}
             {trailers.length > 0 && (
                  <YouTubeEmbed videoId={trailers[trailers.length - 1].key} />
             )}
@@ -43,18 +45,17 @@ const GetTrailers = () => {
 
 
 const YouTubeEmbed = ({ videoId }) => {
-    const embedUrl = `https://www.youtube.com/embed/${videoId}`;
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
   
     return (
-      <div className="video-responsive">
         <iframe
-          width="720"
-          height="406"
+          width="100%"
+          height="100%"
           src={embedUrl}
           title="YouTube video player"
           allowFullScreen
+          className='playerV'
         ></iframe>
-      </div>
     );
   };
   

@@ -56,3 +56,9 @@
 }
 
 
+.videoResponsive{
+
+    width: 60%;
+
+    aspect-ratio: 16 / 9;
+}
