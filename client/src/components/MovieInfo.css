@@ -57,16 +57,7 @@
     max-height: 400px;
 }
 
-#infoReviewContainer{
-    display: flex;
 
-    flex-direction: row;
-
-    margin-left: 2%;
-    margin-right: 2%;
-
-    gap: 2%;
-}
 
 #trailerInfoContainer{
     display: flex;
@@ -121,20 +112,107 @@
   }
 
   
-#reviewContainer{
-    /* display: flex;
-    flex-direction: column; */
-    border-radius: 4px;
 
-    /* flex-grow: 1; */
+/* //reviews ui style */
 
-    max-width: 50%;
-
+#reviewContainer {
     list-style: none;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin: 0 auto;
+  }
+  
+  .reviewItem {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .username {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .rating {
+    font-size: 1em;
+    color: #777;
+    margin-bottom: 5px;
+  }
+  
+  .userReview {
+    font-size: 1em;
+    color: #555;
+  }
+  
 
-    background-color: lightblue;
+/* review FORM STYLES */
+#reviewFormBody {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .addReviewBtn {
+    background-color: darkblue;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #reviewForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  label {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .ratingBox {
+    width: 7%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .submitBtn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .submitBtn:hover {
+    background-color: #0056b3;
+  }
+  
 
-}
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+
 
 
 @media (max-width: 600px) {
