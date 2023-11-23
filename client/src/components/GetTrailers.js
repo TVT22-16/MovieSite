@@ -19,19 +19,20 @@ const GetTrailers = () => {
             }
         };
     
-        fetchTrailers();
 
+        fetchTrailers();
     },[]); //Do when component mounts '[]'
 
-    // console.log(trailers);
+
 
     return (
         <div>
-            Trailers: 
-            {/* {trailers.map((trailer) => (
+            Trailers:
+
+            {trailers.map((trailer) => (
                 <div>{trailer.key}</div>
-            ))} */}
-            {/* {trailers[0]} */}
+            ))}
+
       </div>
     );
 }
