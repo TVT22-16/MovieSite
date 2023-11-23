@@ -51,34 +51,39 @@ const MovieInfo = () => {
 
 
   return (
-      <div id='movieInfoBody'>
-        <div className='infoContainer'>
-          <div className='imgTitleContainer'>
-            <h1 className='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
-            <img className='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
-            <ul id='themoviedbInfo'>
+      <div id='pageContainer'>
+
+        <h1 id='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
+        <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
+
+
+        <div id='infoReviewContainer'>
+
+            <ul id='infoContainer'>
               <li>Moviedb votes: {movieData.vote_average}</li>
-             <br></br> <li>{movieData.overview}</li>
+                <li>{movieData.overview}</li>
             </ul>
-          </div>
+              
+            <ul id='reviewContainer'>
+              {/* pass the movieid to the review form */}
+            <ReviewForm moviedb_movieid={params}/>
+              {/* foreach */}
+              {reviews.map((review, index) => (
+                <li key={index} className='reviewItem'>
+                  <p id='pUsername'> {review.username}  </p> 
+                  <p id='pRating'>Rating: {review.rating}  </p> 
+                  <p id='pReview'>{review.review}  </p> 
 
-          
-        <ul className='reviewContainer'>
-
-          {/* pass the movieid to the review form */}
-        <ReviewForm moviedb_movieid={params}/>
-
-          {/* foreach */}
-          {reviews.map((review, index) => (
-            <li key={index} className='reviewItem'>
-              <p id='pUsername'> {review.username}  </p> 
-              <p id='pRating'>Rating: {review.rating}  </p> 
-              <p id='pReview'>{review.review}  </p> 
-
-            </li>
-          ))}
-        </ul>
+                </li>
+              ))}
+            </ul>
         </div>
+
+      <div id='similarContainer'>
+                poopoo piipii
+      </div>
+
+
       </div>
 
   )
