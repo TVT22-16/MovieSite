@@ -1,0 +1,13 @@
+body {
+    background-color: black;
+  }
+  
+  body, p, h1, h2, h3 {
+    color : white;
+  }
+ 
+  .special {
+    background-color: black;
+    color: white;
+  }
+   
