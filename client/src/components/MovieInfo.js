@@ -3,6 +3,7 @@ import axios from 'axios';
 import './MovieInfo.css';
 import { useSearchParams } from 'react-router-dom'
 import ReviewForm from './ReviewForm';
+import GetTrailers from './GetTrailers';
 
 
 
@@ -58,7 +59,7 @@ const MovieInfo = () => {
         <h1 id='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
         <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
 
-        <div id='movieVideos'>  </div>
+        <div id='movieVideos'><GetTrailers></GetTrailers></div>
 
 
         <div id='infoReviewContainer'>
