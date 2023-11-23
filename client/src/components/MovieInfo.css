@@ -9,10 +9,53 @@
 
 }
 
-#movieTitle{
-    background-color: lightblue;
-    font-size: 200%;
-}
+/* #movieTitle{
+    margin-top: 1%;
+    font-size: 300%;
+} */
+
+#titleVoteContainer {
+    width: 60%;
+    margin-top: 1%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Align items to start and end of the container */
+    align-items: center; /* Center vertically */
+    background-color: #2c3e50; /* Change the background color to a cool color */
+    padding: 15px; /* Add padding for spacing */
+    border-radius: 8px; /* Add rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+  }
+  
+  #titleVoteContainer > #movieTitle {
+    font-weight: 600;
+    color: #ecf0f1; /* Set text color to a light color */
+    font-size: 24px; /* Increase font size */
+  }
+  
+  #titleVoteContainer > #voteAverage {
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    width: 40px; /* Set a fixed width for consistency */
+    height: 40px; /* Set a fixed height for consistency */
+    background-color: #e74c3c; /* Change the background color to a contrasting color */
+    color: #ecf0f1; /* Set text color to a light color */
+    font-size: 16px; /* Adjust font size */
+  }
+  
+  /* Optional: Add hover effect for interactivity */
+  #titleVoteContainer:hover {
+    background-color: #34495e; /* Change background color on hover */
+    transition: background-color 0.3s ease-in-out; /* Add a smooth transition */
+  }
+  
+  #titleVoteContainer > #voteAverage:hover {
+    background-color: #c0392b; /* Change background color on hover */
+    transition: background-color 0.3s ease-in-out; /* Add a smooth transition */
+  }
 
 #infoPoster{
     max-height: 400px;
@@ -21,7 +64,6 @@
 #infoReviewContainer{
     display: flex;
 
-    grid-area: 50%;
     flex-direction: row;
 
     margin-left: 2%;
@@ -31,19 +73,29 @@
 }
 
 #infoReviewContainer > #infoContainer{
-    /* display: flex;
-    flex-direction: column; */
+    display: flex;
+    flex-direction: column;
 
     width: 50%;
-    background-color: black;
-    color: blue;
+    background-color: lightblue;
 
     list-style: none;
+
+    border-radius: 4px;
+
+    padding: 2%;
+
 }
+
+/* //gapping to list */
+#infoReviewContainer > #infoContainer li {
+    margin-bottom: 20px; /* Adjust as needed */
+  }
 
 #infoReviewContainer > #reviewContainer{
     /* display: flex;
     flex-direction: column; */
+    border-radius: 4px;
 
     flex-grow: 1;
 
@@ -51,8 +103,8 @@
 
     list-style: none;
 
-    background-color: black;
-    color: blue;
+    background-color: lightblue;
+
 }
 
 

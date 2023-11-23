@@ -56,7 +56,13 @@ const MovieInfo = () => {
   return (
       <div id='pageContainer'>
 
-        <h1 id='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
+      <div id='titleVoteContainer'>
+
+        <h1 id='movieTitle'>{movieData.title}</h1>
+        <h2 id='voteAverage'>{movieData.vote_average}</h2>
+
+      </div>
+
         {/* <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" /> */}
 
         <GetTrailers id={movieData.id} />
@@ -65,8 +71,11 @@ const MovieInfo = () => {
         <div id='infoReviewContainer'>
 
             <ul id='infoContainer'>
-              <li>Moviedb votes: {movieData.vote_average}</li>
-                <li>{movieData.overview}</li>
+              <li id='tagline'>"{movieData.tagline}"</li>
+              <li id='overview'>{movieData.overview}</li>
+              <li id='status'>Status: {movieData.status}</li>
+              {/* <li >{movieData.genres}</li> */}
+              <li id='releaseDate'>Release date: {movieData.release_date}</li>
             </ul>
               
             <ul id='reviewContainer'>
