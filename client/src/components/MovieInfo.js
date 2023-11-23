@@ -65,33 +65,36 @@ const MovieInfo = () => {
 
         {/* <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" /> */}
 
-        <GetTrailers id={movieData.id} />
+        <div id='trailerInfoContainer'>
+      
+          <GetTrailers id={movieData.id} />
 
+          <ul id='infoContainer'>
+                <li id='tagline'>"{movieData.tagline}"</li>
+                <li id='overview'>{movieData.overview}</li>
+                {/* <li id='status'>Status: {movieData.status}</li> */}
+                {/* <li >{movieData.genres}</li> */}
+                <li id='releaseDate'>Release date: {movieData.release_date}</li>
+          </ul>
 
-        <div id='infoReviewContainer'>
-
-            <ul id='infoContainer'>
-              <li id='tagline'>"{movieData.tagline}"</li>
-              <li id='overview'>{movieData.overview}</li>
-              <li id='status'>Status: {movieData.status}</li>
-              {/* <li >{movieData.genres}</li> */}
-              <li id='releaseDate'>Release date: {movieData.release_date}</li>
-            </ul>
-              
-            <ul id='reviewContainer'>
-              {/* pass the movieid to the review form */}
-            <ReviewForm moviedb_movieid={params}/>
-              {/* foreach */}
-              {reviews.map((review, index) => (
-                <li key={index} className='reviewItem'>
-                  <p id='pUsername'> {review.username}  </p> 
-                  <p id='pRating'>Rating: {review.rating}  </p> 
-                  <p id='pReview'>{review.review}  </p> 
-
-                </li>
-              ))}
-            </ul>
         </div>
+
+
+              
+        <ul id='reviewContainer'>
+          {/* pass the movieid to the review form */}
+        <ReviewForm moviedb_movieid={params}/>
+          {/* foreach */}
+          {reviews.map((review, index) => (
+            <li key={index} className='reviewItem'>
+              <p id='pUsername'> {review.username}  </p> 
+              <p id='pRating'>Rating: {review.rating}  </p> 
+              <p id='pReview'>{review.review}  </p> 
+
+            </li>
+          ))}
+        </ul>
+
 
       <div id='similarContainer'>
                 Similar Movies
