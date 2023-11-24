@@ -2,26 +2,25 @@ import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 // Create the DropdownComponent
-const DropdownComponent = (props) => {
+const DropdownComponent = ({updateSort}) => {
 
 
-    const handleFilterChange = (filter) => {
+    const handleSortChange = (sort) => {
 
-
-        //change the filterState in parent
-        props.updateFilter(filter);
+        updateSort(sort);
     };
 
   return (
     <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Filter
+        Sort By
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item onClick={() => handleFilterChange('popular')}>Popular</Dropdown.Item>
-        <Dropdown.Item onClick={() => handleFilterChange('top_rated')}>Top Rated</Dropdown.Item>
-        <Dropdown.Item onClick={() => handleFilterChange('upcoming')}>Upcoming</Dropdown.Item>
+
+        <Dropdown.Item onClick={() => handleSortChange('popularity.desc')}>popularity.desc</Dropdown.Item>
+        <Dropdown.Item onClick={() => handleSortChange('popularity.asc')}>popularity.asc</Dropdown.Item>
+
       </Dropdown.Menu>
     </Dropdown>
   );

@@ -72,9 +72,10 @@ const Movies = () => {
     setMoviesData(movies);
   }
  
-  const [sort_by, setSort_by] = useState('popularity.asc')
+  const [sort_by, setSort_by] = useState('popularity.desc')
 
   const updateSort = (sort) => {
+    console.log(sort);
     setSort_by(sort)
   }
 
@@ -119,7 +120,7 @@ const Movies = () => {
       <div className='searchCont'>
         
         <SearchBar updateSearchTerm={updateSearchTerm}/>
-        <DropdownComponent childFilter={filter} updateFilter={updateFilter}/>
+        <DropdownComponent updateSort={updateSort}/>
 
       </div>
 
@@ -143,7 +144,7 @@ const Movies = () => {
           //else Render popular movies if no search results
         ) : (
           <>
-          
+
           {/* fetch moviedata and update movies with "updateMoviesData"*/}
           <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount} updateMoviesData={updateMoviesData}/>
 

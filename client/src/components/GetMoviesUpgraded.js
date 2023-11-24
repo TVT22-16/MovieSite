@@ -10,12 +10,9 @@ const GetMovies = ({sort_by,page,updatePageAmount,updateMoviesData}) => {
 
     useEffect(() => {
 
-        // const params = {
-        //     sort_by: sort_by,
-        //     page: 2,
-        //   };
 
-        axios.get(`http://localhost:3001/movies/getMovies?page=${page}`).then(response =>{
+
+        axios.get(`http://localhost:3001/movies/getMovies?page=${page}&sort_by=${sort_by}`).then(response =>{
             // setMovies(response.data.results);
             updateMoviesData(response.data.results);
             updatePageAmount(response.data.total_pages);
@@ -24,7 +21,7 @@ const GetMovies = ({sort_by,page,updatePageAmount,updateMoviesData}) => {
             console.log(error);
         });
         
-    },[page]);
+    },[page,sort_by]);
 
 
     return null;
