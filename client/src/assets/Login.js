@@ -9,7 +9,8 @@ function Login() {
   return (
     <div>
       {jwtToken.value.length === 0 ? <LoginForm /> :
-        <button onClick={() => jwtToken.value = ''}>Logout</button>}
+        //<button onClick={() => jwtToken.value = ''}>Logout</button>}
+        window.location.href = '/'}
     </div>
   );
 }
