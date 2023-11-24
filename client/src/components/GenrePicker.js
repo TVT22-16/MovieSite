@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Dropdown, Button } from 'react-bootstrap';
 
-const GenrePicker = () => {
+const GenrePicker = ({updateGenres}) => {
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -27,6 +27,11 @@ const GenrePicker = () => {
         : [...prevGenres, genreId]
     );
   };
+
+  useEffect(() => {
+    
+    updateGenres(selectedGenres);
+  },[selectedGenres])
 
   // Your genre list
   const genreList = {
@@ -67,7 +72,7 @@ const GenrePicker = () => {
     <div>
       <Dropdown>
         <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Genre
+          Genres
         </Dropdown.Toggle>
 
         <Dropdown.Menu>

@@ -72,7 +72,12 @@ const Movies = () => {
     setSort_by(sort)
   }
 
+  const [genres,setGenres] = useState([]);
 
+  const updateGenres = (genreState) => {
+    setGenres(genreState);
+  }
+   
 
   useEffect(()=>{
 
@@ -97,7 +102,7 @@ const Movies = () => {
         
         <SearchBar updateSearchTerm={updateSearchTerm}/>
         <DropdownComponent updateSort={updateSort}/>
-        <GenrePicker/>
+        <GenrePicker updateGenres={updateGenres}/>
 
       </div>
 
@@ -125,7 +130,7 @@ const Movies = () => {
           <>
 
           {/* fetch moviedata and update movies with "updateMoviesData"*/}
-          <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount} updateMoviesData={updateMoviesData}/>
+          <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount} updateMoviesData={updateMoviesData} genres={genres}/>
 
             {/* display moviedata */}
             {moviesData.map(movie => (
