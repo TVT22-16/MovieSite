@@ -3,6 +3,9 @@ import axios from 'axios';
 import './MovieInfo.css';
 import { useSearchParams } from 'react-router-dom'
 import ReviewForm from './ReviewForm';
+import GetTrailers from './GetTrailers';
+
+
 
 
 //https://webtips.dev/solutions/get-query-params-in-react
@@ -51,23 +54,36 @@ const MovieInfo = () => {
 
 
   return (
-      <div id='movieInfoBody'>
-        <div className='infoContainer'>
-          <div className='imgTitleContainer'>
-            <h1 className='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
-            <img className='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
-            <ul id='themoviedbInfo'>
-              <li>Moviedb votes: {movieData.vote_average}</li>
-             <br></br> <li>{movieData.overview}</li>
-            </ul>
-          </div>
+      <div id='pageContainer'>
 
-          
-        <ul className='reviewContainer'>
+      <div id='titleVoteContainer'>
 
+        <h1 id='movieTitle'>{movieData.title}</h1>
+        <h2 id='voteAverage'>{movieData.vote_average}</h2>
+
+      </div>
+
+        {/* <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" /> */}
+
+        <div id='trailerInfoContainer'>
+      
+          <GetTrailers id={movieData.id} />
+
+          <ul id='infoContainer'>
+                <li id='tagline'>"{movieData.tagline}"</li>
+                <li id='overview'>{movieData.overview}</li>
+                {/* <li id='status'>Status: {movieData.status}</li> */}
+                {/* <li >{movieData.genres}</li> */}
+                <li id='releaseDate'>Release date: {movieData.release_date}</li>
+          </ul>
+
+        </div>
+
+
+              
+        <ul id='reviewContainer'>
           {/* pass the movieid to the review form */}
         <ReviewForm moviedb_movieid={params}/>
-
           {/* foreach */}
           {reviews.map((review, index) => (
             <li key={index} className='reviewItem'>
@@ -78,7 +94,14 @@ const MovieInfo = () => {
             </li>
           ))}
         </ul>
-        </div>
+
+
+      <div id='similarContainer'>
+                Similar Movies
+
+      </div>
+
+
       </div>
 
   )

@@ -49,28 +49,38 @@ const ReviewForm = ({moviedb_movieid}) => {
     };
   
     return (
-      
-        <div id='reviewFormBody'>
-
-        <button onClick={handleShowForm}>Add Review</button>
-  
+      <div id="reviewFormBody">
+        <button className="addReviewBtn" onClick={handleShowForm}>
+          Add Review
+        </button>
+    
         {showForm && (
-            <form id='reviewForm' onSubmit={submitReviewForm}>
-                <label htmlFor="review">Review</label>
-                    {/* <input type="text" class='reviewBox' name="review" placeholder="Write your review here"/> */}
-                    <textarea name="review" rows="4" cols="50" placeholder="Write your review here"></textarea>
-
-
-                <label htmlFor="rating">Rating</label>
-                    <input type="number" name="rating" className='ratingBox' placeholder="0-10.0" step="any" min="0" max="10.0" maxLength="4"/>
-
-
-                <input className='submitBtn' type="submit" value="SUBMIT REVIEW"/>
-            </form>
-
+          <form id="reviewForm" onSubmit={submitReviewForm}>
+            <textarea
+              name="review"
+              rows="4"
+              cols="50"
+              placeholder="Write your review here"
+              className="reviewBox"
+            />
+    
+            <label htmlFor="rating">Rating</label>
+            <input
+              type="number"
+              name="rating"
+              className="ratingBox"
+              placeholder="0-10.0"
+              step="any"
+              min="0"
+              max="10.0"
+            />
+    
+            <input type="submit" value="SUBMIT REVIEW" className="submitBtn" />
+          </form>
         )}
       </div>
     );
+    
   };
 
 export default ReviewForm;

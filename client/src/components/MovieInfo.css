@@ -1,98 +1,235 @@
 
 
+#pageContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.infoContainer{
+    gap: 20px;
+
+}
+
+
+#titleVoteContainer {
+    width: 60%;
+    margin-top: 1%;
     display: flex;
     flex-direction: row;
-    float: left;
-    margin-left: 2%;
-    margin-top: 2%;
+    justify-content: space-between; /* Align items to start and end of the container */
+    align-items: center; /* Center vertically */
+    background-color: #2c3e50; /* Change the background color to a cool color */
+    padding: 15px; /* Add padding for spacing */
+    border-radius: 8px; /* Add rounded corners for a modern look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+  }
+  
+  #titleVoteContainer > #movieTitle {
+    font-weight: 600;
+    color: #ecf0f1; /* Set text color to a light color */
+    font-size: 24px; /* Increase font size */
+  }
+  
+  #titleVoteContainer > #voteAverage {
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    width: 40px; /* Set a fixed width for consistency */
+    height: 40px; /* Set a fixed height for consistency */
+    background-color: #e74c3c; /* Change the background color to a contrasting color */
+    color: #ecf0f1; /* Set text color to a light color */
+    font-size: 14px; /* Adjust font size */
+  }
+  
+  /* Optional: Add hover effect for interactivity */
+  #titleVoteContainer:hover {
+    background-color: #34495e; /* Change background color on hover */
+    transition: background-color 0.3s ease-in-out; /* Add a smooth transition */
+  }
+  
+  #titleVoteContainer > #voteAverage:hover {
+    background-color: #c0392b; /* Change background color on hover */
+    transition: background-color 0.3s ease-in-out; /* Add a smooth transition */
+  }
 
-
+#infoPoster{
+    max-height: 400px;
 }
 
-#movieInfoBody{
-    overflow-x: hidden;
-    float: left;
+
+
+#trailerInfoContainer{
+    display: flex;
+    flex-direction: row;
+    padding-left: 3%;
 }
 
-.infoPoster{
-    max-width: 80%;
+
+.videoResponsive{
+
+    width: 60%;
+
+    aspect-ratio: 16 / 9;
 }
 
-#reviewForm{ 
 
-    margin-top: 2%;
-    margin-bottom: 2%;
+
+#trailerInfoContainer>#infoContainer {
+    list-style: none;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 33%;
+    margin: 0 auto;
+  }
+  
+  #tagline {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  #overview {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  #status {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 10px;
+  }
+  
+  /* Add similar styles for genres if needed */
+  
+  #releaseDate {
+    font-size: 0.9em;
+    color: #777;
+  }
+
+  
+
+/* //reviews ui style */
+
+#reviewContainer {
+    list-style: none;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    margin: 0 auto;
+  }
+  
+  .reviewItem {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .username {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .rating {
+    font-size: 1em;
+    color: #777;
+    margin-bottom: 5px;
+  }
+  
+  .userReview {
+    font-size: 1em;
+    color: #555;
+  }
+  
+
+/* review FORM STYLES */
+#reviewFormBody {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .addReviewBtn {
+    background-color: darkblue;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #reviewForm {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 75%;
-
-    margin: auto auto;
-}
-
-.reviewBox{
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  label {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  textarea {
     width: 100%;
-    height: 200px;
-}
-
-.submitBtn{
-    width: 30%;
-    padding: 5px;
-    margin: auto auto;
-}
-
-.ratingBox{
-
-    width: 15%;
-    height: 20%;
-}
-
-#reviewFormBody{
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin-left: 1%;
-}
-
-.movieTitle{
-    font-size: 120%
-}
-
-.imgTitleContainer{
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-}
-
-#themoviedbInfo{
-    list-style: none;
-    
-}
-
-.infoPoster{
-    border-radius: 5px;
-}
-
-.reviewContainer{
-    margin-top: 2%;
-    width: 80%;
-
-}
-
-.reviewItem{
-    background-color: lightblue;
-    margin: 10px;
     padding: 10px;
-    border-radius: 10px;
+    margin-top: 5px;
+  }
+  
+  .ratingBox {
+    width: 7%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+  
+  .submitBtn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .submitBtn:hover {
+    background-color: #0056b3;
+  }
+  
 
-    list-style: none;
-    display: flex;
-    flex-direction: column;
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
-    min-width: 70%;
+
+
+
+@media (max-width: 600px) {
+    #trailerInfoContainer{
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+    #infoContainer{
+        width: 200%;
+    }
+/* 
+    #overview {
+        width: 200%;
+      } */
 
 }
