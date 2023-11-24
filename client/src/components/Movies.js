@@ -5,6 +5,7 @@ import SearchBar from './Search.js';
 import DropdownComponent from './Dropdown.js';
 import PaginationComponent from './Pagination.js';
 import GetMovies from './GetMoviesUpgraded.js';
+import GenrePicker from './GenrePicker.js';
 
 
 
@@ -96,6 +97,7 @@ const Movies = () => {
         
         <SearchBar updateSearchTerm={updateSearchTerm}/>
         <DropdownComponent updateSort={updateSort}/>
+        <GenrePicker/>
 
       </div>
 
