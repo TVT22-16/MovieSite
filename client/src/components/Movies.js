@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Movies.css';
-import MovieInfo from './MovieInfo.js'
-import ReviewForm from './ReviewForm.js';
 import SearchBar from './Search.js';
 import DropdownComponent from './Dropdown.js';
 import PaginationComponent from './Pagination.js';
+import GetMovies from './GetMoviesUpgraded.js';
+import GenrePicker from './GenrePicker.js';
 
 
 
@@ -24,18 +24,19 @@ const Movies = () => {
 
   const [responsePageAmount, setResponsePageAmount] = useState({});
 
+
+  const updatePageAmount = (total) => {
+
+    setResponsePageAmount(total)
+  }
+   
+
+
+
   const [searchResults, setSearchResults] = useState([]);
 
   const baseUrl = 'http://localhost:3001/movies';
 
-
-  //popular, upcoming, top_rated
-  const [filter, setFilter] = useState('popular');
-
-  const updateFilter = (newFilter) => {
-    setPage(1);
-    setFilter(newFilter);
-  };
 
 
 
@@ -56,21 +57,27 @@ const Movies = () => {
   }
 
 
-  useEffect(() => {
-    // Fetch movies when component mounts
-    if (searchTerm.length < 2){
-      axios.get(`${baseUrl}/filters/${page}/${filter}`)
-      .then(response =>{
 
-        //set movies results and total page count
-         setPopularMovies(response.data.results);
-         setResponsePageAmount(response.data.total_pages);}
-      
-      )
-      .catch(error => console.error('Error fetching popular movies:', error));
-    }
-  }, [baseUrl, page, filter]); // Add baseUrl, page, filter as a dependency to useEffect
+  const [moviesData, setMoviesData] = useState([])
 
+
+  const updateMoviesData = (movies) => {
+    setMoviesData(movies);
+  }
+ 
+  const [sort_by, setSort_by] = useState('popularity.desc')
+
+  const updateSort = (sort) => {
+    setPage(1);
+    setSort_by(sort)
+  }
+
+  const [genres,setGenres] = useState([]);
+
+  const updateGenres = (genreState) => {
+    setGenres(genreState);
+  }
+   
 
   useEffect(()=>{
 
@@ -91,16 +98,17 @@ const Movies = () => {
 
   return (
     <div className='outerCont'>
-      <h1>Movies</h1>
-
       <div className='searchCont'>
         
         <SearchBar updateSearchTerm={updateSearchTerm}/>
-        <DropdownComponent childFilter={filter} updateFilter={updateFilter}/>
+        <DropdownComponent updateSort={updateSort}/>
+        <GenrePicker updateGenres={updateGenres}/>
 
       </div>
 
       <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
+
+      {page}
 
 
       <ul className='listCont'>
@@ -112,19 +120,30 @@ const Movies = () => {
               <h3 className='movieTitle'>{movie.title}</h3>
               <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)} />
               <h3 className='voteAverage'>{movie.vote_average}</h3>
+              <h5>Votes: {movie.vote_count}</h5>
+
             </li>
           ))
 
           //else Render popular movies if no search results
         ) : (
-          popularMovies.map(movie => (
+          <>
+
+          {/* fetch moviedata and update movies with "updateMoviesData"*/}
+          <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount} updateMoviesData={updateMoviesData} genres={genres}/>
+
+            {/* display moviedata */}
+            {moviesData.map(movie => (
             <li className='movieCard' key={movie.id}>
               <h3 className='movieTitle'>{movie.title}</h3>
               {/* To delay the execution of openInfo(movie.id) until the image is clicked, you need to wrap it in an arrow function: */}
               <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)}/>
               <h3 className='voteAverage'>{movie.vote_average}</h3>
+              <h5>Votes: {movie.vote_count}</h5>
+
             </li>
-          ))
+            )) }
+          </>
         )}
       </ul>
 

@@ -31,24 +31,51 @@ async function getPopularMovies(filter,page) {
     }
   }
 
-// async function discorverMovies(){
-//   try {
-//     const options = {
-//       method: 'GET',
-//       url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte={min_date}&release_date.lte={max_date}`,
-//       headers: {
-//         accept: 'application/json',
-//         Authorization: process.env.MOVIEDB_API_KEY
-//       }
-//     };
+async function getMoviesUpgraded(sort_by = 'popularity.desc' ,vote_averagegte = 0 ,with_genres = '',release_dategte = '1900-01-01', page = 1, vote_countgte=0){
 
-//     const response = await axios.request(options);
-//     return response.data.results;
+  //if sorting by voteaverage, should have over 500 votes
+  if(sort_by === 'vote_average.desc'){
+    vote_countgte = 500;
+  }
+
+  try {
+    const options = {
+      method: 'GET',
+      url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&release_date.gte=${release_dategte}&sort_by=${sort_by}&vote_count.gte=${vote_countgte}&vote_average.gte=${vote_averagegte}&with_genres=${with_genres}`,
+      headers: {
+        accept: 'application/json',
+        Authorization: process.env.MOVIEDB_API_KEY
+      }
+    };
+
+    const response = await axios.request(options);
+    return response.data;
     
-//   } catch (error) {
-//     throw error;
-//   }
-// }
+  } catch (error) {
+    throw error;
+  }
+
+  //   MOVIE GENRE ID
+// Action          28
+// Adventure       12
+// Animation       16
+// Comedy          35
+// Crime           80
+// Documentary     99
+// Drama           18
+// Family          10751
+// Fantasy         14
+// History         36
+// Horror          27
+// Music           10402
+// Mystery         9648
+// Romance         10749
+// Science Fiction 878
+// TV Movie        10770
+// Thriller        53
+// War             10752
+// Western         37
+}
 
 async function searchMovies(search,page){
   try {
@@ -113,5 +140,5 @@ async function getMovieTrailer(id){
   }
 }
 
-module.exports = {getPopularMovies,searchMovies,getMovieByID, getMovieTrailer};
+module.exports = {getPopularMovies,searchMovies,getMovieByID, getMovieTrailer, getMoviesUpgraded};
 
