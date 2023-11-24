@@ -18,22 +18,22 @@ router.get('/filters/:page/:filter', async(req,res) =>{
 });
 
 //new get movies for better filtering and sorting
-router.get('/getMovies/', async (req, res) => {
+router.get('/getMovies', async (req, res) => {
     try {
-        let release_dategte = req.body.release_dategte;
-        let sort_by = req.body.sort_by;
-        let vote_averagegte = req.body.vote_averagegte;
-        let with_genres = req.body.with_genres;
+        let release_dategte = req.query.release_dategte;
+        let sort_by = req.query.sort_by;
+        let vote_averagegte = req.query.vote_averagegte;
+        let with_genres = req.query.with_genres;
 
-        let page = req.body.page;
+        let page = req.query.page;
 
-        const movies = await getMoviesUpgraded(sort_by,vote_averagegte,with_genres,release_dategte,page);
+        const movies = await getMoviesUpgraded(sort_by, vote_averagegte, with_genres, release_dategte, page);
 
         res.json(movies);
 
     } catch (error) {
         // Use a 500 Internal Server Error status code
-        res.status(500).json({message: error.message });
+        res.status(500).json({ message: error.message });
     }
 });
 
