@@ -63,7 +63,7 @@ const Header = ({ loggedIn }) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="custom-nav">
-              <Nav.Link href="/home">Home</Nav.Link>
+              <Nav.Link href="/home">Movies</Nav.Link>
               <Nav.Link href="/reviews">Reviews</Nav.Link>
               <Nav.Link href="/groups">Groups</Nav.Link>
               <NavDropdown title={username} id="basic-nav-dropdown">
