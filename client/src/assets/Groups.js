@@ -1,58 +1,85 @@
-
-// Groups.js
-import React, { useState } from 'react';
-import { GroupModal } from '../components/Groupcreate.js';
+// Corrected Groups.js
+import { Container, Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { GroupModal } from '../components/Groupcreate.js';
 
 function Groups() {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [groups, setGroups] = useState([]);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setModalIsOpen(true);
-  };
+    // Function to fetch all groups
+    const fetchGroups = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/groups');
+            setGroups(response.data);
+        } catch (error) {
+            console.error('Error fetching groups:', error.response ? error.response.data : error.message);
+        }
+    };
 
-  const handleCloseModal = () => {
-    setModalIsOpen(false);
-  };
-    const username = sessionStorage.getItem('username');
-    let admin = true;
+    useEffect(() => {
+        // Fetch groups when the component mounts
+        fetchGroups();
+    }, []);
 
-  const handleModalSubmit = async ({ group_name, group_description}) => {
-    try {
-          // Step 2: Create the group and get its ID
-          const groupResponse = await axios.post('http://localhost:3001/groups', {
-            group_name,
-            group_description,
-          });
-          // Step 3: Insert a record into the users_groups table
-          await axios.post('http://localhost:3001/users_groups', {
-            username,
-            group_name,
-            admin,
-          });
-      
-        console.log('Group name:', group_name);
-    console.log('Group description', group_description);
-    console.log('Admin value:', admin);
-    }
-    catch (error){
-        console.error('Error during group creation:', error.response ? error.response.data : error.message);
-    }
+    const handleOpenModal = () => {
+        setModalIsOpen(true);
+    };
 
-    // Close the modal
-    setModalIsOpen(false);
-  };
+    const handleCloseModal = () => {
+        setModalIsOpen(false);
+    };
 
-  return (
+    const handleModalSubmit = (data) => {
+        // Handle the form submission data
+        console.log('Form data:', data);
+
+        // Perform any other logic, e.g., making API calls
+
+        // Close the modal
+        handleCloseModal();
+    };
+
+return (
     <div>
-      <button onClick={handleOpenModal}>Create a Group</button>
-      <GroupModal
-        isOpen={modalIsOpen}
-        onRequestClose={handleCloseModal}
-        onSubmit={handleModalSubmit}
-      />
-    </div>
-  );
+    <Container>
+      <h1>All Groups</h1>
+      <Row>
+        <Col md={6}>
+          {/* All Groups */}
+          <button onClick={handleOpenModal}>Add Group</button>
+          <GroupModal
+            isOpen={modalIsOpen}
+            onRequestClose={handleCloseModal}
+            onSubmit={handleModalSubmit}
+          />
+          <div
+            className="group-container"
+            style={{ height: '400px', overflowY: 'auto', border: '1px solid #ddd', padding: '10px' }}
+          >
+            {groups.map((group) => (
+              <div key={group.group_name} className="mb-3">
+                <div className="group-box p-3 border">
+                  <h3>{group.group_name}</h3>
+                  <p style={{ maxHeight: '80px', overflow: 'hidden' }}>{group.group_description}</p>
+                  {/* Add more details or actions as needed */}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Col>
+        <Col md={6}>
+          {/* My Groups */}
+          {/* Add logic to display groups specific to the logged-in user */}
+          <div className="group-container">
+            {/* Display user-specific groups here */}
+          </div>
+        </Col>
+      </Row>
+    </Container>
+  </div>
+    );
 }
 
 export default Groups;
