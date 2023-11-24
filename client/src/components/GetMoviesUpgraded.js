@@ -3,34 +3,45 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-const GetMovies = ({sort_by}) => {
+const GetMovies = ({sort_by,page,updatePageAmount}) => {
+
 
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
 
-        const fetchMovies = async () =>{
-            try{
-                axios.get('http://localhost:3001/movies/getMovies').then(response =>{
-                    setMovies(response.data.results);
-                    console.log(movies);
-                })
+        // const params = {
+        //     sort_by: sort_by,
+        //     page: 2,
+        //   };
 
-            } catch(error){
-                console.log(error);
-            }
+        axios.get(`http://localhost:3001/movies/getMovies?page=${page}`).then(response =>{
+            setMovies(response.data.results);
+            updatePageAmount(response.data.total_pages);
 
-        }
-
-        fetchMovies();
+            console.log(movies);
+        }).catch(error => {
+            console.log(error);
+        });
         
-    }, []);
+    },[page]);
 
 
     return (
         <div>
-            
-            {sort_by}
+            {movies.length > 0 && (
+            <div>
+                {movies.map((movie) => (
+                <h1 key={movie.id}>{movie.title}</h1>
+                ))}
+            </div>
+            )}
+
+
+
+
+
+
 
         </div>
       );

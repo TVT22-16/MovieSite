@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Movies.css';
-import MovieInfo from './MovieInfo.js'
-import ReviewForm from './ReviewForm.js';
 import SearchBar from './Search.js';
 import DropdownComponent from './Dropdown.js';
 import PaginationComponent from './Pagination.js';
@@ -24,6 +22,15 @@ const Movies = () => {
   const [popularMovies, setPopularMovies] = useState([]);
 
   const [responsePageAmount, setResponsePageAmount] = useState({});
+
+
+  const updatePageAmount = (total) => {
+
+    setResponsePageAmount(total)
+  }
+   
+
+
 
   const [searchResults, setSearchResults] = useState([]);
 
@@ -72,20 +79,20 @@ const Movies = () => {
   }
 
 
-  useEffect(() => {
-    // Fetch movies when component mounts
-    if (searchTerm.length < 2){
-      axios.get(`${baseUrl}/filters/${page}/${filter}`)
-      .then(response =>{
+  // useEffect(() => {
+  //   // Fetch movies when component mounts
+  //   if (searchTerm.length < 2){
+  //     axios.get(`${baseUrl}/filters/${page}/${filter}`)
+  //     .then(response =>{
 
-        //set movies results and total page count
-         setPopularMovies(response.data.results);
-         setResponsePageAmount(response.data.total_pages);}
+  //       //set movies results and total page count
+  //        setPopularMovies(response.data.results);
+  //        setResponsePageAmount(response.data.total_pages);}
       
-      )
-      .catch(error => console.error('Error fetching popular movies:', error));
-    }
-  }, [baseUrl, page, filter]); // Add baseUrl, page, filter as a dependency to useEffect
+  //     )
+  //     .catch(error => console.error('Error fetching popular movies:', error));
+  //   }
+  // }, [baseUrl, page, filter]); // Add baseUrl, page, filter as a dependency to useEffect
 
 
   useEffect(()=>{
@@ -118,6 +125,8 @@ const Movies = () => {
 
       <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
 
+      {page}
+
 
       <ul className='listCont'>
         
@@ -141,7 +150,7 @@ const Movies = () => {
           //     <h3 className='voteAverage'>{movie.vote_average}</h3>
           //   </li>
           // ))
-          <GetMovies sort_by={sort_by}/>
+          <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount}/>
 
 
         )}
