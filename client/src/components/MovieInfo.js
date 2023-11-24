@@ -7,7 +7,6 @@ import GetTrailers from './GetTrailers';
 
 
 
-
 //https://webtips.dev/solutions/get-query-params-in-react
 
 const MovieInfo = () => {
