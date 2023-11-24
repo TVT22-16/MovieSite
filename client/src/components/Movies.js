@@ -65,12 +65,12 @@ const Movies = () => {
 
 
 
-  // const [movies, setMovies] = useState([])
+  const [moviesData, setMoviesData] = useState([])
 
 
-  // const updateMovies = (movies) => {
-  //   setMovies(movies);
-  // }
+  const updateMoviesData = (movies) => {
+    setMoviesData(movies);
+  }
  
   const [sort_by, setSort_by] = useState('popularity.asc')
 
@@ -142,17 +142,21 @@ const Movies = () => {
 
           //else Render popular movies if no search results
         ) : (
-          // popularMovies.map(movie => (
-          //   <li className='movieCard' key={movie.id}>
-          //     <h3 className='movieTitle'>{movie.title}</h3>
-          //     {/* To delay the execution of openInfo(movie.id) until the image is clicked, you need to wrap it in an arrow function: */}
-          //     <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)}/>
-          //     <h3 className='voteAverage'>{movie.vote_average}</h3>
-          //   </li>
-          // ))
-          <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount}/>
+          <>
+          
+          {/* fetch moviedata and update movies with "updateMoviesData"*/}
+          <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount} updateMoviesData={updateMoviesData}/>
 
-
+            {/* display moviedata */}
+            {moviesData.map(movie => (
+            <li className='movieCard' key={movie.id}>
+              <h3 className='movieTitle'>{movie.title}</h3>
+              {/* To delay the execution of openInfo(movie.id) until the image is clicked, you need to wrap it in an arrow function: */}
+              <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)}/>
+              <h3 className='voteAverage'>{movie.vote_average}</h3>
+            </li>
+            )) }
+          </>
         )}
       </ul>
 

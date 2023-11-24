@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-const GetMovies = ({sort_by,page,updatePageAmount}) => {
+const GetMovies = ({sort_by,page,updatePageAmount,updateMoviesData}) => {
 
 
-    const [movies, setMovies] = useState([]);
+    // const [movies, setMovies] = useState([]);
 
     useEffect(() => {
 
@@ -16,10 +16,10 @@ const GetMovies = ({sort_by,page,updatePageAmount}) => {
         //   };
 
         axios.get(`http://localhost:3001/movies/getMovies?page=${page}`).then(response =>{
-            setMovies(response.data.results);
+            // setMovies(response.data.results);
+            updateMoviesData(response.data.results);
             updatePageAmount(response.data.total_pages);
 
-            console.log(movies);
         }).catch(error => {
             console.log(error);
         });
@@ -27,24 +27,7 @@ const GetMovies = ({sort_by,page,updatePageAmount}) => {
     },[page]);
 
 
-    return (
-        <div>
-            {movies.length > 0 && (
-            <div>
-                {movies.map((movie) => (
-                <h1 key={movie.id}>{movie.title}</h1>
-                ))}
-            </div>
-            )}
-
-
-
-
-
-
-
-        </div>
-      );
+    return null;
 }
  
 export default GetMovies;
