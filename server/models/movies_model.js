@@ -31,7 +31,7 @@ async function getPopularMovies(filter,page) {
     }
   }
 
-async function getMoviesUpgraded(sort_by,vote_averagegte,with_genres,release_dategte, page){
+async function getMoviesUpgraded(sort_by = 'popularity.desc' ,vote_averagegte = 0 ,with_genres = '',release_dategte = '1900-01-01', page = 1){
 
 
   try {

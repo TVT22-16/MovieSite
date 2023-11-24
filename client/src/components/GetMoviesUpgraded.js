@@ -4,7 +4,6 @@ import axios from 'axios';
 
 
 const GetMovies = ({sort_by}) => {
-    console.log(sort_by)
 
     const [movies, setMovies] = useState([]);
 
@@ -30,6 +29,7 @@ const GetMovies = ({sort_by}) => {
 
     return (
         <div>
+            
             {sort_by}
 
         </div>
