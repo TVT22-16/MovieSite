@@ -26,8 +26,11 @@ router.get('/getMovies', async (req, res) => {
         let with_genres = req.query.with_genres;
 
         let page = req.query.page;
+        let vote_countgte = req.query.vote_countgte;
 
-        const movies = await getMoviesUpgraded(sort_by, vote_averagegte, with_genres, release_dategte, page);
+        
+
+        const movies = await getMoviesUpgraded(sort_by, vote_averagegte, with_genres, release_dategte, page, vote_countgte);
 
         res.json(movies);
 

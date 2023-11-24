@@ -18,8 +18,11 @@ const DropdownComponent = ({updateSort}) => {
 
       <Dropdown.Menu>
 
-        <Dropdown.Item onClick={() => handleSortChange('popularity.desc')}>popularity.desc</Dropdown.Item>
-        <Dropdown.Item onClick={() => handleSortChange('popularity.asc')}>popularity.asc</Dropdown.Item>
+        <Dropdown.Item onClick={() => handleSortChange('popularity.desc')}>Popularity (descending)</Dropdown.Item>
+        <Dropdown.Item onClick={() => handleSortChange('popularity.asc')}>Popularity (ascending)</Dropdown.Item>
+        <Dropdown.Item onClick={() => handleSortChange('vote_average.desc')}>Vote Average (descending)</Dropdown.Item>
+        <Dropdown.Item onClick={() => handleSortChange('vote_average.asc')}>Vote Average (ascending)</Dropdown.Item>
+
 
       </Dropdown.Menu>
     </Dropdown>

@@ -31,13 +31,13 @@ async function getPopularMovies(filter,page) {
     }
   }
 
-async function getMoviesUpgraded(sort_by = 'popularity.desc' ,vote_averagegte = 0 ,with_genres = '',release_dategte = '1900-01-01', page = 1){
+async function getMoviesUpgraded(sort_by = 'popularity.desc' ,vote_averagegte = 0 ,with_genres = '',release_dategte = '1900-01-01', page = 1, vote_countgte=20){
 
 
   try {
     const options = {
       method: 'GET',
-      url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&release_date.gte=${release_dategte}&sort_by=${sort_by}&vote_average.gte=${vote_averagegte}&with_genres=${with_genres}`,
+      url: `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&release_date.gte=${release_dategte}&sort_by=${sort_by}&vote_count.gte=${vote_countgte}&vote_average.gte=${vote_averagegte}&with_genres=${with_genres}`,
       headers: {
         accept: 'application/json',
         Authorization: process.env.MOVIEDB_API_KEY
