@@ -4,7 +4,7 @@ const upload = multer({dest: 'upload/'});
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const {addUserGroup,getUserGroup,updateUserGroup,deleteUserGroup} = require('../models/users_groups_model');
+const {addUserGroup,getUserGroup,getGroupMembers,updateUserGroup,deleteUserGroup} = require('../models/users_groups_model');
 
 //get users_groups
 router.get('/', async (req, res) => {
@@ -16,6 +16,18 @@ router.get('/', async (req, res) => {
         res.status(500).json({ error: "Error fetching users" });
     }
 });
+//get Group members
+router.get('/:group_name', async (req, res) => {
+    const group_name = req.params.group_name; // Extract group_name from request parameters
+    try {
+        const users = await getGroupMembers(group_name); // Pass group_name to the function
+        res.json(users);
+    } catch (error) {
+        console.error("Error fetching users:", error);S
+        res.status(500).json({ error: "Error fetching users" });
+    }
+});
+
 //add users_groups
 router.post('/', upload.none() , async (req,res) => {
     const username = req.body.username;

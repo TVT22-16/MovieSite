@@ -10,6 +10,7 @@ import Settings from './assets/Settings';
 import MovieInfo from './components/MovieInfo';
 import Users from './assets/Userlist';
 import Groups from './assets/Groups';
+import GroupDetail from './components/GroupDetail';
 
 
 
@@ -33,7 +34,7 @@ function App() {
             <Route path="/userlist" element={<Users/>} />
             <Route path="/groups" element={<Groups />} />
             <Route path="/movieinfo/" element={<MovieInfo/>}/>
-
+            <Route path="/groups/:group_name" element={<GroupDetail />} />
 
           </Routes>
         </main>
