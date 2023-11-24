@@ -37,14 +37,6 @@ const Movies = () => {
   const baseUrl = 'http://localhost:3001/movies';
 
 
-  //popular, upcoming, top_rated
-  const [filter, setFilter] = useState('popular');
-
-  const updateFilter = (newFilter) => {
-    setPage(1);
-    setFilter(newFilter);
-  };
-
 
 
   //result page number
@@ -75,25 +67,10 @@ const Movies = () => {
   const [sort_by, setSort_by] = useState('popularity.desc')
 
   const updateSort = (sort) => {
-    console.log(sort);
+    setPage(1);
     setSort_by(sort)
   }
 
-
-  // useEffect(() => {
-  //   // Fetch movies when component mounts
-  //   if (searchTerm.length < 2){
-  //     axios.get(`${baseUrl}/filters/${page}/${filter}`)
-  //     .then(response =>{
-
-  //       //set movies results and total page count
-  //        setPopularMovies(response.data.results);
-  //        setResponsePageAmount(response.data.total_pages);}
-      
-  //     )
-  //     .catch(error => console.error('Error fetching popular movies:', error));
-  //   }
-  // }, [baseUrl, page, filter]); // Add baseUrl, page, filter as a dependency to useEffect
 
 
   useEffect(()=>{
