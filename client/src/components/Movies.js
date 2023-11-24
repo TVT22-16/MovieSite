@@ -6,6 +6,7 @@ import ReviewForm from './ReviewForm.js';
 import SearchBar from './Search.js';
 import DropdownComponent from './Dropdown.js';
 import PaginationComponent from './Pagination.js';
+import GetMovies from './GetMoviesUpgraded.js';
 
 
 
@@ -53,6 +54,21 @@ const Movies = () => {
   const updateSearchTerm = (searchInput) =>{
     setSearchTerm(searchInput);
 
+  }
+
+
+
+  // const [movies, setMovies] = useState([])
+
+
+  // const updateMovies = (movies) => {
+  //   setMovies(movies);
+  // }
+ 
+  const [sort_by, setSort_by] = useState('popularity.asc')
+
+  const updateSort = (sort) => {
+    setSort_by(sort)
   }
 
 
@@ -117,14 +133,17 @@ const Movies = () => {
 
           //else Render popular movies if no search results
         ) : (
-          popularMovies.map(movie => (
-            <li className='movieCard' key={movie.id}>
-              <h3 className='movieTitle'>{movie.title}</h3>
-              {/* To delay the execution of openInfo(movie.id) until the image is clicked, you need to wrap it in an arrow function: */}
-              <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)}/>
-              <h3 className='voteAverage'>{movie.vote_average}</h3>
-            </li>
-          ))
+          // popularMovies.map(movie => (
+          //   <li className='movieCard' key={movie.id}>
+          //     <h3 className='movieTitle'>{movie.title}</h3>
+          //     {/* To delay the execution of openInfo(movie.id) until the image is clicked, you need to wrap it in an arrow function: */}
+          //     <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)}/>
+          //     <h3 className='voteAverage'>{movie.vote_average}</h3>
+          //   </li>
+          // ))
+          <GetMovies sort_by={sort_by}/>
+
+
         )}
       </ul>
 
