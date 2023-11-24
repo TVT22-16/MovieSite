@@ -31,8 +31,12 @@ async function getPopularMovies(filter,page) {
     }
   }
 
-async function getMoviesUpgraded(sort_by = 'popularity.desc' ,vote_averagegte = 0 ,with_genres = '',release_dategte = '1900-01-01', page = 1, vote_countgte=20){
+async function getMoviesUpgraded(sort_by = 'popularity.desc' ,vote_averagegte = 0 ,with_genres = '',release_dategte = '1900-01-01', page = 1, vote_countgte=0){
 
+  //if sorting by voteaverage, should have over 500 votes
+  if(sort_by === 'vote_average.desc'){
+    vote_countgte = 500;
+  }
 
   try {
     const options = {

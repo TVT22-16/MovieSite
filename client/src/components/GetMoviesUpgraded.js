@@ -10,8 +10,6 @@ const GetMovies = ({sort_by,page,updatePageAmount,updateMoviesData}) => {
 
     useEffect(() => {
 
-
-
         axios.get(`http://localhost:3001/movies/getMovies?page=${page}&sort_by=${sort_by}`).then(response =>{
             // setMovies(response.data.results);
             updateMoviesData(response.data.results);

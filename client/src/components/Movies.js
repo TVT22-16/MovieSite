@@ -115,8 +115,6 @@ const Movies = () => {
 
   return (
     <div className='outerCont'>
-      <h1>Movies</h1>
-
       <div className='searchCont'>
         
         <SearchBar updateSearchTerm={updateSearchTerm}/>
@@ -138,6 +136,8 @@ const Movies = () => {
               <h3 className='movieTitle'>{movie.title}</h3>
               <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)} />
               <h3 className='voteAverage'>{movie.vote_average}</h3>
+              <h5>Votes: {movie.vote_count}</h5>
+
             </li>
           ))
 
