@@ -1,6 +1,5 @@
 import React,{useEffect, useState} from 'react'
 import GetMovies from '../components/GetMoviesUpgraded';
-import BasicExample from '../components/Widget';
 
 const Landingpage = () => {
 
@@ -30,8 +29,7 @@ const Landingpage = () => {
 
           }} >
            
-           <BasicExample/>
-
+            
 
           <ul>
             <GetMovies

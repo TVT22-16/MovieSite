@@ -6,7 +6,7 @@ import DropdownComponent from './Dropdown.js';
 import PaginationComponent from './Pagination.js';
 import GetMovies from './GetMoviesUpgraded.js';
 import GenrePicker from './GenrePicker.js';
-import BootstrapCard from './Widget.js';
+import BootstrapCard from './BootstrapCardMovie.js';
 
 
 
@@ -139,7 +139,7 @@ const Movies = () => {
               {/* <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)}/>
               <h3 className='voteAverage'>{movie.vote_average}</h3>
               <h5>Votes: {movie.vote_count}</h5> */}
-               <BootstrapCard img={movie.poster_path} title={movie.title} voteaverage={movie.vote_average} release={movie.release_date}></BootstrapCard>
+               <BootstrapCard movie={movie}></BootstrapCard>
 
 
             </li>
@@ -147,7 +147,7 @@ const Movies = () => {
           </>
         )}
       </ul>
-      
+
       {page}
 
       <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
