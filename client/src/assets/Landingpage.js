@@ -1,5 +1,10 @@
 import React,{useEffect, useState} from 'react'
 import GetMovies from '../components/GetMoviesUpgraded';
+import BootstrapCard from '../components/BootstrapCardMovie';
+import Card from 'react-bootstrap/Card';
+import { CardBody } from 'react-bootstrap';
+import MinimWidget from '../components/MinimizableWidget';
+import CarouselExample from '../components/Carousel';
 
 const Landingpage = () => {
 
@@ -19,20 +24,21 @@ const Landingpage = () => {
         }
       }, [landingMovies]);
 
+
     return (
-        <div      style={{
+        <div style={{
             backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdroppath})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '100vh',
             opacity:'0.9',
 
-          }} >
-           
-            
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
 
-          <ul>
-            <GetMovies
+          }} >
+        <GetMovies
                 sort_by={'popularity.desc'}
                 page={1}
                 //no need to track pageamount on landing page so empty lamda
@@ -40,25 +46,8 @@ const Landingpage = () => {
                 updateMoviesData={updateLandingMovies}
                 genres={[]}
             />
-
-            {/* <img className='backdrop' src={`https://image.tmdb.org/t/p/original/${backdroppath}`} /> */}
-
-            {landingMovies.length > 0 ? (
-            //Get only first 5 movies
-              landingMovies.slice(0,5).map((movie,index) => (
-                <li key={movie.id}>
-                    
-                    {movie.title}
-
-                    {/* <img className='backdrop' src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} /> */}
-                    
-                    </li>
-              ))
-            
-            ) : (
-              <p>Waiting for movies...</p>
-            )}
-          </ul>
+        <CarouselExample movies={landingMovies}/>
+        
 
 
         </div>
