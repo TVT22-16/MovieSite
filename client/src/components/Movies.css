@@ -97,8 +97,8 @@ h1{
 }
 
 .movieCard:hover{
-    scale: 1.05;
-    opacity: 0.80;
+    scale: 1.02;
+    /* opacity: 0.80; */
 }
 
 @media (max-width: 400px) {

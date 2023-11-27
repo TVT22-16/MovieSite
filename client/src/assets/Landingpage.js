@@ -22,10 +22,12 @@ const Landingpage = () => {
 
     return (
         <div      style={{
-            // backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdroppath})`,
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdroppath})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '100vh',
+            opacity:'0.9',
+
           }} >
            
            <BasicExample/>
