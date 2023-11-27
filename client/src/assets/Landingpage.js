@@ -42,7 +42,11 @@ const Landingpage = () => {
                 updateMoviesData={updateLandingMovies}
                 genres={[]}
             />
-        <CarouselBS movies={landingMovies}/>
+
+        {landingMovies.length > 0 && (
+            <CarouselBS movies={landingMovies}/>
+        )}
+
         
 
 
