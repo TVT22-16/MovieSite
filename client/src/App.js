@@ -11,6 +11,7 @@ import MovieInfo from './components/MovieInfo';
 import Users from './assets/Userlist';
 import Groups from './assets/Groups';
 import GroupDetail from './components/GroupDetail';
+import Landingpage from './assets/Landingpage';
 
 
 
@@ -26,6 +27,7 @@ function App() {
 
             {/* Routing */}
 
+            <Route path="/" element={<Landingpage />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Signup />} />
