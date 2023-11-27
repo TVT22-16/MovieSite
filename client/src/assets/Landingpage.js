@@ -8,17 +8,21 @@ const Landingpage = () => {
 
     const [backdroppath, setBackdroppath] = useState('');
 
+    const updateBackdrop = (p) => {
+        setBackdroppath(p);
+    }
+
     const updateLandingMovies = (movies) => {
         console.log(movies);
         setLandingMovies(movies);
     }
      
-    useEffect(() => {
-        if (landingMovies.length > 0) {
-          // Set the backdrop path for the first movie
-          setBackdroppath(landingMovies[0].backdrop_path);
-        }
-      }, [landingMovies]);
+    // useEffect(() => {
+    //     if (landingMovies.length > 0) {
+    //       // Set the backdrop path for the first movie
+    //       setBackdroppath(landingMovies[0].backdrop_path);
+    //     }
+    //   }, [landingMovies]);
 
 
     return (
@@ -44,7 +48,7 @@ const Landingpage = () => {
             />
 
         {landingMovies.length > 0 && (
-            <CarouselBS movies={landingMovies}/>
+            <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop}/>
         )}
 
         
