@@ -1,20 +1,18 @@
+import { CardFooter, CardSubtitle } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-function bootstrapCard() {
+function BootstrapCard({img,title,voteaverage,release}) {
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+      <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${img}`} />
+      <Card.Body className="text-center">
+        <Card.Title>{title}</Card.Title>
+        {/* <CardSubtitle>{voteaverage}</CardSubtitle> */}
+        <CardSubtitle>{release}</CardSubtitle>
       </Card.Body>
     </Card>
   );
 }
 
-export default bootstrapCard;
+export default BootstrapCard;
