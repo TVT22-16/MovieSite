@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import GetMovies from '../components/GetMoviesUpgraded';
+import BasicExample from '../components/Widget';
 
 const Landingpage = () => {
 
@@ -21,13 +22,15 @@ const Landingpage = () => {
 
     return (
         <div      style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdroppath})`,
+            // backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdroppath})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            minHeight: '100vh', // Set a minimum height to cover the entire viewport
+            minHeight: '100vh',
           }} >
-            {/* style={{ backgroundImage:`https://image.tmdb.org/t/p/original/${backdroppath}`}} */}
-    
+           
+           <BasicExample/>
+
+
           <ul>
             <GetMovies
                 sort_by={'popularity.desc'}

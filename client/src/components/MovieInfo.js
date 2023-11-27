@@ -70,9 +70,8 @@ const MovieInfo = () => {
         backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        minHeight: '100vh', // Set a minimum height to cover the entire viewport
-      }}
-      >
+        minHeight: '100vh', 
+      }}>
 
       <div id='titleVoteContainer'>
 
