@@ -4,7 +4,7 @@ const upload = multer({dest: 'upload/'});
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const {addUserGroup,getUserGroup,getGroupMembers,updateUserGroup,deleteUserGroup} = require('../models/users_groups_model');
+const {addUserGroup,getUserGroup,getGroupMembers,updateUserGroup,deleteUserGroup,getReviewsForGroup} = require('../models/users_groups_model');
 
 //get users_groups
 router.get('/', async (req, res) => {
@@ -41,6 +41,16 @@ router.post('/', upload.none() , async (req,res) => {
         console.log(error);
         res.json({error: error.message}).status(500);
     }   
+});
+router.get('/reviewforgroup/:group_name', async (req, res) => {
+    const group_name = req.params.group_name; // Extract group_name from request parameters
+    try {
+        const users = await getReviewsForGroup(group_name); // Pass group_name to the function
+        res.json(users);
+    } catch (error) {
+        console.error("Error fetching users:", error);S
+        res.status(500).json({ error: "Error fetching users" });
+    }
 });
 
 module.exports = router;
