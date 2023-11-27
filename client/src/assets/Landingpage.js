@@ -5,20 +5,28 @@ const Landingpage = () => {
 
     const [landingMovies, setLandingMovies] = useState([]);
 
-    const [movieIndex,setMovieIndex] = useState(0)
+    const [backdroppath, setBackdroppath] = useState('');
 
     const updateLandingMovies = (movies) => {
         console.log(movies);
         setLandingMovies(movies);
     }
      
-    // const updateMovieIndex = () => {
-    //     setMovieIndex(movieIndex+1);
-    // }
+    useEffect(() => {
+        if (landingMovies.length > 0) {
+          // Set the backdrop path for the first movie
+          setBackdroppath(landingMovies[0].backdrop_path);
+        }
+      }, [landingMovies]);
 
     return (
-        <div>
-          <h2>Landing Page Movies</h2>
+        <div      style={{
+            backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdroppath})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            minHeight: '100vh', // Set a minimum height to cover the entire viewport
+          }} >
+            {/* style={{ backgroundImage:`https://image.tmdb.org/t/p/original/${backdroppath}`}} */}
     
           <ul>
             <GetMovies
@@ -30,17 +38,25 @@ const Landingpage = () => {
                 genres={[]}
             />
 
-        
+            {/* <img className='backdrop' src={`https://image.tmdb.org/t/p/original/${backdroppath}`} /> */}
+
             {landingMovies.length > 0 ? (
             //Get only first 5 movies
-              landingMovies.slice(0,5).map((movie) => (
-                <li key={movie.id}>{movie.title}</li>
+              landingMovies.slice(0,5).map((movie,index) => (
+                <li key={movie.id}>
+                    
+                    {movie.title}
+
+                    {/* <img className='backdrop' src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} /> */}
+                    
+                    </li>
               ))
             
             ) : (
               <p>Waiting for movies...</p>
             )}
           </ul>
+
 
         </div>
       );

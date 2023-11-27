@@ -34,6 +34,18 @@ const MovieInfo = () => {
   }, [params]); //prevent endless loop caused by useEffect and useState (only do this if params changes)
   
 
+
+  //backdrop image handling
+  const [backdrop, setBackdrop] = useState('');
+  useEffect(() => {
+      // Set the backdrop path for the first movie
+      setBackdrop(movieData.backdrop_path);
+      console.log('backdrop is', backdrop)
+  }, [movieData]);
+
+
+
+
   //Fetch user reviews
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +65,14 @@ const MovieInfo = () => {
 
 
   return (
-      <div id='pageContainer'>
+      <div id='pageContainer'
+      style={{
+        backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh', // Set a minimum height to cover the entire viewport
+      }}
+      >
 
       <div id='titleVoteContainer'>
 
@@ -69,7 +88,7 @@ const MovieInfo = () => {
           <GetTrailers id={movieData.id} />
 
           <ul id='infoContainer'>
-                <li id='tagline'>"{movieData.tagline}"</li>
+                <li id='tagline'>{movieData.tagline}</li>
                 <li id='overview'>{movieData.overview}</li>
                 {/* <li id='status'>Status: {movieData.status}</li> */}
                 {/* <li >{movieData.genres}</li> */}
