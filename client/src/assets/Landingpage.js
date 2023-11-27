@@ -17,12 +17,12 @@ const Landingpage = () => {
         setLandingMovies(movies);
     }
      
-    // useEffect(() => {
-    //     if (landingMovies.length > 0) {
-    //       // Set the backdrop path for the first movie
-    //       setBackdroppath(landingMovies[0].backdrop_path);
-    //     }
-    //   }, [landingMovies]);
+    useEffect(() => {
+        if (landingMovies.length > 0) {
+          // Set the backdrop path for the first movie
+          setBackdroppath(landingMovies[0].backdrop_path);
+        }
+      }, [landingMovies]);
 
 
     return (
@@ -34,8 +34,9 @@ const Landingpage = () => {
             opacity:'0.9',
 
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
+            flexDirection: 'row',
+            transition: 'background-image 0.5s ease-in-out',
+
 
           }} >
         <GetMovies
