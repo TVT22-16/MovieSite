@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 function BootstrapCard({img,title,voteaverage,release}) {
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card>
       <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${img}`} />
       <Card.Body className="text-center">
         <Card.Title>{title}</Card.Title>

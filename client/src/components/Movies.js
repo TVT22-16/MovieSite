@@ -147,6 +147,8 @@ const Movies = () => {
           </>
         )}
       </ul>
+      
+      {page}
 
       <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
     </div>

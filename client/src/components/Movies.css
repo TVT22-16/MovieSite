@@ -49,6 +49,8 @@
     padding-top: 2%;
 
     margin: auto auto;
+
+    overflow-y: hidden;
 }
 
 
