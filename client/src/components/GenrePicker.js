@@ -71,7 +71,7 @@ const GenrePicker = ({updateGenres}) => {
   return (
     <div>
       <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
+        <Dropdown.Toggle variant="primary" id="dropdown-basic">
           Genres
         </Dropdown.Toggle>
 

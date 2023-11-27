@@ -16,7 +16,7 @@ const DropdownComponent = ({updateSort}) => {
 
   return (
   <Dropdown>
-    <Dropdown.Toggle variant="success" id="dropdown-basic">
+    <Dropdown.Toggle variant="primary" id="dropdown-basic">
         {sortTag}
     </Dropdown.Toggle>
 
