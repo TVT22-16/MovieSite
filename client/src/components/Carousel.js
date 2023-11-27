@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Carousel, CarouselItem } from 'react-bootstrap';
+import { Carousel } from 'react-bootstrap';
 
-const CarouselExample = ({ movies }) => {
+const CarouselBS = ({ movies }) => {
+  console.log('Movies index 0: ', movies[0]);
 
   const [slicedMovies, setSlicedMovies] = useState(movies.slice(0, 5));
 
   return (
-    <Carousel>
+    <Carousel fade={false} interval={null}>
       {slicedMovies.map((movie, index) => (
         <Carousel.Item key={index}>
           <img
@@ -25,4 +26,4 @@ const CarouselExample = ({ movies }) => {
   );
 };
 
-export default CarouselExample;
+export default CarouselBS;

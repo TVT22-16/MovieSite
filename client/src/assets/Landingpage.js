@@ -1,10 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import GetMovies from '../components/GetMoviesUpgraded';
-import BootstrapCard from '../components/BootstrapCardMovie';
-import Card from 'react-bootstrap/Card';
-import { CardBody } from 'react-bootstrap';
-import MinimWidget from '../components/MinimizableWidget';
-import CarouselExample from '../components/Carousel';
+import CarouselBS from '../components/Carousel';
 
 const Landingpage = () => {
 
@@ -46,7 +42,7 @@ const Landingpage = () => {
                 updateMoviesData={updateLandingMovies}
                 genres={[]}
             />
-        <CarouselExample movies={landingMovies}/>
+        <CarouselBS movies={landingMovies}/>
         
 
 
