@@ -37,6 +37,7 @@ const Landingpage = () => {
 
             display: 'flex',
             flexDirection: 'column',
+            alignItems: 'center',
             transition: 'background-image 0.5s ease-in-out'}} >
 
         <GetMovies

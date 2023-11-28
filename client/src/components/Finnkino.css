@@ -1,0 +1,10 @@
+
+
+.News{
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    overflow-y: scroll;
+    margin-bottom: 2%;
+}
