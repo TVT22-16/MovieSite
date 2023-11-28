@@ -9,10 +9,10 @@ const sql = {
     UPDATE_GROUP: 'UPDATE groups SET group_name = $1, group_description = $2 WHERE group_name = $1',
     DELETE_GROUP: 'DELETE FROM groups WHERE group_name = $1',
     GET_GROUPS_BY_USER: `
-    SELECT groups.*
-    FROM groups
-    INNER JOIN users_groups ON groups.group_name = users_groups.group_name
-    WHERE users_groups.username = $1;
+    SELECT groups.*, users_groups.admin AS is_group_admin
+FROM groups
+INNER JOIN users_groups ON groups.group_name = users_groups.group_name
+WHERE users_groups.username = $1;
   `,
 };
 
@@ -47,10 +47,10 @@ async function deleteGroup(group_name){
 async function getGroupsByUser(username) {
     const query = {
         text: `
-          SELECT groups.*
-          FROM groups
-          INNER JOIN users_groups ON groups.group_name = users_groups.group_name
-          WHERE users_groups.username = $1;
+        SELECT groups.*, users_groups.admin AS is_group_admin
+        FROM groups
+        INNER JOIN users_groups ON groups.group_name = users_groups.group_name
+        WHERE users_groups.username = $1;
         `,
         values: [username],
       };

@@ -1,3 +1,11 @@
 .custom-nav {
     margin-left: auto;
 }
+
+.dark-mode {
+    background-color: black; /* Dark background color for dark mode */
+    color: white; /* Light text color for dark mode */
+  }
+.dark-mode-text{
+    color: black;
+}

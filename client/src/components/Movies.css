@@ -3,31 +3,42 @@
 .searchCont{
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 10px;
+/*  
+    flex-wrap: nowrap; */
+    margin-top: 1%;
+    /* background-color: lightblue; */
 
-    float: right;
 }
 
-.searchBar,textarea{
-    border-radius: 10px;
+/* searchbar */
+.mr-sm-2{
+
 }
 
-#searchBtn{
-    border-radius: 10px;
+.pageComponent{
+    margin-left: 80%;
+    overflow-wrap: break-word;
+    scale: 85%;
 }
 
-/* input[type="text"], textarea {
+.searchForm{
+    /* gap: 10px; */
+    display: flex;
+    flex-direction: row;
 
-    background-color : black; 
-  
-  } */
+    margin: auto auto;
+
+}
+
+
 
 
 .listCont{
     /* display: flex;
     flex-direction:row; */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 
     overflow-x:hidden;
     /* overflow-y: scroll; */
@@ -36,28 +47,41 @@
     list-style: none;
 
     padding-top: 2%;
+
+    margin: auto auto;
+
+    overflow-y: hidden;
+
+    align-items: center;
 }
 
 
 .movieCard{
-    background-color: lightgrey;
+
     border-radius: 10px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5%;
+    padding: 4%;
 }
 
 .movieTitle{
     font-size: 120%;
     font-weight: 700;
+
+    /* //fill empty space */
+    flex-grow: 1;
+
 }
 
 .posterImg{
     /* height: 50% */
-    width: 75%;
+    width: 85%;
     border-radius: 10px;
+}
+
+.voteAverage{
 }
 
 h1{
@@ -71,12 +95,12 @@ h1{
     align-items: center;
     margin: auto auto;
 
-    overflow: hidden;
+    overflow-wrap: break-word;
 }
 
 .movieCard:hover{
-    scale: 1.05;
-    opacity: 0.80;
+    scale: 1.02;
+    /* opacity: 0.80; */
 }
 
 @media (max-width: 400px) {
@@ -91,6 +115,13 @@ h1{
         flex-direction:row; */
         display: grid;
         grid-template-columns: repeat(1, 1fr);
+        margin: auto auto;
+    }
+
+    .searchCont{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
     }
 
 }

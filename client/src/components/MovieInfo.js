@@ -3,6 +3,8 @@ import axios from 'axios';
 import './MovieInfo.css';
 import { useSearchParams } from 'react-router-dom'
 import ReviewForm from './ReviewForm';
+import GetTrailers from './GetTrailers';
+
 
 
 //https://webtips.dev/solutions/get-query-params-in-react
@@ -15,6 +17,8 @@ const MovieInfo = () => {
 
   const params = searchParams.get('id');
 
+
+  //Fetch moviedata by if from moviedatabase
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -30,6 +34,19 @@ const MovieInfo = () => {
   }, [params]); //prevent endless loop caused by useEffect and useState (only do this if params changes)
   
 
+
+  //backdrop image handling
+  const [backdrop, setBackdrop] = useState('');
+  useEffect(() => {
+      // Set the backdrop path for the first movie
+      setBackdrop(movieData.backdrop_path);
+      console.log('backdrop is', backdrop)
+  }, [movieData]);
+
+
+
+
+  //Fetch user reviews
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,32 +65,60 @@ const MovieInfo = () => {
 
 
   return (
-      <div id='movieInfoBody'>
-        <div class='infoContainer'>
-          <div class='imgTitleContainer'>
-            <h1 class='movieTitle'>{movieData.title} ({movieData.release_date})</h1>
-            <img className='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" />
-            <ul class='themoviedbInfo'>
-              <li>Moviedb votes: {movieData.vote_average}</li>
-             <br></br> <li>{movieData.overview}</li>
-            </ul>
-          </div>
+      <div id='pageContainer'
+      style={{
+        backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdrop})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh', 
+      }}>
 
-          
-        <ul class='reviewContainer'>
-        <ReviewForm/>
+      <div id='titleVoteContainer'>
 
+        <h1 id='movieTitle'>{movieData.title}</h1>
+        <h2 id='voteAverage'>{movieData.vote_average}</h2>
+
+      </div>
+
+        {/* <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" /> */}
+
+        <div id='trailerInfoContainer'>
+      
+          <GetTrailers id={movieData.id} />
+
+          <ul id='infoContainer'>
+                <li id='tagline'>{movieData.tagline}</li>
+                <li id='overview'>{movieData.overview}</li>
+                {/* <li id='status'>Status: {movieData.status}</li> */}
+                {/* <li >{movieData.genres}</li> */}
+                <li id='releaseDate'>Release date: {movieData.release_date}</li>
+          </ul>
+
+        </div>
+
+
+              
+        <ul id='reviewContainer'>
+          {/* pass the movieid to the review form */}
+        <ReviewForm moviedb_movieid={params}/>
           {/* foreach */}
           {reviews.map((review, index) => (
-            <li key={index} class='reviewItem'>
-              <p class='pUsername'> {review.username}  </p> 
-              <p class='pRating'>Rating: {review.rating}  </p> 
-              <p class='pReview'>{review.review}  </p> 
+            <li key={index} className='reviewItem'>
+              <p id='pUsername'> {review.username}  </p> 
+              <p id='pRating'>Rating: {review.rating}  </p> 
+              <p id='pReview'>{review.review}  </p> 
 
             </li>
           ))}
         </ul>
-        </div>
+
+
+      <div id='similarContainer'>
+                Similar Movies
+
+      </div>
+
+
       </div>
 
   )
