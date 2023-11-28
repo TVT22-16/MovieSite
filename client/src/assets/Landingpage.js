@@ -62,7 +62,7 @@ const Landingpage = () => {
 
             <div className='News' style={{
               width:'65%',
-              height: '550px',
+              height: '450px',
               overflowY: 'scroll',
               // marginLeft:'50%',
               float:'right',
