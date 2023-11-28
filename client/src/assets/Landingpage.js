@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import GetMovies from '../components/GetMoviesUpgraded';
 import CarouselBS from '../components/Carousel';
+import ToastContainerTest from '../components/ToastContainer';
 
 const Landingpage = () => {
 
@@ -60,7 +61,7 @@ const Landingpage = () => {
               )}
 
             <div className='News' style={{color:'white', backgroundColor:'grey'}}>
-              News from from finnkino News from from finnkino News from from finnkino
+              {/* News from from finnkino News from from finnkino News from from finnkino
               <br/>
               News from from finnkino News from from finnkino News from from finnkino
               <br/>
@@ -72,7 +73,8 @@ const Landingpage = () => {
               <br/>
               News from from finnkino News from from finnkino News from from finnkino
               <br/>
-              News from from finnkino News from from finnkino News from from finnkino
+              News from from finnkino News from from finnkino News from from finnkino */}
+              <ToastContainerTest/>
               </div>
         </div>
         
