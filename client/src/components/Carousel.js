@@ -36,7 +36,7 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
       fade={false}
       interval={null}
       onSelect={handleSelect}
-      style={{ maxWidth: '900px', margin: 'auto', opacity: fadeIn ? 1 : 0, transition: 'opacity 0.5s ease' }} // Adjust the max-width and margin
+      style={{opacity: fadeIn ? 1 : 0, transition: 'opacity 0.5s ease' }} // Adjust the max-width and margin
     >
       {slicedMovies.map((movie, index) => (
         <Carousel.Item key={index}>

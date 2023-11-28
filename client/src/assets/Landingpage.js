@@ -34,11 +34,9 @@ const Landingpage = () => {
             opacity:'0.9',
 
             display: 'flex',
-            flexDirection: 'row',
-            transition: 'background-image 0.5s ease-in-out',
+            flexDirection: 'column',
+            transition: 'background-image 0.5s ease-in-out'}} >
 
-
-          }} >
         <GetMovies
                 sort_by={'popularity.desc'}
                 page={1}
@@ -48,10 +46,35 @@ const Landingpage = () => {
                 genres={[]}
             />
 
-        {landingMovies.length > 0 && (
-            <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop}/>
-        )}
+        <div className='rowContainer' style={{
+          display:'flex',
+          flexDirection:'row',
+          alignItems: 'center',
+          marginLeft: '5%',
+          marginTop: '5%',
+          gap: '26px'
+          // margin: 'auto auto',
+        }}>
+            {landingMovies.length > 0 && (
+              <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
+              )}
 
+            <div className='News' style={{color:'white', backgroundColor:'grey'}}>
+              News from from finnkino News from from finnkino News from from finnkino
+              <br/>
+              News from from finnkino News from from finnkino News from from finnkino
+              <br/>
+              News from from finnkino News from from finnkino News from from finnkino
+              <br/>
+              News from from finnkino News from from finnkino News from from finnkino
+              <br/>
+              News from from finnkino News from from finnkino News from from finnkino
+              <br/>
+              News from from finnkino News from from finnkino News from from finnkino
+              <br/>
+              News from from finnkino News from from finnkino News from from finnkino
+              </div>
+        </div>
         
 
 
