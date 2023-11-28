@@ -6,6 +6,7 @@ import DropdownComponent from './Dropdown.js';
 import PaginationComponent from './Pagination.js';
 import GetMovies from './GetMoviesUpgraded.js';
 import GenrePicker from './GenrePicker.js';
+import BootstrapCard from './BootstrapCardMovie.js';
 
 
 
@@ -47,16 +48,14 @@ const Movies = () => {
     setPage(p);
   }
 
-
   const [searchTerm, setSearchTerm] = useState('');
 
 
   const updateSearchTerm = (searchInput) =>{
     setSearchTerm(searchInput);
+    setPage(1);
 
   }
-
-
 
   const [moviesData, setMoviesData] = useState([])
 
@@ -75,6 +74,7 @@ const Movies = () => {
   const [genres,setGenres] = useState([]);
 
   const updateGenres = (genreState) => {
+    setPage(1);
     setGenres(genreState);
   }
    
@@ -110,17 +110,13 @@ const Movies = () => {
 
       {page}
 
-
       <ul className='listCont'>
         
         {searchResults.length > 0 ? (
           // Render search results if available
           searchResults.map(movie => (
-            <li className='movieCard' key={movie.id}>
-              <h3 className='movieTitle'>{movie.title}</h3>
-              <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)} />
-              <h3 className='voteAverage'>{movie.vote_average}</h3>
-              <h5>Votes: {movie.vote_count}</h5>
+            <li className='movieCard' key={movie.id} onClick={() => openInfo(movie.id)} >
+              <BootstrapCard movie={movie} cardWidth = '14rem'></BootstrapCard>
 
             </li>
           ))
@@ -134,18 +130,17 @@ const Movies = () => {
 
             {/* display moviedata */}
             {moviesData.map(movie => (
-            <li className='movieCard' key={movie.id}>
-              <h3 className='movieTitle'>{movie.title}</h3>
-              {/* To delay the execution of openInfo(movie.id) until the image is clicked, you need to wrap it in an arrow function: */}
-              <img className='posterImg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="Movie Poster" onClick={() => openInfo(movie.id)}/>
-              <h3 className='voteAverage'>{movie.vote_average}</h3>
-              <h5>Votes: {movie.vote_count}</h5>
+            <li className='movieCard' key={movie.id} onClick={() => openInfo(movie.id)} >
+               <BootstrapCard movie={movie} cardWidth = '14rem'></BootstrapCard>
+
 
             </li>
             )) }
           </>
         )}
       </ul>
+
+      {page}
 
       <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
     </div>

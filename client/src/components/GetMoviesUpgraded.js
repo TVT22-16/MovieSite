@@ -24,7 +24,7 @@ const GetMovies = ({sort_by,page,updatePageAmount,updateMoviesData, genres}) => 
             console.log(error);
         });
         
-    },[page,sort_by,genres]);
+    },[page,genresParam,sort_by]);
 
 
     return null;
