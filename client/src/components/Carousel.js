@@ -34,19 +34,20 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
   return (
     <Carousel
       fade={false}
-      interval={5000}
+      interval={8000}
       onSelect={handleSelect}
-      style={{opacity: fadeIn ? 1 : 0, transition: 'opacity 0.5s ease' }} 
+      style={{width:'20%',opacity: fadeIn ? 1 : 0, transition: 'opacity 0.5s ease' }} 
     >
       {slicedMovies.map((movie, index) => (
         <Carousel.Item key={index}>
           <img
             className="d-block w-100 carousel-image"
-            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} 
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
             alt={`Slide ${index}`}
             style={{
-              maxHeight: '300px',
-              objectFit: 'cover', }}
+              maxWidth: '100%',
+              objectFit: 'cover',
+             }}
             onClick={() => openInfo(movie.id)}
           />
 

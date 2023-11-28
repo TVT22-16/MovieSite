@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { parseString } from 'xml2js';
-import './Finnkino.css'
 
 const FinnkinoFetch = () => {
   const url = 'https://www.finnkino.fi/xml/News/';
@@ -23,7 +22,6 @@ const FinnkinoFetch = () => {
 
           // Extract and set the relevant data
           setNews(result.News.NewsArticle);
-          console.log(result.News.NewsArticle);
         });
       })
       .catch(function (error) {
@@ -32,10 +30,10 @@ const FinnkinoFetch = () => {
   }, []);
 
   return (
-    <div style={{width:'80%', marginRight:'20%'}}>
+    <div className='wutwut' style={{width:'90%', margin: '5px auto'}}>
       {news ? (
         <div>
-          {/* Render the extracted data */}
+
           {news.map((article, index) => (
             article.Title.includes("Leffauutiset") && (
               <div key={index}>
