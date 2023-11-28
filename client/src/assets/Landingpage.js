@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react'
 import GetMovies from '../components/GetMoviesUpgraded';
 import CarouselBS from '../components/Carousel';
 import ToastContainerTest from '../components/ToastContainer';
+import FinnkinoFetch from '../components/FinnkinoFetch';
 
 const Landingpage = () => {
 
@@ -49,7 +50,7 @@ const Landingpage = () => {
 
         <div className='rowContainer' style={{
           display:'flex',
-          flexDirection:'row',
+          flexDirection:'column',
           alignItems: 'center',
           marginLeft: '5%',
           marginTop: '5%',
@@ -74,7 +75,8 @@ const Landingpage = () => {
               News from from finnkino News from from finnkino News from from finnkino
               <br/>
               News from from finnkino News from from finnkino News from from finnkino */}
-              <ToastContainerTest/>
+              {/* <ToastContainerTest/> */}
+              <FinnkinoFetch></FinnkinoFetch>
               </div>
         </div>
         
