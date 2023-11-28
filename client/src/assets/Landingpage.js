@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react'
 import GetMovies from '../components/GetMoviesUpgraded';
 import CarouselBS from '../components/Carousel';
 import ToastContainerTest from '../components/ToastContainer';
+import FinnkinoFetch from '../components/FinnkinoFetch';
 
 const Landingpage = () => {
 
@@ -14,7 +15,6 @@ const Landingpage = () => {
     }
 
     const updateLandingMovies = (movies) => {
-        console.log(movies);
         setLandingMovies(movies);
     }
      
@@ -36,6 +36,7 @@ const Landingpage = () => {
 
             display: 'flex',
             flexDirection: 'column',
+            alignItems: 'center',
             transition: 'background-image 0.5s ease-in-out'}} >
 
         <GetMovies
@@ -52,30 +53,27 @@ const Landingpage = () => {
           flexDirection:'row',
           alignItems: 'center',
           marginLeft: '5%',
-          marginTop: '5%',
-          gap: '26px'
+          gap: '10%'
           // margin: 'auto auto',
         }}>
             {landingMovies.length > 0 && (
               <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
               )}
 
-            <div className='News' style={{color:'white', backgroundColor:'grey'}}>
-              {/* News from from finnkino News from from finnkino News from from finnkino
-              <br/>
-              News from from finnkino News from from finnkino News from from finnkino
-              <br/>
-              News from from finnkino News from from finnkino News from from finnkino
-              <br/>
-              News from from finnkino News from from finnkino News from from finnkino
-              <br/>
-              News from from finnkino News from from finnkino News from from finnkino
-              <br/>
-              News from from finnkino News from from finnkino News from from finnkino
-              <br/>
-              News from from finnkino News from from finnkino News from from finnkino */}
-              <ToastContainerTest/>
+            <div className='News' style={{
+              width:'65%',
+              height: '450px',
+              overflowY: 'scroll',
+              // marginLeft:'50%',
+              float:'right',
+              marginTop: '50px',
+              backgroundColor: 'white',
+              opacity: '0.7',
+              borderRadius: '10px',
+              marginBottom: '50px'}}>
+              <FinnkinoFetch></FinnkinoFetch>
               </div>
+
         </div>
         
 

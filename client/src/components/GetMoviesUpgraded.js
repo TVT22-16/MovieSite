@@ -11,7 +11,7 @@ const GetMovies = ({sort_by,page,updatePageAmount,updateMoviesData, genres}) => 
 
 
     // const [movies, setMovies] = useState([]);
-    console.log(`http://localhost:3001/movies/getMovies?page=${page}&sort_by=${sort_by}&with_genres=${genresParam}`);
+
 
     useEffect(() => {
 
