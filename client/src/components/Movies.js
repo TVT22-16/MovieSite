@@ -116,7 +116,7 @@ const Movies = () => {
           // Render search results if available
           searchResults.map(movie => (
             <li className='movieCard' key={movie.id} onClick={() => openInfo(movie.id)} >
-              <BootstrapCard movie={movie}></BootstrapCard>
+              <BootstrapCard movie={movie} cardWidth = '14rem'></BootstrapCard>
 
             </li>
           ))
@@ -131,7 +131,7 @@ const Movies = () => {
             {/* display moviedata */}
             {moviesData.map(movie => (
             <li className='movieCard' key={movie.id} onClick={() => openInfo(movie.id)} >
-               <BootstrapCard movie={movie}></BootstrapCard>
+               <BootstrapCard movie={movie} cardWidth = '14rem'></BootstrapCard>
 
 
             </li>
