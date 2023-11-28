@@ -5,16 +5,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import './Header.css'; // Import the CSS file
 import ThemeSwitcher from './ThemeSwitcher';
-import { Routes, Route } from 'react-router-dom';
 
-import Login from '../assets/Login';
-import Signup from '../assets/Signup';
-import Home from '../assets/Home';
-import Userlist from '../assets/Userlist';
 import { jwtToken, usernameSignal } from '../assets/Signals';
 
 const Header = ({ loggedIn }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  console.log('jwttoken'+jwtToken);
 
   useEffect(() => {
     // Retrieve the theme preference from local storage or any other source
@@ -63,15 +60,29 @@ const Header = ({ loggedIn }) => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="custom-nav">
-              <Nav.Link href="/home">Movies</Nav.Link>
-              <Nav.Link href="/reviews">Reviews</Nav.Link>
-              <Nav.Link href="/groups">Groups</Nav.Link>
-              <NavDropdown title={username} id="basic-nav-dropdown">
-                <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-              </NavDropdown>
+
+            {jwtToken.value.length > 0 ? (
+              <>
+                <Nav.Link href="/home">Movies</Nav.Link>
+                <Nav.Link href="/reviews">Reviews</Nav.Link>
+                <Nav.Link href="/groups">Groups</Nav.Link>
+                <NavDropdown title={username} id="basic-nav-dropdown">
+                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+                  <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              <>
+                <Nav.Link href="/home">Movies</Nav.Link>
+                <Nav.Link href="/reviews">Reviews</Nav.Link>
+                <Nav.Link href="/groups">Groups</Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
+
+
+              </>
+            )}
             </Nav>
             <ThemeSwitcher toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
           </Navbar.Collapse>
