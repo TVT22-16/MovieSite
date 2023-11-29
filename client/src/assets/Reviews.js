@@ -53,15 +53,16 @@ const Reviews = () => {
   }
 
   const handleDelete = async (id) => {
-    axios.delete('http://localhost:3001/reviews/delete', {
-      params: { review_id: id },
-    })
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error('Error deleting review:', error);
-    });
+    // axios.delete('http://localhost:3001/reviews/delete', {
+    //   params: { review_id: id },
+    // })
+    // .then(response => {
+    //   console.log(response.data);
+    // })
+    // .catch(error => {
+    //   console.error('Error deleting review:', error);
+    // });
+    await DeleteReview(id);
   }
 
   return (
@@ -129,21 +130,17 @@ const Reviews = () => {
 };
 
 
-// const DeleteReview = (id) => {
-//   console.log('Delete review with id:', id);
+const DeleteReview = (id) => {
 
-//   axios.delete('http://localhost:3001/reviews/delete', {
-//     params: { review_id: id },
-//   })
-//   .then(response => {
-//     console.log(response.data);
-//   })
-//   .catch(error => {
-//     console.error('Error deleting review:', error);
-//   });
+  axios.delete(`http://localhost:3001/reviews/delete/${id}`)
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error('Error deleting review:', error);
+    });
 
-//   return null;
-// }
- 
+  return null;
+}
 
 export default Reviews;
