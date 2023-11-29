@@ -12,6 +12,7 @@ import Users from './assets/Userlist';
 import Groups from './assets/Groups';
 import GroupDetail from './components/GroupDetail';
 import Landingpage from './assets/Landingpage';
+import Profile from './assets/Profile';
 
 
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/groups" element={<Groups />} />
             <Route path="/movieinfo/" element={<MovieInfo/>}/>
             <Route path="/groups/:group_name" element={<GroupDetail />} />
+            <Route path="/profile" element={<Profile/>} />
 
           </Routes>
         </main>
