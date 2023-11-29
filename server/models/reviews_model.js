@@ -36,12 +36,17 @@ async function addReview(username, review, rating, moviedb_movieid) {
     }
 }
 
-async function deleteReview(review_id){
-  try{
-    const result = await pgPool.query(sql.DELETE_REVIEW,[review_id]);
-    console.log(`Review with id=${review_id} was deleted`);
-  } catch (error){
-    console.error(error);
+async function deleteReview(review_id) {
+  try {
+    const result = await pgPool.query(sql.DELETE_REVIEW, [review_id]);
+
+    if (result.rowCount > 0) {
+      return `Review with id=${review_id} was deleted`;
+    } else {
+      throw new Error(`Review with id=${review_id} not found`);
+    }
+  } catch (error) {
+    return error.message || 'An error occurred while deleting the review';
   }
 }
 

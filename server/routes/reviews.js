@@ -76,9 +76,9 @@ router.post('/add', upload.none() , async (req,res) => {
 //delete review by id
 router.delete('/delete', async(req,res) => {
     const review_id = req.body.review_id;
-
+    
     try{
-        await deleteReview(review_id);
+        res.json(await deleteReview(review_id));
         res.end();
     } catch (error){
         console.log(error);

@@ -52,6 +52,17 @@ const Reviews = () => {
     setReviewsUrl(link)
   }
 
+  const handleDelete = async (id) => {
+    axios.delete('http://localhost:3001/reviews/delete', {
+      params: { review_id: id },
+    })
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error('Error deleting review:', error);
+    });
+  }
 
   return (
 
@@ -96,7 +107,7 @@ const Reviews = () => {
 
 
             {reviews[index].username === username && (
-              <Button style={{margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
+              <Button onClick={() => handleDelete(reviews[index].review_id)} style={{margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
                 Delete
               </Button>)}
 
@@ -119,10 +130,17 @@ const Reviews = () => {
 
 
 // const DeleteReview = (id) => {
+//   console.log('Delete review with id:', id);
 
-
-  
-
+//   axios.delete('http://localhost:3001/reviews/delete', {
+//     params: { review_id: id },
+//   })
+//   .then(response => {
+//     console.log(response.data);
+//   })
+//   .catch(error => {
+//     console.error('Error deleting review:', error);
+//   });
 
 //   return null;
 // }
