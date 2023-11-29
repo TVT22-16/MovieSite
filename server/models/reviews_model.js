@@ -12,19 +12,19 @@ const sql = {
 async function getReviews(){
     const result = await pgPool.query(sql.GET_REVIEWS);
     const rows = result.rows;
-    return rows;
+    return rows.reverse();
 }
 
 async function getReviewsUser(username){
   const result = await pgPool.query(sql.GET_REVIEWS_USER,[username]);
   const rows = result.rows;
-  return rows;
+  return rows.reverse();
 }
 
 async function getReviewsMovieId(moviedb_movieid){
   const result = await pgPool.query(sql.GET_REVIEWS_MOVIEDB_MOVIEID,[moviedb_movieid]);
   const rows = result.rows;
-  return rows;
+  return rows.reverse();
 }
 
 async function addReview(username, review, rating, moviedb_movieid) {
