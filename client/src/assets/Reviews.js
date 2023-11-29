@@ -8,11 +8,11 @@ import Spinner from 'react-bootstrap/Spinner';
 const movieByIdURL = 'http://localhost:3001/movies/id';
 
 const Reviews = () => {
-  const [getReviewsUrl, setReviewsUrl] = useState('http://localhost:3001/reviews');
+  const [username, setUsername] = useState(sessionStorage.getItem('username'));
+  const [getReviewsUrl, setReviewsUrl] = useState(`http://localhost:3001/reviews/user/${username}`);
   const [reviews, setReviews] = useState([]);
   const [reviewsWData, setReviewsWData] = useState([]);
 
-  const [username, setUsername] = useState(sessionStorage.getItem('username'));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +67,7 @@ const Reviews = () => {
       <Dropdown.Item onClick={() => updateGetReviewsUrl('http://localhost:3001/reviews')}>Reviews</Dropdown.Item>
       {/* <Dropdown.Item onClick={() => handleSortChange('popularity.asc')}>Popularity (ascending)</Dropdown.Item> */}
 
-      <Dropdown.Item onClick={() => updateGetReviewsUrl('http://localhost:3001/reviews/user/Roope')}>Your reviews</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateGetReviewsUrl(`http://localhost:3001/reviews/user/${username}`)}>Your reviews</Dropdown.Item>
       {/* <Dropdown.Item onClick={() => handleSortChange('vote_average.asc')}>Vote Average (ascending)</Dropdown.Item> */}
 
 
@@ -81,7 +81,7 @@ const Reviews = () => {
 
           <Card key={index} style={{ display: 'flex', flexDirection: 'row', width: '60%', height: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
 
-          <Card.Img style={{ maxHeight: '90%', height: '200px', width: 'auto', padding: '15px', borderRadius: '20px' }} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`} />
+          <Card.Img style={{ maxHeight: '90%', height: '200px', width: 'auto', margin:'12px' ,padding: '0px', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`} />
 
           <Card.Body style={{ width: '100%', height: '100%', flexGrow: '1', gap: '10px', display: 'flex', flexDirection: 'column' }}>
             <Card.Title style={{fontWeight:'700', fontSize: '1.2rem', marginBottom: '5px' }}>{fd.title} ({reviews[index].rating})</Card.Title>
@@ -96,7 +96,7 @@ const Reviews = () => {
 
 
             {reviews[index].username === username && (
-              <Button style={{ margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
+              <Button style={{margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
                 Delete
               </Button>)}
 
@@ -116,5 +116,16 @@ const Reviews = () => {
     </div>
   );
 };
+
+
+// const DeleteReview = (id) => {
+
+
+  
+
+
+//   return null;
+// }
+ 
 
 export default Reviews;
