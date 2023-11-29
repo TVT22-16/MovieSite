@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Crown from './images/crown.png';
 
 function GroupDetail() {
     const { group_name } = useParams();
@@ -68,7 +69,7 @@ function GroupDetail() {
             <ul>
               {reviews.map((review, index) => (
                 <li key={index}>
-                  <strong>{review.username}</strong> - <strong>{movies[index]?.original_title}</strong> - {review.review} ({review.movieid})
+                  <strong>{review.username}</strong> - <strong>{movies[index]?.original_title}</strong> - {review.review}
                 </li>
               ))}
             </ul>
@@ -79,14 +80,15 @@ function GroupDetail() {
             <h3>Group Members</h3>
             <ul>
               {usernames.map((user, index) => (
-                <li key={index}>
-                  <strong>{user.username}</strong> - {user.admin ? 'Admin' : 'Member'}
-                </li>
+            <li key={index}>
+                <strong>{user.username}</strong> - {user.admin ? 'Admin' : 'Member'}
+                {user.admin && <img src={ Crown } alt="Crown" style={{ width: '25px', height: '25px', marginLeft: '2px', marginTop: '-6px'}} />}
+            </li>
               ))}
             </ul>
           </div>
         </div>
-      );            
+      );
 }      
   export default GroupDetail;
   
