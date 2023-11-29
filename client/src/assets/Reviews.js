@@ -12,6 +12,8 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [reviewsWData, setReviewsWData] = useState([]);
 
+  const [username, setUsername] = useState(sessionStorage.getItem('username'));
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,6 +54,7 @@ const Reviews = () => {
 
 
   return (
+
     <div style={{display:'flex',flexDirection:'column',alignItems:'center', width:'100%',height:'auto', margin:'auto auto', gap:'20px'}}>
 
     <Dropdown style={{marginRight: '20%', marginTop:'10px', marginLeft:'auto'}}>
@@ -89,13 +92,17 @@ const Reviews = () => {
                 </Card.Text>
               )}
 
-
-
             <CardFooter>{reviews[index].username}</CardFooter>
-            <Button style={{ margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
-              Delete
-            </Button>{' '}
+
+
+            {reviews[index].username === username && (
+              <Button style={{ margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
+                Delete
+              </Button>)}
+
+
           </Card.Body>
+
           </Card>
 
 
