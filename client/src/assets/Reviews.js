@@ -14,6 +14,14 @@ const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [reviewsWData, setReviewsWData] = useState([]);
 
+  const [filterState, setFilterState] = useState('Your Reviews');
+
+  const updateFilterState = (state) => {
+    setFilterState(state);
+  }
+   
+
+
 
   const fetchData = async () => {
     try {
@@ -51,7 +59,8 @@ const Reviews = () => {
 
 
 
-  const updateGetReviewsUrl = (link) => {
+  const updateGetReviewsUrl = (link,state) => {
+    updateFilterState(state);
     setReviewsUrl(link)
     
   }
@@ -67,15 +76,15 @@ const Reviews = () => {
 
     <Dropdown style={{marginRight: '20%', marginTop:'10px', marginLeft:'auto'}}>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
-        Filter
+        {filterState}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
 
-      <Dropdown.Item onClick={() => updateGetReviewsUrl('http://localhost:3001/reviews')}>Reviews</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateGetReviewsUrl('http://localhost:3001/reviews','All reviews')}>All Reviews</Dropdown.Item>
       {/* <Dropdown.Item onClick={() => handleSortChange('popularity.asc')}>Popularity (ascending)</Dropdown.Item> */}
 
-      <Dropdown.Item onClick={() => updateGetReviewsUrl(`http://localhost:3001/reviews/user/${username}`)}>Your reviews</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateGetReviewsUrl(`http://localhost:3001/reviews/user/${username}`,'Your reviews')}>Your reviews</Dropdown.Item>
       {/* <Dropdown.Item onClick={() => handleSortChange('vote_average.asc')}>Vote Average (ascending)</Dropdown.Item> */}
 
 
