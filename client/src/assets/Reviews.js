@@ -95,20 +95,18 @@ const Reviews = () => {
     {((reviewsWData.length > 0 && reviews.length > 0) ? (
         <>
           {reviewsWData.map((fd, index) => (
-            <div key={index} style={{    
-              display: 'grid',
-              gridTemplateColumns:'repeat(4, 1fr)'}}>
+            <div key={index} style={{ }}>
 
-              <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`} />
+              <Card style={{display:'flex',flexDirection:'row'}}>
+                <Card.Img style={{height: '2%'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`} />
                 <Card.Body>
-                  <Card.Title>{fd.title} - {reviews[index].rating}</Card.Title>
+                    <Card.Title>{fd.title} - {reviews[index].rating}</Card.Title>
 
-                  <Card.Text>
-                    {reviews[index].review}
-                  </Card.Text>
+                    <Card.Text>
+                      {reviews[index].review}
+                    </Card.Text>
 
-                  <CardFooter>{reviews[index].username}</CardFooter>
+                    <CardFooter>{reviews[index].username}</CardFooter>
                 </Card.Body>
               </Card>
             </div>
