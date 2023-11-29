@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Card, CardFooter, Ratio } from 'react-bootstrap';
 import { Dropdown, Button} from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
+import DeleteReview from '../components/DeleteReview';
 
 
 const movieByIdURL = 'http://localhost:3001/movies/id';
@@ -53,15 +54,6 @@ const Reviews = () => {
   }
 
   const handleDelete = async (id) => {
-    // axios.delete('http://localhost:3001/reviews/delete', {
-    //   params: { review_id: id },
-    // })
-    // .then(response => {
-    //   console.log(response.data);
-    // })
-    // .catch(error => {
-    //   console.error('Error deleting review:', error);
-    // });
     await DeleteReview(id);
   }
 
@@ -129,18 +121,5 @@ const Reviews = () => {
   );
 };
 
-
-const DeleteReview = (id) => {
-
-  axios.delete(`http://localhost:3001/reviews/delete/${id}`)
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error('Error deleting review:', error);
-    });
-
-  return null;
-}
 
 export default Reviews;
