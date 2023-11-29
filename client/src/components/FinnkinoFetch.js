@@ -37,7 +37,7 @@ const FinnkinoFetch = () => {
           {news.map((article, index) => (
             article.Title.includes("Leffauutiset") && (
               <div key={index}>
-                <a href={article.ArticleURL} style={{color:'black'}}><h4>{article.Title}</h4></a>
+                <a href={article.ArticleURL} style={{color:'black'}}><h4>{article.Title.slice(13)}</h4></a>
                 <p>{article.HTMLLead}</p>
               </div>
             )
