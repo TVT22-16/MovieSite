@@ -54,7 +54,7 @@ const Reviews = () => {
   return (
     <div style={{display:'flex',flexDirection:'column',alignItems:'center', width:'100%',height:'auto', margin:'auto auto', gap:'20px'}}>
 
-      <Dropdown style={{margin: 'auto auto', marginTop:'20px'}}>
+    <Dropdown style={{marginRight: '20%', marginTop:'10px', marginLeft:'auto'}}>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
         Filter
       </Dropdown.Toggle>
