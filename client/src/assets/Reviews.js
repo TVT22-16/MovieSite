@@ -15,46 +15,50 @@ const Reviews = () => {
   const [reviewsWData, setReviewsWData] = useState([]);
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(getReviewsUrl);
-        setReviews(response.data);
-        setReviewsWData([]);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(getReviewsUrl);
+      setReviews(response.data);
+      setReviewsWData([]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
+  useEffect(() => {
     fetchData();
   }, [getReviewsUrl]);
 
+
+  const fetchMoviesData = async () => {
+    try {
+      const moviesInformationArray = await Promise.all(
+        reviews.map(async (rev) => {
+          const movieInformation = await axios.get(`${movieByIdURL}/${rev.moviedb_movieid}`);
+          return movieInformation.data;
+        })
+      );
+
+      setReviewsWData(moviesInformationArray);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    const fetchMoviesData = async () => {
-      try {
-        const moviesInformationArray = await Promise.all(
-          reviews.map(async (rev) => {
-            const movieInformation = await axios.get(`${movieByIdURL}/${rev.moviedb_movieid}`);
-            return movieInformation.data;
-          })
-        );
-
-        setReviewsWData(moviesInformationArray);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
     fetchMoviesData();
   }, [reviews]);
 
 
+
   const updateGetReviewsUrl = (link) => {
     setReviewsUrl(link)
+    
   }
 
   const handleDelete = async (id) => {
     await DeleteReview(id);
+    window.location.reload(true);
   }
 
   return (
