@@ -4,10 +4,10 @@ import axios from 'axios';
 const movieByIdURL = 'http://localhost:3001/movies/id';
 
 const Reviews = () => {
-  const [getReviewsUrl, setGetReviewsUrl] = useState('http://localhost:3001/reviews')
-
+  const [getReviewsUrl, setGetReviewsUrl] = useState('http://localhost:3001/reviews');
   const [reviews, setReviews] = useState([]);
   const [reviewsWData, setReviewsWData] = useState([]);
+  const [finalData, setFinalData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +20,7 @@ const Reviews = () => {
     };
 
     fetchData();
-  }, []);
+  }, [getReviewsUrl]);
 
   useEffect(() => {
     const fetchMoviesData = async () => {
@@ -42,29 +42,31 @@ const Reviews = () => {
   }, [reviews]);
 
 
+
+  // useEffect(() => {
+  //   // setFinalData(Array.prototype.push.apply(reviews, reviewsWData);
+  //   // Array.prototype.push.apply(reviews, reviewsWData)
+  //   // setFinalData(reviews.concat(reviewsWData));
+  //   setFinalData((finalData) => [...reviews, ...reviewsWData]);
+
+  // }, [reviewsWData]);
+
   return (
     <div>
-      <ul>
-      {reviewsWData.length > 0 ? (
+    {(reviewsWData.length > 0 ? (<>{reviewsWData.map((fd,index) => (
         <>
-        {reviewsWData.map((item,index) => (
-        <li>
-          <ul>
-            <li>{item.title}</li>
-
-          </ul>
-        </li>
-        ))}
+          <div>{fd.title}</div>
+          <div>{reviews[index].review}</div>
         </>
-        ) : (
 
-          <li>Loading reviews...</li>
-          )
 
-      }
-      </ul>
+      ))}</>) : (
+      
+      <div> Loading reviews...</div>))
+    }
     </div>
   );
 };
 
 export default Reviews;
+
