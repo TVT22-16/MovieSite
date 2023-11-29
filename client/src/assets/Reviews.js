@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const getReviews = 'http://localhost:3001/reviews';
 const movieByIdURL = 'http://localhost:3001/movies/id';
 
 const Reviews = () => {
+  const [getReviewsUrl, setGetReviewsUrl] = useState('http://localhost:3001/reviews')
+
   const [reviews, setReviews] = useState([]);
   const [reviewsWData, setReviewsWData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(getReviews);
+        const response = await axios.get(getReviewsUrl);
         setReviews(response.data);
       } catch (err) {
         console.error(err);
@@ -43,20 +44,25 @@ const Reviews = () => {
 
   return (
     <div>
+      <ul>
       {reviewsWData.length > 0 ? (
         <>
         {reviewsWData.map((item,index) => (
-        <div>{item.title} {reviews[index].review}</div>
+        <li>
+          <ul>
+            <li>{item.title}</li>
+
+          </ul>
+        </li>
         ))}
         </>
-
         ) : (
-          <>
-          <div>Loading reviews...</div>
-          </>)
+
+          <li>Loading reviews...</li>
+          )
 
       }
-
+      </ul>
     </div>
   );
 };
