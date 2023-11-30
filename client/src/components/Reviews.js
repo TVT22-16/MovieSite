@@ -3,12 +3,12 @@ import axios from 'axios';
 import { Card, CardFooter, Ratio } from 'react-bootstrap';
 import { Dropdown, Button} from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
-import DeleteReview from '../components/DeleteReview';
+import DeleteReview from './DeleteReview';
 
 
 const movieByIdURL = 'http://localhost:3001/movies/id';
 
-const Reviews = () => {
+const Reviews = ({byId=false}) => {
   const [username, setUsername] = useState(sessionStorage.getItem('username'));
   const [getReviewsUrl, setReviewsUrl] = useState(`http://localhost:3001/reviews/user/${username}`);
   const [reviews, setReviews] = useState([]);
@@ -71,9 +71,7 @@ const Reviews = () => {
   }
 
   return (
-
-    <div style={{display:'flex',flexDirection:'column',alignItems:'center', width:'100%',height:'auto', margin:'auto auto', gap:'20px'}}>
-
+    <>
     <Dropdown style={{marginRight: '20%', marginTop:'10px', marginLeft:'auto'}}>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
         {filterState}
@@ -82,10 +80,9 @@ const Reviews = () => {
       <Dropdown.Menu>
 
       <Dropdown.Item onClick={() => updateGetReviewsUrl('http://localhost:3001/reviews','All reviews')}>All Reviews</Dropdown.Item>
-      {/* <Dropdown.Item onClick={() => handleSortChange('popularity.asc')}>Popularity (ascending)</Dropdown.Item> */}
-
+    
       <Dropdown.Item onClick={() => updateGetReviewsUrl(`http://localhost:3001/reviews/user/${username}`,'Your reviews')}>Your reviews</Dropdown.Item>
-      {/* <Dropdown.Item onClick={() => handleSortChange('vote_average.asc')}>Vote Average (ascending)</Dropdown.Item> */}
+
 
 
       </Dropdown.Menu>
@@ -96,7 +93,7 @@ const Reviews = () => {
         <>
           {reviewsWData.map((fd, index) => (
 
-          <Card key={index} style={{ display: 'flex', flexDirection: 'row', width: '60%', height: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
+          <Card key={index} style={{ display: 'flex', flexDirection: 'row', width: '80%', height: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
 
           <Card.Img style={{ maxHeight: '90%', height: '200px', width: 'auto', margin:'12px' ,padding: '0px', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`} />
 
@@ -129,10 +126,11 @@ const Reviews = () => {
         <Spinner animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
       </Spinner>
-      ))}
-    </div>
+      ))}</>
+
   );
 };
+
 
 
 export default Reviews;

@@ -4,6 +4,7 @@ import './MovieInfo.css';
 import { useSearchParams } from 'react-router-dom'
 import ReviewForm from './ReviewForm';
 import GetTrailers from './GetTrailers';
+import Reviews from './Reviews';
 
 
 
@@ -98,11 +99,11 @@ const MovieInfo = () => {
 
 
               
-        <ul id='reviewContainer'>
+        {/* <ul id='reviewContainer' style={{width:'100%', margin:'auto auto'}}> */}
           {/* pass the movieid to the review form */}
-        <ReviewForm moviedb_movieid={params}/>
+        {/* <ReviewForm moviedb_movieid={params}/> */}
           {/* foreach */}
-          {reviews.map((review, index) => (
+          {/* {reviews.map((review, index) => (
             <li key={index} className='reviewItem'>
               <p id='pUsername'> {review.username}  </p> 
               <p id='pRating'>Rating: {review.rating}  </p> 
@@ -110,7 +111,12 @@ const MovieInfo = () => {
 
             </li>
           ))}
-        </ul>
+        </ul> */}
+
+          <Reviews></Reviews>
+
+
+        {/* </ul> */}
 
 
       <div id='similarContainer'>

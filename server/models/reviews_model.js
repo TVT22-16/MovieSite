@@ -1,11 +1,20 @@
 const pgPool = require('../postgre/connection');
 
 const sql = {
-    GET_REVIEWS: 'SELECT * FROM reviews',
     GET_REVIEWS_USER: 'SELECT * FROM reviews WHERE username=$1',
     GET_REVIEWS_MOVIEDB_MOVIEID: 'SELECT * FROM reviews WHERE moviedb_movieid=$1',
     INSERT_REVIEW: 'INSERT INTO reviews (username, review, rating, moviedb_movieid,created_at) VALUES ($1,$2,$3,$4, NOW())',
-    DELETE_REVIEW: 'DELETE FROM reviews WHERE review_id=$1;'
+    DELETE_REVIEW: 'DELETE FROM reviews WHERE review_id=$1;',
+
+    // SELECT * FROM reviews WHERE username='Messi' AND moviedb_movieid='283317';
+    // SELECT * FROM reviews WHERE username='Messi';
+    // SELECT * FROM reviews WHERE moviedb_movieid='283317';
+    
+    GET_REVIEWS: 'SELECT * FROM reviews',
+    GET_REV_USER: 'SELECT * FROM reviews WHERE username=$1',
+    GET_REV_USERMOVIE: 'SELECT * FROM reviews WHERE username=$1 AND moviedb_movieid=$2',
+    GET_REV_MOVIE: 'SELECT * FROM reviews WHERE moviedb_movieid=$1'
+
 
 };
 
@@ -20,6 +29,28 @@ async function getReviewsUser(username){
   const rows = result.rows;
   return rows.reverse();
 }
+
+async function getReviewsUpgraded(username='', movieid=''){
+  
+  if (username.length < 1 && movieid.length < 1){
+    result = await pgPool.query(sql.GET_REVIEWS);
+
+  } else if(username.length > 0 && movieid.length < 1){
+    result = await pgPool.query(sql.GET_REV_USER,[username]);
+
+  } else if(username.length < 1 && movieid.length > 0){
+    result = await pgPool.query(sql.GET_REV_MOVIE,[movieid]);
+
+  } else{
+    result = await pgPool.query(sql.GET_REV_USERMOVIE,[username,movieid]);
+  }
+
+ 
+  const rows = result.rows;
+  return rows.reverse();
+}
+
+
 
 async function getReviewsMovieId(moviedb_movieid){
   const result = await pgPool.query(sql.GET_REVIEWS_MOVIEDB_MOVIEID,[moviedb_movieid]);
@@ -52,4 +83,4 @@ async function deleteReview(review_id) {
 
 
 
-module.exports = {addReview,getReviews,deleteReview,getReviewsUser,getReviewsMovieId};
+module.exports = {addReview,getReviews,deleteReview,getReviewsUser,getReviewsMovieId,getReviewsUpgraded};

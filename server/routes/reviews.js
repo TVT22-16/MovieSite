@@ -2,7 +2,7 @@ const router = require('express').Router();
 const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 
-const {addReview,getReviews,deleteReview,getReviewsUser,getReviewsMovieId} = require('../models/reviews_model.js');
+const {addReview,getReviews,deleteReview,getReviewsUser,getReviewsMovieId,getReviewsUpgraded} = require('../models/reviews_model.js');
 
 
 //get all reviews or reviews?username=
@@ -46,6 +46,25 @@ router.get('/user/:username', async (req, res) => {
     } catch (error) {
         console.error("Error fetching reviews:", error);
         res.status(500).json({ error: "Error fetching reviews" });
+    }
+});
+
+
+//get Reviews upgraded
+router.get('/getReviews', async (req, res) => {
+    console.log('Get reviews');
+
+    try {
+        let username = req.query.username;
+        let movieid = req.query.movieid;
+
+        const response = await getReviewsUpgraded(username,movieid);
+
+        res.json(response);
+
+    } catch (error) {
+        // Use a 500 Internal Server Error status code
+        res.status(500).json({ message: error.message });
     }
 });
 
