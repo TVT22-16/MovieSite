@@ -79,6 +79,7 @@ const Header = ({ loggedIn }) => {
                 <Nav.Link href="/reviews">Reviews</Nav.Link>
                 <Nav.Link href="/groups">Groups</Nav.Link>
                 <Nav.Link href="/login">Login</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
 
 
               </>

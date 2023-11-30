@@ -4,6 +4,8 @@ const upload = multer({dest: 'upload/'});
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const auth = require('../middleware/Auth.js');
+
 const {addUser, getUsers, getUsernames, getUserbyname, updateUser,updateUserAvatar, deleteUser, checkUser, updateUsername} = require('../models/users_model');
 
 /**
@@ -33,10 +35,11 @@ router.get('/userinfo', async (req, res) => {
 router.post('/register', upload.none() , async (req,res) => {
     const username = req.body.username;
     let password = req.body.password;
+    const avatar = req.body.avatar;
 
     password = await bcrypt.hash(password, 10);
     try {
-        await addUser(username,password);
+        await addUser(username,password,avatar);
         res.end();
     } catch (error) {
         if (error.message.includes('duplicate key value violates unique constraint')) {

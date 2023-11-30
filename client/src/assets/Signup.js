@@ -37,11 +37,13 @@ function Signup() {
       setLoading(false);
       return;
     }
+    const avatar = 'default';
 
     try {
       const response = await axios.post('http://localhost:3001/users/register', {
         username,
         password,
+        avatar,
       });
 
       console.log('Register successful:', response.data);

@@ -129,6 +129,8 @@ function Settings() {
             { id: 1, text: 'Default avatar', avatar: 'default' },
             { id: 2, text: 'Car', avatar: 'car' },
             { id: 3, text: 'Landscape', avatar: 'landscape' },
+            { id: 4, text: 'Space', avatar: 'space' },
+            {id: 5, text: 'Gorilla', avatar: 'gorilla'}
             // Add more boxes as needed
         ];
 
@@ -139,26 +141,28 @@ function Settings() {
         };
 
         return (
-            <Container>
-                <h2>Change profile picture</h2>
-                <Row>
-                    {boxesData.map((box) => (
-                        <Col key={box.id} xs={12} md={4}>
-                            <div
-                                onClick={() => handleClick(box)}
-                                style={{
-                                    border: '1px solid #ccc',
-                                    padding: '10px',
-                                    margin: '10px',
-                                    width: '100px',
-                                    cursor: 'pointer',
-                                }}
-                            >
-                                {box.text}
-                            </div>
-                        </Col>
-                    ))}
-                </Row>
+            <Container className="mt-3 text-center">
+                <div className='centeringContainer'>
+                    <h2 className="mb-3">Change profile picture</h2>
+                    <Row className="justify-content-center">
+                        {boxesData.map((box) => (
+                            <Col key={box.id} xs={5} md={2}>
+                                <div
+                                    onClick={() => handleClick(box)}
+                                    className="btn btn-primary"
+                                    style={{
+                                        backgroundColor: 'green',
+                                        borderColor: 'green',
+                                        margin: '5px',
+                                        width: '125px', cursor: 'pointer'
+                                    }}
+                                >
+                                    {box.text}
+                                </div>
+                            </Col>
+                        ))}
+                    </Row>
+                </div>
             </Container>
         );
     }
@@ -202,26 +206,28 @@ function Settings() {
 
     return (
         <div>
+
             <h1>Settings</h1>
             <div>
-                {users.map((user, index) => {                    return (
-                        <li key={index} style={{ listStyle: 'none', display: 'flex', alignItems: 'center' }}>
-                            {user.avatar && (
-                                <img
-                                    src={IMAGES[user.avatar]}
-                                    alt={`Avatar for ${user.username} with [${user.avatar}]`}
-                                    style={{ width: '50px', height: '50px', marginLeft: '10px' }}
-                                />
-                            )}
-                            <h2 style={{ fontSize: '40px' }}>{user.username}</h2>
-                        </li>
-                    );
-                })}
+                <div className='centeringContainer'>
+                    {users.map((user, index) => {
+                        return (
+                            <li key={index} style={{ listStyle: 'none', display: 'flex', alignItems: 'center' }}>
+                                {user.avatar && (
+                                    <img
+                                        src={IMAGES[user.avatar]}
+                                        alt={`Avatar for ${user.username} with [${user.avatar}]`}
+                                        style={{ width: '50px', height: '50px', marginLeft: '10px' }}
+                                    />
+                                )}
+                                <h2 style={{ fontSize: '40px' }}>{user.username}</h2>
+                            </li>
+                        );
+                    })}
+                </div>
             </div>
             <NameForm />
             <ClickableBoxes handleBoxClick={handleBoxClickFunction} />
-
-
         </div>
     );
 }
