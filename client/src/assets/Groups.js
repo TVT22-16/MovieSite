@@ -42,14 +42,26 @@ function Groups() {
         setModalIsOpen(false);
     };
 
-    const handleModalSubmit = (data) => {
-        // Handle the form submission data
-        console.log('Form data:', data);
+    let admin = true;
 
-        // Perform any other logic, e.g., making API calls
-
-        // Close the modal
-        handleCloseModal();
+    const handleModalSubmit = async ({ group_name, group_description}) => {
+      try {
+            const groupResponse = await axios.post('http://localhost:3001/groups', {
+              group_name,
+              group_description,
+            });
+            await axios.post('http://localhost:3001/users_groups', {
+              username,
+              group_name,
+              admin,
+            });
+      }
+      catch (error){
+          console.error('Error during group creation:', error.response ? error.response.data : error.message);
+      }
+  
+      // Close the modal
+      setModalIsOpen(false);
     };
 
 return (
@@ -83,12 +95,12 @@ return (
           {/* My Groups */}
           <div className="group-container" style={{ height: '400px', overflowY: 'auto', border: '1px solid #ddd', padding: '10px' }}>
             {mygroups.map((group) => (
-              <Link to={`/groups/${group.group_name}`} key={group.group_name} className="mb-3">
-              <div className="group-box p-3 border">
-                  <h3>{group.group_name}</h3>
-                  <p style={{ maxHeight: '80px', overflow: 'hidden' }}>{group.group_description}</p>
-                  {/* Add more details or actions as needed */}
-                </div>
+         <Link to={`/groups/${group.group_name}`} key={group.group_name} className="mb-3" style={{ textDecoration: 'none', color: 'black' }}>
+            <div className="group-box p-3 border">
+              <h3>{group.group_name}</h3>
+              <p style={{ maxHeight: '80px', overflow: 'hidden' }}>{group.group_description}</p>
+              {/* Add more details or actions as needed */}
+            </div>
               </Link>
             ))}
           </div>
