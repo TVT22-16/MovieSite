@@ -72,7 +72,7 @@ const Reviews = ({movieid=''}) => {
 
   return (
     <>
-    <Dropdown style={{marginRight: '20%', marginTop:'10px', marginLeft:'auto'}}>
+    <Dropdown style={{float:'right', marginTop:'10px', marginLeft:'auto'}}>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
         {filterState}
       </Dropdown.Toggle>

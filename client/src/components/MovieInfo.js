@@ -104,8 +104,6 @@ const MovieInfo = () => {
           <ReviewForm moviedb_movieid={params}/>
 
 
-        {/* </ul> */}
-
 
       <div id='similarContainer'>
                 Similar Movies
