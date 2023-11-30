@@ -3,25 +3,26 @@ import axios from 'axios';
 import { Card, CardFooter, Ratio } from 'react-bootstrap';
 import { Dropdown, Button} from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
-import DeleteReview from '../components/DeleteReview';
+import DeleteReview from './DeleteReview';
 
+//reviews/getReviews?username=&movieid=
 
-const movieByIdURL = 'http://localhost:3001/movies/id';
+const baseUrl = 'http://localhost:3001'
 
-const Reviews = () => {
+const Reviews = ({movieid=''}) => {
+  console.log('reviews movieid', movieid);
+
   const [username, setUsername] = useState(sessionStorage.getItem('username'));
-  const [getReviewsUrl, setReviewsUrl] = useState(`http://localhost:3001/reviews/user/${username}`);
+  const [getReviewsUrl, setReviewsUrl] = useState(`${baseUrl}/reviews/getReviews?username=&movieid=${movieid}`);
   const [reviews, setReviews] = useState([]);
   const [reviewsWData, setReviewsWData] = useState([]);
 
-  const [filterState, setFilterState] = useState('Your Reviews');
+  const [filterState, setFilterState] = useState('All reviews');
 
   const updateFilterState = (state) => {
     setFilterState(state);
   }
    
-
-
 
   const fetchData = async () => {
     try {
@@ -42,7 +43,7 @@ const Reviews = () => {
     try {
       const moviesInformationArray = await Promise.all(
         reviews.map(async (rev) => {
-          const movieInformation = await axios.get(`${movieByIdURL}/${rev.moviedb_movieid}`);
+          const movieInformation = await axios.get(`${baseUrl}/movies/id/${rev.moviedb_movieid}`);
           return movieInformation.data;
         })
       );
@@ -59,10 +60,9 @@ const Reviews = () => {
 
 
 
-  const updateGetReviewsUrl = (link,state) => {
+  const updateGetReviewsUrl = (params,state) => {
     updateFilterState(state);
-    setReviewsUrl(link)
-    
+    setReviewsUrl(`${baseUrl}/reviews/getReviews?${params}`)
   }
 
   const handleDelete = async (id) => {
@@ -71,21 +71,18 @@ const Reviews = () => {
   }
 
   return (
-
-    <div style={{display:'flex',flexDirection:'column',alignItems:'center', width:'100%',height:'auto', margin:'auto auto', gap:'20px'}}>
-
-    <Dropdown style={{marginRight: '20%', marginTop:'10px', marginLeft:'auto'}}>
+    <>
+    <Dropdown style={{float:'right', marginTop:'10px', marginLeft:'auto'}}>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
         {filterState}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
 
-      <Dropdown.Item onClick={() => updateGetReviewsUrl('http://localhost:3001/reviews','All reviews')}>All Reviews</Dropdown.Item>
-      {/* <Dropdown.Item onClick={() => handleSortChange('popularity.asc')}>Popularity (ascending)</Dropdown.Item> */}
+      <Dropdown.Item onClick={() => updateGetReviewsUrl(`movieid=${movieid}`,'All reviews')}>All Reviews</Dropdown.Item>
+    
+      <Dropdown.Item onClick={() => updateGetReviewsUrl(`username=${username}&movieid=${movieid}`,'Your reviews')}>Your reviews</Dropdown.Item>
 
-      <Dropdown.Item onClick={() => updateGetReviewsUrl(`http://localhost:3001/reviews/user/${username}`,'Your reviews')}>Your reviews</Dropdown.Item>
-      {/* <Dropdown.Item onClick={() => handleSortChange('vote_average.asc')}>Vote Average (ascending)</Dropdown.Item> */}
 
 
       </Dropdown.Menu>
@@ -96,7 +93,7 @@ const Reviews = () => {
         <>
           {reviewsWData.map((fd, index) => (
 
-          <Card key={index} style={{ display: 'flex', flexDirection: 'row', width: '60%', height: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
+          <Card key={index} style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
 
           <Card.Img style={{ maxHeight: '90%', height: '200px', width: 'auto', margin:'12px' ,padding: '0px', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`} />
 
@@ -129,10 +126,11 @@ const Reviews = () => {
         <Spinner animation="border" role="status">
         <span className="visually-hidden">Loading...</span>
       </Spinner>
-      ))}
-    </div>
+      ))}</>
+
   );
 };
+
 
 
 export default Reviews;
