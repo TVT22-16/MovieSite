@@ -56,7 +56,7 @@ const ReviewForm = ({moviedb_movieid}) => {
   
     return (
       <div id="reviewFormBody" style={{width:'100%', display:'flex', flexDirection:'column', alignItems:'center'}}>
-            <button type="submit" className="btn btn-primary" onClick={handleShowForm} style={{width:'20%'}}>
+            <button type="submit" className="btn btn-light" onClick={handleShowForm} style={{width:'20%'}}>
               Review Movie
             </button>
     
@@ -85,31 +85,7 @@ const ReviewForm = ({moviedb_movieid}) => {
             />
             </div>
 
-            {/* <input
-              type="number"
-              name="rating"
-              className="ratingBox"
-              placeholder="0-10.0"
-              step="any"
-              min="0"
-              max="10.0"
-              style={{width:'12%'}}
-            /> */}
 
-            {/* <div className="input-prepend">
-              <span className="add-on">0</span>
-              <input
-                type="range"
-                id="rating"
-                name="rating"
-                min="0"
-                max="10"
-              />
-              <span className="add-on">10</span>
-            </div> */}
-{/* 
-            <input type="range" id="numberSlider" name="number" min="0.1" max="10" step="0.25"/>
-            <output for="numberSlider" id="sliderValue">50</output> */}
             <SliderComponent></SliderComponent>
           
   
