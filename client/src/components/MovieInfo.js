@@ -98,22 +98,7 @@ const MovieInfo = () => {
         </div>
 
 
-              
-        {/* <ul id='reviewContainer' style={{width:'100%', margin:'auto auto'}}> */}
-          {/* pass the movieid to the review form */}
-        {/* <ReviewForm moviedb_movieid={params}/> */}
-          {/* foreach */}
-          {/* {reviews.map((review, index) => (
-            <li key={index} className='reviewItem'>
-              <p id='pUsername'> {review.username}  </p> 
-              <p id='pRating'>Rating: {review.rating}  </p> 
-              <p id='pReview'>{review.review}  </p> 
-
-            </li>
-          ))}
-        </ul> */}
-
-          <Reviews></Reviews>
+          <Reviews movieid={params}></Reviews>
 
 
         {/* </ul> */}

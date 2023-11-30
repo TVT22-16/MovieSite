@@ -5,12 +5,15 @@ import { Dropdown, Button} from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import DeleteReview from './DeleteReview';
 
+//reviews/getReviews?username=&movieid=
 
-const movieByIdURL = 'http://localhost:3001/movies/id';
+const baseUrl = 'http://localhost:3001'
 
-const Reviews = ({byId=false}) => {
+const Reviews = ({movieid=''}) => {
+  console.log('reviews movieid', movieid);
+
   const [username, setUsername] = useState(sessionStorage.getItem('username'));
-  const [getReviewsUrl, setReviewsUrl] = useState(`http://localhost:3001/reviews/user/${username}`);
+  const [getReviewsUrl, setReviewsUrl] = useState(`${baseUrl}/reviews/getReviews?username=&movieid=${movieid}`);
   const [reviews, setReviews] = useState([]);
   const [reviewsWData, setReviewsWData] = useState([]);
 
@@ -20,8 +23,6 @@ const Reviews = ({byId=false}) => {
     setFilterState(state);
   }
    
-
-
 
   const fetchData = async () => {
     try {
@@ -42,7 +43,7 @@ const Reviews = ({byId=false}) => {
     try {
       const moviesInformationArray = await Promise.all(
         reviews.map(async (rev) => {
-          const movieInformation = await axios.get(`${movieByIdURL}/${rev.moviedb_movieid}`);
+          const movieInformation = await axios.get(`${baseUrl}/movies/id/${rev.moviedb_movieid}`);
           return movieInformation.data;
         })
       );
@@ -59,10 +60,9 @@ const Reviews = ({byId=false}) => {
 
 
 
-  const updateGetReviewsUrl = (link,state) => {
+  const updateGetReviewsUrl = (params,state) => {
     updateFilterState(state);
-    setReviewsUrl(link)
-    
+    setReviewsUrl(`${baseUrl}/reviews/getReviews?${params}`)
   }
 
   const handleDelete = async (id) => {
@@ -79,9 +79,9 @@ const Reviews = ({byId=false}) => {
 
       <Dropdown.Menu>
 
-      <Dropdown.Item onClick={() => updateGetReviewsUrl('http://localhost:3001/reviews','All reviews')}>All Reviews</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateGetReviewsUrl(`movieid=${movieid}`,'All reviews')}>All Reviews</Dropdown.Item>
     
-      <Dropdown.Item onClick={() => updateGetReviewsUrl(`http://localhost:3001/reviews/user/${username}`,'Your reviews')}>Your reviews</Dropdown.Item>
+      <Dropdown.Item onClick={() => updateGetReviewsUrl(`username=${username}&movieid=${movieid}`,'Your reviews')}>Your reviews</Dropdown.Item>
 
 
 
