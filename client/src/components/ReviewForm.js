@@ -29,14 +29,11 @@ const ReviewForm = ({moviedb_movieid}) => {
         rating: event.target.rating.value,
       };
 
-      console.log(reviewData);
-      console.log(moviedb_movieid);
-      console.log(typeof(moviedb_movieid));
-
       axios.post(addReviewUrl, reviewData)
       .then(response => {
         // Handle successful submission
         console.log('Review submitted successfully');
+        window.location.reload(true);
       })
       .catch(error => {
         // Handle error
