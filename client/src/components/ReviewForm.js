@@ -46,7 +46,7 @@ const ReviewForm = ({moviedb_movieid}) => {
     };
   
     return (
-      <div id="reviewFormBody">
+      <div id="reviewFormBody" style={{width:'60%'}}>
         <button className="addReviewBtn" onClick={handleShowForm}>
           Add Review
         </button>

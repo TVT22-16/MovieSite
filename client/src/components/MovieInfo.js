@@ -97,8 +97,11 @@ const MovieInfo = () => {
 
         </div>
 
+          <div style={{display: 'flex',flexDirection:'column',width:'80%', gap:'20px', alignItems:'center'}}>
+            <Reviews movieid={params}> </Reviews>
 
-          <Reviews movieid={params}></Reviews>
+          </div>
+          <ReviewForm moviedb_movieid={params}/>
 
 
         {/* </ul> */}

@@ -17,7 +17,7 @@ const Reviews = ({movieid=''}) => {
   const [reviews, setReviews] = useState([]);
   const [reviewsWData, setReviewsWData] = useState([]);
 
-  const [filterState, setFilterState] = useState('Your Reviews');
+  const [filterState, setFilterState] = useState('All reviews');
 
   const updateFilterState = (state) => {
     setFilterState(state);
@@ -93,7 +93,7 @@ const Reviews = ({movieid=''}) => {
         <>
           {reviewsWData.map((fd, index) => (
 
-          <Card key={index} style={{ display: 'flex', flexDirection: 'row', width: '80%', height: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
+          <Card key={index} style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
 
           <Card.Img style={{ maxHeight: '90%', height: '200px', width: 'auto', margin:'12px' ,padding: '0px', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`} />
 
