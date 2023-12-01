@@ -60,8 +60,14 @@ async function getReviewsMovieId(moviedb_movieid){
 
 async function addReview(username, review, rating, moviedb_movieid) {
     try {
-      const result = await pgPool.query(sql.INSERT_REVIEW, [username, review, rating, moviedb_movieid]);
+      const test = await pgPool.query(sql.GET_REV_USERMOVIE, [username, moviedb_movieid]);
+      if(test.rowCount < 1){
+        const result = await pgPool.query(sql.INSERT_REVIEW, [username, review, rating, moviedb_movieid]);
+      } else {
+        return {'Status':'User already has review for this movie'};
+      }
       console.log(result); // Log the result of the query if needed
+
     } catch (error) {
       console.error(error);
     }
