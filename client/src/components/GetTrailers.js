@@ -8,10 +8,8 @@ const GetTrailers = ({id}) => {
 
     const [trailers,setTrailers] = useState([]);
 
-    console.log({id});
 
     useEffect(()=>{
-
         const fetchTrailers = async () => {
             try {
                 const response = await axios.get(`http://localhost:3001/movies/trailer/${id}`);

@@ -10,7 +10,6 @@ import DeleteReview from './DeleteReview';
 const baseUrl = 'http://localhost:3001'
 
 const Reviews = ({movieid=''}) => {
-  console.log('reviews movieid', movieid);
 
   const [username, setUsername] = useState(sessionStorage.getItem('username'));
   const [getReviewsUrl, setReviewsUrl] = useState(`${baseUrl}/reviews/getReviews?username=&movieid=${movieid}`);

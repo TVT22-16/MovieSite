@@ -20,7 +20,7 @@ const MovieInfo = () => {
 
 
   //Fetch moviedata by if from moviedatabase
-  useEffect(() => {
+
     const fetchData = async () => {
       try {
         const res = await axios.get(`http://localhost:3001/movies/id/${params}`);
@@ -30,18 +30,19 @@ const MovieInfo = () => {
         console.error('Error fetching movie data:', error);
       }
     };
-  
+
+
+  useEffect(() => {
     fetchData();
   }, [params]); //prevent endless loop caused by useEffect and useState (only do this if params changes)
-  
 
 
   //backdrop image handling
   const [backdrop, setBackdrop] = useState('');
+
   useEffect(() => {
       // Set the backdrop path for the first movie
       setBackdrop(movieData.backdrop_path);
-      console.log('backdrop is', backdrop)
   }, [movieData]);
 
 
@@ -54,7 +55,6 @@ const MovieInfo = () => {
         const res = await axios.get(`http://localhost:3001/reviews/byMovieId/${params}`);
         const response = res.data;
         setReviews(response);
-        console.log(response);
       } catch (error) {
         console.error('Error fetching reviews:', error);
       }

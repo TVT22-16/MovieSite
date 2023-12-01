@@ -36,7 +36,6 @@ const ReviewForm = ({moviedb_movieid}) => {
       .then(response => {
         // Handle successful submission
 
-        console.log(response.data);
         setAddReviewStatus(response.data);
 
       })
