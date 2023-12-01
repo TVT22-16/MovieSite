@@ -96,12 +96,12 @@ const MovieInfo = () => {
           </ul>
 
         </div>
-
+        <ReviewForm moviedb_movieid={params}/>
           <div style={{display: 'flex',flexDirection:'column',width:'80%', gap:'20px', alignItems:'center'}}>
             <Reviews movieid={params}> </Reviews>
 
           </div>
-          <ReviewForm moviedb_movieid={params}/>
+
 
 
 
