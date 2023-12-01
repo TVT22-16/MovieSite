@@ -34,10 +34,7 @@ const ReviewForm = ({moviedb_movieid}) => {
 
       axios.post(addReviewUrl, reviewData)
       .then(response => {
-        // Handle successful submission
-        console.log(response.data);
-        console.log(response.data.status);
-        console.log(response.data.message);
+
         setAddReviewStatus(response.data);
 
       })
@@ -66,8 +63,10 @@ const ReviewForm = ({moviedb_movieid}) => {
               Review Movie
             </button>
 
+          {/* double review error message */}
           {addReviewStatus.status === 'error' &&
-           (<div style={{backgroundColor:'red', marginTop:'10px', padding: '5px', borderRadius:'5px'}}>{addReviewStatus.message}</div>)}
+          //  (<div style={{backgroundColor:'red', marginTop:'10px', padding: '5px', borderRadius:'5px'}}>{addReviewStatus.message}</div>)
+          <div style={{marginTop:'5px'}} class="alert alert-danger" role="alert">{addReviewStatus.message}</div>}
 
         {showForm && (
           <form id="reviewForm" onSubmit={submitReviewForm}
