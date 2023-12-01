@@ -15,7 +15,7 @@ const ReviewForm = ({moviedb_movieid}) => {
 
 
     const [showForm, setShowForm] = useState(false);
-    const [addReviewStatus, setAddReviewStatus] = useState('');
+    const [addReviewStatus, setAddReviewStatus] = useState({});
 
 
     const submitReviewForm = (event) =>{
@@ -35,7 +35,9 @@ const ReviewForm = ({moviedb_movieid}) => {
       axios.post(addReviewUrl, reviewData)
       .then(response => {
         // Handle successful submission
-
+        console.log(response.data);
+        console.log(response.data.status);
+        console.log(response.data.message);
         setAddReviewStatus(response.data);
 
       })
@@ -64,8 +66,9 @@ const ReviewForm = ({moviedb_movieid}) => {
               Review Movie
             </button>
 
-            <div style={{backgroundColor:'red', marginTop:'10px'}}>{addReviewStatus}</div>
-    
+          {addReviewStatus.status === 'error' &&
+           (<div style={{backgroundColor:'red', marginTop:'10px', padding: '5px', borderRadius:'5px'}}>{addReviewStatus.message}</div>)}
+
         {showForm && (
           <form id="reviewForm" onSubmit={submitReviewForm}
           style={{
