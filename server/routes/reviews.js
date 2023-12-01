@@ -83,7 +83,7 @@ router.post('/add', upload.none() , async (req,res) => {
         res.json("Rating can't be over 10")
     } else{
         try {
-            await addReview(username,review,rating,moviedb_movieid);
+            res.json(await addReview(username,review,rating,moviedb_movieid));
             res.end();
         } catch (error) {
             console.log(error);
