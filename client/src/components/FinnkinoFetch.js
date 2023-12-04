@@ -36,7 +36,7 @@ const FinnkinoFetch = () => {
   }, []);
 
   return (
-    <div className='wutwut' style={{width:'90%', margin: '5px auto'}}>
+    <div className='wutwut' style={{width:'90%', margin: '5px auto', padding:'20px'}}>
       {news ? (
         <div>
           

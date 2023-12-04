@@ -78,7 +78,7 @@ const Landingpage = () => {
 
               {reviewsB === 'true' && (
 
-              <div style={{width:'60%'}}>
+              <div style={{width:'60%', padding:'15px'}}>
               {/* <h1 style={{margin:'auto auto', padding:'10px',width:'98%',fontWeight:'700', color:'white', backgroundColor:'black', opacity:'0.8', borderRadius:'5px', marginBottom:'5px'}}>Recent Reviews</h1> */}
               <div style={{height:'400px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'100%', margin: 'auto auto'}}>
                 <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
