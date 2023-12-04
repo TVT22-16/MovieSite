@@ -48,7 +48,8 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
             style={{
               maxWidth: '100%',
               objectFit: 'cover',
-              height:'400px'
+              height:'400px',
+              borderRadius:'10px'
              }}
             onClick={() => openInfo(movie.id)}
           />

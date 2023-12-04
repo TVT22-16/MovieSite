@@ -42,6 +42,7 @@ const Landingpage = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             minHeight: '100vh',
+            maxHeight:'150vh',
             opacity:'0.9',
 
             display: 'flex',
@@ -57,42 +58,22 @@ const Landingpage = () => {
                 updateMoviesData={updateLandingMovies}
                 genres={[]}
             />
-
         <div className='rowContainer' style={{
           display:'flex',
           flexDirection:'row',
           alignItems: 'center',
           marginLeft: '20px',
           marginRight: '20px',
-          marginTop:'1px',
           gap: '10px',
           padding:'15px',
-          height: '100vh'
+          height: '100%',
           // margin: 'auto auto',
         }}>
             {landingMovies.length > 0 && (
               <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
               )}
 
-            {newsB === 'true' && (
 
-                <div className='News' style={{
-                  width:'65%',
-                  height: '400px',
-                  overflowY: 'scroll',
-                  // marginLeft:'50%',
-                  float:'right',
-                  marginTop: '50px',
-                  backgroundColor: 'white',
-                  opacity: '0.7',
-                  borderRadius: '10px',
-                  marginBottom: '50px'}}>
-                      
-                  <FinnkinoFetch></FinnkinoFetch>
-                </div>
-
-                
-            )}
 
               {reviewsB === 'true' && (
 
@@ -109,7 +90,22 @@ const Landingpage = () => {
         </div>
 
 
+        {newsB === 'true' && (
 
+        <div className='News' style={{
+        width:'85%',
+        height: '400px',
+        overflowY: 'scroll',
+        // marginLeft:'50%',
+        float:'right',
+        backgroundColor: 'white',
+        opacity: '0.7',
+        borderRadius: '10px',
+        marginBottom: '30px'}}>
+          
+        <FinnkinoFetch></FinnkinoFetch>
+        </div>
+        )}
         </div>
         
       );
