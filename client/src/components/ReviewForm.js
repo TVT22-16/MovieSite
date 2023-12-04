@@ -15,6 +15,8 @@ const ReviewForm = ({moviedb_movieid}) => {
 
 
     const [showForm, setShowForm] = useState(false);
+    const [addReviewStatus, setAddReviewStatus] = useState({});
+
 
     const submitReviewForm = (event) =>{
 
@@ -32,9 +34,9 @@ const ReviewForm = ({moviedb_movieid}) => {
 
       axios.post(addReviewUrl, reviewData)
       .then(response => {
-        // Handle successful submission
-        console.log('Review submitted successfully');
-        window.location.reload(true);
+
+        setAddReviewStatus(response.data);
+
       })
       .catch(error => {
         // Handle error
@@ -56,24 +58,22 @@ const ReviewForm = ({moviedb_movieid}) => {
   
     return (
       <div id="reviewFormBody" style={{width:'100%', display:'flex', flexDirection:'column', alignItems:'center'}}>
+
             <button type="submit" className="btn btn-light" onClick={handleShowForm} style={{width:'20%'}}>
               Review Movie
             </button>
-    
+
+          {/* double review error message */}
+          {addReviewStatus.status === 'error' &&
+          //  (<div style={{backgroundColor:'red', marginTop:'10px', padding: '5px', borderRadius:'5px'}}>{addReviewStatus.message}</div>)
+          <div style={{marginTop:'5px'}} class="alert alert-danger" role="alert">{addReviewStatus.message}</div>}
+
         {showForm && (
           <form id="reviewForm" onSubmit={submitReviewForm}
           style={{
             gap:'15px',display:'flex',flexDirection:'column', width:'50%', backgroundColor:'white', borderRadius:'5px', padding:'10px', opacity:'0.75'
           }}>
-            {/* <textarea
-              name="review"
-              rows="4"
-              cols="100"
-              placeholder="Write your review here"
-              className="reviewBox"
-              
-              style={{width:'100%'}}
-            /> */}
+
             <div style={{width:'100%'}}>
             <textarea
               id="review"
