@@ -1,5 +1,5 @@
 // Corrected Groups.js
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { GroupModal } from '../components/Groupcreate.js';
@@ -10,6 +10,7 @@ function Groups() {
   const [groups, setGroups] = useState([]);
   const [mygroups, setMyGroups] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [disabledJoinButtons, setDisabledJoinButtons] = useState([]);
 
   const username = sessionStorage.getItem('username');
   // Function to fetch all groups
@@ -29,9 +30,44 @@ function Groups() {
     }
   };
 
+  const fetchJoinRequestsForGroup = async (groupName) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/joinrequest/pending-join-requests/${groupName}/${username}`);
+      return response.data.data;
+    } catch (error) {
+      console.error('Error fetching join requests:', error.response ? error.response.data : error.message);
+      return [];
+    }
+  };
+
+  const updateDisabledJoinButtons = async () => {
+    const disabledButtons = [];
+
+    // Iterate over groups
+    for (const group of groups) {
+      // Check if the user is a member of the group
+      const isMember = mygroups.some((myGroup) => myGroup.group_name === group.group_name);
+
+      // Check if there are pending join requests
+      const pendingJoinRequests = await fetchJoinRequestsForGroup(group.group_name);
+
+      // If the user is a member or there are pending join requests, disable the button
+      if (isMember || pendingJoinRequests.length > 0) {
+        disabledButtons.push(group.group_name);
+      }
+    }
+
+    // Update the state to reflect disabled buttons
+    setDisabledJoinButtons(disabledButtons);
+  };
+
   useEffect(() => {
-    // Fetch groups when the component mounts
-    fetchGroups();
+    const fetchData = async () => {
+      await fetchGroups();
+      updateDisabledJoinButtons();
+    };
+
+    fetchData();
   }, []);
 
   const handleOpenModal = () => {
@@ -64,72 +100,84 @@ function Groups() {
     setModalIsOpen(false);
   };
 
+  const handleJoinRequest = async (group_name) => {
+    try {
+      await axios.post('http://localhost:3001/joinrequest/add', {
+        senderUsername: username,
+        groupName: group_name,
+        status: 'pending',
+      });
+      alert('Join request sent successfully!');
+      setDisabledJoinButtons((prevButtons) => [...prevButtons, group_name]);
+    } catch (error) {
+      console.error('Error sending join request:', error.response ? error.response.data : error.message);
+    }
+  };
+
   return (
     <div>
-      <Container>
-        <GroupModal
-          isOpen={modalIsOpen}
-          onRequestClose={handleCloseModal}
-          onSubmit={handleModalSubmit}
-        />
-        <Row>
-          <Col md={6}>
-          <h1>All Groups</h1>
-            <div
-              className="group-container"
-              style={{ height: '400px', overflowY: 'auto', border: '5px solid #ddd', padding: '10px' }}
-            >
-              {groups.map((group) => (
-                <div key={group.group_name} className="mb-3">
-                  <div className="group-box p-3 border" style={{ backgroundColor: 'lightblue' }}>
-                    <h3>{group.group_name}</h3>
-                    <p style={{ maxHeight: '80px', overflow: 'hidden' }}>{group.group_description}</p>
-                    {/* Add more details or actions as needed */}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Col>
-          <Col md={6}>
-          <h1>Your Groups</h1>
-            {/* My Groups */}
-            <div
-              className="group-container"
-              style={{ height: '400px', overflowY: 'auto', border: '5px solid #ddd', padding: '10px' }}
-            >
-              {mygroups.map((group, index) => (
-                <Link
-                  to={`/groups/${group.group_name}`}
-                  key={group.group_name}
-                  className={`mb-3 ${index !== mygroups.length - 1 ? 'mb-5' : ''}`}  // Add additional margin for all but the last box
-                  style={{ textDecoration: 'none', color: 'black', display: 'block' }}
+  <Container>
+    
+    <GroupModal isOpen={modalIsOpen} onRequestClose={handleCloseModal} onSubmit={handleModalSubmit} />
+    <Row>
+      <Col md={6}>
+      <h1>All Groups</h1>
+        <div className="group-container" style={{ height: '400px', overflowY: 'auto', border: '5px solid #ddd', padding: '10px' }}>
+          {groups.map((group) => (
+            <div key={group.group_name} className="mb-3">
+              <div className="group-box p-3 border" style={{ backgroundColor: 'lightblue' }}>
+                <h3>{group.group_name}</h3>
+                <p style={{ maxHeight: '80px', overflow: 'hidden' }}>{group.group_description}</p>
+                <Button
+                  variant="primary"
+                  onClick={() => handleJoinRequest(group.group_name)}
+                  disabled={disabledJoinButtons.includes(group.group_name)}
+                  style={{ visibility: mygroups.some((myGroup) => myGroup.group_name === group.group_name) ? 'hidden' : 'visible' }}
                 >
-                  <div className="group-box p-3 border" style={{ backgroundColor: 'lightblue' }}>
-                    <h3>{group.group_name}</h3>
-                    <p style={{ maxHeight: '80px', overflow: 'hidden' }}>{group.group_description}</p>
-                    {/* Add more details or actions as needed */}
-                  </div>
-                </Link>
-              ))}
+                  Join Group
+                </Button>
+              </div>
             </div>
-          </Col>
-        </Row>
-        <Row className="mt-4"> {/* Add top margin and a new row for the button */}
-        <Col md={12}>
-          <button
-            onClick={handleOpenModal}
-            className="btn btn-primary"
-            style={{
-              backgroundColor: 'green',
-              borderColor: 'green',
-            }}
-          >
-            Add group
-          </button>
-        </Col>
-      </Row>
-      </Container>
-    </div>
+          ))}
+        </div>
+      </Col>
+      <Col md={6}>
+        <h1>Your Groups</h1>
+        {/* My Groups */}
+        <div className="group-container" style={{ height: '400px', overflowY: 'auto', border: '5px solid #ddd', padding: '10px' }}>
+          {mygroups.map((group, index) => (
+            <Link
+              to={`/groups/${group.group_name}`}
+              key={group.group_name}
+              className={`mb-3 ${index !== mygroups.length - 1 ? 'mb-5' : ''}`}
+              style={{ textDecoration: 'none', color: 'black', display: 'block' }}
+            >
+              <div className="group-box p-3 border" style={{ backgroundColor: 'lightblue' }}>
+                <h3>{group.group_name}</h3>
+                <p style={{ maxHeight: '80px', overflow: 'hidden' }}>{group.group_description}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </Col>
+    </Row>
+    <Row className="mt-4">
+      {/* Add top margin and a new row for the button */}
+      <Col md={12}>
+        <button
+          onClick={handleOpenModal}
+          className="btn btn-primary"
+          style={{
+            backgroundColor: 'green',
+            borderColor: 'green',
+          }}
+        >
+          Add group
+        </button>
+      </Col>
+    </Row>
+  </Container>
+</div>
   );
 }
 

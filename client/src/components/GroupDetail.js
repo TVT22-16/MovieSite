@@ -11,6 +11,7 @@ function GroupDetail() {
   const [reviews, setReviews] = useState([]);
   const [movies, setMovies] = useState([]);
   const [isNewsToggled, setIsNewsToggled] = useState(true);
+  const [joinRequests, setJoinRequests] = useState([]);
 
   const fetchGroupMembers = async () => {
     try {
@@ -55,9 +56,47 @@ function GroupDetail() {
     }
   };
 
+  const fetchJoinRequests = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3001/joinrequest/${group_name}`);
+      console.log(response);  // Log the response
+      setJoinRequests(response.data.data);
+    } catch (error) {
+      console.error('Error fetching join requests:', error.response ? error.response.data : error.message);
+    }
+  };
+
+  const handleAccept = async (requestId) => {
+    try {
+      // Send a request to your backend to accept the join request
+      await axios.post(`http://localhost:3001/joinrequest/accept/${requestId}`);
+  
+      // Fetch the updated join requests
+      fetchJoinRequests();
+  
+      // Optionally, you can fetch other data or perform additional actions after accepting the request
+      // For example, you might want to refresh the list of group members
+      fetchGroupMembers();
+    } catch (error) {
+      console.error('Error accepting join request:', error.response ? error.response.data : error.message);
+    }
+  };
+  
+
+  const handleDeny = async (requestId) => {
+    try {
+      await axios.put(`http://localhost:3001/joinrequest/deny/${requestId}`);
+      // Refresh the join requests after denying
+      fetchJoinRequests();
+    } catch (error) {
+      console.error('Error denying join request:', error.response ? error.response.data : error.message);
+    }
+  };
+
   useEffect(() => {
     fetchGroupMembers();
     fetchGroupReviews();
+    fetchJoinRequests();
   }, []);
 
   useEffect(() => {
@@ -77,33 +116,51 @@ function GroupDetail() {
   const newsComponent = isNewsToggled && <FinnkinoFetch />;
 
   return (
-      <div>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          {/* Display group reviews on the left side */}
-          <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
-            <h3>Group Reviews</h3>
-            <ul>
-              {reviews.map((review, index) => (
-                <li key={index}>
-                  <strong>{review.username}</strong> - <strong>{movies[index]?.original_title}</strong> - {review.review}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Display group members on the right side */}
-          <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
-            <h3>Group Members</h3>
-            <ul>
-              {usernames.map((user, index) => (
-                <li key={index}>
-                  <strong>{user.username}</strong> - {user.admin ? 'Admin' : 'Member'}
-                  {user.admin && <img src={Crown} alt="Crown" style={{ width: '25px', height: '25px', marginLeft: '2px', marginTop: '-6px' }} />}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+    <div>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      {/* Display group reviews on the left side */}
+      <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
+        <h3>Group Reviews</h3>
+        <ul>
+          {reviews.map((review, index) => (
+            <li key={index}>
+              <strong>{review.username}</strong> - <strong>{movies[index]?.original_title}</strong> - {review.review}
+            </li>
+          ))}
+        </ul>
+      </div>
+  
+      {/* Display group members in the middle */}
+      <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
+        <h3>Group Members</h3>
+        <ul>
+          {usernames.map((user, index) => (
+            <li key={index}>
+              <strong>{user.username}</strong> - {user.admin ? 'Admin' : 'Member'}
+              {user.admin && <img src={Crown} alt="Crown" style={{ width: '25px', height: '25px', marginLeft: '2px', marginTop: '-6px' }} />}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  
+    {/* Display join requests at the bottom */}
+    <div style={{ width: '100%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
+      <h3>Join Requests</h3>
+      <ul>
+        {joinRequests
+          .filter((request) => request.status === 'pending') // Filter pending join requests
+          .map((request) => (
+            <li key={request.request_id}>
+              {request.sender_username} - {request.created_at} - {request.status}
+              <button className="btn btn-success mx-2" onClick={() => handleAccept(request.request_id)}>+</button>
+              <button className="btn btn-danger" onClick={() => handleDeny(request.request_id)}>-</button>
+            </li>
+          ))}
+      </ul>
+    </div>
+  
+    {/* Display news on the left side */}
     <div className='news-container' style={{
       display: 'flex',
       width: '45%',
@@ -119,7 +176,7 @@ function GroupDetail() {
       {toggleButton}
       {newsComponent}
     </div>
-    </div>
+  </div>
   );
 }
 
