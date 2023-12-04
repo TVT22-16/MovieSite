@@ -40,7 +40,7 @@ const FinnkinoFetch = () => {
                 <>
               {article.HTMLLead.length > 0 && (
                   
-                  <Card key={index} id={index}>
+                  <Card key={index} id={index} style={{marginTop:'20px',marginBottom:'20px'}}>
                   <Card.Title style={{margin:'auto auto '}}>
                   <a href={article.ArticleURL} style={{color:'black'}}><h4 style={{fontWeight:'700'}}>{article.Title.slice(13)}</h4></a>
                   </Card.Title>
