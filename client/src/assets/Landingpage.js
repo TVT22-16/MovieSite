@@ -64,7 +64,8 @@ const Landingpage = () => {
           alignItems: 'center',
           marginLeft: '20px',
           marginRight: '20px',
-          gap: '10px',
+          marginTop:'20px',
+          gap: '20px',
           padding:'15px',
           height: '100%',
           // margin: 'auto auto',
@@ -94,7 +95,7 @@ const Landingpage = () => {
 
         <div className='News' style={{
         width:'85%',
-        height: '400px',
+        height: '700px',
         overflowY: 'scroll',
         // marginLeft:'50%',
         float:'right',
