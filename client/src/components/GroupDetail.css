@@ -1,0 +1,9 @@
+.news-container::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  .news-container::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    outline: 1px solid #ddd;
+  }
+  

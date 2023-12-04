@@ -70,6 +70,7 @@ function Profile() {
             </div>
                 <Row>
                     <Col md={6}>
+                        <h2>My Groups</h2>
                         {/* My Groups */}
                         <div className="group-container" style={{ height: '400px', overflowY: 'auto', border: '1px solid #ddd', padding: '10px' }}>
                             {mygroups.map((group) => (
