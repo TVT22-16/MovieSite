@@ -66,7 +66,8 @@ const Landingpage = () => {
           marginRight: '20px',
           marginTop:'1px',
           gap: '10px',
-          padding:'50px'
+          padding:'15px',
+          height: '100vh'
           // margin: 'auto auto',
         }}>
             {landingMovies.length > 0 && (
@@ -97,7 +98,7 @@ const Landingpage = () => {
 
               <div style={{width:'60%'}}>
               {/* <h1 style={{margin:'auto auto', padding:'10px',width:'98%',fontWeight:'700', color:'white', backgroundColor:'black', opacity:'0.8', borderRadius:'5px', marginBottom:'5px'}}>Recent Reviews</h1> */}
-              <div style={{height:'400px', padding:'10px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'100%', margin: 'auto auto'}}>
+              <div style={{height:'400px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'100%', margin: 'auto auto'}}>
                 <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
                   <Reviews dropdownOn={false}/>
                 </div>

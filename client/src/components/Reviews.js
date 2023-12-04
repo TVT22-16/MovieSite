@@ -21,6 +21,12 @@ const Reviews = ({movieid='', dropdownOn=true}) => {
   const updateFilterState = (state) => {
     setFilterState(state);
   }
+
+  const openInfo = (id) => {
+    console.log(`Movie with id ${id}`);
+
+    window.location.href = `/movieinfo/?id=${id}`;
+  };
    
 
   const fetchData = async () => {
@@ -97,9 +103,9 @@ const Reviews = ({movieid='', dropdownOn=true}) => {
         <>
           {reviewsWData.map((fd, index) => (
 
-          <Card key={index} style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
+          <Card onClick={() => openInfo(fd.id)} key={index} style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
 
-          <Card.Img style={{ maxHeight: '90%', height: '200px', width: 'auto', margin:'12px' ,padding: '0px', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`} />
+          <Card.Img style={{ maxHeight: '90%', height: '200px', width: 'auto', margin:'12px' ,padding: '0px', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`}/>
 
           <Card.Body style={{ width: '100%', height: '100%', flexGrow: '1', gap: '10px', display: 'flex', flexDirection: 'column' }}>
             <Card.Title style={{fontWeight:'700', fontSize: '1.2rem', marginBottom: '5px' }}>{fd.title} ({reviews[index].rating})</Card.Title>
