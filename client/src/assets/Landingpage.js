@@ -62,16 +62,16 @@ const Landingpage = () => {
           display:'flex',
           flexDirection:'row',
           alignItems: 'center',
-          marginLeft: '5%',
-          gap: '10%',
+          marginLeft: '20px',
+          marginRight: '20px',
+          marginTop:'1px',
+          gap: '10px',
+          padding:'50px'
           // margin: 'auto auto',
         }}>
-
-          {landingMovies.length > 0 && (
-                        <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
-                        )}
-
-
+            {landingMovies.length > 0 && (
+              <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
+              )}
 
             {newsB === 'true' && (
 
@@ -88,23 +88,25 @@ const Landingpage = () => {
                   marginBottom: '50px'}}>
                       
                   <FinnkinoFetch></FinnkinoFetch>
+                </div>
 
-                  </div>  
+                
             )}
+
+              {reviewsB === 'true' && (
+
+              <div style={{width:'60%'}}>
+              {/* <h1 style={{margin:'auto auto', padding:'10px',width:'98%',fontWeight:'700', color:'white', backgroundColor:'black', opacity:'0.8', borderRadius:'5px', marginBottom:'5px'}}>Recent Reviews</h1> */}
+              <div style={{height:'400px', padding:'10px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'100%', margin: 'auto auto'}}>
+                <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
+                  <Reviews dropdownOn={false}/>
+                </div>
+              </div>
+              </div>
+
+              )}
         </div>
 
-        {reviewsB === 'true' && (
-
-            <div style={{width:'80%'}}>
-            <h1 style={{margin:'auto auto', padding:'10px',width:'98%',fontWeight:'700', color:'white', backgroundColor:'black', opacity:'0.8', borderRadius:'5px', marginBottom:'5px'}}>Recent Reviews</h1>
-            <div style={{height:'400px', padding:'10px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'100%', margin: 'auto auto', marginBottom:'50px'}}>
-              <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
-                <Reviews dropdownOn={false}/>
-              </div>
-            </div>
-            </div>
-
-        )}
 
 
         </div>
