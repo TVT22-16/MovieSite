@@ -1,0 +1,9 @@
+.group-container::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  .group-container::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    outline: 1px solid #ddd;
+  }
+  
