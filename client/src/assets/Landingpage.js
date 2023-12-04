@@ -3,6 +3,7 @@ import GetMovies from '../components/GetMoviesUpgraded';
 import CarouselBS from '../components/Carousel';
 import FinnkinoFetch from '../components/FinnkinoFetch';
 import Reviews from '../components/Reviews';
+import { useSearchParams } from 'react-router-dom';
 
 
 const Landingpage = () => {
@@ -10,6 +11,17 @@ const Landingpage = () => {
     const [landingMovies, setLandingMovies] = useState([]);
 
     const [backdroppath, setBackdroppath] = useState('');
+
+
+    const [searchParams] = useSearchParams();
+    // const reviewsBool = searchParams.get('reviews');
+    const [reviewsB,setReviewsB] = useState(searchParams.get('reviews'));
+
+    // useEffect(() => {
+    //   setReviewsB(searchParams.get('reviews'));
+    // }, [searchParams]);
+
+
 
     const updateBackdrop = (p) => {
         setBackdroppath(p);
@@ -76,13 +88,20 @@ const Landingpage = () => {
 
               </div>  
         </div>
+        {reviewsB}
+        {reviewsB === 'true' && (
 
-        <h1 style={{margin:'auto auto', fontWeight:'700', color:'white'}}>Recent Reviews</h1>
-        <div style={{height:'400px', padding:'10px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'80%', margin: 'auto auto', marginBottom:'50px'}}>
-          <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
-            <Reviews dropdownOn={false}/>
-          </div>
-        </div>
+            <div style={{width:'80%'}}>
+            <h1 style={{margin:'auto auto', padding:'10px',width:'98%',fontWeight:'700', color:'white', backgroundColor:'black', opacity:'0.8', borderRadius:'5px', marginBottom:'5px'}}>Recent Reviews</h1>
+            <div style={{height:'400px', padding:'10px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'100%', margin: 'auto auto', marginBottom:'50px'}}>
+              <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
+                <Reviews dropdownOn={false}/>
+              </div>
+            </div>
+            </div>
+
+        )}
+
 
         </div>
         
