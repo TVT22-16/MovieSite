@@ -36,7 +36,8 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
       fade={false}
       interval={8000}
       onSelect={handleSelect}
-      style={{width:'20%',opacity: fadeIn ? 1 : 0, transition: 'opacity 0.5s ease' }} 
+      style={{width:'20%',opacity: fadeIn ? 1 : 0, transition: 'opacity 0.5s ease', margin: 'auto auto',
+      flexGrow:'1', marginTop:'10px', marginBottom: '10px'}} 
     >
       {slicedMovies.map((movie, index) => (
         <Carousel.Item key={index}>
@@ -47,6 +48,7 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
             style={{
               maxWidth: '100%',
               objectFit: 'cover',
+              height:'300px'
              }}
             onClick={() => openInfo(movie.id)}
           />

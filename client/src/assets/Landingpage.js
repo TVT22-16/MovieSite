@@ -14,12 +14,9 @@ const Landingpage = () => {
 
 
     const [searchParams] = useSearchParams();
-    // const reviewsBool = searchParams.get('reviews');
-    const [reviewsB,setReviewsB] = useState(searchParams.get('reviews'));
 
-    // useEffect(() => {
-    //   setReviewsB(searchParams.get('reviews'));
-    // }, [searchParams]);
+    const [reviewsB,setReviewsB] = useState(searchParams.get('reviews'));
+    const [newsB,setNewsB] = useState(searchParams.get('news'));
 
 
 
@@ -66,29 +63,36 @@ const Landingpage = () => {
           flexDirection:'row',
           alignItems: 'center',
           marginLeft: '5%',
-          gap: '10%'
+          gap: '10%',
           // margin: 'auto auto',
         }}>
-            {landingMovies.length > 0 && (
-              <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
-              )}
 
-            <div className='News' style={{
-              width:'65%',
-              height: '400px',
-              overflowY: 'scroll',
-              // marginLeft:'50%',
-              float:'right',
-              marginTop: '50px',
-              backgroundColor: 'white',
-              opacity: '0.7',
-              borderRadius: '10px',
-              marginBottom: '50px'}}>
-              <FinnkinoFetch></FinnkinoFetch>
+          {landingMovies.length > 0 && (
+                        <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
+                        )}
 
-              </div>  
+
+
+            {newsB === 'true' && (
+
+                <div className='News' style={{
+                  width:'65%',
+                  height: '400px',
+                  overflowY: 'scroll',
+                  // marginLeft:'50%',
+                  float:'right',
+                  marginTop: '50px',
+                  backgroundColor: 'white',
+                  opacity: '0.7',
+                  borderRadius: '10px',
+                  marginBottom: '50px'}}>
+                      
+                  <FinnkinoFetch></FinnkinoFetch>
+
+                  </div>  
+            )}
         </div>
-        {reviewsB}
+
         {reviewsB === 'true' && (
 
             <div style={{width:'80%'}}>
