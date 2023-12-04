@@ -6,6 +6,11 @@ import { Card } from 'react-bootstrap';
 const FinnkinoFetch = () => {
   const url = 'https://www.finnkino.fi/xml/News/';
   const [news, setNews] = useState(null);
+  const [lead,setLead] = useState('');
+
+  const updateLead = (l) => {
+    setLead(l);
+  }
 
   useEffect(() => {
     axios
@@ -34,25 +39,19 @@ const FinnkinoFetch = () => {
     <div className='wutwut' style={{width:'90%', margin: '5px auto'}}>
       {news ? (
         <div>
-
+          
           {news.map((article, index) => (
-            article.Title.includes("Leffauutiset") && (
-                <>
-              {article.HTMLLead.length > 0 && (
-                  
-                  <Card key={index} id={index} style={{marginTop:'20px',marginBottom:'20px'}}>
-                  <Card.Title style={{margin:'auto auto '}}>
-                  <a href={article.ArticleURL} style={{color:'black'}}><h4 style={{fontWeight:'700'}}>{article.Title.slice(13)}</h4></a>
-                  </Card.Title>
+            article.Title.includes("Leffauutiset") && article.HTMLLead.length > 0 &&(
 
-                  <Card.Footer>
-                  <p>{article.HTMLLead}</p>
-                  </Card.Footer>
-              </Card>
+                    <Card key={index} id={index} style={{marginTop:'20px',marginBottom:'20px'}}>
+                      <Card.Title style={{margin:'auto auto '}}>
+                      <a href={article.ArticleURL} style={{color:'black'}}><h4 style={{fontWeight:'700'}}>{article.Title.slice(13)}</h4></a>
+                      </Card.Title>
 
-              )}
-              </>
-
+                      <Card.Footer>
+                      <p>{article.HTMLLead}</p>
+                      </Card.Footer>
+                    </Card>
             )
           ))}
         </div>

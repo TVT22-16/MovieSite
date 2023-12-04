@@ -93,19 +93,19 @@ const Landingpage = () => {
 
         {newsB === 'true' && (
 
-        <div className='News' style={{
-        width:'75%',
-        height: '700px',
-        overflowY: 'scroll',
-        // marginLeft:'50%',
-        float:'right',
-        backgroundColor: 'white',
-        opacity: '0.9',
-        borderRadius: '10px',
-        marginBottom: '30px'}}>
-          
-        <FinnkinoFetch></FinnkinoFetch>
-        </div>
+          <div className='News' style={{
+          width:'75%',
+          height: '700px',
+          overflowY: 'scroll',
+          // marginLeft:'50%',
+          float:'right',
+          backgroundColor: 'white',
+          opacity: '0.9',
+          borderRadius: '10px',
+          marginBottom: '30px'}}>
+            
+          <FinnkinoFetch></FinnkinoFetch>
+          </div>
         )}
         </div>
         
