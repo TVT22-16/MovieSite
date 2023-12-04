@@ -52,5 +52,15 @@ router.get('/reviewforgroup/:group_name', async (req, res) => {
         res.status(500).json({ error: "Error fetching users" });
     }
 });
-
+router.delete('/:group_name/:username', async (req,res) => {
+    const group_name = req.params.group_name;
+    const username = req.params.username;
+    try {
+        await deleteUserGroup(group_name,username);
+        res.end();
+    } catch (error) {
+        console.log(error);
+        res.json({error: error.message}).status(500);
+    }   
+});
 module.exports = router;
