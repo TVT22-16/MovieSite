@@ -1,8 +1,9 @@
 import React,{useEffect, useState} from 'react'
 import GetMovies from '../components/GetMoviesUpgraded';
 import CarouselBS from '../components/Carousel';
-import ToastContainerTest from '../components/ToastContainer';
 import FinnkinoFetch from '../components/FinnkinoFetch';
+import Reviews from '../components/Reviews';
+
 
 const Landingpage = () => {
 
@@ -72,13 +73,17 @@ const Landingpage = () => {
               borderRadius: '10px',
               marginBottom: '50px'}}>
               <FinnkinoFetch></FinnkinoFetch>
-              </div>
+
+              </div>  
+        </div>
+
+        
+        <div style={{overflowY:'scroll', width:'70%', height:'350px', marginBottom:'50px'}}>
+          <Reviews dropdownOn={false}/>
+        </div>
 
         </div>
         
-
-
-        </div>
       );
 }
  

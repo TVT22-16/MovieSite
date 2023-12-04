@@ -9,7 +9,7 @@ import DeleteReview from './DeleteReview';
 
 const baseUrl = 'http://localhost:3001'
 
-const Reviews = ({movieid=''}) => {
+const Reviews = ({movieid='', dropdownOn=true}) => {
 
   const [username, setUsername] = useState(sessionStorage.getItem('username'));
   const [getReviewsUrl, setReviewsUrl] = useState(`${baseUrl}/reviews/getReviews?username=&movieid=${movieid}`);
@@ -71,7 +71,9 @@ const Reviews = ({movieid=''}) => {
 
   return (
     <>
-    <Dropdown style={{float:'right', marginTop:'10px', marginLeft:'auto'}}>
+    {dropdownOn === true && (
+
+      <Dropdown style={{float:'right', marginTop:'10px', marginLeft:'auto'}}>
       <Dropdown.Toggle variant="primary" id="dropdown-basic">
         {filterState}
       </Dropdown.Toggle>
@@ -79,13 +81,16 @@ const Reviews = ({movieid=''}) => {
       <Dropdown.Menu>
 
       <Dropdown.Item onClick={() => updateGetReviewsUrl(`movieid=${movieid}`,'All reviews')}>All Reviews</Dropdown.Item>
-    
+
       <Dropdown.Item onClick={() => updateGetReviewsUrl(`username=${username}&movieid=${movieid}`,'Your reviews')}>Your reviews</Dropdown.Item>
 
 
 
       </Dropdown.Menu>
-    </Dropdown>
+      </Dropdown>
+
+    )}
+
 
 
     {((reviewsWData.length > 0 && reviews.length > 0) ? (
