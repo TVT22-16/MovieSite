@@ -113,7 +113,7 @@ const Reviews = ({movieid='', dropdownOn=true}) => {
             <CardFooter>{reviews[index].username}</CardFooter>
 
 
-            {reviews[index].username === username && (
+            {reviews[index].username === username && dropdownOn === true &&  (
               <Button onClick={() => handleDelete(reviews[index].review_id)} style={{margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
                 Delete
               </Button>)}

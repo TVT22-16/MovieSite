@@ -77,9 +77,11 @@ const Landingpage = () => {
               </div>  
         </div>
 
-        
-        <div style={{overflowY:'scroll', width:'70%', height:'350px', marginBottom:'50px'}}>
-          <Reviews dropdownOn={false}/>
+        <h1 style={{margin:'auto auto', fontWeight:'700', color:'white'}}>Recent Reviews</h1>
+        <div style={{height:'400px', padding:'10px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'80%', margin: 'auto auto', marginBottom:'50px'}}>
+          <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
+            <Reviews dropdownOn={false}/>
+          </div>
         </div>
 
         </div>
