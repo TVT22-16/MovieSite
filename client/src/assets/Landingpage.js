@@ -23,15 +23,30 @@ const Landingpage = () => {
 
     const [genre,setGenre] = useState(searchParams.get('genre') || '');
 
+    // useEffect(() => {
+    //   if (genre.length < 1){
+    //     setGenre(localStorage.getItem('genresUI'));
+    //     const savedGenres = (localStorage.getItem('genresUI'));
+    //     setGenre(savedGenres);
+    //     console.log('savedGenres',savedGenres);
+    //   }
+
+    //   console.log('genres',genre);
+    // }, []);
     useEffect(() => {
-      if (genre.length < 1){
-        // setGenre(localStorage.getItem('genresUI'));
-        const savedGenres = (localStorage.getItem('genresUI'));
-        setGenre(savedGenres);
+      if (!genre) {
+        const savedGenres = localStorage.getItem('genresUI');
+        setGenre(savedGenres || ''); // Use the savedGenres or default to an empty string
       }
-    }, []);
+    }, [genre]);
 
     useEffect(() => {
+      // if(genre.length < 1){
+      //   setGenre('');
+      //   const savedGenres = (localStorage.getItem('genresUI'));
+      //   setGenre(savedGenres);
+      // }
+      console.log(genre);
       searchParams.set('genre', genre);
       navigate(`?${searchParams.toString()}`);
     }, [genre]);
