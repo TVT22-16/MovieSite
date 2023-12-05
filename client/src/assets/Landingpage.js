@@ -37,7 +37,7 @@ const Landingpage = () => {
 
 
     return (
-        <div style={{
+        <div className='body' style={{
             backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdroppath})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
@@ -57,6 +57,16 @@ const Landingpage = () => {
                 updateMoviesData={updateLandingMovies}
                 genres={[]}/>
 
+          <div className='secondBody' style={{
+            overflowY:'hidden',
+            width:'70%',
+            display:'flex',
+            flexDirection:'column',
+            margin:'auto auto', 
+            justifyContent:'center',
+            marginTop:'20px'
+          }}>
+
           {newsB === 'true' && (
             <FkNews></FkNews>
           )}
@@ -67,11 +77,12 @@ const Landingpage = () => {
               flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'center',  // Add this line for horizontal centering
+              gap:'10px',
               margin: 'auto auto',
               width:'100%'}}>
 
             
-              <div className='carouselContainer' style={{width:'20%'}}>
+              <div className='carouselContainer' style={{flexGrow:'1'}}>
               {landingMovies.length > 0 && (
                 <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
                 )}
@@ -82,7 +93,7 @@ const Landingpage = () => {
               )}
 
           </div>
-
+          </div>
         </div>
         
       );
@@ -93,7 +104,7 @@ const FkNews = () => {
   return (
   
     <div className='News' style={{
-      width: '70%',
+      width: '100%',
       height: '700px',
       overflowY: 'scroll',
       // marginLeft:'50%',
@@ -101,8 +112,9 @@ const FkNews = () => {
       opacity: '0.75',
       display:'flex',
       flexDirection:'column',
+      margin:'auto auto',
       gap:'30px',
-      padding:'30px',
+      padding:'5px',
       borderRadius: '10px',
       marginBottom: '30px',
       marginTop:'30px'}}>
@@ -115,9 +127,21 @@ const FkNews = () => {
  
 const ReviewsContainer  = () => {
   return (
-    <div className='reviewsContainer' style={{width:'55%', padding:'15px', opacity:'0.80'}}>
-    {/* <h1 style={{margin:'auto auto', padding:'10px',width:'98%',fontWeight:'700', color:'white', backgroundColor:'black', opacity:'0.8', borderRadius:'5px', marginBottom:'5px'}}>Recent Reviews</h1> */}
-    <div style={{height:'400px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'100%', margin: 'auto auto'}}>
+    <div className='reviewsContainer' style={{
+      width:'70%',
+      minWidth:'70%', 
+      opacity:'0.80'
+      }}>
+
+    <div style={{
+        height:'400px',
+        borderRadius:'5px',
+        overflowY:'scroll',
+        display:'flex', 
+        flexDirection:'column' ,
+        width:'100%', 
+        margin: 'auto auto'
+      }}>
       <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
         <Reviews dropdownOn={false}/>
       </div>
@@ -126,10 +150,5 @@ const ReviewsContainer  = () => {
     );
 }
  
-
-
-
-
-
 
 export default Landingpage;
