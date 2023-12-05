@@ -22,12 +22,20 @@ const Landingpage = () => {
 
     const [genre,setGenre] = useState(searchParams.get('genre'));
 
-    const updateReviewBool = () =>{
-      reviewsB === 'true' ? (setReviewsB('false')):(setReviewsB('true'));
-    }
+    const updateReviewBool = () => {
+      const updatedReviewsB = reviewsB === 'true' ? 'false' : 'true';
+    
+      setReviewsB(updatedReviewsB);
+      searchParams.set('reviews', updatedReviewsB);
+      navigate(`?${searchParams.toString()}`);
+    };
 
     const updateNewsBool = () =>{
-      newsB === 'true' ? (setNewsB('false')):(setNewsB('true'));
+      const updatedNewsB = newsB === 'true' ? 'false' : 'true';
+      setNewsB(updatedNewsB);
+
+      searchParams.set('news', updatedNewsB);
+      navigate(`?${searchParams.toString()}`);
     }
 
     const updateBackdrop = (p) => {
@@ -104,7 +112,7 @@ const Landingpage = () => {
               width:'100%'}}>
 
 
-          <div className='carouselContainer' style={{flexGrow:'1'}}>
+          <div className='carouselContainer' style={{flexGrow:'1', maxWidth:'30%'}}>
             {landingMovies.length > 0 && (
             <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
             )}
