@@ -46,7 +46,7 @@ const Landingpage = () => {
       //   const savedGenres = (localStorage.getItem('genresUI'));
       //   setGenre(savedGenres);
       // }
-      console.log(genre);
+
       searchParams.set('genre', genre);
       navigate(`?${searchParams.toString()}`);
     }, [genre]);
@@ -74,7 +74,7 @@ const Landingpage = () => {
       localStorage.setItem('reviewsUI', reviewsB);
       localStorage.setItem('genresUI', genre)
 
-      console.log(localStorage.getItem('genresUI'));
+      // console.log(localStorage.getItem('genresUI'));
     }
 
     const updateBackdrop = (p) => {
@@ -82,7 +82,7 @@ const Landingpage = () => {
     }
 
     const updateGenres = (g) => {
-      console.log('In update genres!');
+      // console.log('In update genres!');
       
       setGenre(g);
       // Update the URL with the new genre
