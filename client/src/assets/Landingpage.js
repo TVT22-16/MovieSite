@@ -21,7 +21,7 @@ const Landingpage = () => {
 
     const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
 
-    const [genre,setGenre] = useState(searchParams.get('genre'));
+    const [genre,setGenre] = useState(searchParams.get('genre')) || localStorage.getItem('genresUI');
 
     const updateReviewBool = () => {
       const updatedReviewsB = reviewsB === 'true' ? 'false' : 'true';
@@ -40,11 +40,12 @@ const Landingpage = () => {
     }
 
     const savePageSettings = () =>{
-      // localStorage.setItem('newsUI', newsB);
-      // localStorage.setItem('reviewsUI', reviewsB);
+      console.log(this);
+      localStorage.setItem('newsUI', newsB);
+      localStorage.setItem('reviewsUI', reviewsB);
+      localStorage.setItem('genresUI', genre)
 
-      console.log('saved');
-
+      console.log(localStorage.getItem('genresUI'));
     }
 
     const updateBackdrop = (p) => {
@@ -178,7 +179,7 @@ const Landingpage = () => {
           ...(newsB === 'false' && { backgroundColor: 'red' }),}}
           onClick={() => updateNewsBool()}
           >
-          Reviews on/off
+         News on/off
         </Dropdown.Item>
 
         <Dropdown.Item className="custom-dropdown-item" onClick={() => savePageSettings() }>Save</Dropdown.Item>

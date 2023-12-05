@@ -14,7 +14,6 @@ const GetMovies = ({sort_by='',page='',updatePageAmount='',updateMoviesData, gen
             // setMovies(response.data.results);
             updateMoviesData(response.data.results);
             updatePageAmount(response.data.total_pages);
-            console.log(genresParam);
 
         }).catch(error => {
             console.log(error);
