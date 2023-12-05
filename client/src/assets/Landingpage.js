@@ -54,7 +54,7 @@ const Landingpage = () => {
     }
 
     const savePageSettings = () =>{
-      console.log(this);
+
       localStorage.setItem('newsUI', newsB);
       localStorage.setItem('reviewsUI', reviewsB);
       localStorage.setItem('genresUI', genre)
@@ -67,6 +67,7 @@ const Landingpage = () => {
     }
 
     const updateGenres = (g) => {
+      console.log('In update genres!');
       
       setGenre(g);
       // Update the URL with the new genre
@@ -119,7 +120,7 @@ const Landingpage = () => {
             marginTop:'20px'
             }}>
 
-          <SettingsButton savePageSettings={savePageSettings} reviewsB={reviewsB} newsB={newsB} updateGenres={updateGenres} updateReviewBool={updateReviewBool} updateNewsBool={updateNewsBool}></SettingsButton>
+          <SettingsButton curGenre={genre} savePageSettings={savePageSettings} reviewsB={reviewsB} newsB={newsB} updateGenres={updateGenres} updateReviewBool={updateReviewBool} updateNewsBool={updateNewsBool}></SettingsButton>
           
 
           <div className='rowContainer' style={{
@@ -154,14 +155,11 @@ const Landingpage = () => {
       );
 }
 
- const SettingsButton = ({updateGenres,updateReviewBool,updateNewsBool,newsB, reviewsB, savePageSettings}) => {
+ const SettingsButton = ({updateGenres,updateReviewBool,updateNewsBool,newsB, reviewsB, savePageSettings, curGenre}) => {
   
   const handleSelect = (eventKey, e) => {
     // Prevent the default behavior of closing the dropdown
     e.preventDefault();
-
-    // Add your custom logic for handling the selected item here
-    // console.log(`Selected option: ${eventKey}`);
   };
 
   return (
@@ -173,7 +171,7 @@ const Landingpage = () => {
 
       <Dropdown.Menu className="custom-dropdown-menu"  style={{ minWidth: 'auto',padding:'5px'}}>
         {/* Add your settings options here */}
-        <GenrePicker updateGenres={updateGenres}/>
+        <GenrePicker updateGenres={updateGenres} currentGenres={curGenre}/>
 
         <Dropdown.Item
           className="custom-dropdown-item"
