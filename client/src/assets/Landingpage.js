@@ -9,6 +9,7 @@ import { Dropdown } from 'react-bootstrap';
 
 
 const Landingpage = () => {
+    const navigate = useNavigate();
 
     const [landingMovies, setLandingMovies] = useState([]);
 
@@ -38,11 +39,17 @@ const Landingpage = () => {
       navigate(`?${searchParams.toString()}`);
     }
 
+    const savePageSettings = () =>{
+      // localStorage.setItem('newsUI', newsB);
+      // localStorage.setItem('reviewsUI', reviewsB);
+
+      console.log('saved');
+
+    }
+
     const updateBackdrop = (p) => {
         setBackdroppath(p);
     }
-
-    const navigate = useNavigate();
 
     const updateGenres = (g) => {
       
@@ -97,7 +104,7 @@ const Landingpage = () => {
             marginTop:'20px'
             }}>
 
-          <SettingsButton reviewsB={reviewsB} newsB={newsB} updateGenres={updateGenres} updateReviewBool={updateReviewBool} updateNewsBool={updateNewsBool}></SettingsButton>
+          <SettingsButton savePageSettings={savePageSettings} reviewsB={reviewsB} newsB={newsB} updateGenres={updateGenres} updateReviewBool={updateReviewBool} updateNewsBool={updateNewsBool}></SettingsButton>
           
 
 
@@ -134,13 +141,13 @@ const Landingpage = () => {
       );
 }
 
- const SettingsButton = ({updateGenres,updateReviewBool,updateNewsBool,newsB, reviewsB}) => {
+ const SettingsButton = ({updateGenres,updateReviewBool,updateNewsBool,newsB, reviewsB, savePageSettings}) => {
   const handleSelect = (eventKey, e) => {
     // Prevent the default behavior of closing the dropdown
     e.preventDefault();
 
     // Add your custom logic for handling the selected item here
-    console.log(`Selected option: ${eventKey}`);
+    // console.log(`Selected option: ${eventKey}`);
   };
 
   return (
@@ -173,6 +180,9 @@ const Landingpage = () => {
           >
           Reviews on/off
         </Dropdown.Item>
+
+        <Dropdown.Item className="custom-dropdown-item" onClick={() => savePageSettings() }>Save</Dropdown.Item>
+
       </Dropdown.Menu>
     </Dropdown>
 
