@@ -44,7 +44,6 @@ const Landingpage = () => {
             minHeight: '100vh',
             maxHeight:'150vh',
             opacity:'0.9',
-
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -59,26 +58,24 @@ const Landingpage = () => {
                 genres={[]}
             />
         <div className='rowContainer' style={{
-          display:'flex',
-          flexDirection:'row',
-          alignItems: 'center',
-          marginLeft: '20px',
-          marginRight: '20px',
-          marginTop:'20px',
-          gap: '20px',
-          padding:'15px',
-          height: '100%',
-          // margin: 'auto auto',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',  // Add this line for horizontal centering
+            margin: 'auto auto',
+            width:'100%'
+      
         }}>
+            <div className='carouselContainer' style={{width:'20%'}}>
             {landingMovies.length > 0 && (
               <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
               )}
-
+            </div>
 
 
               {reviewsB === 'true' && (
 
-              <div style={{width:'60%', padding:'15px'}}>
+              <div style={{width:'55%', padding:'15px', opacity:'0.80'}}>
               {/* <h1 style={{margin:'auto auto', padding:'10px',width:'98%',fontWeight:'700', color:'white', backgroundColor:'black', opacity:'0.8', borderRadius:'5px', marginBottom:'5px'}}>Recent Reviews</h1> */}
               <div style={{height:'400px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'100%', margin: 'auto auto'}}>
                 <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
@@ -94,13 +91,13 @@ const Landingpage = () => {
         {newsB === 'true' && (
 
           <div className='News' style={{
-          width:'75%',
+          width: '70%',
           height: '700px',
           overflowY: 'scroll',
           // marginLeft:'50%',
           float:'right',
           backgroundColor: 'white',
-          opacity: '0.9',
+          opacity: '0.75',
           borderRadius: '10px',
           marginBottom: '30px'}}>
             
