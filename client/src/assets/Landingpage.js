@@ -21,7 +21,14 @@ const Landingpage = () => {
 
     const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
 
-    const [genre,setGenre] = useState(searchParams.get('genre')) || localStorage.getItem('genresUI');
+    const [genre,setGenre] = useState(searchParams.get('genre') || '');
+
+    useEffect(() => {
+      if (genre.length < 1){
+        setGenre(localStorage.getItem('genresUI'));
+      }
+    }, []);
+
 
     const updateReviewBool = () => {
       const updatedReviewsB = reviewsB === 'true' ? 'false' : 'true';
@@ -107,8 +114,6 @@ const Landingpage = () => {
 
           <SettingsButton savePageSettings={savePageSettings} reviewsB={reviewsB} newsB={newsB} updateGenres={updateGenres} updateReviewBool={updateReviewBool} updateNewsBool={updateNewsBool}></SettingsButton>
           
-
-
 
           <div className='rowContainer' style={{
               display: 'flex',
