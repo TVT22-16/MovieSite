@@ -37,27 +37,27 @@ const Landingpage = () => {
 
 
     return (
-        <div className='body' style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdroppath})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            minHeight: '100vh',
-            maxHeight:'150vh',
-            opacity:'0.9',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            transition: 'background-image 0.5s ease-in-out'}} >
+      <div className='body' style={{
+        backgroundImage: `url(https://image.tmdb.org/t/p/original/${backdroppath})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh',
+        maxHeight:'150vh',
+        opacity:'1',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        transition: 'background-image 0.5s ease-in-out'}} >
 
-        <GetMovies
-                sort_by={'popularity.desc'}
-                page={1}
-                //no need to track pageamount on landing page so empty lamda
-                updatePageAmount={() => ({})}
-                updateMoviesData={updateLandingMovies}
-                genres={[]}/>
+      <GetMovies
+      sort_by={'popularity.desc'}
+      page={1}
+      //no need to track pageamount on landing page so empty lamda
+      updatePageAmount={() => ({})}
+      updateMoviesData={updateLandingMovies}
+      genres={[]}/>
 
-          <div className='secondBody' style={{
+        <div className='secondBody' style={{
             overflowY:'hidden',
             width:'70%',
             display:'flex',
@@ -65,11 +65,11 @@ const Landingpage = () => {
             margin:'auto auto', 
             justifyContent:'center',
             marginTop:'20px'
-          }}>
+            }}>
 
-          {newsB === 'true' && (
-            <FkNews></FkNews>
-          )}
+          {/* {newsB === 'true' && (
+          <FkNews></FkNews>
+          )} */}
 
 
           <div className='rowContainer' style={{
@@ -81,21 +81,24 @@ const Landingpage = () => {
               margin: 'auto auto',
               width:'100%'}}>
 
-            
-              <div className='carouselContainer' style={{flexGrow:'1'}}>
-              {landingMovies.length > 0 && (
-                <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
-                )}
-              </div>
 
-              {reviewsB === 'true' && (
-                <ReviewsContainer></ReviewsContainer>
-              )}
+          <div className='carouselContainer' style={{flexGrow:'1'}}>
+          {landingMovies.length > 0 && (
+          <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
+          )}
+          </div>
+
+          {reviewsB === 'true' && (
+          <ReviewsContainer></ReviewsContainer>
+          )}
 
           </div>
-          </div>
+          {newsB === 'true' && (
+          <FkNews></FkNews>
+          )}
         </div>
-        
+      </div>
+
       );
 }
  
@@ -128,8 +131,8 @@ const FkNews = () => {
 const ReviewsContainer  = () => {
   return (
     <div className='reviewsContainer' style={{
-      width:'70%',
-      minWidth:'70%', 
+      width:'75%',
+      minWidth:'75%', 
       opacity:'0.80'
       }}>
 
