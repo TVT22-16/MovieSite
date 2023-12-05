@@ -146,7 +146,7 @@ const ReviewsContainer  = () => {
         margin: 'auto auto'
       }}>
       <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
-        <Reviews dropdownOn={false}/>
+        <Reviews dropdownOn={false} slicing={true}/>
       </div>
     </div>
     </div>

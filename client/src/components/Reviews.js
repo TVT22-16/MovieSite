@@ -9,7 +9,7 @@ import DeleteReview from './DeleteReview';
 
 const baseUrl = 'http://localhost:3001'
 
-const Reviews = ({movieid='', dropdownOn=true}) => {
+const Reviews = ({movieid='', dropdownOn=true, slicing=false}) => {
 
   const [username, setUsername] = useState(sessionStorage.getItem('username'));
   const [getReviewsUrl, setReviewsUrl] = useState(`${baseUrl}/reviews/getReviews?username=&movieid=${movieid}`);
@@ -29,10 +29,12 @@ const Reviews = ({movieid='', dropdownOn=true}) => {
   };
    
 
-  const fetchData = async () => {
+  const fetchData = async (slicing) => {
     try {
       const response = await axios.get(getReviewsUrl);
-      setReviews(response.data);
+
+      slicing === true ? (setReviews((response.data).slice(0,5))) : (setReviews(response.data));
+
       setReviewsWData([]);
     } catch (err) {
       console.error(err);
@@ -40,7 +42,7 @@ const Reviews = ({movieid='', dropdownOn=true}) => {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData(slicing);
   }, [getReviewsUrl]);
 
 
