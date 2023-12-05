@@ -57,6 +57,26 @@ const Landingpage = () => {
                 updateMoviesData={updateLandingMovies}
                 genres={[]}
             />
+        {newsB === 'true' && (
+
+          <div className='News' style={{
+          width: '70%',
+          height: '700px',
+          overflowY: 'scroll',
+          // marginLeft:'50%',
+          float:'right',
+          backgroundColor: 'white',
+          opacity: '0.75',
+          borderRadius: '10px',
+          marginBottom: '30px',
+          marginTop:'30px'}}>
+            
+          <FinnkinoFetch></FinnkinoFetch>
+          </div>
+          )}
+
+
+
         <div className='rowContainer' style={{
             display: 'flex',
             flexDirection: 'row',
@@ -66,6 +86,8 @@ const Landingpage = () => {
             width:'100%'
       
         }}>
+
+          
             <div className='carouselContainer' style={{width:'20%'}}>
             {landingMovies.length > 0 && (
               <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
@@ -88,7 +110,7 @@ const Landingpage = () => {
         </div>
 
 
-        {newsB === 'true' && (
+        {/* {newsB === 'true' && (
 
           <div className='News' style={{
           width: '70%',
@@ -103,7 +125,7 @@ const Landingpage = () => {
             
           <FinnkinoFetch></FinnkinoFetch>
           </div>
-        )}
+        )} */}
         </div>
         
       );
