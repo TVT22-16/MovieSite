@@ -15,8 +15,8 @@ const Landingpage = () => {
 
     const [searchParams] = useSearchParams();
 
-    const [reviewsB,setReviewsB] = useState(searchParams.get('reviews'));
-    const [newsB,setNewsB] = useState(searchParams.get('news'));
+    const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || 'true');
+    const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
 
 
 
