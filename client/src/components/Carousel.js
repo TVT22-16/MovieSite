@@ -13,9 +13,16 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
     updateBackdrop(currentMovie.backdrop_path);
   };
 
+  const updateMovies = (movies) => {
+    setSlicedMovies(movies.slice(0, 10));
+  }
+  
+  useEffect(() => {
+    updateMovies(movies);
+  }, [movies]);
+
 
   const openInfo = (id) => {
-    console.log(`Movie with id ${id}`);
 
     window.location.href = `/movieinfo/?id=${id}`;
   };
