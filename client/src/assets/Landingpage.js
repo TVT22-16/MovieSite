@@ -25,9 +25,16 @@ const Landingpage = () => {
 
     useEffect(() => {
       if (genre.length < 1){
-        setGenre(localStorage.getItem('genresUI'));
+        // setGenre(localStorage.getItem('genresUI'));
+        const savedGenres = (localStorage.getItem('genresUI'));
+        setGenre(savedGenres);
       }
     }, []);
+
+    useEffect(() => {
+      searchParams.set('genre', genre);
+      navigate(`?${searchParams.toString()}`);
+    }, [genre]);
 
 
     const updateReviewBool = () => {
@@ -148,6 +155,7 @@ const Landingpage = () => {
 }
 
  const SettingsButton = ({updateGenres,updateReviewBool,updateNewsBool,newsB, reviewsB, savePageSettings}) => {
+  
   const handleSelect = (eventKey, e) => {
     // Prevent the default behavior of closing the dropdown
     e.preventDefault();
