@@ -118,7 +118,7 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false}) => {
                 </Card.Text>
               )}
 
-            <CardFooter>{reviews[index].username}</CardFooter>
+            <CardFooter>{reviews[index].username === username ? ('My review'):(reviews[index].username)}</CardFooter>
 
 
             {reviews[index].username === username && dropdownOn === true &&  (
