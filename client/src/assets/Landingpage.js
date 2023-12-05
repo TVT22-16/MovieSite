@@ -14,14 +14,17 @@ const Landingpage = () => {
 
     const [backdroppath, setBackdroppath] = useState('');
 
-
     const [searchParams] = useSearchParams();
 
     const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || 'true');
+
     const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
 
-    // const [genre,setGenre] = useState(searchParams.get('genre') || '');
     const [genre,setGenre] = useState(searchParams.get('genre'));
+
+    const updateReviewBool = () =>{
+      reviewsB === 'true' ? (setReviewsB('false')):(setReviewsB('true'));
+    }
 
     const updateBackdrop = (p) => {
         setBackdroppath(p);
@@ -82,7 +85,7 @@ const Landingpage = () => {
             marginTop:'20px'
             }}>
 
-          <SettingsButton updateGenres={updateGenres}></SettingsButton>
+          <SettingsButton updateGenres={updateGenres} updateReviewBool={updateReviewBool}></SettingsButton>
           
 
 
@@ -119,7 +122,7 @@ const Landingpage = () => {
       );
 }
 
- const SettingsButton = ({updateGenres}) => {
+ const SettingsButton = ({updateGenres,updateReviewBool}) => {
   const handleSelect = (eventKey, e) => {
     // Prevent the default behavior of closing the dropdown
     e.preventDefault();
@@ -129,19 +132,19 @@ const Landingpage = () => {
   };
 
   return (
-<Dropdown onSelect={handleSelect} className="ms-auto">
-  <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-    {/* Three dots icon (ellipsis) */}
-    <span>&#8285;</span>
-  </Dropdown.Toggle>
+    <Dropdown onSelect={handleSelect} className="ms-auto">
+      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+        {/* Three dots icon (ellipsis) */}
+        <span>&#8285;</span>
+      </Dropdown.Toggle>
 
-  <Dropdown.Menu style={{ minWidth: 'auto', padding:'5px' }}>
-    {/* Add your settings options here */}
-    <GenrePicker updateGenres={updateGenres}/>
-    <Dropdown.Item eventKey="action2">Action 2</Dropdown.Item>
-    <Dropdown.Item eventKey="action3">Action 3</Dropdown.Item>
-  </Dropdown.Menu>
-</Dropdown>
+      <Dropdown.Menu style={{ minWidth: 'auto', padding:'5px' }}>
+        {/* Add your settings options here */}
+        <GenrePicker updateGenres={updateGenres}/>
+        <Dropdown.Item  onClick={() => updateReviewBool()}>Reviews on/off</Dropdown.Item>
+        <Dropdown.Item eventKey="action3">Action 3</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
 
 
   );
