@@ -5,8 +5,8 @@ import axios from 'axios';
 
 const GetMovies = ({sort_by='',page='',updatePageAmount='',updateMoviesData, genres=''}) => {
 
-    // use OR separator in query
-    let genresParam = genres.join('||');
+    // use OR separator in query and recognize %2C as separator
+    let genresParam = genres.join('||').replace(/,/g, '||');
         
     useEffect(() => {
 

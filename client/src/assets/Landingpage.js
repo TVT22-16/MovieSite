@@ -21,9 +21,7 @@ const Landingpage = () => {
     const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
 
     // const [genre,setGenre] = useState(searchParams.get('genre') || '');
-    const [genre,setGenre] = useState(searchParams.get('genre')) || '';
-
-
+    const [genre,setGenre] = useState(searchParams.get('genre'));
 
     const updateBackdrop = (p) => {
         setBackdroppath(p);
@@ -32,6 +30,7 @@ const Landingpage = () => {
     const navigate = useNavigate();
 
     const updateGenres = (g) => {
+      
       setGenre(g);
       // Update the URL with the new genre
       searchParams.set('genre', g);
