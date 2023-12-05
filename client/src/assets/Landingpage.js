@@ -82,7 +82,7 @@ const Landingpage = () => {
             marginTop:'20px'
             }}>
 
-          <SettingsButton style={{float:'right'}} updateGenres={updateGenres}></SettingsButton>
+          <SettingsButton updateGenres={updateGenres}></SettingsButton>
           
 
 
@@ -129,19 +129,21 @@ const Landingpage = () => {
   };
 
   return (
-    <Dropdown onSelect={handleSelect}>
-      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-        {/* Three dots icon (ellipsis) */}
-        <span>&#8285;</span>
-      </Dropdown.Toggle>
+<Dropdown onSelect={handleSelect} className="ms-auto">
+  <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+    {/* Three dots icon (ellipsis) */}
+    <span>&#8285;</span>
+  </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        {/* Add your settings options here */}
-        <GenrePicker updateGenres={updateGenres}/>
-        <Dropdown.Item eventKey="action2">Action 2</Dropdown.Item>
-        <Dropdown.Item eventKey="action3">Action 3</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+  <Dropdown.Menu style={{ minWidth: 'auto', padding:'5px' }}>
+    {/* Add your settings options here */}
+    <GenrePicker updateGenres={updateGenres}/>
+    <Dropdown.Item eventKey="action2">Action 2</Dropdown.Item>
+    <Dropdown.Item eventKey="action3">Action 3</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+
+
   );
 };
 
