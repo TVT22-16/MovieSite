@@ -4,6 +4,7 @@ import CarouselBS from '../components/Carousel';
 import FinnkinoFetch from '../components/FinnkinoFetch';
 import Reviews from '../components/Reviews';
 import { useSearchParams } from 'react-router-dom';
+import GenrePicker from '../components/GenrePicker';
 
 
 const Landingpage = () => {
@@ -18,7 +19,8 @@ const Landingpage = () => {
     const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || 'true');
     const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
 
-    const [genre,setGenre] = useState(searchParams.get('genre') || '');
+    // const [genre,setGenre] = useState(searchParams.get('genre') || '');
+    const [genre,setGenre] = useState([]);
 
 
 
@@ -26,7 +28,12 @@ const Landingpage = () => {
         setBackdroppath(p);
     }
 
+    const updateGenres  = (g) => {
+      setGenre(g);
+    }
+
     const updateLandingMovies = (movies) => {
+        console.log(movies);
         setLandingMovies(movies);
     }
      
@@ -69,9 +76,9 @@ const Landingpage = () => {
             marginTop:'20px'
             }}>
 
-          {/* {newsB === 'true' && (
-          <FkNews></FkNews>
-          )} */}
+
+          <GenrePicker updateGenres={updateGenres}></GenrePicker>
+
 
 
           <div className='rowContainer' style={{

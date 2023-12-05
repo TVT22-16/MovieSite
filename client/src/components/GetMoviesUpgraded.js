@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 
-const GetMovies = ({sort_by,page,updatePageAmount,updateMoviesData, genres}) => {
+const GetMovies = ({sort_by='',page='',updatePageAmount='',updateMoviesData, genres=''}) => {
 
 
     // use OR separator in query
