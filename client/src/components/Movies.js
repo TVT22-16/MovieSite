@@ -21,7 +21,6 @@ const Movies = () => {
   };
 
 
-  const [popularMovies, setPopularMovies] = useState([]);
 
   const [responsePageAmount, setResponsePageAmount] = useState({});
 

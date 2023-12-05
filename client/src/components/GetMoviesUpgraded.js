@@ -10,9 +10,6 @@ const GetMovies = ({sort_by,page,updatePageAmount,updateMoviesData, genres}) => 
     let genresParam = genres.join('||');
 
 
-    // const [movies, setMovies] = useState([]);
-
-
     useEffect(() => {
 
         axios.get(`http://localhost:3001/movies/getMovies?page=${page}&sort_by=${sort_by}&with_genres=${genresParam}`).then(response =>{

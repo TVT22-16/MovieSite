@@ -18,6 +18,8 @@ const Landingpage = () => {
     const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || 'true');
     const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
 
+    const [genre,setGenre] = useState(searchParams.get('genre') || '');
+
 
 
     const updateBackdrop = (p) => {
@@ -50,12 +52,12 @@ const Landingpage = () => {
         transition: 'background-image 0.5s ease-in-out'}} >
 
       <GetMovies
-      sort_by={'popularity.desc'}
-      page={1}
-      //no need to track pageamount on landing page so empty lamda
-      updatePageAmount={() => ({})}
-      updateMoviesData={updateLandingMovies}
-      genres={[]}/>
+          sort_by={'popularity.desc'}
+          page={1}
+          //no need to track pageamount on landing page so empty lamda
+          updatePageAmount={() => ({})}
+          updateMoviesData={updateLandingMovies}
+          genres={[genre]}/>
 
         <div className='secondBody' style={{
             overflowY:'hidden',
@@ -83,9 +85,9 @@ const Landingpage = () => {
 
 
           <div className='carouselContainer' style={{flexGrow:'1'}}>
-          {landingMovies.length > 0 && (
-          <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
-          )}
+            {landingMovies.length > 0 && (
+            <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
+            )}
           </div>
 
           {reviewsB === 'true' && (
@@ -93,9 +95,11 @@ const Landingpage = () => {
           )}
 
           </div>
+
           {newsB === 'true' && (
           <FkNews></FkNews>
           )}
+
         </div>
       </div>
 
