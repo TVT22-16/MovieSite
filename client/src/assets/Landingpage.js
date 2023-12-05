@@ -97,7 +97,7 @@ const Landingpage = () => {
             marginTop:'20px'
             }}>
 
-          <SettingsButton updateGenres={updateGenres} updateReviewBool={updateReviewBool} updateNewsBool={updateNewsBool}></SettingsButton>
+          <SettingsButton reviewsB={reviewsB} newsB={newsB} updateGenres={updateGenres} updateReviewBool={updateReviewBool} updateNewsBool={updateNewsBool}></SettingsButton>
           
 
 
@@ -134,7 +134,7 @@ const Landingpage = () => {
       );
 }
 
- const SettingsButton = ({updateGenres,updateReviewBool,updateNewsBool}) => {
+ const SettingsButton = ({updateGenres,updateReviewBool,updateNewsBool,newsB, reviewsB}) => {
   const handleSelect = (eventKey, e) => {
     // Prevent the default behavior of closing the dropdown
     e.preventDefault();
@@ -150,11 +150,27 @@ const Landingpage = () => {
         <span>&#8285;</span>
       </Dropdown.Toggle>
 
-      <Dropdown.Menu style={{ minWidth: 'auto', padding:'5px' }}>
+      <Dropdown.Menu className="custom-dropdown-menu"  style={{ minWidth: 'auto', padding:'5px'}}>
         {/* Add your settings options here */}
         <GenrePicker updateGenres={updateGenres}/>
-        <Dropdown.Item  onClick={() => updateReviewBool()}>Reviews on/off</Dropdown.Item>
-        <Dropdown.Item onClick={() => updateNewsBool()}>News on/off</Dropdown.Item>
+
+        <Dropdown.Item
+          className="custom-dropdown-item"
+          style={{
+          borderRadius: '5px',
+          ...(reviewsB === 'false' && { backgroundColor: 'red' }),}}onClick={() => updateReviewBool()}
+          >
+          Reviews on/off
+        </Dropdown.Item>
+        
+        <Dropdown.Item
+          className="custom-dropdown-item"
+          style={{
+          borderRadius: '5px',
+          ...(newsB === 'false' && { backgroundColor: 'red' }),}}onClick={() => updateNewsBool()}
+          >
+          Reviews on/off
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
 
