@@ -150,7 +150,7 @@ const Landingpage = () => {
         <span>&#8285;</span>
       </Dropdown.Toggle>
 
-      <Dropdown.Menu className="custom-dropdown-menu"  style={{ minWidth: 'auto', padding:'5px'}}>
+      <Dropdown.Menu className="custom-dropdown-menu"  style={{ minWidth: 'auto',padding:'5px'}}>
         {/* Add your settings options here */}
         <GenrePicker updateGenres={updateGenres}/>
 
@@ -158,7 +158,8 @@ const Landingpage = () => {
           className="custom-dropdown-item"
           style={{
           borderRadius: '5px',
-          ...(reviewsB === 'false' && { backgroundColor: 'red' }),}}onClick={() => updateReviewBool()}
+          ...(reviewsB === 'false' && { backgroundColor: 'red' }),}}
+          onClick={() => updateReviewBool()}
           >
           Reviews on/off
         </Dropdown.Item>
@@ -167,7 +168,8 @@ const Landingpage = () => {
           className="custom-dropdown-item"
           style={{
           borderRadius: '5px',
-          ...(newsB === 'false' && { backgroundColor: 'red' }),}}onClick={() => updateNewsBool()}
+          ...(newsB === 'false' && { backgroundColor: 'red' }),}}
+          onClick={() => updateNewsBool()}
           >
           Reviews on/off
         </Dropdown.Item>
