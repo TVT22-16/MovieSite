@@ -26,6 +26,10 @@ const Landingpage = () => {
       reviewsB === 'true' ? (setReviewsB('false')):(setReviewsB('true'));
     }
 
+    const updateNewsBool = () =>{
+      newsB === 'true' ? (setNewsB('false')):(setNewsB('true'));
+    }
+
     const updateBackdrop = (p) => {
         setBackdroppath(p);
     }
@@ -85,7 +89,7 @@ const Landingpage = () => {
             marginTop:'20px'
             }}>
 
-          <SettingsButton updateGenres={updateGenres} updateReviewBool={updateReviewBool}></SettingsButton>
+          <SettingsButton updateGenres={updateGenres} updateReviewBool={updateReviewBool} updateNewsBool={updateNewsBool}></SettingsButton>
           
 
 
@@ -122,7 +126,7 @@ const Landingpage = () => {
       );
 }
 
- const SettingsButton = ({updateGenres,updateReviewBool}) => {
+ const SettingsButton = ({updateGenres,updateReviewBool,updateNewsBool}) => {
   const handleSelect = (eventKey, e) => {
     // Prevent the default behavior of closing the dropdown
     e.preventDefault();
@@ -142,7 +146,7 @@ const Landingpage = () => {
         {/* Add your settings options here */}
         <GenrePicker updateGenres={updateGenres}/>
         <Dropdown.Item  onClick={() => updateReviewBool()}>Reviews on/off</Dropdown.Item>
-        <Dropdown.Item eventKey="action3">Action 3</Dropdown.Item>
+        <Dropdown.Item onClick={() => updateNewsBool()}>News on/off</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
 
