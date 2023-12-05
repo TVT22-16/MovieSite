@@ -36,14 +36,13 @@ const FinnkinoFetch = () => {
   }, []);
 
   return (
-    <div className='wutwut' style={{width:'90%', margin: '5px auto', padding:'20px'}}>
+    <>
       {news ? (
-        <div>
-          
+        <>
           {news.map((article, index) => (
             article.Title.includes("Leffauutiset") && article.HTMLLead.length > 0 &&(
 
-                    <Card key={index} id={index} style={{marginTop:'20px',marginBottom:'20px'}}>
+                    <Card key={index} id={index} style={{}}>
                       <Card.Title style={{margin:'auto auto '}}>
                       <a href={article.ArticleURL} style={{color:'black'}}><h4 style={{fontWeight:'700'}}>{article.Title.slice(13)}</h4></a>
                       </Card.Title>
@@ -54,11 +53,11 @@ const FinnkinoFetch = () => {
                     </Card>
             )
           ))}
-        </div>
+        </>
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+  </>
   );
   
 };

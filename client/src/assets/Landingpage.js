@@ -91,14 +91,18 @@ const Landingpage = () => {
 
 const FkNews = () => {
   return (
+  
     <div className='News' style={{
       width: '70%',
       height: '700px',
       overflowY: 'scroll',
       // marginLeft:'50%',
-      float:'right',
       backgroundColor: 'white',
       opacity: '0.75',
+      display:'flex',
+      flexDirection:'column',
+      gap:'30px',
+      padding:'30px',
       borderRadius: '10px',
       marginBottom: '30px',
       marginTop:'30px'}}>
