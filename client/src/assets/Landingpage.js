@@ -3,8 +3,9 @@ import GetMovies from '../components/GetMoviesUpgraded';
 import CarouselBS from '../components/Carousel';
 import FinnkinoFetch from '../components/FinnkinoFetch';
 import Reviews from '../components/Reviews';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import GenrePicker from '../components/GenrePicker';
+import { Dropdown } from 'react-bootstrap';
 
 
 const Landingpage = () => {
@@ -20,7 +21,7 @@ const Landingpage = () => {
     const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
 
     // const [genre,setGenre] = useState(searchParams.get('genre') || '');
-    const [genre,setGenre] = useState([]);
+    const [genre,setGenre] = useState(searchParams.get('genre')) || '';
 
 
 
@@ -28,12 +29,18 @@ const Landingpage = () => {
         setBackdroppath(p);
     }
 
-    const updateGenres  = (g) => {
+    const navigate = useNavigate();
+
+    const updateGenres = (g) => {
       setGenre(g);
-    }
+      // Update the URL with the new genre
+      searchParams.set('genre', g);
+      navigate(`?${searchParams.toString()}`);
+    };
+  
 
     const updateLandingMovies = (movies) => {
-        console.log(movies);
+
         setLandingMovies(movies);
     }
      
@@ -76,8 +83,8 @@ const Landingpage = () => {
             marginTop:'20px'
             }}>
 
-
-          <GenrePicker updateGenres={updateGenres}></GenrePicker>
+          <SettingsButton style={{float:'right'}} updateGenres={updateGenres}></SettingsButton>
+          
 
 
 
@@ -112,7 +119,32 @@ const Landingpage = () => {
 
       );
 }
- 
+
+ const SettingsButton = ({updateGenres}) => {
+  const handleSelect = (eventKey, e) => {
+    // Prevent the default behavior of closing the dropdown
+    e.preventDefault();
+
+    // Add your custom logic for handling the selected item here
+    console.log(`Selected option: ${eventKey}`);
+  };
+
+  return (
+    <Dropdown onSelect={handleSelect}>
+      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+        {/* Three dots icon (ellipsis) */}
+        <span>&#8285;</span>
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        {/* Add your settings options here */}
+        <GenrePicker updateGenres={updateGenres}/>
+        <Dropdown.Item eventKey="action2">Action 2</Dropdown.Item>
+        <Dropdown.Item eventKey="action3">Action 3</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  );
+};
 
 const FkNews = () => {
   return (

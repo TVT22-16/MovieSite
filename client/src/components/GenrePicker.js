@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Dropdown, Button } from 'react-bootstrap';
 
-const GenrePicker = ({updateGenres}) => {
-  const [selectedGenres, setSelectedGenres] = useState([]);
+const GenrePicker = ({updateGenres,currentGenres=''}) => {
+  const [selectedGenres, setSelectedGenres] = useState(currentGenres) || [];
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
