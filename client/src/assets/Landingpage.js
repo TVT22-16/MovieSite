@@ -55,80 +55,77 @@ const Landingpage = () => {
                 //no need to track pageamount on landing page so empty lamda
                 updatePageAmount={() => ({})}
                 updateMoviesData={updateLandingMovies}
-                genres={[]}
-            />
-        {newsB === 'true' && (
+                genres={[]}/>
 
-          <div className='News' style={{
-          width: '70%',
-          height: '700px',
-          overflowY: 'scroll',
-          // marginLeft:'50%',
-          float:'right',
-          backgroundColor: 'white',
-          opacity: '0.75',
-          borderRadius: '10px',
-          marginBottom: '30px',
-          marginTop:'30px'}}>
-            
-          <FinnkinoFetch></FinnkinoFetch>
-          </div>
+          {newsB === 'true' && (
+            <FkNews></FkNews>
           )}
 
 
+          <div className='rowContainer' style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',  // Add this line for horizontal centering
+              margin: 'auto auto',
+              width:'100%'}}>
 
-        <div className='rowContainer' style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',  // Add this line for horizontal centering
-            margin: 'auto auto',
-            width:'100%'
-      
-        }}>
-
-          
-            <div className='carouselContainer' style={{width:'20%'}}>
-            {landingMovies.length > 0 && (
-              <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
-              )}
-            </div>
-
+            
+              <div className='carouselContainer' style={{width:'20%'}}>
+              {landingMovies.length > 0 && (
+                <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
+                )}
+              </div>
 
               {reviewsB === 'true' && (
-
-              <div style={{width:'55%', padding:'15px', opacity:'0.80'}}>
-              {/* <h1 style={{margin:'auto auto', padding:'10px',width:'98%',fontWeight:'700', color:'white', backgroundColor:'black', opacity:'0.8', borderRadius:'5px', marginBottom:'5px'}}>Recent Reviews</h1> */}
-              <div style={{height:'400px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'100%', margin: 'auto auto'}}>
-                <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
-                  <Reviews dropdownOn={false}/>
-                </div>
-              </div>
-              </div>
-
+                <ReviewsContainer></ReviewsContainer>
               )}
-        </div>
 
-
-        {/* {newsB === 'true' && (
-
-          <div className='News' style={{
-          width: '70%',
-          height: '700px',
-          overflowY: 'scroll',
-          // marginLeft:'50%',
-          float:'right',
-          backgroundColor: 'white',
-          opacity: '0.75',
-          borderRadius: '10px',
-          marginBottom: '30px'}}>
-            
-          <FinnkinoFetch></FinnkinoFetch>
           </div>
-        )} */}
+
         </div>
         
       );
 }
  
+
+const FkNews = () => {
+  return (
+    <div className='News' style={{
+      width: '70%',
+      height: '700px',
+      overflowY: 'scroll',
+      // marginLeft:'50%',
+      float:'right',
+      backgroundColor: 'white',
+      opacity: '0.75',
+      borderRadius: '10px',
+      marginBottom: '30px',
+      marginTop:'30px'}}>
+        
+      <FinnkinoFetch></FinnkinoFetch>
+      </div>
+
+    );
+}
+ 
+const ReviewsContainer  = () => {
+  return (
+    <div className='reviewsContainer' style={{width:'55%', padding:'15px', opacity:'0.80'}}>
+    {/* <h1 style={{margin:'auto auto', padding:'10px',width:'98%',fontWeight:'700', color:'white', backgroundColor:'black', opacity:'0.8', borderRadius:'5px', marginBottom:'5px'}}>Recent Reviews</h1> */}
+    <div style={{height:'400px', borderRadius:'5px',overflowY:'scroll', display:'flex', flexDirection:'column' ,width:'100%', margin: 'auto auto'}}>
+      <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
+        <Reviews dropdownOn={false}/>
+      </div>
+    </div>
+    </div>
+    );
+}
+ 
+
+
+
+
+
+
 export default Landingpage;
