@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import ReviewForm from './ReviewForm';
 import GetTrailers from './GetTrailers';
 import Reviews from './Reviews';
-
+import WatchlistButton from './WatchList';
 
 
 //https://webtips.dev/solutions/get-query-params-in-react
@@ -78,7 +78,14 @@ const MovieInfo = () => {
 
         <h1 id='movieTitle'>{movieData.title}</h1>
         <h2 id='voteAverage'>{movieData.vote_average}</h2>
-
+        <WatchlistButton
+          username= {sessionStorage.getItem('username')}  // Replace with the actual username
+          moviedb_movieid={movieData.id}
+          title={movieData.title}
+          overview={movieData.overview}
+          release_date={movieData.release_date}
+          poster_path={movieData.poster_path}
+        />
       </div>
 
         {/* <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" /> */}
@@ -99,7 +106,7 @@ const MovieInfo = () => {
         <ReviewForm moviedb_movieid={params}/>
           <div style={{display: 'flex',flexDirection:'column',width:'80%', gap:'20px', alignItems:'center'}}>
             <Reviews movieid={params}> </Reviews>
-
+            
           </div>
 
 
