@@ -18,7 +18,7 @@
     justify-content: space-between; /* Align items to start and end of the container */
     align-items: center; /* Center vertically */
     background-color: #2c3e50; /* Change the background color to a cool color */
-    padding: 15px; /* Add padding for spacing */
+    padding: 6px; /* Add padding for spacing */
     border-radius: 8px; /* Add rounded corners for a modern look */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
   }
@@ -27,9 +27,19 @@
     font-weight: 600;
     color: #ecf0f1; /* Set text color to a light color */
     font-size: 24px; /* Increase font size */
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    margin-left: 1%;
+
   }
   
-  #titleVoteContainer > #voteAverage {
+  #voteAverage {
     font-weight: 600;
     border-radius: 50%;
     display: flex;

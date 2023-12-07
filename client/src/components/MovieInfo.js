@@ -76,8 +76,7 @@ const MovieInfo = () => {
 
       <div id='titleVoteContainer'>
 
-        <h1 id='movieTitle'>{movieData.title}</h1>
-        <h2 id='voteAverage'>{movieData.vote_average}</h2>
+        <h1 id='movieTitle'>{movieData.title}  <h2 id='voteAverage'>{movieData.vote_average}</h2></h1>
         <WatchlistButton
           username= {sessionStorage.getItem('username')}  // Replace with the actual username
           moviedb_movieid={movieData.id}
