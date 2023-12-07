@@ -10,19 +10,19 @@
 }
 
 
-#titleVoteContainer {
+/* #titleVoteContainer {
     width: 60%;
     margin-top: 1%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between; /* Align items to start and end of the container */
-    align-items: center; /* Center vertically */
-    background-color: #2c3e50; /* Change the background color to a cool color */
-    padding: 6px; /* Add padding for spacing */
-    border-radius: 8px; /* Add rounded corners for a modern look */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+    justify-content: space-between; 
+    align-items: center;
+    background-color: #2c3e50; 
+    padding: 6px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   }
-  
+   */
   #titleVoteContainer > #movieTitle {
     font-weight: 600;
     color: #ecf0f1; /* Set text color to a light color */
