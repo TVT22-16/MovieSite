@@ -36,8 +36,10 @@ const Header = ({ loggedIn }) => {
     const body = document.body;
     if (isDarkMode) {
       body.classList.add('dark-mode');
+      body.classList.remove('light-mode');
     } else {
       body.classList.remove('dark-mode');
+      body.classList.add('light-mode');
     }
   };
 
@@ -54,19 +56,19 @@ const Header = ({ loggedIn }) => {
 
   return (
     <header>
-      <Navbar expand="lg" className={`bg-body-tertiary ${isDarkMode ? 'dark-mode' : ''}`}>
+      <Navbar expand="lg" className={`bg-body-tertiary ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
         <Container>
-          <Navbar.Brand href="/">MovieSite</Navbar.Brand>
+          <Navbar.Brand className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/">MovieSite</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="custom-nav">
 
             {jwtToken.value.length > 0 ? (
               <>
-                <Nav.Link href="/home">Movies</Nav.Link>
-                <Nav.Link href="/reviews">Reviews</Nav.Link>
-                <Nav.Link href="/groups">Groups</Nav.Link>
-                <NavDropdown title={username} id="basic-nav-dropdown">
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/home">Movies</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/reviews">Reviews</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/groups">Groups</Nav.Link>
+                <NavDropdown className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} title={username} id="custom-nav-dropdown">
                   <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                   <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                   <NavDropdown.Divider />

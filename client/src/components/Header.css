@@ -3,9 +3,24 @@
 }
 
 .dark-mode {
-    background-color: black; /* Dark background color for dark mode */
+    background-image: linear-gradient( 94.3deg,  rgba(26,33,64,1) 10.9%, rgba(81,84,115,1) 87.1% );
     color: white; /* Light text color for dark mode */
   }
+
+.light-mode {
+    background: rgb(63,94,251);
+    background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
+    color: black; /* Light text color for dark mode */
+  }
+
 .dark-mode-text{
+    font-weight: 700;
+    color: white;
+
+}
+
+.light-mode-text{
     color: black;
+    font-weight: 700;
+
 }
