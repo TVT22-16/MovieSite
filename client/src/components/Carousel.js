@@ -13,9 +13,16 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
     updateBackdrop(currentMovie.backdrop_path);
   };
 
+  const updateMovies = (movies) => {
+    setSlicedMovies(movies.slice(0, 10));
+  }
+  
+  useEffect(() => {
+    updateMovies(movies);
+  }, [movies]);
+
 
   const openInfo = (id) => {
-    console.log(`Movie with id ${id}`);
 
     window.location.href = `/movieinfo/?id=${id}`;
   };
@@ -36,7 +43,8 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
       fade={false}
       interval={8000}
       onSelect={handleSelect}
-      style={{width:'20%',opacity: fadeIn ? 1 : 0, transition: 'opacity 0.5s ease' }} 
+      style={{width:'100%',opacity: fadeIn ? 1 : 0, transition: 'opacity 0.5s ease', margin: 'auto auto',
+      flexGrow:'1', marginTop:'10px', marginBottom: '10px'}} 
     >
       {slicedMovies.map((movie, index) => (
         <Carousel.Item key={index}>
@@ -47,6 +55,9 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
             style={{
               maxWidth: '100%',
               objectFit: 'cover',
+              height:'400px',
+              borderRadius:'5px',
+              width:'auto'
              }}
             onClick={() => openInfo(movie.id)}
           />

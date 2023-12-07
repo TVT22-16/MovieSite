@@ -21,7 +21,6 @@ const Movies = () => {
   };
 
 
-  const [popularMovies, setPopularMovies] = useState([]);
 
   const [responsePageAmount, setResponsePageAmount] = useState({});
 
@@ -126,7 +125,7 @@ const Movies = () => {
           <>
 
           {/* fetch moviedata and update movies with "updateMoviesData"*/}
-          <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount} updateMoviesData={updateMoviesData} genres={genres}/>
+          <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount} updateMoviesData={updateMoviesData} genres={[genres]}/>
 
             {/* display moviedata */}
             {moviesData.map(movie => (
