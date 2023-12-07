@@ -106,46 +106,32 @@ const Movies = () => {
 
       </div>
 
-      
-      {/* <div className='pageComps' style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center', // Center items vertically
-          width: '100%', // Set width to 100%
-          height: 'auto',
-          marginBottom: '20px',
-          padding: '15px',
-          flexWrap: 'wrap',
-          gap: '10px',
-          margin: 'auto', // Center the div horizontally
-          }}> */}
-              <div style={{
-                  width:'50%',
-                  display: 'flex',
-                  flexDirection:'column',
-                  alignItems: 'center',
-                  justifyContent:'center',
-                  gap:'10px',
-                  margin:'auto',
-                  marginBottom:'5px',
-                  marginTop:'20px'
-                }}>
+          <div style={{
+              width:'50%',
+              display: 'flex',
+              flexDirection:'column',
+              alignItems: 'center',
+              justifyContent:'center',
+              gap:'10px',
+              margin:'auto',
+              marginBottom:'5px',
+              marginTop:'20px'
+            }}>
 
-                  <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage} />
-                  {/* <Badge style={{maxHeight: '100%',margin:'auto auto' ,fontSize: '15px', padding: '5px'}}>{page}</Badge> */}
+              <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage} />
+              {/* <Badge style={{maxHeight: '100%',margin:'auto auto' ,fontSize: '15px', padding: '5px'}}>{page}</Badge> */}
 
-              </div>
-{/* 
-</div> */}
+        </div>
+
 
       <ul className='listCont'>
         
         {searchResults.length > 0 ? (
           // Render search results if available
           searchResults.map(movie => (
-              <div key={movie.id}>
-                <BootstrapCard key={movie.id} movie={movie} cardWidth = '15rem'></BootstrapCard>
-              </div>
+            <div key={movie.id} onClick={()=>openInfo(movie.id)}>
+            <BootstrapCard key={movie.id} movie={movie} cardWidth = '14rem'></BootstrapCard>
+            </div>
           ))
           //else Render popular movies if no search results
         ) : (
@@ -156,7 +142,10 @@ const Movies = () => {
             {/* display moviedata */}
             {moviesData.map(movie => (
 
-               <BootstrapCard key={movie.id} movie={movie} cardWidth = '14rem'></BootstrapCard>
+              <div key={movie.id} onClick={()=>openInfo(movie.id)}>
+                  <BootstrapCard key={movie.id} movie={movie} cardWidth = '14rem'></BootstrapCard>
+              </div>
+
 
             )) }
           </>
@@ -165,21 +154,21 @@ const Movies = () => {
 
 
       <div style={{
-                  width:'50%',
-                  display: 'flex',
-                  flexDirection:'column',
-                  alignItems: 'center',
-                  justifyContent:'center',
-                  gap:'10px',
-                  margin:'auto',
-                  marginBottom:'5px',
-                  marginTop:'20px'
-                }}>
+          width:'50%',
+          display: 'flex',
+          flexDirection:'column',
+          alignItems: 'center',
+          justifyContent:'center',
+          gap:'10px',
+          margin:'auto',
+          marginBottom:'5px',
+          marginTop:'20px'
+        }}>
 
-                  <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage} />
-                  {/* <Badge style={{maxHeight: '100%',margin:'auto auto' ,fontSize: '15px', padding: '5px'}}>{page}</Badge> */}
+        <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage} />
+        {/* <Badge style={{maxHeight: '100%',margin:'auto auto' ,fontSize: '15px', padding: '5px'}}>{page}</Badge> */}
 
-              </div>
+      </div>
 
 
       
