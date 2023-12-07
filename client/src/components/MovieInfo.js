@@ -128,18 +128,19 @@ const MovieInfo = () => {
           <GetTrailers id={movieData.id} />
 
           <ul id='infoContainer'>
-                <li id='tagline'>{movieData.tagline}</li>
+                <li id='tagline'>{movieData.tagline} </li>
                 <li id='overview'>{movieData.overview}</li>
-                {/* <li id='status'>Status: {movieData.status}</li> */}
-                {/* <li >{movieData.genres}</li> */}
                 <li id='releaseDate'>Release date: {movieData.release_date}</li>
                 {/* Map genres if defined */}
-                <li style={{ display: 'flex', flexDirection: 'row', gap: '2px', flexWrap:'wrap'}}>
+
+                <li style={{marginTop:'5px',display: 'flex', flexDirection: 'row', gap: '2px', flexWrap:'wrap'}}>
                   {movieData.genres &&
                     movieData.genres.map((genre) => (
                   <Badge key={genre.id} bg="secondary">{genre.name}</Badge>
                     ))}
                 </li>
+
+
           </ul>
  
         </div>
