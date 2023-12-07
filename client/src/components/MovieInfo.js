@@ -6,6 +6,7 @@ import ReviewForm from './ReviewForm';
 import GetTrailers from './GetTrailers';
 import Reviews from './Reviews';
 import WatchlistButton from './WatchList';
+import { Badge } from 'react-bootstrap';
 
 
 //https://webtips.dev/solutions/get-query-params-in-react
@@ -74,7 +75,7 @@ const MovieInfo = () => {
         minHeight: '100vh', 
       }}>
 
-      <div id='titleVoteContainer'>
+      <div id='titleVoteContainer' style={{overflow:'wrap'}}>
 
         <h1 id='movieTitle'>{movieData.title}  <h2 id='voteAverage'>{movieData.vote_average}</h2></h1>
         <WatchlistButton
@@ -99,8 +100,15 @@ const MovieInfo = () => {
                 {/* <li id='status'>Status: {movieData.status}</li> */}
                 {/* <li >{movieData.genres}</li> */}
                 <li id='releaseDate'>Release date: {movieData.release_date}</li>
+                {/* Map genres if defined */}
+                <li style={{ display: 'flex', flexDirection: 'row', gap: '2px', flexWrap:'wrap'}}>
+                  {movieData.genres &&
+                    movieData.genres.map((genre) => (
+                  <Badge key={genre.id} bg="secondary">{genre.name}</Badge>
+                    ))}
+                </li>
           </ul>
-
+ 
         </div>
         <ReviewForm moviedb_movieid={params}/>
           <div style={{display: 'flex',flexDirection:'column',width:'80%', gap:'20px', alignItems:'center'}}>
