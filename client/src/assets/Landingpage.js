@@ -22,17 +22,6 @@ const Landingpage = () => {
     const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
 
     const [genre,setGenre] = useState(searchParams.get('genre') || '');
-
-    // useEffect(() => {
-    //   if (genre.length < 1){
-    //     setGenre(localStorage.getItem('genresUI'));
-    //     const savedGenres = (localStorage.getItem('genresUI'));
-    //     setGenre(savedGenres);
-    //     console.log('savedGenres',savedGenres);
-    //   }
-
-    //   console.log('genres',genre);
-    // }, []);
      
 
     useEffect(() => {
@@ -40,18 +29,14 @@ const Landingpage = () => {
         const savedGenres = localStorage.getItem('genresUI');
         setGenre(savedGenres || ''); // Use the savedGenres or default to an empty string
       }
-    }, [genre]);
-
-    useEffect(() => {
-      // if(genre.length < 1){
-      //   setGenre('');
-      //   const savedGenres = (localStorage.getItem('genresUI'));
-      //   setGenre(savedGenres);
-      // }
 
       searchParams.set('genre', genre);
       navigate(`?${searchParams.toString()}`);
     }, [genre]);
+
+    // useEffect(() => {
+      
+    // }, []);
 
 
     const updateReviewBool = () => {
@@ -75,8 +60,6 @@ const Landingpage = () => {
       localStorage.setItem('newsUI', newsB);
       localStorage.setItem('reviewsUI', reviewsB);
       localStorage.setItem('genresUI', genre)
-
-      // console.log(localStorage.getItem('genresUI'));
     }
 
     const updateBackdrop = (p) => {

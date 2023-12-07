@@ -3,9 +3,6 @@ import { Dropdown, Button } from 'react-bootstrap';
 
 const GenrePicker = ({updateGenres,currentGenres=''}) => {
   
-  useEffect(() => {
-    console.log('Current genres',currentGenres);
-  }, [currentGenres]);
 
   const [selectedGenres, setSelectedGenres] = useState(currentGenres ? currentGenres : []);
 
