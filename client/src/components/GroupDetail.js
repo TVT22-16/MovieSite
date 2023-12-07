@@ -4,6 +4,8 @@ import axios from 'axios';
 import Crown from './images/crown.png';
 import './GroupDetail.css';
 import FinnkinoFetch from './FinnkinoFetch';
+import { Dropdown } from 'react-bootstrap';
+
 
 function GroupDetail() {
   const { group_name } = useParams();
@@ -11,6 +13,7 @@ function GroupDetail() {
   const [reviews, setReviews] = useState([]);
   const [movies, setMovies] = useState([]);
   const [isNewsToggled, setIsNewsToggled] = useState(true);
+  const [isReviewsToggled, setIsReviewsToggled] = useState(true);
   const [joinRequests, setJoinRequests] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const loggedInUsername = sessionStorage.getItem('username');
@@ -139,32 +142,63 @@ function GroupDetail() {
     fetchMoviesForReviews();
   }, [reviews]);
 
-  const handleToggle = () => {
+  const handleNewsToggle = () => {
     setIsNewsToggled(!isNewsToggled);
   };
-
+  const handleReviewsToggle = () => {
+    setIsReviewsToggled(!isReviewsToggled);
+  };
   const toggleButton = (
-    <button onClick={handleToggle}>
-      {isNewsToggled ? 'Hide News' : 'Show News'}
-    </button>
-  );
+    <Dropdown onSelect={(eventKey, e) => e.preventDefault()} className="ms-auto">
+      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+        {/* Three dots icon (ellipsis) */}
+        <span>&#8285;</span>
+      </Dropdown.Toggle>
 
+      <Dropdown.Menu className="custom-dropdown-menu" style={{ minWidth: 'auto', padding: '5px' }}>
+        <Dropdown.Item
+          className="custom-dropdown-item"
+          style={{
+            borderRadius: '5px',
+            ...(isNewsToggled && { backgroundColor: 'red' }), // Step 3
+          }}
+          onClick={handleNewsToggle}
+        >
+          {isNewsToggled ? 'Hide News' : 'Show News'}
+        </Dropdown.Item>
+        <Dropdown.Item
+          className="custom-dropdown-item"
+          style={{
+            borderRadius: '5px',
+            ...(isReviewsToggled && { backgroundColor: 'red' }), // Step 3
+          }}
+          onClick={handleReviewsToggle}
+        >
+          {isReviewsToggled ? 'Hide Reviews' : 'Show Reviews'}
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  );
   const newsComponent = isNewsToggled && <FinnkinoFetch />;
+  const reviewsComponent = isReviewsToggled && (
+  <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
+    {/* Display group reviews on the left side */}
+    <h3>Group Reviews</h3>
+    <ul>
+      {reviews.map((review, index) => (
+        <li key={index}>
+          <strong>{review.username}</strong> - <strong>{movies[index]?.original_title}</strong> - {review.review}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         {/* Display group reviews on the left side */}
-        <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
-          <h3>Group Reviews</h3>
-          <ul>
-            {reviews.map((review, index) => (
-              <li key={index}>
-                <strong>{review.username}</strong> - <strong>{movies[index]?.original_title}</strong> - {review.review}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {reviewsComponent}
 
         <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
           <h3>Group Members</h3>
@@ -188,40 +222,46 @@ function GroupDetail() {
 
         </div>
       </div>
-
-      {/* Display join requests at the bottom */}
-      <div style={{ width: '100%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
-        <h3>Join Requests</h3>
-        <ul>
-          {joinRequests
-            .filter((request) => request.status === 'pending') // Filter pending join requests
-            .map((request) => (
-              <li key={request.request_id}>
-                {request.sender_username} - {request.created_at} - {request.status}
-                <button className="btn btn-success mx-2" onClick={() => handleAccept(request.request_id)}>+</button>
-                <button className="btn btn-danger" onClick={() => handleDeny(request.request_id)}>-</button>
-              </li>
-            ))}
-        </ul>
-      </div>
-
-      {/* Display news on the left side */}
-      <div className='news-container' style={{
-        display: 'flex',
-        width: '45%',
-        height: '400px',
-        overflowY: 'scroll',
-        float: 'left',
-        border: '5px solid #ddd',
-        marginTop: '5px',
-        backgroundColor: 'white',
-        borderRadius: '10px',
-        marginBottom: '50px'
-      }}>
-        {toggleButton}
-        {newsComponent}
-      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd', display: 'flex', flexDirection: 'column' }}>
+    {/* Display news on the left side */}
+    <div className='news-container' style={{
+      width: '100%',
+      height: '300px',
+      overflowY: 'scroll',
+      backgroundColor: 'white',
+      opacity: '0.75',
+      margin: 'auto auto',
+      gap: '30px',
+      padding: '5px',
+      borderRadius: '10px',
+      marginBottom: '10px',
+    }}>
+      {newsComponent}
     </div>
+  </div>
+
+  <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
+    {/* Display join requests on the right side */}
+    <h3>Join Requests</h3>
+    <ul>
+      {joinRequests
+        .filter((request) => request.status === 'pending')
+        .map((request) => (
+          <li key={request.request_id}>
+            {request.sender_username} - {request.created_at} - {request.status}
+            <button className="btn btn-success mx-2" onClick={() => handleAccept(request.request_id)}>+</button>
+            <button className="btn btn-danger" onClick={() => handleDeny(request.request_id)}>-</button>
+          </li>
+        ))}
+    </ul>
+  </div>
+      {/* Hide News button */}
+      <div style={{ width: '10%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
+      {toggleButton}
+    </div>
+</div>
+</div>    
   );
 }
 
