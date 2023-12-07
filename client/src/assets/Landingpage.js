@@ -17,9 +17,9 @@ const Landingpage = () => {
 
     const [searchParams] = useSearchParams();
 
-    const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || 'true');
+    const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || localStorage.getItem('reviewsUI') || 'true');
 
-    const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
+    const [newsB,setNewsB] = useState(searchParams.get('news') || localStorage.getItem('newsUI') ||'true');
 
     const [genre,setGenre] = useState(searchParams.get('genre') || '');
      
@@ -34,9 +34,17 @@ const Landingpage = () => {
       navigate(`?${searchParams.toString()}`);
     }, [genre]);
 
-    // useEffect(() => {
-      
-    // }, []);
+    useEffect(() => {
+      searchParams.set('news', newsB);
+      navigate(`?${searchParams.toString()}`);
+    }, [newsB]);
+
+    useEffect(() => {
+      searchParams.set('reviews', reviewsB);
+      navigate(`?${searchParams.toString()}`);
+    }, [reviewsB]);
+
+
 
 
     const updateReviewBool = () => {
