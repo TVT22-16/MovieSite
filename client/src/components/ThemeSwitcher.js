@@ -10,7 +10,7 @@ const ThemeSwitcher = ({ toggleTheme, isDarkMode }) => {
           event.preventDefault();
           toggleTheme();
         }}
-        className={`nav-link ${isDarkMode ? 'dark-mode-text' : ''}`}
+        className={`nav-link ${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`}
       >
         {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       </NavLink>

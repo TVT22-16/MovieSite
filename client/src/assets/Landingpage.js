@@ -17,39 +17,34 @@ const Landingpage = () => {
 
     const [searchParams] = useSearchParams();
 
-    const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || 'true');
+    const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || localStorage.getItem('reviewsUI') || 'true');
 
-    const [newsB,setNewsB] = useState(searchParams.get('news') || 'true');
+    const [newsB,setNewsB] = useState(searchParams.get('news') || localStorage.getItem('newsUI') ||'true');
 
     const [genre,setGenre] = useState(searchParams.get('genre') || '');
+     
 
-    // useEffect(() => {
-    //   if (genre.length < 1){
-    //     setGenre(localStorage.getItem('genresUI'));
-    //     const savedGenres = (localStorage.getItem('genresUI'));
-    //     setGenre(savedGenres);
-    //     console.log('savedGenres',savedGenres);
-    //   }
-
-    //   console.log('genres',genre);
-    // }, []);
     useEffect(() => {
       if (!genre) {
         const savedGenres = localStorage.getItem('genresUI');
         setGenre(savedGenres || ''); // Use the savedGenres or default to an empty string
       }
-    }, [genre]);
-
-    useEffect(() => {
-      // if(genre.length < 1){
-      //   setGenre('');
-      //   const savedGenres = (localStorage.getItem('genresUI'));
-      //   setGenre(savedGenres);
-      // }
 
       searchParams.set('genre', genre);
       navigate(`?${searchParams.toString()}`);
     }, [genre]);
+
+    useEffect(() => {
+      searchParams.set('news', newsB);
+      navigate(`?${searchParams.toString()}`);
+    }, [newsB]);
+
+    useEffect(() => {
+      searchParams.set('reviews', reviewsB);
+      navigate(`?${searchParams.toString()}`);
+    }, [reviewsB]);
+
+
 
 
     const updateReviewBool = () => {
@@ -73,8 +68,6 @@ const Landingpage = () => {
       localStorage.setItem('newsUI', newsB);
       localStorage.setItem('reviewsUI', reviewsB);
       localStorage.setItem('genresUI', genre)
-
-      // console.log(localStorage.getItem('genresUI'));
     }
 
     const updateBackdrop = (p) => {
@@ -135,7 +128,7 @@ const Landingpage = () => {
             marginTop:'20px'
             }}>
 
-          <SettingsButton curGenre={genre} savePageSettings={savePageSettings} reviewsB={reviewsB} newsB={newsB} updateGenres={updateGenres} updateReviewBool={updateReviewBool} updateNewsBool={updateNewsBool}></SettingsButton>
+          <SettingsButton currentGenres={genre} savePageSettings={savePageSettings} reviewsB={reviewsB} newsB={newsB} updateGenres={updateGenres} updateReviewBool={updateReviewBool} updateNewsBool={updateNewsBool}></SettingsButton>
           
 
           <div className='rowContainer' style={{
@@ -170,8 +163,24 @@ const Landingpage = () => {
       );
 }
 
- const SettingsButton = ({updateGenres,updateReviewBool,updateNewsBool,newsB, reviewsB, savePageSettings, curGenre}) => {
-  
+const SettingsButton = ({ updateGenres, updateReviewBool, updateNewsBool, newsB, reviewsB, savePageSettings, currentGenres }) => {
+  // Function to map currentGenres array to integers
+  const mapGenresToIntegers = () => {
+    if (Array.isArray(currentGenres)) {
+      return currentGenres.map((genre) => parseInt(genre, 10));
+    } else {
+      // If it's not an array, parse the genre alone
+      const parsedGenre = parseInt(currentGenres, 10);
+      if (!isNaN(parsedGenre)) {
+        return [parsedGenre];
+      } else {
+        // Handle the case where parsing fails (fallback or error handling)
+        console.error("Failed to parse genre as an integer");
+        return [];
+      }
+    }
+  };
+
   const handleSelect = (eventKey, e) => {
     // Prevent the default behavior of closing the dropdown
     e.preventDefault();
@@ -184,36 +193,37 @@ const Landingpage = () => {
         <span>&#8285;</span>
       </Dropdown.Toggle>
 
-      <Dropdown.Menu className="custom-dropdown-menu"  style={{ minWidth: 'auto',padding:'5px'}}>
-        {/* Add your settings options here */}
-        <GenrePicker updateGenres={updateGenres} currentGenres={curGenre}/>
+      <Dropdown.Menu className="custom-dropdown-menu" style={{ minWidth: 'auto', padding: '5px' }}>
+        {/* Pass the mapped genres to GenrePicker */}
+        <GenrePicker updateGenres={updateGenres} currentGenres={mapGenresToIntegers()} />
 
         <Dropdown.Item
           className="custom-dropdown-item"
           style={{
-          borderRadius: '5px',
-          ...(reviewsB === 'false' && { backgroundColor: 'red' }),}}
+            borderRadius: '5px',
+            ...(reviewsB === 'false' && { backgroundColor: 'red' }),
+          }}
           onClick={() => updateReviewBool()}
-          >
+        >
           Reviews on/off
         </Dropdown.Item>
-        
+
         <Dropdown.Item
           className="custom-dropdown-item"
           style={{
-          borderRadius: '5px',
-          ...(newsB === 'false' && { backgroundColor: 'red' }),}}
+            borderRadius: '5px',
+            ...(newsB === 'false' && { backgroundColor: 'red' }),
+          }}
           onClick={() => updateNewsBool()}
-          >
-         News on/off
+        >
+          News on/off
         </Dropdown.Item>
 
-        <Dropdown.Item className="custom-dropdown-item" onClick={() => savePageSettings() }>Save</Dropdown.Item>
-
+        <Dropdown.Item className="custom-dropdown-item" onClick={() => savePageSettings()}>
+          Save
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-
-
   );
 };
 

@@ -59,9 +59,10 @@ const ReviewForm = ({moviedb_movieid}) => {
     return (
       <div id="reviewFormBody" style={{width:'100%', display:'flex', flexDirection:'column', alignItems:'center'}}>
 
-            <button type="submit" className="btn btn-light" onClick={handleShowForm} style={{width:'20%'}}>
+            {sessionStorage.getItem('username') ? (<button type="submit" className="btn btn-light" onClick={handleShowForm} style={{width:'20%'}}>
               Review Movie
-            </button>
+            </button>) : (<button className="btn btn-light">Login to review movie</button>)}
+
 
           {/* double review error message */}
           {addReviewStatus.status === 'error' &&

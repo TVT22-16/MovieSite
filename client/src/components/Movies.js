@@ -7,6 +7,7 @@ import PaginationComponent from './Pagination.js';
 import GetMovies from './GetMoviesUpgraded.js';
 import GenrePicker from './GenrePicker.js';
 import BootstrapCard from './BootstrapCardMovie.js';
+import { Badge, Card } from 'react-bootstrap';
 
 
 
@@ -105,43 +106,72 @@ const Movies = () => {
 
       </div>
 
-      <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
+          <div style={{
+              width:'50%',
+              display: 'flex',
+              flexDirection:'column',
+              alignItems: 'center',
+              justifyContent:'center',
+              gap:'10px',
+              margin:'auto',
+              marginBottom:'5px',
+              marginTop:'20px'
+            }}>
 
-      {page}
+              <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage} />
+              {/* <Badge style={{maxHeight: '100%',margin:'auto auto' ,fontSize: '15px', padding: '5px'}}>{page}</Badge> */}
+
+        </div>
+
 
       <ul className='listCont'>
         
         {searchResults.length > 0 ? (
           // Render search results if available
           searchResults.map(movie => (
-            <li className='movieCard' key={movie.id} onClick={() => openInfo(movie.id)} >
-              <BootstrapCard movie={movie} cardWidth = '14rem'></BootstrapCard>
-
-            </li>
+            <div key={movie.id} onClick={()=>openInfo(movie.id)}>
+            <BootstrapCard key={movie.id} movie={movie} cardWidth = '14rem'></BootstrapCard>
+            </div>
           ))
-
           //else Render popular movies if no search results
         ) : (
           <>
-
           {/* fetch moviedata and update movies with "updateMoviesData"*/}
           <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount} updateMoviesData={updateMoviesData} genres={[genres]}/>
 
             {/* display moviedata */}
             {moviesData.map(movie => (
-            <li className='movieCard' key={movie.id} onClick={() => openInfo(movie.id)} >
-               <BootstrapCard movie={movie} cardWidth = '14rem'></BootstrapCard>
+
+              <div key={movie.id} onClick={()=>openInfo(movie.id)}>
+                  <BootstrapCard key={movie.id} movie={movie} cardWidth = '14rem'></BootstrapCard>
+              </div>
 
 
-            </li>
             )) }
           </>
         )}
       </ul>
 
-      {page}
 
-      <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
+      <div style={{
+          width:'50%',
+          display: 'flex',
+          flexDirection:'column',
+          alignItems: 'center',
+          justifyContent:'center',
+          gap:'10px',
+          margin:'auto',
+          marginBottom:'5px',
+          marginTop:'20px'
+        }}>
+
+        <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage} />
+        {/* <Badge style={{maxHeight: '100%',margin:'auto auto' ,fontSize: '15px', padding: '5px'}}>{page}</Badge> */}
+
+      </div>
+
+
+      
     </div>
   );
 };

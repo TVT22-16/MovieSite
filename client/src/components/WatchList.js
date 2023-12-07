@@ -27,7 +27,7 @@ const WatchlistButton = ({ username, moviedb_movieid, title, overview, release_d
   };
 
   return (
-    <Button variant={isAdded ? 'success' : 'primary'} onClick={handleAddToWatchlist} disabled={isAdded}>
+    <Button style={{float:'right', marginLeft:'auto'}}variant={isAdded ? 'success' : 'primary'} onClick={handleAddToWatchlist} disabled={isAdded}>
       {isAdded ? 'Added to Watchlist' : 'Add to Watchlist'}
     </Button>
   );

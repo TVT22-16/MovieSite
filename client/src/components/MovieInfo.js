@@ -6,6 +6,7 @@ import ReviewForm from './ReviewForm';
 import GetTrailers from './GetTrailers';
 import Reviews from './Reviews';
 import WatchlistButton from './WatchList';
+import { Badge } from 'react-bootstrap';
 
 
 //https://webtips.dev/solutions/get-query-params-in-react
@@ -74,10 +75,40 @@ const MovieInfo = () => {
         minHeight: '100vh', 
       }}>
 
-      <div id='titleVoteContainer'>
+      <div id='titleVoteContainer' style={{
+            display:'flex',
+            margin:'10px',
+            width:'50%',
+            borderRadius:'6px',
+            backgroundColor:'#2c3e50',
+            flexDirection:'row',
+            flexWrap:'wrap',
+            gap:'10px',
+        }}>
 
         <h1 id='movieTitle'>{movieData.title}</h1>
-        <h2 id='voteAverage'>{movieData.vote_average}</h2>
+
+        <h2 id='voteAverage' style={{
+
+              fontWeight: '600',
+              borderRadius: '50%',
+              display: 'flex',
+              alignTtems: 'center', 
+              justifyContent: 'center', 
+              width: '40px',
+              height:'40px', 
+              backgroundColor: '#e74c3c',
+              color: '#ecf0f1',
+              fontSize: '14px', 
+              marginTop:'auto',
+              margin:'auto auto'
+
+             }}>{movieData.vote_average}</h2>
+
+        <div className='watchContainer' style={{
+          flexGrow: '1',
+          margin:'10px'
+        }}>
         <WatchlistButton
           username= {sessionStorage.getItem('username')}  // Replace with the actual username
           moviedb_movieid={movieData.id}
@@ -86,6 +117,8 @@ const MovieInfo = () => {
           release_date={movieData.release_date}
           poster_path={movieData.poster_path}
         />
+        </div>
+
       </div>
 
         {/* <img id='infoPoster' src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`} alt="Movie Poster" /> */}
@@ -95,13 +128,21 @@ const MovieInfo = () => {
           <GetTrailers id={movieData.id} />
 
           <ul id='infoContainer'>
-                <li id='tagline'>{movieData.tagline}</li>
+                <li id='tagline'>{movieData.tagline} </li>
                 <li id='overview'>{movieData.overview}</li>
-                {/* <li id='status'>Status: {movieData.status}</li> */}
-                {/* <li >{movieData.genres}</li> */}
                 <li id='releaseDate'>Release date: {movieData.release_date}</li>
-          </ul>
+                {/* Map genres if defined */}
 
+                <li style={{marginTop:'5px',display: 'flex', flexDirection: 'row', gap: '2px', flexWrap:'wrap'}}>
+                  {movieData.genres &&
+                    movieData.genres.map((genre) => (
+                  <Badge key={genre.id} bg="secondary">{genre.name}</Badge>
+                    ))}
+                </li>
+
+
+          </ul>
+ 
         </div>
         <ReviewForm moviedb_movieid={params}/>
           <div style={{display: 'flex',flexDirection:'column',width:'80%', gap:'20px', alignItems:'center'}}>
