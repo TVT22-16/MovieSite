@@ -24,14 +24,12 @@ const PaginationComponent = (props) => {
     }
     
     return ( 
-        <div className='pageComponent'>
-            <nav aria-label="Page navigation example">
-            <ul style={{cursor:'pointer'}} className="pagination">
+
+            <ul style={{cursor:'pointer', margin:'auto auto', scale:'0.8',display:'flex'}} className="pagination">
                 <li className="page-item"><a className="page-link" onClick={handlePagePrevious}>Previous</a></li>
                 <li className="page-item"><a className="page-link" onClick={handlePageNext}>Next</a></li>
             </ul>
-            </nav>
-        </div>
+
      );
 }
  

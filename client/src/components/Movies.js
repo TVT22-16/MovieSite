@@ -106,9 +106,36 @@ const Movies = () => {
 
       </div>
 
-      <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
+      
+      <div className='pageComps' style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center', // Center items vertically
+          width: '100%', // Set width to 100%
+          height: 'auto',
+          marginBottom: '20px',
+          padding: '15px',
+          flexWrap: 'wrap',
+          gap: '10px',
+          margin: 'auto', // Center the div horizontally
+          marginBottom:'60px'
+          }}>
+              <div style={{
+                  width:'50%',
+                  display: 'flex',
+                  flexDirection:'column',
+                  alignItems: 'center',
+                  justifyContent:'center',
+                  gap:'10px',
+                  margin:'auto'
+                }}>
 
-      <Badge style={{fontSize:'15px',padding:'5px'}}>{page}</Badge>
+                  <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage} />
+                  <Badge style={{maxHeight: '100%',margin:'auto auto' ,fontSize: '15px', padding: '5px'}}>{page}</Badge>
+
+              </div>
+
+</div>
 
       <ul className='listCont'>
         
@@ -138,6 +165,9 @@ const Movies = () => {
       <Badge style={{fontSize:'15px',padding:'5px',marginTop:'10px'}}>{page}</Badge>
 
       <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
+
+
+      
     </div>
   );
 };
