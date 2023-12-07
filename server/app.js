@@ -10,6 +10,7 @@ var reviewsRouter = require('./routes/reviews.js');
 var moviesRouter = require('./routes/movies.js');
 var users_groupsRouter = require('./routes/users_groups.js');
 var joinrequestRouter = require('./routes/joinrequest.js')
+var watchlistRouter = require('./routes/watchlist.js');
 
 var app = express();
 dotenv.config();
@@ -26,6 +27,7 @@ app.use('/reviews',reviewsRouter);
 app.use('/movies',moviesRouter);
 app.use('/users_groups',users_groupsRouter);
 app.use('/joinrequest',joinrequestRouter);
+app.use('/watchlist', watchlistRouter);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
