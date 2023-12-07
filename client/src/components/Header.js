@@ -68,7 +68,10 @@ const Header = ({ loggedIn }) => {
                 <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/home">Movies</Nav.Link>
                 <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/reviews">Reviews</Nav.Link>
                 <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/groups">Groups</Nav.Link>
-                <NavDropdown className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} title={username} id="custom-nav-dropdown">
+                <NavDropdown className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`}
+                    title={
+                      <span className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`}>{username}</span>
+                  } id="custom-nav-dropdown">
                   <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                   <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
                   <NavDropdown.Divider />
