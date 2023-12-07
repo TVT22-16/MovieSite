@@ -12,13 +12,19 @@ function BootstrapCard({ movie, cardWidth = '16rem', cTitle = true, cRelease = t
   };
 
   return (
-    <Card className='movieCard' style={{ width: cardWidth, boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-      <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
-      <Card.Body className="text-center">
-        <Card.Title style={titleStyle}>{cTitle === true && (<>{movie.title}</>)}</Card.Title>
-        <Card.Subtitle>{cRelease && movie.release_date}</Card.Subtitle>
-      </Card.Body>
-    </Card>
+    // <div style={{display:'flex', height:'100%'}}>
+        <Card className='movieCard' style={{
+          padding:'6px',
+          width: cardWidth,
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          }}>
+          <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
+          <Card.Body className="text-center">
+            <Card.Title style={titleStyle}>{cTitle === true && (<>{movie.title}</>)}</Card.Title>
+            <Card.Subtitle>{cRelease && movie.release_date}</Card.Subtitle>
+          </Card.Body>
+        </Card>
+    // </div>
   );
 }
 

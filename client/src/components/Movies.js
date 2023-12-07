@@ -109,37 +109,33 @@ const Movies = () => {
       <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
 
       <Badge style={{fontSize:'15px',padding:'5px'}}>{page}</Badge>
+
       <ul className='listCont'>
         
         {searchResults.length > 0 ? (
           // Render search results if available
           searchResults.map(movie => (
-            <li className='movieCard' key={movie.id} onClick={() => openInfo(movie.id)} >
-              <BootstrapCard movie={movie} cardWidth = '14rem'></BootstrapCard>
-
-            </li>
+              <div key={movie.id}>
+                <BootstrapCard key={movie.id} movie={movie} cardWidth = '15rem'></BootstrapCard>
+              </div>
           ))
-
           //else Render popular movies if no search results
         ) : (
           <>
-
           {/* fetch moviedata and update movies with "updateMoviesData"*/}
           <GetMovies sort_by={sort_by} page={page} updatePageAmount={updatePageAmount} updateMoviesData={updateMoviesData} genres={[genres]}/>
 
             {/* display moviedata */}
             {moviesData.map(movie => (
-            <li className='movieCard' key={movie.id} onClick={() => openInfo(movie.id)} >
-               <BootstrapCard movie={movie} cardWidth = '14rem'></BootstrapCard>
 
+               <BootstrapCard key={movie.id} movie={movie} cardWidth = '14rem'></BootstrapCard>
 
-            </li>
             )) }
           </>
         )}
       </ul>
 
-      <Card style={{borderRadius:'20%', alignItems:'center' ,fontWeight:'700',padding:'0.3%'}}>{page}</Card>
+      <Badge style={{fontSize:'15px',padding:'5px',marginTop:'10px'}}>{page}</Badge>
 
       <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
     </div>
