@@ -7,6 +7,7 @@ import PaginationComponent from './Pagination.js';
 import GetMovies from './GetMoviesUpgraded.js';
 import GenrePicker from './GenrePicker.js';
 import BootstrapCard from './BootstrapCardMovie.js';
+import { Card } from 'react-bootstrap';
 
 
 
@@ -107,8 +108,7 @@ const Movies = () => {
 
       <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
 
-      {page}
-
+      <Card style={{borderRadius:'20%', alignItems:'center' ,fontWeight:'700',padding:'0.3%'}}>{page}</Card>
       <ul className='listCont'>
         
         {searchResults.length > 0 ? (
@@ -139,7 +139,7 @@ const Movies = () => {
         )}
       </ul>
 
-      {page}
+      <Card style={{borderRadius:'20%', alignItems:'center' ,fontWeight:'700',padding:'0.3%'}}>{page}</Card>
 
       <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
     </div>
