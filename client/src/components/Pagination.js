@@ -1,6 +1,7 @@
 // PaginationComponent.js
 import React from 'react';
 import './Movies.css';
+import { Badge } from 'react-bootstrap';
 
 
 const PaginationComponent = (props) => {
@@ -25,10 +26,19 @@ const PaginationComponent = (props) => {
     
     return ( 
 
-            <ul style={{cursor:'pointer', margin:'auto auto', scale:'0.8',display:'flex'}} className="pagination">
-                <li className="page-item"><a className="page-link" onClick={handlePagePrevious}>Previous</a></li>
-                <li className="page-item"><a className="page-link" onClick={handlePageNext}>Next</a></li>
-            </ul>
+        <ul className="pagination justify-content-center" style={{ cursor: 'pointer', margin: 'auto auto', gap: '10px', scale: '0.9', display: 'flex' }}>
+
+            <li className="page-item" style={{ padding: '1px', width: '50%' }}>
+                <button className="btn btn-primary" onClick={handlePagePrevious}>{'<'}</button>
+            </li>
+
+            <Badge style={{ maxHeight: '100%', margin: 'auto auto', fontSize: '15px', padding: '10px' }}>{props.page}</Badge>
+
+            <li className="page-item" style={{ width: '50%' }}>
+                <button className="btn btn-primary" onClick={handlePageNext}>{'>'}</button>
+            </li>
+
+        </ul>
 
      );
 }

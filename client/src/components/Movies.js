@@ -107,7 +107,7 @@ const Movies = () => {
       </div>
 
       
-      <div className='pageComps' style={{
+      {/* <div className='pageComps' style={{
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center', // Center items vertically
@@ -118,8 +118,7 @@ const Movies = () => {
           flexWrap: 'wrap',
           gap: '10px',
           margin: 'auto', // Center the div horizontally
-          marginBottom:'60px'
-          }}>
+          }}> */}
               <div style={{
                   width:'50%',
                   display: 'flex',
@@ -127,15 +126,17 @@ const Movies = () => {
                   alignItems: 'center',
                   justifyContent:'center',
                   gap:'10px',
-                  margin:'auto'
+                  margin:'auto',
+                  marginBottom:'5px',
+                  marginTop:'20px'
                 }}>
 
                   <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage} />
-                  <Badge style={{maxHeight: '100%',margin:'auto auto' ,fontSize: '15px', padding: '5px'}}>{page}</Badge>
+                  {/* <Badge style={{maxHeight: '100%',margin:'auto auto' ,fontSize: '15px', padding: '5px'}}>{page}</Badge> */}
 
               </div>
-
-</div>
+{/* 
+</div> */}
 
       <ul className='listCont'>
         
@@ -162,9 +163,23 @@ const Movies = () => {
         )}
       </ul>
 
-      <Badge style={{fontSize:'15px',padding:'5px',marginTop:'10px'}}>{page}</Badge>
 
-      <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage}/>
+      <div style={{
+                  width:'50%',
+                  display: 'flex',
+                  flexDirection:'column',
+                  alignItems: 'center',
+                  justifyContent:'center',
+                  gap:'10px',
+                  margin:'auto',
+                  marginBottom:'5px',
+                  marginTop:'20px'
+                }}>
+
+                  <PaginationComponent page={page} responsePageAmount={responsePageAmount} updatePage={updatePage} />
+                  {/* <Badge style={{maxHeight: '100%',margin:'auto auto' ,fontSize: '15px', padding: '5px'}}>{page}</Badge> */}
+
+              </div>
 
 
       
