@@ -145,10 +145,10 @@ const MovieInfo = () => {
  
         </div>
         <ReviewForm moviedb_movieid={params}/>
-          <div style={{display: 'flex',flexDirection:'column',width:'80%', gap:'20px', alignItems:'center'}}>
+          <div style={{display: 'flex', marginBottom:'2%',flexDirection:'column',width:'80%', gap:'20px', alignItems:'center'}}>
             <Reviews movieid={params}> </Reviews>
             
-          </div>
+        </div>
 
 
 
