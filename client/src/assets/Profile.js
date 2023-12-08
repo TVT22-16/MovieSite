@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import IMAGES from './avatars/Images.js';
+import ConfirmUser from '../components/ConfirmUser.js';
 
 function Profile() {
     const [users, setUsers] = useState([]);
@@ -76,6 +77,7 @@ function Profile() {
   
     return (
         <div>
+          {ConfirmUser() ? <div>Authorized</div> : <div>Unauthorized</div>}
         <Container>
           <div>
             {users.map((user, index) => (
