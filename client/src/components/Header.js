@@ -80,11 +80,11 @@ const Header = ({ loggedIn }) => {
               </>
             ) : (
               <>
-                <Nav.Link href="/home">Movies</Nav.Link>
-                <Nav.Link href="/reviews">Reviews</Nav.Link>
-                <Nav.Link href="/groups">Groups</Nav.Link>
-                <Nav.Link href="/login">Login</Nav.Link>
-                <Nav.Link href="/register">Register</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/home">Movies</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/reviews">Reviews</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/groups">Groups</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/login">Login</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/register">Register</Nav.Link>
 
 
               </>
