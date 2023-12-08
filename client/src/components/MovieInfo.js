@@ -153,10 +153,6 @@ const MovieInfo = () => {
 
 
 
-      <div id='similarContainer'>
-                Similar Movies
-
-      </div>
 
 
       </div>
