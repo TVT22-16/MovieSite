@@ -22,7 +22,10 @@ const Landingpage = () => {
     const [newsB,setNewsB] = useState(searchParams.get('news') || localStorage.getItem('newsUI') ||'true');
 
     const [genre,setGenre] = useState(searchParams.get('genre') || '');
-     
+
+    useEffect(() => {
+      console.log('Query string genre: ', searchParams.get('genre'));
+    }, []);
 
     useEffect(() => {
       if (!genre) {
@@ -206,7 +209,7 @@ const SettingsButton = ({ updateGenres, updateReviewBool, updateNewsBool, newsB,
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="custom-dropdown-menu" style={{ minWidth: 'auto', padding: '5px' }}>
-        {/* Pass the mapped genres to GenrePicker */}
+        {/* Pass the mapped genres to § */}
         <GenrePicker updateGenres={updateGenres} currentGenres={mapGenresToIntegers()} />
 
         <Dropdown.Item
