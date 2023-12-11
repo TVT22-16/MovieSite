@@ -86,6 +86,20 @@ router.get('/private', async (req,res) => {
     }
 });
 
+router.get('/private2', async (req,res) => {
+    //Authorization: Bearer token
+    const token = req.headers.authorization?.split(' ')[1];
+    console.log('privatessa');
+    try {
+        const username = jwt.verify(token, process.env.JWT_SECRET).username;
+        res.status(200).json({username : username});
+        console.log('toimii');
+    } catch (error) {
+        res.status(403).json({error: 'Access forbidden'});
+        console.log('ei toimi');
+    }
+});
+
 // update user
 router.put('/user/:username', upload.none(), async (req, res) => {
     let username = req.params.username;

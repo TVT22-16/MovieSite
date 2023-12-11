@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -14,11 +14,15 @@ import Landingpage from './assets/Landingpage';
 import Profile from './assets/Profile';
 import ReviewPage from './assets/ReviewPage';
 
-
-
-
+import { forceLogout } from './components/ConfirmUserSignal';
 
 function App() {
+
+  useEffect(() => {
+    console.log('app.js UEF forcelogout');
+    forceLogout();
+  }, []);
+
   return (
     <BrowserRouter>
       <>

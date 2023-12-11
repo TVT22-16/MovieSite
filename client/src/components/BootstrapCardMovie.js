@@ -16,7 +16,7 @@ function BootstrapCard({ movie, cardWidth = '16rem', cTitle = true, cRelease = t
         <Card className='movieCard' style={{
           padding:'6px',
           width: cardWidth,
-          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
           }}>
           <Card.Img variant="top" src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
           <Card.Body className="text-center">

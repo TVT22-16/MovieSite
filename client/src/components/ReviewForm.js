@@ -4,14 +4,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './MovieInfo.css';
 import SliderComponent from './Slider';
+import {clientServerMatch, forceUpdateMatch} from '../components/ConfirmUserSignal.js';
 
+const baseUrl = 'http://localhost:3001'
 
 //Add review button and form for movieInfo page
 
 const ReviewForm = ({moviedb_movieid}) => {
   
 
-    const addReviewUrl = 'http://localhost:3001/reviews/add'
+    const addReviewUrl = `${baseUrl}/reviews/add`
 
 
     const [showForm, setShowForm] = useState(false);
@@ -32,16 +34,22 @@ const ReviewForm = ({moviedb_movieid}) => {
         rating: event.target.rating.value,
       };
 
-      axios.post(addReviewUrl, reviewData)
-      .then(response => {
+      if (forceUpdateMatch()===true){
+        axios.post(addReviewUrl, reviewData)
+        .then(response => {
+  
+          setAddReviewStatus(response.data);
+  
+        })
+        .catch(error => {
+          // Handle error
+          console.error('Error submitting review:', error);
+        });
 
-        setAddReviewStatus(response.data);
+      }
 
-      })
-      .catch(error => {
-        // Handle error
-        console.error('Error submitting review:', error);
-      });
+      window.location.reload(false);
+      
     }
 
 
@@ -59,7 +67,7 @@ const ReviewForm = ({moviedb_movieid}) => {
     return (
       <div id="reviewFormBody" style={{width:'100%', display:'flex', flexDirection:'column', alignItems:'center'}}>
 
-            {sessionStorage.getItem('username') ? (<button type="submit" className="btn btn-light" onClick={handleShowForm} style={{width:'20%'}}>
+            {forceUpdateMatch()===true ? (<button type="submit" className="btn btn-light" onClick={handleShowForm} style={{width:'20%'}}>
               Review Movie
             </button>) : (<button className="btn btn-light">Login to review movie</button>)}
 

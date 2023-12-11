@@ -4,6 +4,9 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import IMAGES from './avatars/Images.js';
 import { Link } from 'react-router-dom';
 
+import {forceUpdateMatch } from '../components/ConfirmUserSignal.js';
+
+
 function Profile() {
   const [users, setUsers] = useState([]);
   const [mygroups, setMyGroups] = useState([]);
@@ -120,7 +123,8 @@ function Profile() {
 
   return (
     <div>
-      <Container>
+      {forceUpdateMatch() === true ? (
+        <Container>
         <div>
           {users.map((user, index) => (
             <li key={index} style={{ listStyle: 'none', display: 'flex', alignItems: 'center' }}>
@@ -202,6 +206,10 @@ function Profile() {
           </Button>
         )}
       </Container>
+
+
+      ) : (<div>Unauthorized</div>)}
+      
     </div>
   );
 }

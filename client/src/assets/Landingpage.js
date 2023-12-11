@@ -5,7 +5,7 @@ import FinnkinoFetch from '../components/FinnkinoFetch';
 import Reviews from '../components/Reviews';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import GenrePicker from '../components/GenrePicker';
-import { Dropdown } from 'react-bootstrap';
+import { Badge, Dropdown } from 'react-bootstrap';
 
 
 const Landingpage = () => {
@@ -134,27 +134,39 @@ const Landingpage = () => {
           <div className='rowContainer' style={{
               display: 'flex',
               flexDirection: 'row',
-              alignItems: 'center',
+              alignItems: 'start',
               justifyContent: 'center',  // Add this line for horizontal centering
               gap:'10px',
               margin: 'auto auto',
+              marginTop:'auto',
+              // flexWrap:'wrap',
               width:'100%'}}>
 
 
           <div className='carouselContainer' style={{flexGrow:'1', maxWidth:'30%'}}>
             {landingMovies.length > 0 && (
+            <>
+            <Badge  style={{marginBottom:'2px',width:'100%'}}>For you</Badge>
             <CarouselBS movies={landingMovies} updateBackdrop={updateBackdrop} />
+            </>
             )}
           </div>
 
           {reviewsB === 'true' && (
-          <ReviewsContainer></ReviewsContainer>
+            <>
+              
+              <ReviewsContainer></ReviewsContainer>
+            </>
+ 
           )}
 
           </div>
 
           {newsB === 'true' && (
+          <>
+          <Badge style={{width:'100%', marginBottom:'2px'}}>News</Badge>
           <FkNews></FkNews>
+          </>
           )}
 
         </div>
@@ -244,21 +256,25 @@ const FkNews = () => {
       padding:'5px',
       borderRadius: '10px',
       marginBottom: '30px',
-      marginTop:'30px'}}>
+      }}>
         
       <FinnkinoFetch></FinnkinoFetch>
       </div>
 
     );
 }
+
  
 const ReviewsContainer  = () => {
+
+
   return (
     <div className='reviewsContainer' style={{
       width:'75%',
       minWidth:'75%', 
-      opacity:'0.80'
+      opacity:'0.90'
       }}>
+        <Badge style={{width:'100%', marginBottom:'2px'}}>Recent reviews</Badge>
 
     <div style={{
         height:'400px',
@@ -269,6 +285,7 @@ const ReviewsContainer  = () => {
         width:'100%', 
         margin: 'auto auto'
       }}>
+        
       <div style={{gap:'5px', display:'flex', flexDirection:'column'}}>
         <Reviews dropdownOn={false} slicing={true}/>
       </div>

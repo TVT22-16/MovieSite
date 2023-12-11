@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Carousel } from 'react-bootstrap';
+import { Badge, Carousel } from 'react-bootstrap';
 
 const CarouselBS = ({ movies, updateBackdrop }) => {
   const [slicedMovies, setSlicedMovies] = useState(movies.slice(0, 10));
@@ -39,14 +39,16 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
   }, []); // Empty dependency array ensures this effect runs only once after the initial render
 
   return (
+
     <Carousel
       fade={false}
       interval={8000}
       onSelect={handleSelect}
       style={{width:'100%',opacity: fadeIn ? 1 : 0, transition: 'opacity 0.5s ease', margin: 'auto auto',
-      flexGrow:'1', marginTop:'10px', marginBottom: '10px'}} 
+      flexGrow:'1', marginBottom: '10px'}} 
     >
       {slicedMovies.map((movie, index) => (
+        
         <Carousel.Item key={index}>
           <img
             className="d-block w-100 carousel-image"
@@ -68,6 +70,7 @@ const CarouselBS = ({ movies, updateBackdrop }) => {
         </Carousel.Item>
       ))}
     </Carousel>
+
   );
 };
 

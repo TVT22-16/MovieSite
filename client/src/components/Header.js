@@ -11,7 +11,6 @@ import { jwtToken, usernameSignal } from '../assets/Signals';
 const Header = ({ loggedIn }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  console.log('jwttoken'+jwtToken);
 
   useEffect(() => {
     // Retrieve the theme preference from local storage or any other source
@@ -44,7 +43,6 @@ const Header = ({ loggedIn }) => {
   };
 
   const username = sessionStorage.getItem('username');
-  console.log(username);
 
   const handleLogout = () => {
     // Clear authentication-related information
@@ -80,11 +78,11 @@ const Header = ({ loggedIn }) => {
               </>
             ) : (
               <>
-                <Nav.Link href="/home">Movies</Nav.Link>
-                <Nav.Link href="/reviews">Reviews</Nav.Link>
-                <Nav.Link href="/groups">Groups</Nav.Link>
-                <Nav.Link href="/login">Login</Nav.Link>
-                <Nav.Link href="/register">Register</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/home">Movies</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/reviews">Reviews</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/groups">Groups</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/login">Login</Nav.Link>
+                <Nav.Link className={`${isDarkMode ? 'dark-mode-text' : 'light-mode-text'}`} href="/register">Register</Nav.Link>
 
 
               </>

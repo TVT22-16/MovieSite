@@ -4,12 +4,15 @@ import { Card, CardFooter, Ratio } from 'react-bootstrap';
 import { Dropdown, Button} from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import DeleteReview from './DeleteReview';
+import {clientServerMatch,forceUpdateMatch} from '../components/ConfirmUserSignal.js';
 
 //reviews/getReviews?username=&movieid=
 
 const baseUrl = 'http://localhost:3001'
 
-const Reviews = ({movieid='', dropdownOn=true, slicing=false}) => {
+const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) => {
+
+  const custScale=customScale;
 
   const [username, setUsername] = useState(sessionStorage.getItem('username'));
   const [getReviewsUrl, setReviewsUrl] = useState(`${baseUrl}/reviews/getReviews?username=&movieid=${movieid}`);
@@ -89,8 +92,8 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false}) => {
       <Dropdown.Menu>
 
       <Dropdown.Item onClick={() => updateGetReviewsUrl(`movieid=${movieid}`,'All reviews')}>All Reviews</Dropdown.Item>
-
-      <Dropdown.Item onClick={() => updateGetReviewsUrl(`username=${username}&movieid=${movieid}`,'Your reviews')}>Your reviews</Dropdown.Item>
+      {forceUpdateMatch()===true && (<Dropdown.Item onClick={() => updateGetReviewsUrl(`username=${username}&movieid=${movieid}`,'Your reviews')}>Your reviews</Dropdown.Item>)}
+     
 
 
 
@@ -105,29 +108,38 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false}) => {
         <>
           {reviewsWData.map((fd, index) => (
 
-          <Card onClick={() => openInfo(fd.id)} key={index} style={{ display: 'flex', flexDirection: 'row', width: '100%', height: '100%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px' }}>
+          <Card onClick={() => openInfo(fd.id)} key={index} style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: '100%',
+                    height: '50%',
+                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
+                    borderRadius: '8px',
+                    transform: customScale ? `scale(${customScale})` : 'none',
 
-          <Card.Img style={{ maxHeight: '90%', height: '200px', width: 'auto', margin:'12px' ,padding: '0px', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`}/>
+                 }}>
 
-          <Card.Body style={{ width: '100%', height: '100%', flexGrow: '1', gap: '10px', display: 'flex', flexDirection: 'column' }}>
-            <Card.Title style={{fontWeight:'700', fontSize: '1.2rem', marginBottom: '5px' }}>{fd.title} ({reviews[index].rating})</Card.Title>
+            <Card.Img style={{ maxHeight: '90%', height: '150px', width: 'auto', margin:'12px' ,padding: '0px', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`}/>
 
-            {reviews[index].review.length > 0 && (
-                <Card.Text style={{ flex: '1', fontStyle: 'italic', marginBottom: '10px', padding: '10px', border: '1px solid #337ab7', borderRadius: '8px', backgroundColor: '#d9edf7' }}>
-                  {reviews[index].review}
-                </Card.Text>
-              )}
+              <Card.Body style={{ width: '100%', height: '100%', flexGrow: '1', gap: '10px', display: 'flex', flexDirection: 'column' }}>
+                <Card.Title style={{fontWeight:'700', fontSize: '1.2rem', marginBottom: '5px' }}>{fd.title} ({reviews[index].rating})</Card.Title>
 
-            <CardFooter>{reviews[index].username === username ? ('My review'):(reviews[index].username)}</CardFooter>
+                {reviews[index].review.length > 0 && (
+                    <Card.Text style={{ flex: '1', fontStyle: 'italic', marginBottom: '10px', padding: '10px', border: '1px solid #337ab7', borderRadius: '8px', backgroundColor: '#d9edf7' }}>
+                      {reviews[index].review}
+                    </Card.Text>
+                  )}
 
-
-            {reviews[index].username === username && dropdownOn === true &&  (
-              <Button onClick={() => handleDelete(reviews[index].review_id)} style={{margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
-                Delete
-              </Button>)}
+                <CardFooter>{reviews[index].username === username ? ('My review'):(reviews[index].username)}</CardFooter>
 
 
-          </Card.Body>
+                {reviews[index].username === username && dropdownOn === true && forceUpdateMatch()===true &&  (
+                  <Button onClick={() => handleDelete(reviews[index].review_id)} style={{margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
+                    Delete
+                  </Button>)}
+
+
+              </Card.Body>
 
           </Card>
 
