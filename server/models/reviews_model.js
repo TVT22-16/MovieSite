@@ -30,24 +30,25 @@ async function getReviewsUser(username){
   return rows.reverse();
 }
 
-async function getReviewsUpgraded(username='', movieid=''){
-  
-  if (username.length < 1 && movieid.length < 1){
+async function getReviewsUpgraded(username = '', movieid = '') {
+  let result;
+
+  if (username.length < 1 && movieid.length < 1) {
     result = await pgPool.query(sql.GET_REVIEWS);
-
-  } else if(username.length > 0 && movieid.length < 1){
-    result = await pgPool.query(sql.GET_REV_USER,[username]);
-
-  } else if(username.length < 1 && movieid.length > 0){
-    result = await pgPool.query(sql.GET_REV_MOVIE,[movieid]);
-
-  } else{
-    result = await pgPool.query(sql.GET_REV_USERMOVIE,[username,movieid]);
+  } else if (username.length > 0 && movieid.length < 1) {
+    result = await pgPool.query(sql.GET_REV_USER, [username]);
+  } else if (username.length < 1 && movieid.length > 0) {
+    result = await pgPool.query(sql.GET_REV_MOVIE, [movieid]);
+  } else {
+    result = await pgPool.query(sql.GET_REV_USERMOVIE, [username, movieid]);
   }
 
- 
   const rows = result.rows;
-  return rows.reverse();
+
+  // Sort the rows by created_at in descending order (newest to oldest)
+  const sortedRows = rows.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+  return sortedRows;
 }
 
 
