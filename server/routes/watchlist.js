@@ -3,12 +3,16 @@ const multer = require('multer');
 const upload = multer({dest: 'upload/'});
 
 
-const {addToWatchlist, getWatchlistMovies, checkIfMovieInWatchlist} = require('../models/watchlist_model.js')
+const {addToWatchlist, getWatchlistMovies, checkIfMovieInWatchlist, removeFromWatchlist} = require('../models/watchlist_model.js')
 
 router.post('/add', async (req, res) => {
   try {
     const { username, moviedb_movieid } = req.body;
     // Check if the movie is already in the watchlist for the user
+    if (username === null) {
+      return res.status(400).json({ success: false, error: 'To add movies to watchlist, you need to login.' });
+    }
+
     const isMovieInWatchlist = await checkIfMovieInWatchlist(username, moviedb_movieid);
 
     if (isMovieInWatchlist) {
@@ -20,6 +24,25 @@ router.post('/add', async (req, res) => {
     res.status(201).json({ success: true, data: result.rows[0] });
   } catch (error) {
     console.error('Error adding to watchlist:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+
+router.post('/remove', async (req, res) => {
+  try {
+    const { username, moviedb_movieids } = req.body;
+
+    // Check if the movie is in the watchlist before removing
+    for (const moviedb_movieid of moviedb_movieids) {
+      const isMovieInWatchlist = await checkIfMovieInWatchlist(username, moviedb_movieid);
+      if (isMovieInWatchlist) {
+        await removeFromWatchlist(username, moviedb_movieid);
+      }
+    }
+
+    res.status(200).json({ success: true, message: 'Movies removed from the watchlist successfully.' });
+  } catch (error) {
+    console.error('Error removing from the watchlist:', error);
     res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 });

@@ -4,6 +4,7 @@ const sql = {
 ADD_TO_WATCHLIST: `INSERT INTO watchlist (username, moviedb_movieid, title, overview, release_date, poster_path, added_at) VALUES ($1, $2, $3, $4, $5, $6, NOW()) RETURNING *;`,
 GET_WATCHLIST_MOVIES: 'SELECT * FROM watchlist WHERE username = $1',
 CHECK_IF_MOVIE_IN_WATCHLIST: 'SELECT EXISTS (SELECT 1 FROM watchlist WHERE username = $1 AND moviedb_movieid = $2)',
+REMOVE_FROM_WATCHLIST: 'DELETE FROM watchlist WHERE username = $1 AND moviedb_movieid = $2 RETURNING *;',
 
 
 }
@@ -31,6 +32,10 @@ async function addToWatchlist(username, moviedb_movieid, title, overview, releas
 
   async function checkIfMovieInWatchlist(username, moviedb_movieid) {
     try {
+      if (moviedb_movieid === undefined || moviedb_movieid === null) {
+        throw new Error('Invalid moviedb_movieid: ' + moviedb_movieid);
+      }
+  
       const result = await pgPool.query(sql.CHECK_IF_MOVIE_IN_WATCHLIST, [username, moviedb_movieid]);
       return result.rows[0].exists;
     } catch (error) {
@@ -39,5 +44,15 @@ async function addToWatchlist(username, moviedb_movieid, title, overview, releas
     }
   }
 
+  async function removeFromWatchlist(username, moviedb_movieid) {
+    try {
+      const result = await pgPool.query(sql.REMOVE_FROM_WATCHLIST, [username, moviedb_movieid]);
+      return result;
+    } catch (error) {
+      console.error('Error removing from watchlist:', error);
+      throw error;
+    }
+  }
 
-module.exports = {addToWatchlist, getWatchlistMovies, checkIfMovieInWatchlist}
+
+module.exports = {addToWatchlist, getWatchlistMovies, checkIfMovieInWatchlist, removeFromWatchlist}

@@ -8,9 +8,6 @@ const WatchlistButton = ({ moviedb_movieid, title, overview, release_date, poste
   // Retrieve username from sessionStorage
   const username = sessionStorage.getItem('username');
 
-  // Check if username is a valid string before using slice
-  
-
   const handleAddToWatchlist = async () => {
     try {
       // Check if the movie is already in the watchlist for the user
@@ -35,7 +32,7 @@ const WatchlistButton = ({ moviedb_movieid, title, overview, release_date, poste
       if (error.response) {
         // The request was made, but the server responded with an error status
         console.error('Error response from server:', error.response.data);
-        alert('Error adding to watchlist. Please try again.');
+        alert(error.response.data.error || 'Error adding to watchlist. Please try again.');
       } else {
         // Something else happened
         console.error('Unexpected error:', error.message);
@@ -55,7 +52,7 @@ const WatchlistButton = ({ moviedb_movieid, title, overview, release_date, poste
   };
 
   return (
-    <Button style={{float:'right', marginLeft:'auto'}}variant={isAdded ? 'success' : 'primary'} onClick={handleAddToWatchlist} disabled={isAdded}>
+    <Button style={{float:'right', marginLeft:'auto'}} variant={isAdded ? 'success' : 'primary'} onClick={handleAddToWatchlist} disabled={isAdded}>
       {isAdded ? 'Added to Watchlist' : 'Add to Watchlist'}
     </Button>
   );
