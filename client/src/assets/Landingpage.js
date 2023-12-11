@@ -34,7 +34,7 @@ const Landingpage = () => {
 
     const [newsB,setNewsB] = useState(searchParams.get('news') || getUserSettings()?.newsUI || 'true');
 
-    const [genre,setGenre] = useState(searchParams.get('genre') || '');
+    const [genre,setGenre] = useState(searchParams.get('genre') || getUserSettings()?.genresUI || '');
 
 
 
@@ -61,7 +61,6 @@ const Landingpage = () => {
       searchParams.set('reviews', reviewsB);
       navigate(`?${searchParams.toString()}`);
     }, [reviewsB]);
-
 
 
 
