@@ -4,6 +4,7 @@ import { jwtToken, usernameSignal } from './Signals.js';
 import './Login.css';
 import IMAGES from './avatars/Images.js';
 import { Container, Row, Col } from 'react-bootstrap';
+import {clientServerMatch,forceUpdateMatch } from '../components/ConfirmUserSignal.js';
 
 
 
@@ -24,50 +25,59 @@ function Settings() {
         };
 
         const handleSubmit = async (e) => {
-            e.preventDefault();
-            console.log('Current Username: ' + username);
-            console.log('New Username: ' + newUsername);
-            console.log('Password: ' + password);
-            try {
-                console.log('Request payload:', { username: newUsername, password });
-                console.log('New Username before axios request: ' + newUsername);
-                const response = await axios.put(`http://localhost:3001/users/name/${username}`, {
-                    newUsername,
-                    password,
-                    username,
-                });
+            if(forceUpdateMatch() === true){
 
-                jwtToken.value = response.data.jwtToken;
-                usernameSignal.value = newUsername;
+                e.preventDefault();
+                console.log('Current Username: ' + username);
+                console.log('New Username: ' + newUsername);
+                console.log('Password: ' + password);
+                try {
+                    console.log('Request payload:', { username: newUsername, password });
+                    console.log('New Username before axios request: ' + newUsername);
+                    const response = await axios.put(`http://localhost:3001/users/name/${username}`, {
+                        newUsername,
+                        password,
+                        username,
+                    });
+    
+                    jwtToken.value = response.data.jwtToken;
+                    usernameSignal.value = newUsername;
+                }
+                catch (error) {
+                    console.error('Error during login:', error.response ? error.response.data : error.message);
+                    // Handle the error, e.g., display an error message to the user
+                }
+
+
             }
-            catch (error) {
-                console.error('Error during login:', error.response ? error.response.data : error.message);
-                // Handle the error, e.g., display an error message to the user
-            }
+           
         };
         const handleDeleteUser = async () => {
+            if (forceUpdateMatch()===true){
 
-            const confirmDelete = window.confirm("Are you sure you want to delete your user? This action is irreversible.");
+                const confirmDelete = window.confirm("Are you sure you want to delete your user? This action is irreversible.");
 
-            if (!confirmDelete) {
-                return;
+                if (!confirmDelete) {
+                    return;
+                }
+    
+                try {
+                    const response = await axios.delete(`http://localhost:3001/users/${username}`, {
+                        headers: { Authorization: `Bearer ${jwtToken.value}` },
+                    });
+                    console.log('User deleted:', response.data);
+    
+                    sessionStorage.removeItem('username');
+                    jwtToken.value = '';
+                    usernameSignal.value = '';
+    
+                    window.location.href = '/login';
+    
+                } catch (error) {
+                    console.error('Error deleting user:', error.response ? error.response.data : error.message);
+                }
             }
 
-            try {
-                const response = await axios.delete(`http://localhost:3001/users/${username}`, {
-                    headers: { Authorization: `Bearer ${jwtToken.value}` },
-                });
-                console.log('User deleted:', response.data);
-
-                sessionStorage.removeItem('username');
-                jwtToken.value = '';
-                usernameSignal.value = '';
-
-                window.location.href = '/login';
-
-            } catch (error) {
-                console.error('Error deleting user:', error.response ? error.response.data : error.message);
-            }
         };
         return (
             <div className="container">
@@ -206,6 +216,7 @@ function Settings() {
 
     return (
         <div>
+            {forceUpdateMatch() === true ? (<div>
 
             <h1>Settings</h1>
             <div>
@@ -228,6 +239,11 @@ function Settings() {
             </div>
             <NameForm />
             <ClickableBoxes handleBoxClick={handleBoxClickFunction} />
+
+
+            </div>):(<div>Unauthorized</div>)}
+
+
         </div>
     );
 }

@@ -4,6 +4,7 @@ import { Card, CardFooter, Ratio } from 'react-bootstrap';
 import { Dropdown, Button} from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import DeleteReview from './DeleteReview';
+import {clientServerMatch,forceUpdateMatch} from '../components/ConfirmUserSignal.js';
 
 //reviews/getReviews?username=&movieid=
 
@@ -91,8 +92,8 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
       <Dropdown.Menu>
 
       <Dropdown.Item onClick={() => updateGetReviewsUrl(`movieid=${movieid}`,'All reviews')}>All Reviews</Dropdown.Item>
-
-      <Dropdown.Item onClick={() => updateGetReviewsUrl(`username=${username}&movieid=${movieid}`,'Your reviews')}>Your reviews</Dropdown.Item>
+      {forceUpdateMatch()===true && (<Dropdown.Item onClick={() => updateGetReviewsUrl(`username=${username}&movieid=${movieid}`,'Your reviews')}>Your reviews</Dropdown.Item>)}
+     
 
 
 
@@ -132,7 +133,7 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
                 <CardFooter>{reviews[index].username === username ? ('My review'):(reviews[index].username)}</CardFooter>
 
 
-                {reviews[index].username === username && dropdownOn === true &&  (
+                {reviews[index].username === username && dropdownOn === true && forceUpdateMatch()===true &&  (
                   <Button onClick={() => handleDelete(reviews[index].review_id)} style={{margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
                     Delete
                   </Button>)}

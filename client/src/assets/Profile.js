@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import IMAGES from './avatars/Images.js';
-<<<<<<< HEAD
-import ConfirmUser from '../components/ConfirmUser.js';
-=======
 import { Link } from 'react-router-dom';
->>>>>>> bd70fa07ee8a70131c2ab79dfb112dfd5a02444e
+
+import {forceUpdateMatch } from '../components/ConfirmUserSignal.js';
+
 
 function Profile() {
   const [users, setUsers] = useState([]);
@@ -124,43 +123,9 @@ function Profile() {
 
   return (
     <div>
-      <Container>
-        <div>
-<<<<<<< HEAD
-          {ConfirmUser() ? <div>Authorized</div> : <div>Unauthorized</div>}
+      {forceUpdateMatch() === true ? (
         <Container>
-          <div>
-            {users.map((user, index) => (
-              <li key={index} style={{ listStyle: 'none', display: 'flex', alignItems: 'center' }}>
-                {user.avatar && (
-                  <img
-                    src={IMAGES[user.avatar]}
-                    alt={`Avatar for ${user.username} with [${user.avatar}]`}
-                    style={{ width: '50px', height: '50px', marginLeft: '10px' }}
-                  />
-                )}
-                <h2 style={{ fontSize: '40px' }}>{user.username}</h2>
-              </li>
-            ))}
-          </div>
-          <Row>
-            <Col md={6}>
-              <h2>My Groups</h2>
-              {/* My Groups */}
-              <div className="group-container" style={{ height: '400px', overflowY: 'auto', border: '1px solid #ddd', padding: '10px' }}>
-                {mygroups.map((group) => (
-                  <Link to={`/groups/${group.group_name}`} key={group.group_name} className="mb-3" style={{ textDecoration: 'none', color: 'black' }}>
-                    <div className="group-box p-3 border">
-                      <h3>{group.group_name}</h3>
-                      <p style={{ maxHeight: '80px', overflow: 'hidden' }}>{group.group_description}</p>
-                      {/* Add more details or actions as needed */}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </Col>
-            <Col md={6}>
-=======
+        <div>
           {users.map((user, index) => (
             <li key={index} style={{ listStyle: 'none', display: 'flex', alignItems: 'center' }}>
               {user.avatar && (
@@ -196,7 +161,6 @@ function Profile() {
             </div>
           </Col>
           <Col md={6}>
->>>>>>> bd70fa07ee8a70131c2ab79dfb112dfd5a02444e
             <h2>Watchlist Movies</h2>
             {/* Watchlist Movies */}
             <div className="movie-container d-flex flex-wrap gap-3" style={{ height: '400px', overflowY: 'auto', border: '1px solid #ddd', padding: '10px' }}>
@@ -242,6 +206,10 @@ function Profile() {
           </Button>
         )}
       </Container>
+
+
+      ) : (<div>Unauthorized</div>)}
+      
     </div>
   );
 }
