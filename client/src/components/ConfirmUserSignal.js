@@ -20,7 +20,7 @@ const handleLogout = () => {
 };
 
 export function forceLogout() {
-    console.log('Forcelogout', getClientUsername(), ' ', forceUpdateMatch());
+    // console.log('Forcelogout', getClientUsername(), ' ', forceUpdateMatch());
   
     setTimeout(() => {
       if (getClientUsername().length > 0 && forceUpdateMatch() === false) {
@@ -43,8 +43,8 @@ function getClientUsername(){
 
 export function forceUpdateMatch() {
     getClientUsername();
-    console.log(clientUsername.value);
-    console.log('forceUpdateMatch: ',clientUsername.value === serverUsername.value && clientUsername.value.length > 0);
+    // console.log(clientUsername.value);
+    // console.log('forceUpdateMatch: ',clientUsername.value === serverUsername.value && clientUsername.value.length > 0);
     return getClientUsername() === serverUsername.value && getClientUsername().length > 0;
 }
 
