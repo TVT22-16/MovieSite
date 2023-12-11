@@ -7,6 +7,8 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import GenrePicker from '../components/GenrePicker';
 import { Badge, Dropdown } from 'react-bootstrap';
 
+import { forceUpdateMatch } from '../components/ConfirmUserSignal';
+
 
 const Landingpage = () => {
     const navigate = useNavigate();
@@ -203,41 +205,55 @@ const SettingsButton = ({ updateGenres, updateReviewBool, updateNewsBool, newsB,
 
   return (
     <Dropdown onSelect={handleSelect} className="ms-auto">
-      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-        {/* Three dots icon (ellipsis) */}
-        <span>&#8285;</span>
-      </Dropdown.Toggle>
+      {forceUpdateMatch() === false ? (
+        <>
+            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+            {/* Three dots icon (ellipsis) */}
+            <span>Log in to edit view</span>
+            </Dropdown.Toggle>
+        </>
+      ):(
+         <>
+          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+          {/* Three dots icon (ellipsis) */}
+          <span>&#8285;</span>
+          </Dropdown.Toggle>
 
-      <Dropdown.Menu className="custom-dropdown-menu" style={{ minWidth: 'auto', padding: '5px' }}>
-        {/* Pass the mapped genres to § */}
-        <GenrePicker updateGenres={updateGenres} currentGenres={mapGenresToIntegers()} />
+          <Dropdown.Menu className="custom-dropdown-menu" style={{ minWidth: 'auto', padding: '5px' }}>
+          {/* Pass the mapped genres to § */}
+          <GenrePicker updateGenres={updateGenres} currentGenres={mapGenresToIntegers()} />
 
-        <Dropdown.Item
-          className="custom-dropdown-item"
-          style={{
-            borderRadius: '5px',
-            ...(reviewsB === 'false' && { backgroundColor: 'red' }),
-          }}
-          onClick={() => updateReviewBool()}
-        >
-          Reviews on/off
-        </Dropdown.Item>
+            <Dropdown.Item
+            className="custom-dropdown-item"
+            style={{
+              borderRadius: '5px',
+              ...(reviewsB === 'false' && { backgroundColor: 'red' }),
+            }}
+            onClick={() => updateReviewBool()}
+            >
+            Reviews on/off
+              </Dropdown.Item>
 
-        <Dropdown.Item
-          className="custom-dropdown-item"
-          style={{
-            borderRadius: '5px',
-            ...(newsB === 'false' && { backgroundColor: 'red' }),
-          }}
-          onClick={() => updateNewsBool()}
-        >
-          News on/off
-        </Dropdown.Item>
+                  <Dropdown.Item
+                  className="custom-dropdown-item"
+                  style={{
+                    borderRadius: '5px',
+                    ...(newsB === 'false' && { backgroundColor: 'red' }),
+                  }}
+                  onClick={() => updateNewsBool()}
+                  >
+                  News on/off
+                  </Dropdown.Item>
 
-        <Dropdown.Item className="custom-dropdown-item" onClick={() => savePageSettings()}>
-          Save
-        </Dropdown.Item>
-      </Dropdown.Menu>
+              <Dropdown.Item className="custom-dropdown-item" onClick={() => savePageSettings()}>
+            Save
+            </Dropdown.Item>
+          </Dropdown.Menu>
+
+      </>
+
+      )}
+   
     </Dropdown>
   );
 };
