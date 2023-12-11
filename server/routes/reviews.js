@@ -50,7 +50,7 @@ router.get('/user/:username', async (req, res) => {
 });
 
 
-//get Reviews upgraded
+//get Reviews 
 router.get('/getReviews', async (req, res) => {
     console.log('Get reviews');
 
@@ -58,16 +58,19 @@ router.get('/getReviews', async (req, res) => {
         let username = req.query.username;
         let movieid = req.query.movieid;
 
-        const response = await getReviewsUpgraded(username,movieid);
+        const response = await getReviewsUpgraded(username, movieid);
 
-        res.json(response);
-
+        if (response.length > 0) {
+            res.status(200).json({ results: response });
+        } else {
+            // Use 204 No Content status code for empty array
+            res.status(204).send();
+        }
     } catch (error) {
         // Use a 500 Internal Server Error status code
         res.status(500).json({ message: error.message });
     }
 });
-
 
 
 //add user

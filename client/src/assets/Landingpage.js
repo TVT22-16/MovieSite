@@ -7,8 +7,21 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import GenrePicker from '../components/GenrePicker';
 import { Badge, Dropdown } from 'react-bootstrap';
 
+import { forceUpdateMatch } from '../components/ConfirmUserSignal';
+
 
 const Landingpage = () => {
+
+    const getUserSettings = () =>{
+      const retrievedUserSettings = localStorage.getItem(`${sessionStorage.getItem('username')}Settings`);
+      console.log(JSON.parse(retrievedUserSettings));
+      if (retrievedUserSettings) {
+        return JSON.parse(retrievedUserSettings);
+      } else {
+        return null;
+      }
+    }
+
     const navigate = useNavigate();
 
     const [landingMovies, setLandingMovies] = useState([]);
@@ -17,12 +30,17 @@ const Landingpage = () => {
 
     const [searchParams] = useSearchParams();
 
-    const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || localStorage.getItem('reviewsUI') || 'true');
+    const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || getUserSettings()?.reviewsUI || 'true');
 
-    const [newsB,setNewsB] = useState(searchParams.get('news') || localStorage.getItem('newsUI') ||'true');
+    const [newsB,setNewsB] = useState(searchParams.get('news') || getUserSettings()?.newsUI || 'true');
 
-    const [genre,setGenre] = useState(searchParams.get('genre') || '');
-     
+    const [genre,setGenre] = useState(searchParams.get('genre') || getUserSettings()?.genresUI || '');
+
+
+
+    useEffect(() => {
+      getUserSettings();
+    }, []);
 
     useEffect(() => {
       if (!genre) {
@@ -46,7 +64,6 @@ const Landingpage = () => {
 
 
 
-
     const updateReviewBool = () => {
       const updatedReviewsB = reviewsB === 'true' ? 'false' : 'true';
     
@@ -65,9 +82,14 @@ const Landingpage = () => {
 
     const savePageSettings = () =>{
 
-      localStorage.setItem('newsUI', newsB);
-      localStorage.setItem('reviewsUI', reviewsB);
-      localStorage.setItem('genresUI', genre)
+      const settingsObject = {
+        user: sessionStorage.getItem('username'),
+        newsUI: newsB,
+        reviewsUI: reviewsB,
+        genresUI: genre
+      };
+
+      localStorage.setItem(`${sessionStorage.getItem('username')}Settings`, JSON.stringify(settingsObject));
     }
 
     const updateBackdrop = (p) => {
@@ -200,41 +222,52 @@ const SettingsButton = ({ updateGenres, updateReviewBool, updateNewsBool, newsB,
 
   return (
     <Dropdown onSelect={handleSelect} className="ms-auto">
-      <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-        {/* Three dots icon (ellipsis) */}
-        <span>&#8285;</span>
-      </Dropdown.Toggle>
 
-      <Dropdown.Menu className="custom-dropdown-menu" style={{ minWidth: 'auto', padding: '5px' }}>
-        {/* Pass the mapped genres to GenrePicker */}
-        <GenrePicker updateGenres={updateGenres} currentGenres={mapGenresToIntegers()} />
+          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+          {/* Three dots icon (ellipsis) */}
+          <span>&#8285;</span>
+          </Dropdown.Toggle>
 
-        <Dropdown.Item
-          className="custom-dropdown-item"
-          style={{
-            borderRadius: '5px',
-            ...(reviewsB === 'false' && { backgroundColor: 'red' }),
-          }}
-          onClick={() => updateReviewBool()}
-        >
-          Reviews on/off
-        </Dropdown.Item>
+          <Dropdown.Menu className="custom-dropdown-menu" style={{ minWidth: 'auto', padding: '5px' }}>
+          {/* Pass the mapped genres to § */}
+          <GenrePicker updateGenres={updateGenres} currentGenres={mapGenresToIntegers()} />
 
-        <Dropdown.Item
-          className="custom-dropdown-item"
-          style={{
-            borderRadius: '5px',
-            ...(newsB === 'false' && { backgroundColor: 'red' }),
-          }}
-          onClick={() => updateNewsBool()}
-        >
-          News on/off
-        </Dropdown.Item>
+            <Dropdown.Item
+            className="custom-dropdown-item"
+            style={{
+              borderRadius: '5px',
+              ...(reviewsB === 'false' && { backgroundColor: 'red' }),
+            }}
+            onClick={() => updateReviewBool()}
+            >
+            Reviews on/off
+              </Dropdown.Item>
 
-        <Dropdown.Item className="custom-dropdown-item" onClick={() => savePageSettings()}>
-          Save
-        </Dropdown.Item>
-      </Dropdown.Menu>
+                  <Dropdown.Item
+                  className="custom-dropdown-item"
+                  style={{
+                    borderRadius: '5px',
+                    ...(newsB === 'false' && { backgroundColor: 'red' }),
+                  }}
+                  onClick={() => updateNewsBool()}
+                  >
+                  News on/off
+                  </Dropdown.Item>
+
+              {forceUpdateMatch() === true ? (
+                <Dropdown.Item className="custom-dropdown-item" onClick={() => savePageSettings()}>
+                Save
+                </Dropdown.Item>
+
+              ):(
+                <Dropdown.Item className="custom-dropdown-item">
+                  Login to save
+                </Dropdown.Item>
+
+              )}
+
+          </Dropdown.Menu>
+   
     </Dropdown>
   );
 };

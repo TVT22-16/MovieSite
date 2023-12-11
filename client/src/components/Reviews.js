@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Card, CardFooter, Ratio } from 'react-bootstrap';
+import { Badge, Card, CardFooter, Ratio } from 'react-bootstrap';
 import { Dropdown, Button} from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import DeleteReview from './DeleteReview';
@@ -18,6 +18,7 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
   const [getReviewsUrl, setReviewsUrl] = useState(`${baseUrl}/reviews/getReviews?username=&movieid=${movieid}`);
   const [reviews, setReviews] = useState([]);
   const [reviewsWData, setReviewsWData] = useState([]);
+  const [latestStatus, setLatestStatus] = useState(404);
 
   const [filterState, setFilterState] = useState('All reviews');
 
@@ -36,12 +37,14 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
     try {
       const response = await axios.get(getReviewsUrl);
 
-      slicing === true ? (setReviews((response.data).slice(0,5))) : (setReviews(response.data));
-
+      slicing === true ? (setReviews((response.data.results).slice(0,5))) : (setReviews(response.data.results));
+      setLatestStatus(response.status);
+      console.log('Reponsestatus: ',response.status)
       setReviewsWData([]);
     } catch (err) {
       console.error(err);
     }
+
   };
 
   useEffect(() => {
@@ -146,10 +149,18 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
 
           ))}
         </>
-      ) : (
+      ) : (<>
+        {console.log(latestStatus)}
+        {latestStatus===204 ? (
+        
+          <h3><span class="badge bg-success">This movie has not been reviewed yet</span></h3>
+        
+        ) : (
         <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+        )}
+        </>
       ))}</>
 
   );

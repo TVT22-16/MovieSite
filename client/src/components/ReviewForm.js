@@ -39,6 +39,12 @@ const ReviewForm = ({moviedb_movieid}) => {
         .then(response => {
   
           setAddReviewStatus(response.data);
+          if(response.data.status === 'error'){
+            // alert('Only one review/movie is allowed');
+            console.log('Only one review/movie allowed');
+          } else{
+            window.location.reload(false);
+          }
   
         })
         .catch(error => {
@@ -47,8 +53,6 @@ const ReviewForm = ({moviedb_movieid}) => {
         });
 
       }
-
-      window.location.reload(false);
       
     }
 
