@@ -11,6 +11,17 @@ import { forceUpdateMatch } from '../components/ConfirmUserSignal';
 
 
 const Landingpage = () => {
+
+    const getUserSettings = () =>{
+      const retrievedUserSettings = localStorage.getItem(`${sessionStorage.getItem('username')}Settings`);
+      console.log(JSON.parse(retrievedUserSettings));
+      if (retrievedUserSettings) {
+        return JSON.parse(retrievedUserSettings);
+      } else {
+        return null;
+      }
+    }
+
     const navigate = useNavigate();
 
     const [landingMovies, setLandingMovies] = useState([]);
@@ -19,14 +30,16 @@ const Landingpage = () => {
 
     const [searchParams] = useSearchParams();
 
-    const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || localStorage.getItem('reviewsUI') || 'true');
+    const [reviewsB, setReviewsB] = useState(searchParams.get('reviews') || getUserSettings()?.reviewsUI || 'true');
 
-    const [newsB,setNewsB] = useState(searchParams.get('news') || localStorage.getItem('newsUI') ||'true');
+    const [newsB,setNewsB] = useState(searchParams.get('news') || getUserSettings()?.newsUI || 'true');
 
     const [genre,setGenre] = useState(searchParams.get('genre') || '');
 
+
+
     useEffect(() => {
-      console.log('Query string genre: ', searchParams.get('genre'));
+      getUserSettings();
     }, []);
 
     useEffect(() => {
@@ -70,9 +83,14 @@ const Landingpage = () => {
 
     const savePageSettings = () =>{
 
-      localStorage.setItem('newsUI', newsB);
-      localStorage.setItem('reviewsUI', reviewsB);
-      localStorage.setItem('genresUI', genre)
+      const settingsObject = {
+        user: sessionStorage.getItem('username'),
+        newsUI: newsB,
+        reviewsUI: reviewsB,
+        genresUI: genre
+      };
+
+      localStorage.setItem(`${sessionStorage.getItem('username')}Settings`, JSON.stringify(settingsObject));
     }
 
     const updateBackdrop = (p) => {
