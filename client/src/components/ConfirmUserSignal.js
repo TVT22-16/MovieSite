@@ -11,14 +11,32 @@ export const clientServerMatch = signal(true);
 const baseUrl = 'http://localhost:3001'
 
 
+const handleLogout = () => {
+    // console.log('Confirm user handlelogout')
+    // Clear authentication-related information
+    window.location.href = '/login';
+    sessionStorage.clear();
+    alert('Ähäkutti');
+};
+
+export function forceLogout() {
+    console.log('Forcelogout', getClientUsername(), ' ', forceUpdateMatch());
+  
+    setTimeout(() => {
+      if (getClientUsername().length > 0 && forceUpdateMatch() === false) {
+        handleLogout();
+      }
+    }, 2500);
+  }
+
 function getSessionToken(){
-    console.log('getSessionToken()');
+    // console.log('getSessionToken()');
     const t = sessionStorage.getItem('token');
     return t===null || t==='null' ? '' : t;
 }
 
 function getClientUsername(){
-    console.log('getClientUsername()');
+    // console.log('getClientUsername()');
     const username = sessionStorage.getItem('username');
     return username===null || username==='null' ? '':username;
 }
@@ -27,11 +45,12 @@ export function forceUpdateMatch() {
     getClientUsername();
     console.log(clientUsername.value);
     console.log('forceUpdateMatch: ',clientUsername.value === serverUsername.value && clientUsername.value.length > 0);
-    return clientUsername.value === serverUsername.value && clientUsername.value.length > 0;
+    return getClientUsername() === serverUsername.value && getClientUsername().length > 0;
 }
 
+
 effect(() =>{
-    console.log('getServerUsername-effect');
+    // console.log('getServerUsername-effect');
     const config = {headers:{ Authorization: 'Bearer ' + clientToken}};
     axios.get(`${baseUrl}/users/private2`, config)
     .then(resp => {
@@ -39,12 +58,6 @@ effect(() =>{
     })
     .catch(err => console.log(err.response.data))
 })
-
-// effect(()=>{
-//     //check if name on sessionStorage and name returned from backend matches while sessiostorage name.lenght>0
-//     clientUsername.value===serverUsername.value && clientUsername.value.length>0 ? clientServerMatch.value = true: clientServerMatch.value=false
-//     console.log('DoNamesMatch-Effect: ',clientServerMatch.value);
-// })
 
 
 

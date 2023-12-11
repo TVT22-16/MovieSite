@@ -11,7 +11,6 @@ import { jwtToken, usernameSignal } from '../assets/Signals';
 const Header = ({ loggedIn }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  console.log('jwttoken'+jwtToken);
 
   useEffect(() => {
     // Retrieve the theme preference from local storage or any other source
@@ -44,7 +43,6 @@ const Header = ({ loggedIn }) => {
   };
 
   const username = sessionStorage.getItem('username');
-  console.log(username);
 
   const handleLogout = () => {
     // Clear authentication-related information

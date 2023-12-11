@@ -34,7 +34,7 @@ const ReviewForm = ({moviedb_movieid}) => {
         rating: event.target.rating.value,
       };
 
-      if (forceUpdateMatch===true){
+      if (forceUpdateMatch()===true){
         axios.post(addReviewUrl, reviewData)
         .then(response => {
   
@@ -67,7 +67,7 @@ const ReviewForm = ({moviedb_movieid}) => {
     return (
       <div id="reviewFormBody" style={{width:'100%', display:'flex', flexDirection:'column', alignItems:'center'}}>
 
-            {clientServerMatch.value===true ? (<button type="submit" className="btn btn-light" onClick={handleShowForm} style={{width:'20%'}}>
+            {forceUpdateMatch()===true ? (<button type="submit" className="btn btn-light" onClick={handleShowForm} style={{width:'20%'}}>
               Review Movie
             </button>) : (<button className="btn btn-light">Login to review movie</button>)}
 
