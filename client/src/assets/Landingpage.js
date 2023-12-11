@@ -222,15 +222,7 @@ const SettingsButton = ({ updateGenres, updateReviewBool, updateNewsBool, newsB,
 
   return (
     <Dropdown onSelect={handleSelect} className="ms-auto">
-      {forceUpdateMatch() === false ? (
-        <>
-            <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-            {/* Three dots icon (ellipsis) */}
-            <span>Log in to edit view</span>
-            </Dropdown.Toggle>
-        </>
-      ):(
-         <>
+
           <Dropdown.Toggle variant="secondary" id="dropdown-basic">
           {/* Three dots icon (ellipsis) */}
           <span>&#8285;</span>
@@ -262,14 +254,19 @@ const SettingsButton = ({ updateGenres, updateReviewBool, updateNewsBool, newsB,
                   News on/off
                   </Dropdown.Item>
 
-              <Dropdown.Item className="custom-dropdown-item" onClick={() => savePageSettings()}>
-            Save
-            </Dropdown.Item>
+              {forceUpdateMatch() === true ? (
+                <Dropdown.Item className="custom-dropdown-item" onClick={() => savePageSettings()}>
+                Save
+                </Dropdown.Item>
+
+              ):(
+                <Dropdown.Item className="custom-dropdown-item">
+                  Login to save
+                </Dropdown.Item>
+
+              )}
+
           </Dropdown.Menu>
-
-      </>
-
-      )}
    
     </Dropdown>
   );
