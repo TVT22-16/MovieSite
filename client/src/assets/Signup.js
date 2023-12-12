@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link,useNavigate } from 'react-router-dom';
 import './Signup.css'
 
+//In Signup you can create a new account
+
 function Signup() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -39,6 +41,8 @@ function Signup() {
     }
     const avatar = 'default';
 
+    //Sending username, password and avatar to the server
+    //avatar is  set as default for everyone, but can be changed in Profile
     try {
       const response = await axios.post('http://localhost:3001/users/register', {
         username,

@@ -4,6 +4,10 @@ import { jwtToken, userData, usernameSignal } from './Signals';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+//In Login you can login to your account or register a new one
+//For Login we need username and password from the user to send to the server.
+//If the user is logged in, the login page will redirect to the homepage
+
 function Login() {
 
   return (
@@ -49,11 +53,11 @@ function LoginForm() {
         username,
         password,
       })
-
+      //Stored as signals (see Signals.js)
       jwtToken.value = response.data.jwtToken;
       usernameSignal.value = response.data.username;
 
-      //These may be needed later
+      //Stored in sessionStorage
       sessionStorage.setItem('username', username);
       sessionStorage.setItem('token', jwtToken.value);
 
