@@ -17,6 +17,7 @@ describe('Reviews API models', () => {
     // Perform cleanup after running the tests, e.g., removing test data or closing connections
   });
 
+  //todo add 'done' here
   describe('getReviewsUpgraded', () => {
 
     it('should get reviews for a user and movie', async () => {
@@ -24,14 +25,14 @@ describe('Reviews API models', () => {
       
       expect(response).to.be.an('array');
       expect(response).to.have.length.greaterThan(0);
-      // Add more specific assertions based on the structure of the response
+
     });
 
     it('should handle empty input', async () => {
       const response = await getReviewsUpgraded();
       
       expect(response).to.be.an('array');
-      // Add more assertions based on the expected behavior
+
     });
   });
 
@@ -61,7 +62,7 @@ describe('Reviews API models', () => {
 
   describe('deleteReview', () => {
     it('should delete a review', async () => {
-      // Assuming you have a review ID that exists in your test database
+
       const response = await deleteReview(addedReviewID);
       
       expect(response).to.equal(`Review with id=${addedReviewID} was deleted`);
