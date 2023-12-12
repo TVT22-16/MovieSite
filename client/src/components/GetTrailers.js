@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import baseUrl from './baseUrl';
 
 
 
@@ -12,7 +13,7 @@ const GetTrailers = ({id}) => {
     useEffect(()=>{
         const fetchTrailers = async () => {
             try {
-                const response = await axios.get(`http://localhost:3001/movies/trailer/${id}`);
+                const response = await axios.get(`${baseUrl}/movies/trailer/${id}`);
                 setTrailers(response.data);
             } catch (error) {
                 console.error('Error fetching trailers:', error);

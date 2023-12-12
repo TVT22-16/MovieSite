@@ -5,8 +5,7 @@ import axios from 'axios';
 import './MovieInfo.css';
 import SliderComponent from './Slider';
 import {clientServerMatch, forceUpdateMatch} from '../components/ConfirmUserSignal.js';
-
-const baseUrl = 'http://localhost:3001'
+import baseUrl from './baseUrl.js';
 
 //Add review button and form for movieInfo page
 

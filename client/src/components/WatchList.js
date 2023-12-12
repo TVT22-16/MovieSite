@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import baseUrl from './baseUrl';
 
 const WatchlistButton = ({ moviedb_movieid, title, overview, release_date, poster_path }) => {
   const [isAdded, setIsAdded] = useState(false);
@@ -17,7 +18,7 @@ const WatchlistButton = ({ moviedb_movieid, title, overview, release_date, poste
         alert('This movie is already in your watchlist.');
       } else {
         // Movie is not in the watchlist, proceed with adding
-        await axios.post('http://localhost:3001/watchlist/add', {
+        await axios.post(`${baseUrl}/watchlist/add`, {
           username,
           moviedb_movieid,
           title,
@@ -43,7 +44,7 @@ const WatchlistButton = ({ moviedb_movieid, title, overview, release_date, poste
 
   const checkIfMovieInWatchlist = async (username, moviedb_movieid) => {
     try {
-      const response = await axios.get(`http://localhost:3001/watchlist/check/${username}/${moviedb_movieid}`);
+      const response = await axios.get(`${baseUrl}/watchlist/check/${username}/${moviedb_movieid}`);
       return response.data.isInWatchlist;
     } catch (error) {
       console.error('Error checking if movie is in watchlist:', error.response ? error.response.data : error.message);

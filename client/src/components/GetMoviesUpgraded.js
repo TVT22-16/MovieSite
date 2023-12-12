@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import baseUrl from './baseUrl';
 
 
 const GetMovies = ({sort_by='',page='',updatePageAmount='',updateMoviesData, genres=''}) => {
@@ -10,7 +11,7 @@ const GetMovies = ({sort_by='',page='',updatePageAmount='',updateMoviesData, gen
         
     useEffect(() => {
 
-        axios.get(`http://localhost:3001/movies/getMovies?page=${page}&sort_by=${sort_by}&with_genres=${genresParam}`).then(response =>{
+        axios.get(`${baseUrl}/movies/getMovies?page=${page}&sort_by=${sort_by}&with_genres=${genresParam}`).then(response =>{
             // setMovies(response.data.results);
             updateMoviesData(response.data.results);
             updatePageAmount(response.data.total_pages);

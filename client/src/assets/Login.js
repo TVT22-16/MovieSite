@@ -3,6 +3,7 @@ import './Login.css'
 import { jwtToken, userData, usernameSignal } from './Signals';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import baseUrl from '../components/baseUrl';
 
 //In Login you can login to your account or register a new one
 //For Login we need username and password from the user to send to the server.
@@ -49,7 +50,7 @@ function LoginForm() {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/users/login', {
+      const response = await axios.post(`${baseUrl}/users/login`, {
         username,
         password,
       })

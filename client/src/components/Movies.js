@@ -8,6 +8,7 @@ import GetMovies from './GetMoviesUpgraded.js';
 import GenrePicker from './GenrePicker.js';
 import BootstrapCard from './BootstrapCardMovie.js';
 import { Badge, Card } from 'react-bootstrap';
+import baseUrl from './baseUrl.js';
 
 
 
@@ -30,16 +31,8 @@ const Movies = () => {
 
     setResponsePageAmount(total)
   }
-   
-
-
 
   const [searchResults, setSearchResults] = useState([]);
-
-  const baseUrl = 'http://localhost:3001/movies';
-
-
-
 
   //result page number
   const [page, setPage] = useState(1);

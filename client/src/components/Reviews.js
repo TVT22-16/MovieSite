@@ -5,10 +5,9 @@ import { Dropdown, Button} from 'react-bootstrap';
 import Spinner from 'react-bootstrap/Spinner';
 import DeleteReview from './DeleteReview';
 import {clientServerMatch,forceUpdateMatch} from '../components/ConfirmUserSignal.js';
+import baseUrl from './baseUrl.js';
 
 //reviews/getReviews?username=&movieid=
-
-const baseUrl = 'http://localhost:3001'
 
 const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) => {
 

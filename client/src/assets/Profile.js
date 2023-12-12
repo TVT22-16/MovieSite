@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import IMAGES from './avatars/Images.js';
 import { Link } from 'react-router-dom';
+import baseUrl from '../components/baseUrl.js';
 
 import {forceUpdateMatch } from '../components/ConfirmUserSignal.js';
 
@@ -20,7 +21,7 @@ function Profile() {
   // Function to fetch all groups
   const fetchGroups = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/groups/user/${username}`);
+      const response = await axios.get(`${baseUrl}/groups/user/${username}`);
       setMyGroups(response.data);
     } catch (error) {
       console.error('Error fetching My Groups:', error.response ? error.response.data : error.message);
@@ -30,7 +31,7 @@ function Profile() {
   // Function to fetch watchlist movies
   const fetchWatchlist = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/watchlist/${username}`);
+      const response = await axios.get(`${baseUrl}/watchlist/${username}`);
       // Assuming the watchlist is an array, update the state
       if (Array.isArray(response.data)) {
         setWatchlist(response.data);
@@ -48,7 +49,7 @@ function Profile() {
   // Function to fetch user information
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/users');
+      const response = await axios.get(`${baseUrl}/users`);
       // Filter the users to include only the current user
       const currentUser = response.data.find((user) => user.username === username);
       if (currentUser) {
@@ -94,7 +95,7 @@ function Profile() {
   const handleManageWatchlist = async () => {
     try {
       // Remove selected movies from the watchlist
-      await axios.post('http://localhost:3001/watchlist/remove', {
+      await axios.post(`${baseUrl}/watchlist/remove`, {
         username,
         moviedb_movieids: selectedMovies,
       });
@@ -115,7 +116,7 @@ function Profile() {
   // Function to check if a movie is in the watchlist
   const checkIfMovieInWatchlist = async (username, moviedb_movieid) => {
     try {
-      const response = await axios.get(`http://localhost:3001/watchlist/check/${username}/${moviedb_movieid}`);
+      const response = await axios.get(`${baseUrl}/watchlist/check/${username}/${moviedb_movieid}`);
       return response.data.isInWatchlist;
     } catch (error) {
       console.error('Error checking if movie is in watchlist:', error.response ? error.response.data : error.message);

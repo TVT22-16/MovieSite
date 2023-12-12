@@ -1,7 +1,8 @@
 import axios from 'axios';
+import baseUrl from './baseUrl';
 
 const DeleteReview = (id) => {
-  axios.delete(`http://localhost:3001/reviews/delete/${id}`)
+  axios.delete(`${baseUrl}/reviews/delete/${id}`)
     .then(response => {
       console.log(response.data);
     })
