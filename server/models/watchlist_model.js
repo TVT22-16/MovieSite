@@ -5,10 +5,9 @@ ADD_TO_WATCHLIST: `INSERT INTO watchlist (username, moviedb_movieid, title, over
 GET_WATCHLIST_MOVIES: 'SELECT * FROM watchlist WHERE username = $1',
 CHECK_IF_MOVIE_IN_WATCHLIST: 'SELECT EXISTS (SELECT 1 FROM watchlist WHERE username = $1 AND moviedb_movieid = $2)',
 REMOVE_FROM_WATCHLIST: 'DELETE FROM watchlist WHERE username = $1 AND moviedb_movieid = $2 RETURNING *;',
+            }
 
-
-}
-
+// Adds the movie to the users watchlist
 async function addToWatchlist(username, moviedb_movieid, title, overview, release_date, poster_path) {
   try {
     const result = await pgPool.query(sql.ADD_TO_WATCHLIST, [username, moviedb_movieid, title, overview, release_date, poster_path]);
@@ -30,6 +29,7 @@ async function addToWatchlist(username, moviedb_movieid, title, overview, releas
     }
   }
 
+// Checks if the movie is already in the users watchlist
   async function checkIfMovieInWatchlist(username, moviedb_movieid) {
     try {
       if (moviedb_movieid === undefined || moviedb_movieid === null) {
@@ -44,6 +44,7 @@ async function addToWatchlist(username, moviedb_movieid, title, overview, releas
     }
   }
 
+// Removes the movie from the watchlist
   async function removeFromWatchlist(username, moviedb_movieid) {
     try {
       const result = await pgPool.query(sql.REMOVE_FROM_WATCHLIST, [username, moviedb_movieid]);

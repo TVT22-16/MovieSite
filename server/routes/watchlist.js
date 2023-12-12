@@ -5,6 +5,7 @@ const upload = multer({dest: 'upload/'});
 
 const {addToWatchlist, getWatchlistMovies, checkIfMovieInWatchlist, removeFromWatchlist} = require('../models/watchlist_model.js')
 
+// Adds the movie to the users watchlist
 router.post('/add', async (req, res) => {
   try {
     const { username, moviedb_movieid } = req.body;
@@ -28,6 +29,7 @@ router.post('/add', async (req, res) => {
   }
 });
 
+// Removes the movie from the watchlist
 router.post('/remove', async (req, res) => {
   try {
     const { username, moviedb_movieids } = req.body;
@@ -47,7 +49,7 @@ router.post('/remove', async (req, res) => {
   }
 });
 
-
+// Gets all the movies on the users watchlist with the movieid
 router.get('/check/:username/:moviedb_movieid', async (req, res) => {
   try {
     const { username, moviedb_movieid } = req.params;
@@ -70,6 +72,7 @@ router.get('/check/:username/:moviedb_movieid', async (req, res) => {
   }
 });
   
+// Gets the users whole watchlist
   router.get('/:username', async (req, res) => {
     const { username } = req.params;
   
