@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const multer = require('multer');
 const upload = multer({dest: 'upload/'});
-const { addJoinRequest, addUserToGroup,getPendingJoinRequestForGroup, getJoinRequests,getPendingJoinRequests,getJoinRequestById,getJoinRequestsForGroup, getJoinRequestBySenderAndGroup, updateJoinRequestStatus, deleteJoinRequest, acceptJoinRequest, denyJoinRequest, isUserGroupMember} = require('../models/joinrequest_model');
+const { addJoinRequest, addUserToGroup, getJoinRequests,getPendingJoinRequests,getJoinRequestById,getJoinRequestsForGroup, getJoinRequestBySenderAndGroup, deleteJoinRequest, acceptJoinRequest, denyJoinRequest, isUserGroupMember} = require('../models/joinrequest_model');
 
 /**
  * Join Requests Routes
@@ -51,19 +51,7 @@ router.get('/:senderUsername/:groupName', async (req, res) => {
     }
 });
 
-// Update join request status
-router.put('/update-status/:senderUsername/:groupName', async (req, res) => {
-    const { senderUsername, groupName } = req.params;
-    const { status } = req.body;
 
-    try {
-        await updateJoinRequestStatus(status, senderUsername, groupName);
-        res.end();
-    } catch (error) {
-        console.error("Error updating join request status:", error);
-        res.status(500).json({ error: "Error updating join request status" });
-    }
-});
 
 // Delete join request
 router.delete('/delete/:senderUsername/:groupName', async (req, res) => {
@@ -78,7 +66,7 @@ router.delete('/delete/:senderUsername/:groupName', async (req, res) => {
     }
 });
 
-// joinrequest.js
+// Get pending join requests for a group from a user
 router.get('/pending-join-requests/:groupName/:username', async (req, res) => {
   try {
     const groupName = req.params.groupName;
@@ -107,6 +95,7 @@ router.get('/pending-join-requests/:groupName/:username', async (req, res) => {
   }
 });
 
+// Update the join request status to accepted
   router.post('/accept/:requestId', async (req, res) => {
     const { requestId } = req.params;
   
@@ -135,7 +124,7 @@ router.get('/pending-join-requests/:groupName/:username', async (req, res) => {
     }
   });
   
-  // Deny a join request
+  // Update the join request status to denied
   router.put('/deny/:requestId', async (req, res) => {
     const { requestId } = req.params;
   
@@ -148,6 +137,7 @@ router.get('/pending-join-requests/:groupName/:username', async (req, res) => {
     }
   });
 
+  // Get all join request for a group
   router.get('/:groupName', async (req, res) => {
     const { groupName } = req.params;
 
@@ -159,33 +149,8 @@ router.get('/pending-join-requests/:groupName/:username', async (req, res) => {
         res.status(500).json({ success: false, error: 'Internal Server Error' });
     }
 });
-router.get('/pending/:groupName', async (req, res) => {
-  const { groupName } = req.params;
 
-  try {
-      // Use the new function to get the pending join request for the specified group
-      const pendingJoinRequest = await getPendingJoinRequestForGroup(groupName);
-
-      if (pendingJoinRequest) {
-          res.status(200).json({
-              success: true,
-              data: pendingJoinRequest,
-          });
-      } else {
-          res.status(404).json({
-              success: false,
-              error: 'No pending join request found for the specified group',
-          });
-      }
-  } catch (error) {
-      console.error('Error fetching pending join request:', error);
-      res.status(500).json({
-          success: false,
-          error: 'Internal Server Error',
-      });
-  }
-});
-
+//Get join request with requestId
 router.get('/:requestId', async (req, res) => {
     const { requestId } = req.params;
   
