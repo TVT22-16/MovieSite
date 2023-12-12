@@ -6,9 +6,6 @@ const sql = {
     INSERT_REVIEW: 'INSERT INTO reviews (username, review, rating, moviedb_movieid,created_at) VALUES ($1,$2,$3,$4, NOW())',
     DELETE_REVIEW: 'DELETE FROM reviews WHERE review_id=$1;',
 
-    // SELECT * FROM reviews WHERE username='Messi' AND moviedb_movieid='283317';
-    // SELECT * FROM reviews WHERE username='Messi';
-    // SELECT * FROM reviews WHERE moviedb_movieid='283317';
     
     GET_REVIEWS: 'SELECT * FROM reviews',
     GET_REV_USER: 'SELECT * FROM reviews WHERE username=$1',
@@ -18,17 +15,6 @@ const sql = {
 
 };
 
-async function getReviews(){
-    const result = await pgPool.query(sql.GET_REVIEWS);
-    const rows = result.rows;
-    return rows.reverse();
-}
-
-async function getReviewsUser(username){
-  const result = await pgPool.query(sql.GET_REVIEWS_USER,[username]);
-  const rows = result.rows;
-  return rows.reverse();
-}
 
 async function getReviewsUpgraded(username = '', movieid = '') {
   let result;
@@ -49,14 +35,6 @@ async function getReviewsUpgraded(username = '', movieid = '') {
   const sortedRows = rows.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
   return sortedRows;
-}
-
-
-
-async function getReviewsMovieId(moviedb_movieid){
-  const result = await pgPool.query(sql.GET_REVIEWS_MOVIEDB_MOVIEID,[moviedb_movieid]);
-  const rows = result.rows;
-  return rows.reverse();
 }
 
 async function addReview(username, review, rating, moviedb_movieid) {
@@ -91,4 +69,4 @@ async function deleteReview(review_id) {
 
 
 
-module.exports = {addReview,getReviews,deleteReview,getReviewsUser,getReviewsMovieId,getReviewsUpgraded};
+module.exports = {addReview,deleteReview,getReviewsUpgraded};
