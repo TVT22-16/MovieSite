@@ -13,6 +13,10 @@ const sql = {
     GET_REV_MOVIE: 'SELECT * FROM reviews WHERE moviedb_movieid=$1'
 };
 
+const sqlWithReturning = {
+  INSERT_REVIEW_WITH_RETURNING: `${sql.INSERT_REVIEW} RETURNING *`, // '*' returns all columns; modify as needed
+};
+
 
 async function getReviewsUpgraded(username = '', movieid = '') {
   let result;
@@ -36,19 +40,29 @@ async function getReviewsUpgraded(username = '', movieid = '') {
 }
 
 async function addReview(username, review, rating, moviedb_movieid) {
-    try {
-      const test = await pgPool.query(sql.GET_REV_USERMOVIE, [username, moviedb_movieid]);
-      if(test.rowCount < 1){
-        const result = await pgPool.query(sql.INSERT_REVIEW, [username, review, rating, moviedb_movieid]);
-        return { status: 'success', message: 'Review added successfully' };
-      } else {
-        return { status: 'error', message: 'User already has a review for this movie!' };
-      }
-      console.log(result); // Log the result of the query if needed
+  try {
+    const test = await pgPool.query(sql.GET_REV_USERMOVIE, [username, moviedb_movieid]);
 
-    } catch (error) {
-      console.error(error);
+    if (test.rowCount < 1) {
+      const result = await pgPool.query(
+        sqlWithReturning.INSERT_REVIEW_WITH_RETURNING,
+        [username, review, rating, moviedb_movieid]
+      );
+
+      if (result.rowCount > 0) {
+        const affectedRow = result.rows[0];
+        return { status: 'success', message: 'Review added successfully', review: affectedRow };
+      } else {
+        return { status: 'error', message: 'Review not added' };
+      }
+    } else {
+      return { status: 'error', message: 'User already has a review for this movie!' };
     }
+
+  } catch (error) {
+    console.error(error);
+    return { status: 'error', message: 'An error occurred' };
+  }
 }
 
 async function deleteReview(review_id) {
