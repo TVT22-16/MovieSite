@@ -4,19 +4,6 @@ const {getPopularMovies,searchMovies,getMovieByID, getMovieTrailer, getMoviesUpg
 
 
 
-router.get('/filters/:page/:filter', async(req,res) =>{
-    try{
-        let filter = req.params.filter;
-        let page = req.params.page;
-
-        const movies = await getPopularMovies(filter,page);
-
-        res.json(movies);
-    } catch (error){
-        res.json('Movies get fail -> '+ error);
-    }
-});
-
 //new get movies for better filtering and sorting
 router.get('/getMovies', async (req, res) => {
     try {
@@ -56,10 +43,11 @@ router.get('/id/:id', async(req,res) =>{
     try{
         let id = req.params.id;
         const movies = await getMovieByID(id);
-        res.json(movies);
+        res.status(200).json(movies);
     } catch (error){
-        res.json('Movies get fail -> '+ error);
+        res.status(404).json({error:'Could not find the movie', status:'404'});
         console.error(error);
+        
 
     }
 });

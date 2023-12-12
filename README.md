@@ -3,6 +3,8 @@
 ## Notes
 To setup for dev:
     "npm install" on client and server directory
+    "Setup your .env file in the server directory"
 
-Scripts:
-    To start with nodemon: npm run dev
+    "npm run test" to start backend tests
+
+
