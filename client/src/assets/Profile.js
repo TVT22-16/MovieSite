@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 
 import {forceUpdateMatch } from '../components/ConfirmUserSignal.js';
 
+//In Profile you can see your groups and watchlist
+//You can also remove movies from your watchlist
 
 function Profile() {
   const [users, setUsers] = useState([]);

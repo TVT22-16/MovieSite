@@ -1,10 +1,12 @@
-// Corrected Groups.js
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { GroupModal } from '../components/Groupcreate.js';
 import { Link } from 'react-router-dom';
 import './Group.css';
+
+//Here you can see all groups and groups you are a member of
+//You can also create a new group
 
 function Groups() {
   const [groups, setGroups] = useState([]);
@@ -101,6 +103,12 @@ function Groups() {
   };
 
   const handleJoinRequest = async (group_name) => {
+    const isLoggedIn = sessionStorage.getItem('username');
+    if (!isLoggedIn) {
+      alert('You must be logged in to join a group.');
+      return;
+    }
+
     try {
       await axios.post('http://localhost:3001/joinrequest/add', {
         senderUsername: username,
@@ -117,7 +125,6 @@ function Groups() {
   return (
     <div>
   <Container>
-    
     <GroupModal isOpen={modalIsOpen} onRequestClose={handleCloseModal} onSubmit={handleModalSubmit} />
     <Row>
       <Col md={6}>

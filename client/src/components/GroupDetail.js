@@ -6,6 +6,9 @@ import './GroupDetail.css';
 import FinnkinoFetch from './FinnkinoFetch';
 import { Dropdown } from 'react-bootstrap';
 
+//In GroupDetail you can see group members, news, reviews and join requests.
+//If you are Admin of the group you can also accept or deny join requests and delete members from your group.
+//You can also hide news and reviews from the page.
 
 function GroupDetail() {
   const { group_name } = useParams();
