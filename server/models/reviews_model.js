@@ -11,8 +11,6 @@ const sql = {
     GET_REV_USER: 'SELECT * FROM reviews WHERE username=$1',
     GET_REV_USERMOVIE: 'SELECT * FROM reviews WHERE username=$1 AND moviedb_movieid=$2',
     GET_REV_MOVIE: 'SELECT * FROM reviews WHERE moviedb_movieid=$1'
-
-
 };
 
 
