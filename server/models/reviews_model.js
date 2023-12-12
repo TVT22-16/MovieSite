@@ -6,6 +6,7 @@ const sql = {
     INSERT_REVIEW: 'INSERT INTO reviews (username, review, rating, moviedb_movieid,created_at) VALUES ($1,$2,$3,$4, NOW())',
     DELETE_REVIEW: 'DELETE FROM reviews WHERE review_id=$1;',
 
+    USER_EXISTS: 'SELECT * FROM users WHERE username=$1',
     
     GET_REVIEWS: 'SELECT * FROM reviews',
     GET_REV_USER: 'SELECT * FROM reviews WHERE username=$1',
@@ -40,25 +41,34 @@ async function getReviewsUpgraded(username = '', movieid = '') {
 }
 
 async function addReview(username, review, rating, moviedb_movieid) {
+
+
   try {
-    const test = await pgPool.query(sql.GET_REV_USERMOVIE, [username, moviedb_movieid]);
+    const userExitsResponse = await pgPool.query(sql.USER_EXISTS,[username]);
 
-    if (test.rowCount < 1) {
-      const result = await pgPool.query(
-        sqlWithReturning.INSERT_REVIEW_WITH_RETURNING,
-        [username, review, rating, moviedb_movieid]
-      );
+    if(userExitsResponse.rowCount > 0){
 
-      if (result.rowCount > 0) {
-        const affectedRow = result.rows[0];
-        return { status: 'success', message: 'Review added successfully', review: affectedRow };
+      const response = await pgPool.query(sql.GET_REV_USERMOVIE, [username, moviedb_movieid]);
+
+      if (response.rowCount < 1) {
+        const result = await pgPool.query(
+          sqlWithReturning.INSERT_REVIEW_WITH_RETURNING,
+          [username, review, rating, moviedb_movieid]
+        );
+
+        if (result.rowCount > 0) {
+          const affectedRow = result.rows[0];
+          return { status: 'success', message: 'Review added successfully', review: affectedRow };
+        } else {
+          return { status: 'error', message: 'Review not added' };
+        }
       } else {
-        return { status: 'error', message: 'Review not added' };
+        return { status: 'error', message: 'User already has a review for this movie!' };
       }
-    } else {
-      return { status: 'error', message: 'User already has a review for this movie!' };
-    }
 
+    } else{
+      return {status: 'error', message:'User does not exist'};
+    }
   } catch (error) {
     console.error(error);
     return { status: 'error', message: 'An error occurred' };

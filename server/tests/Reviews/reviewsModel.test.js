@@ -36,7 +36,14 @@ describe('Reviews API models', () => {
     });
   });
 
+
+
   describe('addReview', () => {
+    it('Should not allow undefined user to make a review', async () =>{
+      const response = await addReview('nonexistentuser69', 'nonexistent user! (automated test review)', 1, '466420');
+      expect(response.message).to.equal("User does not exist");
+    });
+
     it('should add a review and return the review_id', async () => {
       const response = await addReview('testuser', 'Great movie! (automated test review)', 9, '466420');
 
