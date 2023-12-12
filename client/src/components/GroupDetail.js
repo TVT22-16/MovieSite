@@ -179,19 +179,47 @@ function GroupDetail() {
       </Dropdown.Menu>
     </Dropdown>
   );
-  const newsComponent = isNewsToggled && <FinnkinoFetch />;
-  const reviewsComponent = isReviewsToggled && (
-  <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
-    {/* Display group reviews on the left side */}
-    <h3>Group Reviews</h3>
-    <ul>
-      {reviews.map((review, index) => (
-        <li key={index}>
-          <strong>{review.username}</strong> - <strong>{movies[index]?.original_title}</strong> - {review.review}
-        </li>
-      ))}
-    </ul>
+  const newsComponent = isNewsToggled && (
+  <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd', display: 'flex', flexDirection: 'column' }}>
+  <div className='news-container' style={{
+    width: '100%',
+    height: '300px',
+    overflowY: 'scroll',
+    backgroundColor: 'white',
+    opacity: '0.75',
+    margin: 'auto auto',
+    gap: '30px',
+    padding: '5px',
+    borderRadius: '10px',
+    marginBottom: '10px',
+  }}>
+    <FinnkinoFetch />
   </div>
+  </div>
+  );
+
+  const truncateReview = (text, maxLength) => {
+    if (text.length <= maxLength) {
+      return text;
+    } else {
+      const lastSpaceIndex = text.lastIndexOf(' ', maxLength);
+      return text.substring(0, lastSpaceIndex) + '...';
+    }
+  };
+  
+  
+  const reviewsComponent = isReviewsToggled && (
+<div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
+  {/* Display group reviews on the left side */}
+  <h3>Group Reviews</h3>
+  <ul>
+    {reviews.map((review, index) => (
+      <li key={index}>
+        <strong>{review.username}</strong> - <strong>{movies[index]?.original_title}</strong> - {truncateReview(review.review, 120)}
+      </li>
+    ))}
+  </ul>
+</div>
 );
 
   return (
@@ -221,25 +249,11 @@ function GroupDetail() {
           </ul>
 
         </div>
+        {toggleButton}
+
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd', display: 'flex', flexDirection: 'column' }}>
-    {/* Display news on the left side */}
-    <div className='news-container' style={{
-      width: '100%',
-      height: '300px',
-      overflowY: 'scroll',
-      backgroundColor: 'white',
-      opacity: '0.75',
-      margin: 'auto auto',
-      gap: '30px',
-      padding: '5px',
-      borderRadius: '10px',
-      marginBottom: '10px',
-    }}>
-      {newsComponent}
-    </div>
-  </div>
+    {newsComponent}
 
   <div style={{ width: '45%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
     {/* Display join requests on the right side */}
@@ -256,10 +270,6 @@ function GroupDetail() {
         ))}
     </ul>
   </div>
-      {/* Hide News button */}
-      <div style={{ width: '10%', border: '1px solid #ccc', padding: '10px', marginTop: '10px', border: '5px solid #ddd' }}>
-      {toggleButton}
-    </div>
 </div>
 </div>    
   );
