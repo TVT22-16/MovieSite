@@ -5,6 +5,7 @@ import Crown from './images/crown.png';
 import './GroupDetail.css';
 import FinnkinoFetch from './FinnkinoFetch';
 import { Dropdown } from 'react-bootstrap';
+import baseUrl from './baseUrl';
 
 //In GroupDetail you can see group members, news, reviews and join requests.
 //If you are Admin of the group you can also accept or deny join requests and delete members from your group.
@@ -23,7 +24,7 @@ function GroupDetail() {
 
   const fetchGroupMembers = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/users_groups/${group_name}`);
+      const response = await axios.get(`${baseUrl}/users_groups/${group_name}`);
       setUsernames(response.data.map(user => ({ username: user.username, admin: user.admin })));
     } catch (error) {
       console.error('Error fetching group members:', error.response ? error.response.data : error.message);
@@ -32,7 +33,7 @@ function GroupDetail() {
 
   const fetchGroupReviews = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/users_groups/reviewforgroup/${group_name}`);
+      const response = await axios.get(`${baseUrl}/users_groups/reviewforgroup/${group_name}`);
       setReviews(response.data);
     } catch (error) {
       console.error('Error fetching group reviews:', error.response ? error.response.data : error.message);
@@ -47,7 +48,7 @@ function GroupDetail() {
         const responses = await Promise.all(
           movieIds.map(async (movieId) => {
             try {
-              const response = await axios.get(`http://localhost:3001/movies/id/${movieId}`);
+              const response = await axios.get(`${baseUrl}/movies/id/${movieId}`);
               return response.data;
             } catch (error) {
               console.error(`Error fetching movie with ID ${movieId}:`, error.response ? error.response.data : error.message);
@@ -66,7 +67,7 @@ function GroupDetail() {
 
   const fetchJoinRequests = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/joinrequest/${group_name}`);
+      const response = await axios.get(`${baseUrl}/joinrequest/${group_name}`);
       console.log(response);  // Log the response
       setJoinRequests(response.data.data);
     } catch (error) {
@@ -77,7 +78,7 @@ function GroupDetail() {
   const handleAccept = async (requestId) => {
     try {
       // Send a request to your backend to accept the join request
-      await axios.post(`http://localhost:3001/joinrequest/accept/${requestId}`);
+      await axios.post(`${baseUrl}/joinrequest/accept/${requestId}`);
 
       // Fetch the updated join requests
       fetchJoinRequests();
@@ -93,7 +94,7 @@ function GroupDetail() {
 
   const handleDeny = async (requestId) => {
     try {
-      await axios.put(`http://localhost:3001/joinrequest/deny/${requestId}`);
+      await axios.put(`${baseUrl}/joinrequest/deny/${requestId}`);
       // Refresh the join requests after denying
       fetchJoinRequests();
     } catch (error) {
@@ -103,7 +104,7 @@ function GroupDetail() {
   const handleDeleteUser = async (username, isAdminToDelete) => {
     try {
       if (isAdmin && !isAdminToDelete) {
-        const response = await axios.delete(`http://localhost:3001/users_groups/${group_name}/${username}`, {
+        const response = await axios.delete(`${baseUrl}/users_groups/${group_name}/${username}`, {
           headers: {
             Authorization: localStorage.getItem('token'), // Include the JWT token in the headers
           },
@@ -121,7 +122,7 @@ function GroupDetail() {
   useEffect(() => {
     const fetchGroupMembers = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/users_groups/${group_name}`);
+        const response = await axios.get(`${baseUrl}/users_groups/${group_name}`);
         const groupMembers = response.data.map(user => ({ username: user.username, admin: user.admin }));
         setUsernames(groupMembers);
 

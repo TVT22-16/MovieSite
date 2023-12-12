@@ -1,5 +1,6 @@
 import { effect, signal } from "@preact/signals-react";
 import axios from "axios";
+import baseUrl from "./baseUrl";
 
 export const clientToken = signal(getSessionToken());
 export const clientUsername = signal(getClientUsername());
@@ -8,7 +9,6 @@ export const serverUsername = signal('');
 export const clientServerMatch = signal(true);
 // export const loggedIn = signal(false);
 
-const baseUrl = 'http://localhost:3001'
 
 
 const handleLogout = () => {

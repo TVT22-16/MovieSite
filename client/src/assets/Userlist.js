@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import baseUrl from '../components/baseUrl';
 
 const UserData = () => {
     const [users, setUsers] = useState([]);
@@ -8,7 +9,7 @@ const UserData = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/users/userinfo');
+                const response = await axios.get(`${baseUrl}/users/userinfo`);
                 const sortedUsers = response.data.sort((a, b) => a.username.localeCompare(b.username));
                 setUsers(sortedUsers);
                 console.log(sortedUsers);

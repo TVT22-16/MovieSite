@@ -7,7 +7,7 @@ import GetTrailers from './GetTrailers';
 import Reviews from './Reviews';
 import WatchlistButton from './WatchList';
 import { Badge } from 'react-bootstrap';
-
+import baseUrl from './baseUrl';
 
 //https://webtips.dev/solutions/get-query-params-in-react
 
@@ -24,7 +24,10 @@ const MovieInfo = () => {
 
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/movies/id/${params}`);
+        console.log('baseurl ', baseUrl);
+        console.log(`${baseUrl}/movies/id/${params}`);
+        const res = await axios.get(`${baseUrl}/movies/id/${params}`);
+        
         const response = res.data;
         setMovieData(response);
       } catch (error) {
@@ -53,7 +56,7 @@ const MovieInfo = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3001/reviews/byMovieId/${params}`);
+        const res = await axios.get(`${baseUrl}/reviews/byMovieId/${params}`);
         const response = res.data;
         setReviews(response);
       } catch (error) {

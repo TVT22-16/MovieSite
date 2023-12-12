@@ -5,6 +5,7 @@ import './Login.css';
 import IMAGES from './avatars/Images.js';
 import { Container, Row, Col } from 'react-bootstrap';
 import { clientServerMatch, forceUpdateMatch } from '../components/ConfirmUserSignal.js';
+import baseUrl from '../components/baseUrl.js';
 
 //In Settings you can change your avatar and delete your user
 
@@ -22,7 +23,7 @@ function Settings() {
             }
 
             try {
-                const response = await axios.delete(`http://localhost:3001/users/${username}`, {
+                const response = await axios.delete(`${baseUrl}/users/${username}`, {
                     headers: { Authorization: `Bearer ${jwtToken.value}` },
                 });
                 console.log('User deleted:', response.data);
@@ -86,7 +87,7 @@ function Settings() {
         try {
             const username = sessionStorage.getItem('username');
 
-            await axios.put(`http://localhost:3001/users/avatar/${username}`, {
+            await axios.put(`${baseUrl}/users/avatar/${username}`, {
                 avatar: box.avatar,
                 username: username,
             });
@@ -99,7 +100,7 @@ function Settings() {
     const [users, setUsers] = useState([]);
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/users');
+            const response = await axios.get(`${baseUrl}/users`);
             // Filter the users to include only the current user
             const currentUser = response.data.find((user) => user.username === username);
             if (currentUser) {

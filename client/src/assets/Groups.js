@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { GroupModal } from '../components/Groupcreate.js';
 import { Link } from 'react-router-dom';
+import baseUrl from '../components/baseUrl.js';
 import './Group.css';
 
 //Here you can see all groups and groups you are a member of
@@ -18,13 +19,13 @@ function Groups() {
   // Function to fetch all groups
   const fetchGroups = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/groups'); //
+      const response = await axios.get(`${baseUrl}/groups`); //
       setGroups(response.data);
     } catch (error) {
       console.error('Error fetching groups:', error.response ? error.response.data : error.message);
     }
     try {
-      const response = await axios.get(`http://localhost:3001/groups/user/${username}`);
+      const response = await axios.get(`${baseUrl}/groups/user/${username}`);
       setMyGroups(response.data);
     }
     catch (error) {
@@ -34,7 +35,7 @@ function Groups() {
 
   const fetchJoinRequestsForGroup = async (groupName) => {
     try {
-      const response = await axios.get(`http://localhost:3001/joinrequest/pending-join-requests/${groupName}/${username}`);
+      const response = await axios.get(`${baseUrl}/joinrequest/pending-join-requests/${groupName}/${username}`);
       return response.data.data;
     } catch (error) {
       console.error('Error fetching join requests:', error.response ? error.response.data : error.message);
@@ -84,11 +85,11 @@ function Groups() {
 
   const handleModalSubmit = async ({ group_name, group_description }) => {
     try {
-      const groupResponse = await axios.post('http://localhost:3001/groups', {
+      const groupResponse = await axios.post(`${baseUrl}/groups`, {
         group_name,
         group_description,
       });
-      await axios.post('http://localhost:3001/users_groups', {
+      await axios.post(`${baseUrl}/users_groups`, {
         username,
         group_name,
         admin,
@@ -110,7 +111,7 @@ function Groups() {
     }
 
     try {
-      await axios.post('http://localhost:3001/joinrequest/add', {
+      await axios.post(`${baseUrl}/joinrequest/add`, {
         senderUsername: username,
         groupName: group_name,
         status: 'pending',
