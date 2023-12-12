@@ -3,33 +3,7 @@ const apiurl = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1
 require('dotenv').config({path:('../.env')});
 const axios = require('axios');
 
-//popular
-//top_rated
-//upcoming
 
-
-
-//
-
-async function getPopularMovies(filter,page) {
-    try {
-      const options = {
-        method: 'GET',
-        url: `https://api.themoviedb.org/3/movie/${filter}?language=en-US&page=${page}`,
-        headers: {
-          accept: 'application/json',
-          Authorization: process.env.MOVIEDB_API_KEY
-        }
-      };
-  
-      const response = await axios.request(options);
-      // return response.data.results;
-      return response.data;
-      
-    } catch (error) {
-      throw error;
-    }
-  }
 
 async function getMoviesUpgraded(sort_by = 'popularity.desc' ,vote_averagegte = 0 ,with_genres = '',release_dategte = '1900-01-01', page = 1, vote_countgte=0){
 
@@ -97,7 +71,7 @@ async function searchMovies(search,page){
   }
 }
 
-//const url = 'https://api.themoviedb.org/3/find/external_id?external_source=';
+// const url = 'https://api.themoviedb.org/3/find/external_id?external_source=';
 
 async function getMovieByID(id){
   try {
@@ -109,8 +83,6 @@ async function getMovieByID(id){
         Authorization: process.env.MOVIEDB_API_KEY
       }
     };
-
-
     const response = await axios.request(options);
     return response.data;
     
@@ -140,5 +112,26 @@ async function getMovieTrailer(id){
   }
 }
 
-module.exports = {getPopularMovies,searchMovies,getMovieByID, getMovieTrailer, getMoviesUpgraded};
+
+// async function getPopularMovies(filter,page) {
+//     try {
+//       const options = {
+//         method: 'GET',
+//         url: `https://api.themoviedb.org/3/movie/${filter}?language=en-US&page=${page}`,
+//         headers: {
+//           accept: 'application/json',
+//           Authorization: process.env.MOVIEDB_API_KEY
+//         }
+//       };
+  
+//       const response = await axios.request(options);
+//       // return response.data.results;
+//       return response.data;
+      
+//     } catch (error) {
+//       throw error;
+//     }
+//   }
+
+module.exports = {searchMovies, getMovieByID,getMovieTrailer, getMoviesUpgraded};
 
