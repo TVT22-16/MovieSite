@@ -65,7 +65,7 @@ describe('Watchlist API models', () => {
       });
     
       it('should add movie to the watchlist', async () => {
-        const response = await addToWatchlist('testuser', 897087, 'Freelance', 'overview (watchlist test)', '2012-11-11', 'poster-path');
+        const response = await addToWatchlist('testuser', 897087, 'Freelance', 'overview (watchlist test)', '2012-11-11', '/7Bd4EUOqQDKZXA6Od5gkfzRNb0.jpg');
       
         // Check if the response is an object and has the expected properties
         expect(response).to.be.an('object');
