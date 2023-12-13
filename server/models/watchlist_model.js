@@ -9,10 +9,22 @@ REMOVE_FROM_WATCHLIST: 'DELETE FROM watchlist WHERE username = $1 AND moviedb_mo
 
 }
 
+
 async function addToWatchlist(username, moviedb_movieid, title, overview, release_date, poster_path) {
   try {
+    // Additional check for null username
+    if (username === null || username === undefined) {
+      throw new Error('Username cannot be null');
+    }
+    if (moviedb_movieid === null || moviedb_movieid === undefined) {
+      throw new Error('moviedb_movieid cannot be null');
+    }
+    if (title === null || title === undefined) {
+      throw new Error('Title cannot be null');
+    }
+
     const result = await pgPool.query(sql.ADD_TO_WATCHLIST, [username, moviedb_movieid, title, overview, release_date, poster_path]);
-    return result;
+    return result.rows[0]; // Returning the first row of the result (the inserted row)
   } catch (error) {
     console.error('Error adding to watchlist:', error);
     throw error;
