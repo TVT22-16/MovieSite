@@ -150,7 +150,7 @@ router.get('/pending-join-requests/:groupName/:username', async (req, res) => {
     }
 });
 
-//Get join request with requestId
+//Get join request by id
 router.get('/:requestId', async (req, res) => {
     const { requestId } = req.params;
   

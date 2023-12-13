@@ -1,16 +1,17 @@
 const router = require('express').Router();
 const multer = require('multer');
-const upload = multer({dest: 'upload/'});
+const upload = multer({ dest: 'upload/' });
 
 
-const {addToWatchlist, getWatchlistMovies, checkIfMovieInWatchlist, removeFromWatchlist} = require('../models/watchlist_model.js')
+const { addToWatchlist, getWatchlistMovies, checkIfMovieInWatchlist, removeFromWatchlist } = require('../models/watchlist_model.js')
 
 router.post('/add', async (req, res) => {
   try {
-    const { username, moviedb_movieid } = req.body;
+    const { username, moviedb_movieid, title, overview, release_date, poster_path } = req.body;
+
     // Check if the movie is already in the watchlist for the user
     if (username === null) {
-      return res.status(400).json({ success: false, error: 'To add movies to watchlist, you need to login.' });
+      return res.status(400).json({ success: false, error: 'To add movies to the watchlist, you need to login.' });
     }
 
     const isMovieInWatchlist = await checkIfMovieInWatchlist(username, moviedb_movieid);
@@ -20,8 +21,10 @@ router.post('/add', async (req, res) => {
     }
 
     // Movie is not in the watchlist, proceed with adding
-    const result = await addToWatchlist(req.body.username, req.body.moviedb_movieid, req.body.title, req.body.overview, req.body.release_date, req.body.poster_path);
-    res.status(201).json({ success: true, data: result.rows[0] });
+    const result = await addToWatchlist(username, moviedb_movieid, title, overview, release_date, poster_path);
+    console.log('Result:', result);
+
+    res.status(201).json({ success: true, data: result.rows });
   } catch (error) {
     console.error('Error adding to watchlist:', error);
     res.status(500).json({ success: false, error: 'Internal Server Error' });
@@ -69,26 +72,26 @@ router.get('/check/:username/:moviedb_movieid', async (req, res) => {
     });
   }
 });
-  
-  router.get('/:username', async (req, res) => {
-    const { username } = req.params;
-  
-    try {
-      // Call the function to get watchlist movies for the user
-      const watchlistMovies = await getWatchlistMovies(username);
-  
-      res.status(200).json({
-        success: true,
-        data: watchlistMovies,
-      });
-    } catch (error) {
-      console.error('Error getting watchlist movies:', error);
-  
-      res.status(500).json({
-        success: false,
-        error: 'Internal Server Error',
-      });
-    }
-  });
+
+router.get('/:username', async (req, res) => {
+  const { username } = req.params;
+
+  try {
+    // Call the function to get watchlist movies for the user
+    const watchlistMovies = await getWatchlistMovies(username);
+
+    res.status(200).json({
+      success: true,
+      data: watchlistMovies,
+    });
+  } catch (error) {
+    console.error('Error getting watchlist movies:', error);
+
+    res.status(500).json({
+      success: false,
+      error: 'Internal Server Error',
+    });
+  }
+});
 
 module.exports = router;
