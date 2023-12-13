@@ -58,16 +58,16 @@ async function addReview(username, review, rating, moviedb_movieid) {
 
         if (result.rowCount > 0) {
           const affectedRow = result.rows[0];
-          return { status: 'success', message: 'Review added successfully', review: affectedRow };
+          return { status: 200, message: 'Review added successfully', review: affectedRow };
         } else {
-          return { status: 'error', message: 'Review not added' };
+          return { status: 400 , message: 'Review not added' };
         }
       } else {
-        return { status: 'error', message: 'User already has a review for this movie!' };
+        return { status: 403, message: 'User already has a review for this movie!' };
       }
 
     } else{
-      return {status: 'error', message:'User does not exist'};
+      return {status: 404, message:'User does not exist'};
     }
   } catch (error) {
     console.error(error);
