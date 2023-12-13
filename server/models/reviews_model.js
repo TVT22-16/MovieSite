@@ -73,9 +73,9 @@ async function deleteReview(review_id) {
     const result = await pgPool.query(sql.DELETE_REVIEW, [review_id]);
 
     if (result.rowCount > 0) {
-      return `Review with id=${review_id} was deleted`;
+      return {status: 200, message: `Review with id=${review_id} was deleted`}
     } else {
-      throw new Error(`Review with id=${review_id} not found`);
+      return  {status: 404, message: `Review with id=${review_id} not found`}
     }
   } catch (error) {
     return error.message || 'An error occurred while deleting the review';

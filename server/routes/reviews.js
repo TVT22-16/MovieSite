@@ -55,11 +55,11 @@ router.delete('/delete/:review_id', async(req,res) => {
 
     try{
         const review_id = req.params.review_id;
-        res.json(await deleteReview(review_id));
+        response = await deleteReview(review_id);
+        res.status(response.status).json(response);
         res.end();
     } catch (error){
-        console.log(error);
-        res.json({error: error.message}).status(500);
+        res.status(400).json({message: 'Something went wrong'})
     }
 });
 
