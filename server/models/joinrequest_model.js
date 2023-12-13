@@ -8,7 +8,7 @@ const sql = {
     DENY_JOIN_REQUEST: 'UPDATE join_requests SET status = $1 WHERE request_id = $2',
     GET_JOIN_REQUEST_BY_SENDER_AND_GROUP: 'SELECT * FROM join_requests WHERE sender_username = $1 AND group_name = $2',
     DELETE_JOIN_REQUEST: 'DELETE FROM join_requests WHERE sender_username = $1 AND group_name = $2',
-    GET_JOIN_REQUEST_BY_ID: 'SELECT * FROM join_requests WHERE request_id = $1',
+    GET_JOIN_REQUEST_BY_ID: 'SELECT * FROM join_requests WHERE request_id = $1::integer',
     CHECK_USER_GROUP_MEMBERSHIP: 'SELECT COUNT(*) FROM users_groups WHERE username = $1 AND group_name = $2',
 };
 
@@ -27,13 +27,14 @@ async function getJoinRequests() {
 // Gets a join request with its id
 async function getJoinRequestById(requestId) {
     try {
+        console.log('Request ID:', requestId);
         const result = await pgPool.query(sql.GET_JOIN_REQUEST_BY_ID, [requestId]);
         console.log('SQL Query:', sql.GET_JOIN_REQUEST_BY_ID, [requestId]);
         console.log('Query Result:', result.rows);
 
         return result.rows.length > 0 ? result.rows[0] : null;
     } catch (error) {
-        console.error('Error in getJoinRequestById:', error);
+        console.error('Error in getJoinRequestById:', error.stack);
         throw error;
     }
 }
@@ -74,13 +75,36 @@ async function getPendingJoinRequests(groupName, username) {
 // Gets the join requests by senderusername and groupname
 async function getJoinRequestBySenderAndGroup(senderUsername, groupName) {
     const result = await pgPool.query(sql.GET_JOIN_REQUEST_BY_SENDER_AND_GROUP, [senderUsername, groupName]);
-    return result.rows.length > 0 ? result.rows[0] : null;
+    return result.rows;
 }
 
 // Deletes a join request
-async function deleteJoinRequest(senderUsername, groupName) {
-    await pgPool.query(sql.DELETE_JOIN_REQUEST, [senderUsername, groupName]);
-    console.log(sql.DELETE_JOIN_REQUEST, [senderUsername, groupName]);
+async function deleteJoinRequest(requestId) {
+    try {
+        // Retrieve the request_id for the join request
+        const getRequestQuery = 'SELECT request_id FROM join_requests WHERE request_id = $1';
+        const getRequestResult = await pgPool.query(getRequestQuery, [requestId]);
+
+        if (getRequestResult.rows.length > 0) {
+            const requestId = getRequestResult.rows[0].request_id;
+
+            // Log the requestId for debugging
+            console.log('Deleting join request with requestId:', requestId);
+
+            // Delete the join request
+            const deleteQuery = 'DELETE FROM join_requests WHERE request_id = $1';
+            await pgPool.query(deleteQuery, [requestId]);
+
+            // Return null or any other meaningful value
+            return null;
+        } else {
+            console.log(`Join request not found for ID: ${requestId}`);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error deleting join request:', error);
+        throw new Error('Failed to delete join request.');
+    }
 }
 
 // Adds the user to the dedicated group
