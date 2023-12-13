@@ -76,13 +76,13 @@ describe('Reviews API models', () => {
 
       const response = await deleteReview(addedReviewID);
       
-      expect(response).to.equal(`Review with id=${addedReviewID} was deleted`);
+      expect(response.status).to.equal(200);
     });
 
     it('should handle non-existing review', async () => {
       const response = await deleteReview('0');
       
-      expect(response).to.be.a('string').and.include('Review with id=0 not found');
+      expect(response.status).to.equal(404);
     });
   });
 });
