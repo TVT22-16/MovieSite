@@ -21,19 +21,21 @@ describe('Reviews API models', () => {
   describe('getReviewsUpgraded', () => {
 
     it('should get reviews for a user and movie', async () => {
-      const response = await getReviewsUpgraded('testuser', '566810');
-      
+
+      const response = await getReviewsUpgraded('testuser', '753342');
+
       expect(response).to.be.an('array');
-      expect(response).to.have.length.greaterThan(0);
+      
+      expect(response).to.have.lengthOf.gt(0);
 
     });
 
     it('should handle empty input', async () => {
       const response = await getReviewsUpgraded();
-      
       expect(response).to.be.an('array');
 
     });
+
   });
 
 

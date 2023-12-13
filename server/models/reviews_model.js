@@ -8,10 +8,10 @@ const sql = {
 
     USER_EXISTS: 'SELECT * FROM users WHERE username=$1',
     
-    GET_REVIEWS: 'SELECT * FROM reviews',
-    GET_REV_USER: 'SELECT * FROM reviews WHERE username=$1',
-    GET_REV_USERMOVIE: 'SELECT * FROM reviews WHERE username=$1 AND moviedb_movieid=$2',
-    GET_REV_MOVIE: 'SELECT * FROM reviews WHERE moviedb_movieid=$1'
+    GET_REVIEWS: 'SELECT * FROM reviews ORDER BY created_at DESC',
+    GET_REV_USER: 'SELECT * FROM reviews WHERE username=$1 ORDER BY created_at DESC',
+    GET_REV_USERMOVIE: 'SELECT * FROM reviews WHERE username=$1 AND moviedb_movieid=$2 ORDER BY created_at DESC',
+    GET_REV_MOVIE: 'SELECT * FROM reviews WHERE moviedb_movieid=$1 ORDER BY created_at DESC'
 };
 
 const sqlWithReturning = {
@@ -35,9 +35,8 @@ async function getReviewsUpgraded(username = '', movieid = '') {
   const rows = result.rows;
 
   // Sort the rows by created_at in descending order (newest to oldest)
-  const sortedRows = rows.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
-  return sortedRows;
+  // const sortedRows = rows.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+  return rows;
 }
 
 async function addReview(username, review, rating, moviedb_movieid) {
