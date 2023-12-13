@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const auth = require('../middleware/Auth.js');
 
-const {addUser, getUsers, getUsernames, getUserbyname, updateUser,updateUserAvatar, deleteUser, checkUser, updateUsername} = require('../models/users_model');
+const {addUser, getUsers, getUsernames, updateUser,updateUserAvatar, deleteUser, checkUser} = require('../models/users_model');
 
 /**
  * User root get mapping
@@ -128,22 +128,6 @@ router.put('/avatar/:username', upload.none(), async (req, res) => {
         res.json({error: error.message}).status(500);
     }
 });
-//update username
-router.put('/name/:username', upload.none(), async (req, res) => {
-    let username = req.params.username;
-    let password = req.body.password;
-    let newUsername = req.body.newUsername;
-
-    password = await bcrypt.hash(password, 10);
-    try {
-        await updateUsername(username,password, newUsername);
-        res.end();
-    } catch (error) {
-        console.log(error);
-        res.json({error: error.message}).status(500);
-    }
-});
-
 
 //delete user
 router.delete('/:username', async (req, res) => {

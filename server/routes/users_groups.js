@@ -48,7 +48,7 @@ router.get('/reviewforgroup/:group_name', async (req, res) => {
         const users = await getReviewsForGroup(group_name); // Pass group_name to the function
         res.json(users);
     } catch (error) {
-        console.error("Error fetching users:", error);S
+        console.error("Error fetching users:", error);
         res.status(500).json({ error: "Error fetching users" });
     }
 });
