@@ -21,19 +21,21 @@ describe('Reviews API models', () => {
   describe('getReviewsUpgraded', () => {
 
     it('should get reviews for a user and movie', async () => {
-      const response = await getReviewsUpgraded('testuser', '566810');
-      
+
+      const response = await getReviewsUpgraded('testuser', '753342');
+
       expect(response).to.be.an('array');
-      expect(response).to.have.length.greaterThan(0);
+      
+      expect(response).to.have.lengthOf.gt(0);
 
     });
 
     it('should handle empty input', async () => {
       const response = await getReviewsUpgraded();
-      
       expect(response).to.be.an('array');
 
     });
+
   });
 
 
@@ -42,6 +44,7 @@ describe('Reviews API models', () => {
     it('Should not allow undefined user to make a review', async () =>{
       const response = await addReview('nonexistentuser69', 'nonexistent user! (automated test review)', 1, '466420');
       expect(response.message).to.equal("User does not exist");
+
     });
 
     it('should add a review and return the review_id', async () => {
@@ -51,7 +54,8 @@ describe('Reviews API models', () => {
       addedReviewID = response.review.review_id;
 
       expect(response).to.be.an('object');
-      expect(response).to.have.property('status', 'success');
+      // expect(response).to.have.property('status', 'success');
+      expect(response.status).to.equal(200);
       expect(response).to.have.property('message', 'Review added successfully');
       expect(response).to.have.property('review').that.is.an('object');
       expect(response.review).to.have.property('review_id').that.is.a('number');
@@ -61,7 +65,7 @@ describe('Reviews API models', () => {
       const response = await addReview('testuser', 'Great DOUBLE REVIEW', 8, '466420');
       
       expect(response).to.be.an('object');
-      expect(response).to.have.property('status', 'error');
+      expect(response.status).to.equal(403);
       expect(response).to.have.property('message', 'User already has a review for this movie!');
     });
   });
@@ -72,13 +76,13 @@ describe('Reviews API models', () => {
 
       const response = await deleteReview(addedReviewID);
       
-      expect(response).to.equal(`Review with id=${addedReviewID} was deleted`);
+      expect(response.status).to.equal(200);
     });
 
     it('should handle non-existing review', async () => {
       const response = await deleteReview('0');
       
-      expect(response).to.be.a('string').and.include('Review with id=0 not found');
+      expect(response.status).to.equal(404);
     });
   });
 });

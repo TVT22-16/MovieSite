@@ -8,10 +8,12 @@ const sql = {
 
     USER_EXISTS: 'SELECT * FROM users WHERE username=$1',
     
-    GET_REVIEWS: 'SELECT * FROM reviews',
-    GET_REV_USER: 'SELECT * FROM reviews WHERE username=$1',
-    GET_REV_USERMOVIE: 'SELECT * FROM reviews WHERE username=$1 AND moviedb_movieid=$2',
-    GET_REV_MOVIE: 'SELECT * FROM reviews WHERE moviedb_movieid=$1'
+    GET_REVIEWS: 'SELECT * FROM reviews ORDER BY created_at DESC',
+    GET_REV_USER: 'SELECT * FROM reviews WHERE username=$1 ORDER BY created_at DESC',
+    GET_REV_USERMOVIE: 'SELECT * FROM reviews WHERE username=$1 AND moviedb_movieid=$2 ORDER BY created_at DESC',
+    GET_REV_MOVIE: 'SELECT * FROM reviews WHERE moviedb_movieid=$1 ORDER BY created_at DESC',
+
+    GET_REVIEWS: 'SELECT * FROM reviews WHERE ($1 = \'\' OR username=$1) AND ($2 = \'\' OR moviedb_movieid=$2) ORDER BY created_at DESC'
 };
 
 const sqlWithReturning = {
@@ -19,25 +21,16 @@ const sqlWithReturning = {
 };
 
 
-async function getReviewsUpgraded(username = '', movieid = '') {
-  let result;
-
-  if (username.length < 1 && movieid.length < 1) {
-    result = await pgPool.query(sql.GET_REVIEWS);
-  } else if (username.length > 0 && movieid.length < 1) {
-    result = await pgPool.query(sql.GET_REV_USER, [username]);
-  } else if (username.length < 1 && movieid.length > 0) {
-    result = await pgPool.query(sql.GET_REV_MOVIE, [movieid]);
-  } else {
-    result = await pgPool.query(sql.GET_REV_USERMOVIE, [username, movieid]);
+async function getReviewsUpgraded(username, movieid) {
+  try{
+    const result = await pgPool.query(sql.GET_REVIEWS, [username, movieid]);
+    const rows = result.rows;
+  
+    return rows;
+  }catch(error){
+    return ({status: 404})
   }
-
-  const rows = result.rows;
-
-  // Sort the rows by created_at in descending order (newest to oldest)
-  const sortedRows = rows.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
-  return sortedRows;
+  
 }
 
 async function addReview(username, review, rating, moviedb_movieid) {
@@ -58,16 +51,16 @@ async function addReview(username, review, rating, moviedb_movieid) {
 
         if (result.rowCount > 0) {
           const affectedRow = result.rows[0];
-          return { status: 'success', message: 'Review added successfully', review: affectedRow };
+          return { status: 200, message: 'Review added successfully', review: affectedRow };
         } else {
-          return { status: 'error', message: 'Review not added' };
+          return { status: 400 , message: 'Review not added' };
         }
       } else {
-        return { status: 'error', message: 'User already has a review for this movie!' };
+        return { status: 403, message: 'User already has a review for this movie!' };
       }
 
     } else{
-      return {status: 'error', message:'User does not exist'};
+      return {status: 404, message:'User does not exist'};
     }
   } catch (error) {
     console.error(error);
@@ -80,9 +73,9 @@ async function deleteReview(review_id) {
     const result = await pgPool.query(sql.DELETE_REVIEW, [review_id]);
 
     if (result.rowCount > 0) {
-      return `Review with id=${review_id} was deleted`;
+      return {status: 200, message: `Review with id=${review_id} was deleted`}
     } else {
-      throw new Error(`Review with id=${review_id} not found`);
+      return  {status: 404, message: `Review with id=${review_id} not found`}
     }
   } catch (error) {
     return error.message || 'An error occurred while deleting the review';

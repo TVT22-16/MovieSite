@@ -9,8 +9,8 @@ router.get('/getReviews', async (req, res) => {
     console.log('Get reviews');
 
     try {
-        let username = req.query.username;
-        let movieid = req.query.movieid;
+        let username = req.query.username || '';
+        let movieid = req.query.movieid || '';
 
         const response = await getReviewsUpgraded(username, movieid);
 
@@ -27,7 +27,7 @@ router.get('/getReviews', async (req, res) => {
 });
 
 
-//add user
+//add review
 router.post('/add', upload.none() , async (req,res) => {
     const username = req.body.username;
     const review = req.body.review;
@@ -37,14 +37,15 @@ router.post('/add', upload.none() , async (req,res) => {
     console.log(username,review,rating,moviedb_movieid);
 
     if (rating>10){
-        res.json("Rating can't be over 10")
+        res.status(400).json("Rating can't be over 10");
     } else{
         try {
-            res.json(await addReview(username,review,rating,moviedb_movieid));
+            const response  = await addReview(username,review,rating,moviedb_movieid);
+            res.status(response.status).json(response);
             res.end();
         } catch (error) {
-            console.log(error);
-            res.json({error: error.message}).status(500);
+            res.status(503).json(response);
+            res.end();
         }  
     }
 });
@@ -54,11 +55,11 @@ router.delete('/delete/:review_id', async(req,res) => {
 
     try{
         const review_id = req.params.review_id;
-        res.json(await deleteReview(review_id));
+        response = await deleteReview(review_id);
+        res.status(response.status).json(response);
         res.end();
     } catch (error){
-        console.log(error);
-        res.json({error: error.message}).status(500);
+        res.status(400).json({message: 'Something went wrong'})
     }
 });
 
