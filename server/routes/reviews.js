@@ -9,8 +9,8 @@ router.get('/getReviews', async (req, res) => {
     console.log('Get reviews');
 
     try {
-        let username = req.query.username || null;
-        let movieid = req.query.movieid || null;
+        let username = req.query.username || '';
+        let movieid = req.query.movieid || '';
 
         const response = await getReviewsUpgraded(username, movieid);
 

@@ -11,7 +11,9 @@ const sql = {
     GET_REVIEWS: 'SELECT * FROM reviews ORDER BY created_at DESC',
     GET_REV_USER: 'SELECT * FROM reviews WHERE username=$1 ORDER BY created_at DESC',
     GET_REV_USERMOVIE: 'SELECT * FROM reviews WHERE username=$1 AND moviedb_movieid=$2 ORDER BY created_at DESC',
-    GET_REV_MOVIE: 'SELECT * FROM reviews WHERE moviedb_movieid=$1 ORDER BY created_at DESC'
+    GET_REV_MOVIE: 'SELECT * FROM reviews WHERE moviedb_movieid=$1 ORDER BY created_at DESC',
+
+    GET_REVIEWS: 'SELECT * FROM reviews WHERE ($1 = \'\' OR username=$1) AND ($2 = \'\' OR moviedb_movieid=$2) ORDER BY created_at DESC'
 };
 
 const sqlWithReturning = {
@@ -19,24 +21,16 @@ const sqlWithReturning = {
 };
 
 
-async function getReviewsUpgraded(username=null, movieid=null) {
-  let result;
-
-  if (!username && !movieid) {
-    result = await pgPool.query(sql.GET_REVIEWS);
-  } else if (username && !movieid) {
-    result = await pgPool.query(sql.GET_REV_USER, [username]);
-  } else if (!username && movieid) {
-    result = await pgPool.query(sql.GET_REV_MOVIE, [movieid]);
-  } else {
-    result = await pgPool.query(sql.GET_REV_USERMOVIE, [username, movieid]);
+async function getReviewsUpgraded(username, movieid) {
+  try{
+    const result = await pgPool.query(sql.GET_REVIEWS, [username, movieid]);
+    const rows = result.rows;
+  
+    return rows;
+  }catch(error){
+    return ({status: 404})
   }
-
-  const rows = result.rows;
-
-  // Sort the rows by created_at in descending order (newest to oldest)
-  // const sortedRows = rows.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-  return rows;
+  
 }
 
 async function addReview(username, review, rating, moviedb_movieid) {
