@@ -19,14 +19,14 @@ const sqlWithReturning = {
 };
 
 
-async function getReviewsUpgraded(username = '', movieid = '') {
+async function getReviewsUpgraded(username=null, movieid=null) {
   let result;
 
-  if (username.length < 1 && movieid.length < 1) {
+  if (!username && !movieid) {
     result = await pgPool.query(sql.GET_REVIEWS);
-  } else if (username.length > 0 && movieid.length < 1) {
+  } else if (username && !movieid) {
     result = await pgPool.query(sql.GET_REV_USER, [username]);
-  } else if (username.length < 1 && movieid.length > 0) {
+  } else if (!username && movieid) {
     result = await pgPool.query(sql.GET_REV_MOVIE, [movieid]);
   } else {
     result = await pgPool.query(sql.GET_REV_USERMOVIE, [username, movieid]);
