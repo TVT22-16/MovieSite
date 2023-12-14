@@ -102,6 +102,7 @@ My responsibilities included the design and implementation of essential CRUD ope
 At the start of the project, my responsibilities included designing the frontend mockup and the UI for login and register pages. Tasks also involved handling group invitations and adding movies to the watchlist. Crucial to the role was implementing essential CRUD operations on the backend and utilizing Postman for these tasks. I made necessary database adjustments to accommodate group invitations and watchlist updates. Additionally, I implemented the feature to remove movies from the watchlist on the profile page and conducted testing for both the watchlist and group invitations.
 
 **Joonas Ridanpää:**
+In my responsibilities, UI design was included for the Movie search page, landing page, reviews, and Movie information pages on the website. I also handled the entire React implementation for these sections. In the backend, I worked on the parts related to reviews and movies (TMDB) and was responsible for their testing and documentation. I was also involved in the Render deployment of the project.
 
 
 **Roope Ylikulju:**
