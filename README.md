@@ -104,3 +104,4 @@ My responsibilities included the design and implementation of essential CRUD ope
 
 
 **Roope Ylikulju:**
+I implemented the ThemeSwitcher and Userlist for the project. Additionally, I worked on various other frontend-related tasks.
