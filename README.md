@@ -86,3 +86,4 @@ On the Movies page, users can browse movies using the search bar or filters of t
 
 
 **Roope Ylikulju:**
+I implemented the ThemeSwitcher and Userlist for the project. Additionally, I worked on various other frontend-related tasks.
