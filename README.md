@@ -98,7 +98,7 @@ On the Movies page, users can browse movies using the search bar or filters of t
 My responsibilities included the design and implementation of essential CRUD operations and endpoints, for which I utilized Postman in my testing. Additionally, I designed a group page on the website where users can browse all groups or join them, a profile page where they can check their groups, and a settings page where user can change their profile picture and provides the functionality to delete their account. These pages work in tandem with the backend to retrieve necessary information from the database.
 
 **Eerik Väisänen:**
-
+At the start of the project, my responsibilities included designing the frontend mockup and the UI for login and register pages. Tasks also involved handling group invitations and adding movies to the watchlist. Crucial to the role was implementing essential CRUD operations on the backend and utilizing Postman for these tasks. I made necessary database adjustments to accommodate group invitations and watchlist updates. Additionally, I implemented the feature to remove movies from the watchlist on the profile page and conducted testing for both the watchlist and group invitations.
 
 **Joonas Ridanpää:**
 
