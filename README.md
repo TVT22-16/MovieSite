@@ -92,7 +92,7 @@ On the Movies page, users can browse movies using the search bar or filters of t
 <img width="947" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/acd91eab-c7ec-4937-94dd-6ccb184c4957">
 
 
-*IMAGE 10. MovieInfo
+*IMAGE 10. MovieInfo*
 
 ## Group's areas of responsibilities
 
