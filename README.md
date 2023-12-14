@@ -98,7 +98,7 @@ On the Movies page, users can browse movies using the search bar or filters of t
 
 
 **Eerik Väisänen:**
-
+At the start of the project, my responsibilities included designing the frontend mockup and the UI for login and register pages. Tasks also involved handling group invitations and adding movies to the watchlist. Crucial to the role was implementing essential CRUD operations on the backend and utilizing Postman for these tasks. I made necessary database adjustments to accommodate group invitations and watchlist updates. Additionally, I implemented the feature to remove movies from the watchlist on the profile page and conducted testing for both the watchlist and group invitations.
 
 **Joonas Ridanpää:**
 
