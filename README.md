@@ -32,7 +32,7 @@ The database was created using PostgreSQL, and Postman and Visual Studio Code we
 From the homepage of our website (image 1), you can find popular movies, new reviews, and movie-related news. The movies on display change regularly, accompanied by background images related to the films. You can see the five latest reviews directly on the homepage, and if needed, you can find more reviews on the "Reviews" page. At the bottom of the page, you can access news sourced through Finnkino.
 
 
-[//]: <> (Add image1 url here.)
+<img width="928" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/af0f15b6-c258-454d-bd66-cd7d4f9d60b6">
 *IMAGE 1. Frontpage*
 
 Our website allows users to register (image 2), after which they can log in (image 3) and utilize the functionalities provided by the site with their own account.
