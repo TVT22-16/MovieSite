@@ -88,7 +88,8 @@ On the Movies page, users can browse movies using the search bar or filters of t
 *IMAGE 9. Movies page*
 
 
-<img width="947" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/e8564ca0-f556-46de-a717-81d59dd1c2eb">
+<img width="947" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/acd91eab-c7ec-4937-94dd-6ccb184c4957">
+
 
 *IMAGE 10. MovieInfo
 
