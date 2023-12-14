@@ -33,46 +33,64 @@ From the homepage of our website (image 1), you can find popular movies, new rev
 
 
 <img width="928" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/af0f15b6-c258-454d-bd66-cd7d4f9d60b6">
+
 *IMAGE 1. Frontpage*
 
 Our website allows users to register (image 2), after which they can log in (image 3) and utilize the functionalities provided by the site with their own account.
 
-[//]: <> (Add image2 url here.)
+<img width="932" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/e612d4a5-65d6-4e6e-8a8c-6167aa6ee807">
+
 *IMAGE 2. Registeration page*
 
-[//]: <> (Add image3 url here.)
+<img width="923" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/f2e90a89-f0de-4c74-bc07-e667b587e338">
+
 *IMAGE 3. Login page*
 
 The user can submit their own reviews and view reviews submitted by other users (image 3). If desired, the user can also customize their view by filtering reviews. They have the option to delete their own review if they wish.
 
-[//]: <> (Add image4 url here.)
+<img width="915" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/1af0267b-b0e3-402e-a073-0a898e57829b">
+
 *IMAGE 4. Review page*
+
 
 On the Groups page, users have the option to send join requests to groups aligned with their interests or create their own group (image 5).
 
-[//]: <> (Add image5 url here.)
+<img width="923" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/b01753bb-f512-4355-8786-4abc5cbbc5b7">
+
 *IMAGE 5. Groups page*
+
 
 From the group's dedicated page, users can view movie reviews made by group members, the list of group members, and movie-related news, as well as join requests to the group (image 6). If desired, users can hide reviews and news from the top-right corner dropdown menu on the page.
 
-[//]: <> (Add image6 url here.)
+<img width="960" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/bb610d53-a8f8-4417-b05d-40c4eeb42666">
+
 *IMAGE 6. The group's dedicated page*
 
 
 Users can edit their profiles from the Settings page, where they can choose a new profile picture from the available options or delete their account (image 7). This provides users with the opportunity to personalize their profiles and easily manage their account settings.
 
-[//]: <> (Add image7 url here.)
+<img width="944" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/43b62011-50c6-42a5-80d5-6c9aec868707">
+
 *IMAGE 7. Settings page*
+
 
 On the Profile page, users can browse the groups they are a part of and remove selected movies from their watchlist.
 
-[//]: <> (Add image8 url here.)
+<img width="944" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/70aad211-e0a6-4a56-9b81-ed450e4986fa">
+
 *IMAGE 8. Profile page*
+
 
 On the Movies page, users can browse movies using the search bar or filters of their choice.
 
-[//]: <> (Add image9 url here.)
+<img width="940" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/0aea65b1-d378-4e06-ad99-e890ee81ffd3">
+
 *IMAGE 9. Movies page*
+
+
+<img width="947" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/e8564ca0-f556-46de-a717-81d59dd1c2eb">
+
+*IMAGE 10. MovieInfo
 
 ## Group's areas of responsibilities
 
