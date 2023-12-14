@@ -83,7 +83,8 @@ On the Profile page, users can browse the groups they are a part of and remove s
 
 On the Movies page, users can browse movies using the search bar or filters of their choice.
 
-<img width="940" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/0aea65b1-d378-4e06-ad99-e890ee81ffd3">
+<img width="946" alt="image" src="https://github.com/TVT22-16/MovieSite/assets/112471004/bcf2e273-3c3b-4670-95e8-6c09d3a2fb95">
+
 
 *IMAGE 9. Movies page*
 
