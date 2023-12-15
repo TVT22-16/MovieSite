@@ -19,6 +19,8 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
   const [reviewsWData, setReviewsWData] = useState([]);
   const [latestStatus, setLatestStatus] = useState(404);
 
+  const [refreshReviews,setRefreshReviews] = useState(false);
+
   const [filterState, setFilterState] = useState('All reviews');
 
   const updateFilterState = (state) => {
@@ -50,6 +52,14 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
     fetchData(slicing);
   }, [getReviewsUrl]);
 
+  // useEffect(() => {
+  //   if (refreshReviews){
+  //     fetchData(slicing);
+  //   }
+  //   setRefreshReviews(false)
+
+  // }, [refreshReviews]);
+
 
   const fetchMoviesData = async () => {
     try {
@@ -78,10 +88,16 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
   }
 
   const handleDelete = async (id) => {
-    await DeleteReview(id);
-    window.location.reload(true);
-  }
-
+    try {
+      await DeleteReview(id);
+      // If you want to reload the page after deleting, uncomment the following line
+      // window.location.reload(true);
+      fetchData();
+    } catch (error) {
+      console.error('Error handling delete:', error);
+    }
+  };
+  
   return (
     <>
     {dropdownOn === true && (
@@ -110,7 +126,7 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
         <>
           {reviewsWData.map((fd, index) => (
 
-          <Card className='reviewCardCont' onClick={() => openInfo(fd.id)} key={index} style={{
+          <Card className='reviewCardCont' key={index} style={{
                     display: 'flex',
                     flexDirection: 'row',
                     width: '100%',
@@ -121,12 +137,12 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
 
                  }}>
             <div className='cardInsideCont'>
-              <Card.Img className='cardImageReview' style={{ maxHeight: '90%', height: '150px', width: 'auto', margin:'12px' ,padding: '0px', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`}/>
+              <Card.Img onClick={() => openInfo(fd.id)} className='cardImageReview' style={{ maxHeight: '90%', height: '150px', width: 'auto', margin:'12px' ,padding: '0px', borderRadius: '15px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} variant="top" src={`https://image.tmdb.org/t/p/w500${fd.poster_path}`}/>
 
             </div>
 
             
-            <div className='cardBodyContainer' style={{width:'100%'}}>
+            <div className='cardBodyContainer' style={{width:'100%', height:'fit-content'}}>
               <Card.Body style={{ width: '100%', height: '100%', flexGrow: '1', gap: '10px', display: 'flex', flexDirection: 'column' }}>
                 
                 <div className='cardTitleContainer'>
@@ -144,7 +160,8 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
                 </div>
 
                 {reviews[index].username === username && dropdownOn === true && forceUpdateMatch()===true &&  (
-                  <Button onClick={() => handleDelete(reviews[index].review_id)} style={{margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
+
+                  <Button onClick={() => handleDelete(reviews[index].review_id)} style={{margin: 'auto auto', marginBottom: '1%', height: '5%' }} variant="danger">
                     Delete
                   </Button>)}
 
