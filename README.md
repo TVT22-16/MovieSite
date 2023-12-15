@@ -11,7 +11,9 @@ The project was created by second-year students of Oulu University of Applied Sc
 
 ### [Link to our website](https://moviesite-e8gb.onrender.com/)
 
-### [MovieSite API documentation](https://documenter.getpostman.com/view/26520966/2s9YkkgPS7)
+#### [MovieSite API documentation](https://documenter.getpostman.com/view/26520966/2s9YkkgPS7)
+
+#### [Pictures from the design and planning phase](https://imgur.com/a/JMQupDR)
 
 ### Demo videos
 [Youtube](https://www.youtube.com/watch?v=H3Bj4Q2qrzo)
