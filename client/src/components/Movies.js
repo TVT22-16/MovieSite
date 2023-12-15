@@ -75,7 +75,7 @@ const Movies = () => {
   useEffect(()=>{
 
     if (searchTerm.length>2) {
-      axios.get(`${baseUrl}/search/${page}/${searchTerm}`) 
+      axios.get(`${baseUrl}/movies/search/${page}/${searchTerm}`) 
         .then(response =>{ 
           setSearchResults(response.data.results);
           setResponsePageAmount(response.data.total_pages);
