@@ -126,7 +126,7 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
             </div>
 
             
-            <div className='cardBodyContainer' style={{width:'100%'}}>
+            <div className='cardBodyContainer' style={{width:'100%',height:'100%'}}>
               <Card.Body style={{ width: '100%', height: '100%', flexGrow: '1', gap: '10px', display: 'flex', flexDirection: 'column' }}>
                 
                 <div className='cardTitleContainer'>
@@ -144,7 +144,7 @@ const Reviews = ({movieid='', dropdownOn=true, slicing=false, customScale=''}) =
                 </div>
 
                 {reviews[index].username === username && dropdownOn === true && forceUpdateMatch()===true &&  (
-                  <Button onClick={() => handleDelete(reviews[index].review_id)} style={{margin: 'auto auto', marginBottom: '1%', height: '10%' }} variant="danger">
+                  <Button onClick={() => handleDelete(reviews[index].review_id)} style={{margin: 'auto auto', marginBottom: '1%', height: '5%' }} variant="danger">
                     Delete
                   </Button>)}
 

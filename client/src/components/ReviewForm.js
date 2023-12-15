@@ -21,38 +21,41 @@ const ReviewForm = ({moviedb_movieid}) => {
 
     const submitReviewForm = (event) =>{
 
-      // Hide form when submitting
-      setShowForm(false);
+        // Hide form when submitting
+        setShowForm(false);
 
-      event.preventDefault(); 
+        event.preventDefault(); 
 
-      const reviewData = {
-        username: sessionStorage.getItem('username'),
-        moviedb_movieid: moviedb_movieid,
-        review: event.target.review.value,
-        rating: event.target.rating.value,
-      };
+        const reviewData = {
+          username: sessionStorage.getItem('username'),
+          moviedb_movieid: moviedb_movieid,
+          review: event.target.review.value,
+          rating: event.target.rating.value,
+        };
 
-      if (forceUpdateMatch()===true){
-        axios.post(addReviewUrl, reviewData)
-        .then(response => {
-  
-          setAddReviewStatus(response.data);
-          if(response.data.status === 'error'){
-            // alert('Only one review/movie is allowed');
-            console.log('Only one review/movie allowed');
-          } else{
+        if (forceUpdateMatch()===true){
+          axios.post(addReviewUrl, reviewData)
+          .then(response => {
+            console.log('ReponseReview: ',response.status);
+            setAddReviewStatus(response.data);
+
             window.location.reload(false);
-          }
-  
-        })
-        .catch(error => {
-          // Handle error
-          console.error('Error submitting review:', error);
-        });
+    
+          })
+          .catch(error => {
 
-      }
-      
+            setAddReviewStatus(error.response);
+
+            console.log('Error response data: ',error.response.data)
+            console.log('Error response status: ',error.response.data.status)
+            console.log('Error response message: ',error.response.data.message)
+          
+            console.error('Error submitting review:', error);
+          });
+
+
+        }
+        
     }
 
 
@@ -76,9 +79,9 @@ const ReviewForm = ({moviedb_movieid}) => {
 
 
           {/* double review error message */}
-          {addReviewStatus.status === 'error' &&
+          {addReviewStatus.status === 403 &&
           //  (<div style={{backgroundColor:'red', marginTop:'10px', padding: '5px', borderRadius:'5px'}}>{addReviewStatus.message}</div>)
-          <div style={{marginTop:'5px'}} class="alert alert-danger" role="alert">{addReviewStatus.message}</div>}
+          <div style={{marginTop:'5px'}} className="alert alert-danger" role="alert">You already have a review for this movie!</div>}
 
         {showForm && (
           <form id="reviewForm" onSubmit={submitReviewForm}
